@@ -1,0 +1,10 @@
+.idea
+composer.lock
+*.log
+thinkphp
+vendor
+runtime/
+config
+public/uploads/
+.svn/
+web.config
