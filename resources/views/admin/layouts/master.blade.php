@@ -22,7 +22,12 @@
     @include('admin::partials.sidebar')
 
     <div class="content-wrapper" id="pjax-container">
-        @yield('content')
+        <section class="content-header">
+            @yield('content-header')
+        </section>
+        <section class="content">
+            @yield('content')
+        </section>
     </div>
 
     @include('admin::partials.footer')
@@ -37,6 +42,12 @@
 
 @include('admin::partials.script')
 @yield('script')
+<script>
+    $(function(){
+
+        $(".active")
+    })
+</script>
 </body>
 </html>
 
