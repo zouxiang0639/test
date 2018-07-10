@@ -1,6 +1,6 @@
 @if(Admin::user()->visible($item['roles']))
     @if(!isset($item['children']))
-        <li id="menu_{!! $item['id'] !!}" {!! $item['id'] == 6 ?'class="active"':'' !!}>
+        <li  {!! $item['route'] == Admin::getRouteName() ?'class="active"':'' !!}>
             @if(Route::has($item['route']))
                 <a href="{{ route($item['route']) }}" >
             @else
@@ -11,7 +11,7 @@
             </a>
         </li>
     @else
-        <li id="menu_{!! $item['id'] !!}" class="treeview">
+        <li class="treeview">
             <a href="#">
                 <i class="fa {{$item['icon']}}"></i>
                 <span>{{$item['title']}}</span>

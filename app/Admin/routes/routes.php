@@ -14,6 +14,8 @@ Route::group([
 
     Route::group(['prefix'=>'users'], function(){
         Route::get('', ['uses' => "UserController@index", 'as' => 'm.user.index']);
+        Route::get('edit/{id}', ['uses' => "UserController@edit", 'as' => 'm.user.edit']);
+        Route::post('update/{id}', ['uses' => "UserController@update", 'as' => 'm.user.update']);
 //        $router->resource('auth/roles', 'RoleController');
 //        $router->resource('auth/permissions', 'PermissionController');
 //        $router->resource('auth/menu', 'MenuController', ['except' => ['create']]);

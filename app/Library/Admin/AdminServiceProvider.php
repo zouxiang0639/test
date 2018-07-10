@@ -51,12 +51,13 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         $this->loadAdminAuthConfig();
         $this->registerRouteMiddleware();
-        $this->loadViewsFrom(resource_path().'/views/admin', 'admin');
-
+        $this->loadViewsFrom(app_path('Admin/views'), 'admin');
+        $this->loadRoutesFrom(app_path('Admin/routes/routes.php'));
 //        if (file_exists($routes = admin_path('routes.php'))) {
-//            $this->loadRoutesFrom($routes);
+//
 //        }
 //
 //        if ($this->app->runningInConsole()) {

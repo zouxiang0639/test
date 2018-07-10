@@ -20,7 +20,7 @@
 <script src="{{  assets_path("/lib/AdminLTE/bootstrap/js/bootstrap.min.js") }}"></script>
 <script src="{{  assets_path("/lib/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js") }}"></script>
 <script src="{{  assets_path("/lib/AdminLTE/dist/js/app.min.js") }}"></script>
-<script src="{{  assets_path("/lib/jquery-pjax/jquery.pjax.js") }}"></script>
+{{--<script src="{{  assets_path("/lib/jquery-pjax/jquery.pjax.js") }}"></script>--}}
 <script src="{{  assets_path("/lib/nprogress/nprogress.js") }}"></script>
 
 <!--[if lt IE 9]>
