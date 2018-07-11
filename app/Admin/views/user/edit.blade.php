@@ -33,5 +33,9 @@
 @stop
 
 @section('script')
-
+    <script>
+        var initialAjAx = {
+            "url":"{!! route('m.user.update', ['id' => 1]) !!}"
+        }
+    </script>
 @stop

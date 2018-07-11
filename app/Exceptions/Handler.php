@@ -2,8 +2,10 @@
 
 namespace App\Exceptions;
 
+use App\Library\Response\JsonResponse;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
 
 class Handler extends ExceptionHandler
 {
@@ -46,8 +48,16 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $e)
     {
-        return parent::render($request, $exception);
+
+        //ajax提交报错处理
+        if ($e instanceof LogicException) {
+            if ($request->ajax() || $request->wantsJson()) {
+                return new Response((new JsonResponse())->error($e->getCode(), $e->getMessage(), $e->getData()));
+            }
+        }
+
+        return parent::render($request, $e);
     }
 }

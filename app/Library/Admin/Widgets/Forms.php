@@ -37,11 +37,12 @@ class Forms
 
         });
 
+        $id = array_get($open,'submit_id', 'form-submit');
         $this->formHtml .= <<<EOT
         <div class="box-footer">
-            <button class="btn btn-info col-md-offset-2" data-loading-text="<i class='fa fa-spinner fa-spin'></i> 提交">
+            <a id='$id'  class="btn btn-info col-md-offset-2" data-loading-text="<i class='fa fa-spinner fa-spin'></i> 提交">
                 提交
-            </button>
+            </a>
         </div>
 EOT;
         $this->formHtml .=  Form::close();
@@ -59,8 +60,10 @@ EOT;
                 $required
                 $title:
             </label>
-            <div class="col-sm-7 input-group $name">
+            <div class="col-sm-7 $name">
+                <div class="input-group" style="width:100%">
                  $input
+                 </div>
             </div>
         </div>
 EOT;
