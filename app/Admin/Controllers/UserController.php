@@ -2,16 +2,15 @@
 
 namespace App\Admin\Controllers;
 
-use App\Admin\Controllers\Requests\UserRequest;
-use App\Bls\Auth\AdminUserBls;
-use App\Bls\Auth\Model\Permission;
-use App\Bls\Auth\Model\Role;
+use App\Admin\Bls\Auth\Requests\UserRequest;
+use App\Admin\Bls\Auth\AdminUserBls;
+use App\Admin\Bls\Auth\Model\Permission;
+use App\Admin\Bls\Auth\Model\Role;
 use App\Exceptions\LogicException;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
 use Redirect;
 use Admin;
-use Auth;
 use View;
 
 class UserController extends Controller
@@ -23,15 +22,6 @@ class UserController extends Controller
     public function index(Redirect $request)
     {
         $model = AdminUserBls::getAdminUser($request);
-
-        $model->getCollection()->each(function($item) {
-
-            $item->rolesName = '-';
-
-            if($roles =$item->roles) {
-                $item->rolesName = $roles->implode('name', ',');
-            }
-        });
 
         return view('admin::user.index',[
             'list' => $model
@@ -90,6 +80,6 @@ class UserController extends Controller
             $date->push(['权限', 'permissions', false,
                 $form->multipleSelect('permissions[]', Permission::all()->pluck('name', 'id'), array_get($info, 'permissions'), $options) ]);
 
-        }, ['url' => route('m.user.update', ['id' =>1])]);
+        }, []);
     }
 }

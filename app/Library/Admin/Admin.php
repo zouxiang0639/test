@@ -7,7 +7,7 @@ use App\Library\Admin\Consts\StyleTypeConst;
 use App\Library\Admin\Widgets\Forms;
 use App\Library\Admin\Widgets\NavBar;
 use Auth;
-use App\Bls\Auth\Model\Menu;
+use App\Admin\Bls\Auth\Model\Menu;
 
 class Admin
 {

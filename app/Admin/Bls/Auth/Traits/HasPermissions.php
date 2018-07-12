@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Bls\Auth\Traits;
+namespace App\Admin\Bls\Auth\Traits;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;

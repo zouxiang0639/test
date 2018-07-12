@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Bls\Auth\Model;
+namespace App\Admin\Bls\Auth\Model;
 
-use App\Bls\Auth\Traits\HasPermissions;
+use App\Admin\Bls\Auth\Traits\HasPermissions;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;

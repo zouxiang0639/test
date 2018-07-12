@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Bls\Auth;
+namespace App\Admin\Bls\Auth;
 
-use App\Bls\Auth\Model\Administrator;
+use App\Admin\Bls\Auth\Model\Administrator;
+use App\Admin\Bls\BasicBls;
 use Redirect;
 
 /**
  * Class AdminUserBls.
  */
-class AdminUserBls
+class AdminUserBls extends BasicBls
 {
     public static function getAdminUser(Redirect $request, $order = '`id` DESC', $limit = 20)
     {
@@ -36,9 +37,11 @@ class AdminUserBls
     public static function updateAdminUser($request, $id)
     {
         return Administrator::query()->getQuery()->getConnection()->transaction(function () use($request, $id) {
-            $relations = ['roles', 'permissions'];
-            $model = Administrator::with($relations)->findOrFail($id);
-            static::updateRelation($model, $request->only($relations));
+            $only = ['roles', 'permissions'];
+
+            $model = Administrator::with($only)->findOrFail($id);
+
+            static::updateRelation($model, $request->only($only));
 
             $model->username = $request->username;
             $model->name = $request->name;
@@ -50,22 +53,10 @@ class AdminUserBls
         });
     }
 
-
-    /**
-     * 关联数据更新
-     * @param $model
-     * @param $relationsData
-     */
-    private static function updateRelation($model, $relationsData)
+    public static function storeAdminUser()
     {
-        foreach($relationsData as $name => $value) {
-            if(is_null($value)) {
-                continue;
-            }
-            $relation = $model->$name();
-            $relation->sync($value);
-        }
 
     }
+
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Bls\Auth\Model;
+namespace App\Admin\Bls\Auth\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;

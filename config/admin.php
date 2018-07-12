@@ -58,7 +58,7 @@ return [
         'providers' => [
             'admin' => [
                 'driver' => 'eloquent',
-                'model'  => \App\Bls\Auth\Model\Administrator::class,
+                'model'  => \App\Admin\Bls\Auth\Model\Administrator::class,
             ],
         ],
     ],
@@ -86,19 +86,19 @@ return [
 
         // User tables and model.
         'users_table' => 'admin_users',
-        'users_model' => \App\Bls\Auth\Model\Administrator::class,
+        'users_model' => \App\Admin\Bls\Auth\Model\Administrator::class,
 
         // Role table and model.
         'roles_table' => 'admin_roles',
-        'roles_model' => \App\Bls\Auth\Model\Role::class,
+        'roles_model' => \App\Admin\Bls\Auth\Model\Role::class,
 
         // Permission table and model.
         'permissions_table' => 'admin_permissions',
-        'permissions_model' => \App\Bls\Auth\Model\Permission::class,
+        'permissions_model' => \App\Admin\Bls\Auth\Model\Permission::class,
 
         // Menu table and model.搭min
         'menu_table' => 'admin_menu',
-        'menu_model' => \App\Bls\Auth\Model\Menu::class,
+        'menu_model' => \App\Admin\Bls\Auth\Model\Menu::class,
 
         // Pivot table for table above.
         'operation_log_table'    => 'admin_operation_log',

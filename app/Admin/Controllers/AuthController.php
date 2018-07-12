@@ -2,7 +2,6 @@
 
 namespace App\Admin\Controllers;
 
-use Encore\Admin\Form;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +18,7 @@ class AuthController extends Controller
      */
     public function Login()
     {
-        if ($this->guard()->check()) {
+        if (Auth::guard('admin')->check()) {
             return redirect($this->redirectPath());
         }
 
@@ -47,7 +46,7 @@ class AuthController extends Controller
             return back()->withInput()->withErrors($validator);
         }
 
-        if ($this->guard()->attempt($credentials)) {
+        if (Auth::guard('admin')->attempt($credentials)) {
             return $this->sendLoginResponse($request);
         }
 
@@ -63,7 +62,7 @@ class AuthController extends Controller
      */
     public function getLogout(Request $request)
     {
-        $this->guard()->logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
 
@@ -185,13 +184,4 @@ class AuthController extends Controller
         return 'username';
     }
 
-    /**
-     * Get the guard to be used during authentication.
-     *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
-     */
-    protected function guard()
-    {
-        return Auth::guard('admin');
-    }
 }

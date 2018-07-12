@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Bls\Auth\Model;
+namespace App\Admin\Bls\Auth\Model;
 
-use App\Bls\Auth\Traits\AdminBuilder;
-use App\Bls\Auth\Traits\ModelTree;
+use App\Admin\Bls\Auth\Traits\ModelTree;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +16,7 @@ use Illuminate\Support\Facades\DB;
  */
 class Menu extends Model
 {
-    use AdminBuilder, ModelTree {
+    use  ModelTree {
         ModelTree::boot as treeBoot;
     }
 

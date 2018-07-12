@@ -21,6 +21,18 @@ Route::group([
 //        $router->resource('auth/menu', 'MenuController', ['except' => ['create']]);
 //        $router->resource('auth/logs', 'LogController', ['only' => ['index', 'destroy']]);
     });
+
+    Route::group(['prefix'=>'role'], function(){
+        Route::get('', ['uses' => "RoleController@index", 'as' => 'm.role.list']);
+        Route::get('edit/{id}', ['uses' => "RoleController@edit", 'as' => 'm.role.edit']);
+        Route::post('update/{id}', ['uses' => "RoleController@update", 'as' => 'm.role.update']);
+        Route::get('create', ['uses' => "RoleController@create", 'as' => 'm.role.create']);
+        Route::post('store', ['uses' => "RoleController@store", 'as' => 'm.role.store']);
+//        $router->resource('auth/roles', 'RoleController');
+//        $router->resource('auth/permissions', 'PermissionController');
+//        $router->resource('auth/menu', 'MenuController', ['except' => ['create']]);
+//        $router->resource('auth/logs', 'LogController', ['only' => ['index', 'destroy']]);
+    });
     Route::get('auth/users', ['uses' => "AuthController@index", 'as' => 'm.auth.users']);
 });
 

@@ -1,10 +1,17 @@
 @extends('admin::layouts.master')
 
 @section('content-header')
+    <style>
+        .label{line-height: 2;}
+    </style>
+@stop
+
+@section('content-header')
     <h1>
         管理员<small>列表</small>
     </h1>
 @stop
+
 @section('content')
 
     <div class="box">
@@ -28,9 +35,9 @@
                     <th>ID
                         <a class="fa fa-fw fa-sort-amount-asc" href="http://bbs.com/admin/auth/users?_sort%5Bcolumn%5D=id&amp;_sort%5Btype%5D=desc"></a>
                     </th>
-                    <th>用户名</th>
+                    <th>标识</th>
                     <th>名称</th>
-                    <th>角色</th>
+                    <th>权限</th>
                     <th>创建时间</th>
                     <th>更新时间</th>
                     <th>操作</th>
@@ -42,7 +49,7 @@
                         <td>{!! $item->username !!}</td>
                         <td>{!! $item->name !!}</td>
                         <td>
-                            @if($roles = $item->roles)
+                            @if($roles = $item->permissions)
                                 @foreach($roles as $value)
                                     <span class="label label-success">{!! $value->name !!}</span>
                                 @endforeach

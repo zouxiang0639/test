@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers\Requests;
+namespace App\Admin\Bls\Auth\Requests;
 
 use App\Library\Validators\JsonResponseValidator;
 
