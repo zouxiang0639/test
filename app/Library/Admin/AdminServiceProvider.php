@@ -23,7 +23,8 @@ class AdminServiceProvider extends ServiceProvider
      * @var array
      */
     protected $routeMiddleware = [
-        'admin.auth'       => \App\Http\Middleware\Admin\Authenticate::class,
+        'admin.auth'       => \App\Library\Admin\Middleware\Authenticate::class,
+        'admin.Validator' => \App\Library\Admin\Middleware\RequestsValidator::class,
        // 'admin.pjax'       => \App\Http\Middleware\Admin\Pjax::class,
         //'admin.log'        => \App\Http\Middleware\Admin\LogOperation::class,
         //'admin.permission' => \App\Http\Middleware\Admin\Permission::class,
@@ -38,6 +39,7 @@ class AdminServiceProvider extends ServiceProvider
     protected $middlewareGroups = [
         'admin' => [
             'admin.auth',
+            'admin.Validator',
             //'admin.log',
             //'admin.bootstrap',
             //'admin.permission',

@@ -16,7 +16,21 @@ class UserRequest extends JsonResponseValidator
     public function rules()
     {
         return [
-            'password' => 'required|unique:posts|max:255',
+            'password' => 'confirmed|max:255',
+            'roles' => 'required',
+        ];
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'password.confirmed' => '两次密码输入不一致',
+            'roles.required' => '请选择角色',
         ];
     }
 

@@ -31,7 +31,7 @@ class FormBuilder extends \Collective\Html\FormBuilder
     }
 
     /**
-     * Create a select box field.
+     * Create a multipleSelect box field.
      *
      * @param  string $name
      * @param  array  $list
@@ -58,13 +58,13 @@ class FormBuilder extends \Collective\Html\FormBuilder
 
             $("select[name='$name']").select2({
                 allowClear: true,
-                placeholder: "$name"
+                placeholder: "$name",
+                separator:true
             });\n
 EOT;
         Admin::setJs(StyleTypeConst::CODE, $code);
-
         $selectAttributes = array_merge(["multiple"=>"multiple",'data-placeholder'=>"请输入"], $selectAttributes);
-        return self::select($name ,$list, $selected, $selectAttributes, $optionsAttributes, $optgroupsAttributes)
-            . self::hidden($name);
+        return self::hidden(str_replace(array("[","]"),"",$name)).
+        self::select($name ,$list, $selected, $selectAttributes, $optionsAttributes, $optgroupsAttributes);
     }
 }

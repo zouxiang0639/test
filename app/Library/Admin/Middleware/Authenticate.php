@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Middleware\Admin;
+namespace App\Library\Admin\Middleware;
 
 use Closure;
-use Encore\Admin\Admin;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 class Authenticate
 {

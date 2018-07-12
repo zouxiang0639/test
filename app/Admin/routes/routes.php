@@ -9,11 +9,11 @@ Route::group([
     Route::get('/', ['uses' => "HomeController@index", 'as' => 'm.home']);
     Route::get('login', ['uses' => "AuthController@login", 'as' => 'm.login']);
     Route::post('login', ['uses' => "AuthController@postLogin", 'as' => 'm.postLogin']);
-    Route::get('logout', ['uses' => "HomeController@index", 'as' => 'm.logout']);
+    Route::get('logout', ['uses' => "AuthController@logout", 'as' => 'm.logout']);
 
 
     Route::group(['prefix'=>'users'], function(){
-        Route::get('', ['uses' => "UserController@index", 'as' => 'm.user.index']);
+        Route::get('', ['uses' => "UserController@index", 'as' => 'm.user.list']);
         Route::get('edit/{id}', ['uses' => "UserController@edit", 'as' => 'm.user.edit']);
         Route::post('update/{id}', ['uses' => "UserController@update", 'as' => 'm.user.update']);
 //        $router->resource('auth/roles', 'RoleController');

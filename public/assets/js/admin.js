@@ -40,8 +40,8 @@ $(function(){
                     _this.attr('disabled',false);
                     locked = true;
                 } else {
-                    alert(res.data.msg);
-                    window.location.href = '';
+                    alert(res.data);
+                    window.location.href = config.backUrl;
                 }
             },
             error:function () {

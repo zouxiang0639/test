@@ -48,7 +48,7 @@
                                 <a href="auth/setting" class="btn btn-default btn-flat">设置</a>
                             </div>
                             <div class="pull-right">
-                                <a href="auth/logout" class="btn btn-default btn-flat">退出</a>
+                                <a href="{!! route('m.logout') !!}" class="btn btn-default btn-flat">退出</a>
                             </div>
                         </li>
                     </ul>

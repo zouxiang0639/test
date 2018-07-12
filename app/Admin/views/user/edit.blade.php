@@ -35,7 +35,8 @@
 @section('script')
     <script>
         var initialAjAx = {
-            "url":"{!! route('m.user.update', ['id' => 1]) !!}"
+            "url":"{!! route('m.user.update', ['id' => $info->id]) !!}",
+            "backUrl":"{!! route('m.user.list') !!}"
         }
     </script>
 @stop

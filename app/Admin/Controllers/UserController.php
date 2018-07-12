@@ -3,13 +3,15 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Controllers\Requests\UserRequest;
-use App\Admin\Controllers\Validator\UserValidator;
 use App\Bls\Auth\AdminUserBls;
 use App\Bls\Auth\Model\Permission;
 use App\Bls\Auth\Model\Role;
+use App\Exceptions\LogicException;
 use App\Http\Controllers\Controller;
+use App\Library\Response\JsonResponse;
 use Redirect;
 use Admin;
+use Auth;
 use View;
 
 class UserController extends Controller
@@ -43,15 +45,19 @@ class UserController extends Controller
     {
         $model = AdminUserBls::find($id);
         return View::make('admin::user.edit',[
-          'form' =>  $this->form($model)
+          'form' =>  $this->form($model),
+          'info' =>  $model
         ]);
     }
 
     public function update(UserRequest $request, $id)
     {
-
+        if(AdminUserBls::updateAdminUser($request, $id)) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010001, ['操作失败']);
+        }
     }
-
 
     /**
      * Make a form builder.
@@ -60,6 +66,7 @@ class UserController extends Controller
      */
     protected function form($info)
     {
+
         return Admin::form(function($item) use ($info)  {
             $form = $item->form;
             $date = $item->date;
@@ -77,11 +84,11 @@ class UserController extends Controller
             $date->push(['确认密码', 'password_confirmation', false,
                 $form->password('password_confirmation', $options) ]);
 
-            $date->push(['角色', 'roles[]', true,
-                $form->multipleSelect('roles',  Role::all()->pluck('name', 'id'), array_get($info, 'roles'), $options) ]);
+            $date->push(['角色', 'roles', true,
+                $form->multipleSelect('roles[]',  Role::all()->pluck('name', 'id'), array_get($info, 'roles'), $options) ]);
 
-            $date->push(['权限', 'permissions[]', true,
-                $form->multipleSelect('permission', Permission::all()->pluck('name', 'id'), array_get($info, 'permission'), $options) ]);
+            $date->push(['权限', 'permissions', false,
+                $form->multipleSelect('permissions[]', Permission::all()->pluck('name', 'id'), array_get($info, 'permissions'), $options) ]);
 
         }, ['url' => route('m.user.update', ['id' =>1])]);
     }
