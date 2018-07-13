@@ -28,6 +28,7 @@ Route::group([
         Route::post('update/{id}', ['uses' => "RoleController@update", 'as' => 'm.role.update']);
         Route::get('create', ['uses' => "RoleController@create", 'as' => 'm.role.create']);
         Route::post('store', ['uses' => "RoleController@store", 'as' => 'm.role.store']);
+        Route::delete('destroy/{id}', ['uses' => "RoleController@destroy", 'as' => 'm.role.destroy']);
 //        $router->resource('auth/roles', 'RoleController');
 //        $router->resource('auth/permissions', 'PermissionController');
 //        $router->resource('auth/menu', 'MenuController', ['except' => ['create']]);

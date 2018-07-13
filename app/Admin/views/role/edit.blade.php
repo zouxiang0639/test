@@ -5,7 +5,7 @@
 @stop
 @section('content-header')
     <h1>
-        管理员<small>编辑</small>
+        角色<small>编辑</small>
     </h1>
 @stop
 @section('content')
@@ -35,7 +35,7 @@
 @section('script')
     <script>
         var initialAjAx = {
-            "url":"{!! route('m.role.store') !!}",
+            "url":"{!! route('m.role.update', ['id' => $info->id]) !!}",
             "backUrl":"{!! route('m.role.list') !!}"
         }
     </script>

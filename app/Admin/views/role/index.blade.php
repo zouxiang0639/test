@@ -13,13 +13,18 @@
 @stop
 
 @section('content')
-
+    {{ method_field('PUT') }}
     <div class="box">
         <div class="box-header">
-
+            <div class="btn-group" style="margin-right: 10px">
+                <a href="{!! route('m.role.create') !!}" class="btn btn-sm btn-success">
+                    <i class="fa fa-save"></i>&nbsp;&nbsp;新增
+                </a>
+            </div>
             <h3 class="box-title"></h3>
 
             <div class="pull-right">
+
             </div>
 
         <span>
@@ -60,8 +65,11 @@
                         <td>{!! $item->created_at !!}</td>
                         <td>{!! $item->updated_at !!}</td>
                         <td>
-                            <a href="{!! route('m.user.edit', ['id' => $item->id]) !!}">
+                            <a href="{!! route('m.role.edit', ['id' => $item->id]) !!}">
                                 <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="javascript:void(0);" data-url="{!! route('m.role.destroy', ['id' => $item->id]) !!}" class="item-delete">
+                                <i class="fa fa-trash"></i>
                             </a>
                         </td>
                     </tr>
@@ -76,4 +84,11 @@
         <!-- /.box-body -->
     </div>
 
+@stop
+
+@section('script')
+    <script>
+
+
+    </script>
 @stop

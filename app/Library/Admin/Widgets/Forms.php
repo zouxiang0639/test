@@ -51,22 +51,23 @@ EOT;
 
     private function formGroup($title, $name, $required, $input)
     {
+        if($input) {
+            $required = $required === true ? '<span class="text-danger">*</span>' : '';
+            return <<<EOT
 
-        $required = $required === true ? '<span class="text-danger">*</span>' : '';
-        return <<<EOT
-
-        <div class="form-group">
-            <label for="username" class="col-sm-2 control-label">
-                $required
-                $title:
-            </label>
-            <div class="col-sm-7 $name">
-                <div class="input-group" style="width:100%">
-                 $input
-                 </div>
+            <div class="form-group">
+                <label for="username" class="col-sm-2 control-label">
+                    $required
+                    $title:
+                </label>
+                <div class="col-sm-7 $name">
+                    <div class="input-group" style="width:100%">
+                     $input
+                     </div>
+                </div>
             </div>
-        </div>
 EOT;
+        }
     }
 
 

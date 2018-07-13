@@ -14,9 +14,8 @@ class RoleRequest extends JsonResponseValidator
      */
     public function rules()
     {
-        $id = 0;
         return [
-            'slug' => 'required|alpha|unique:admin_roles,slug,'.$id,
+            'slug' => 'required|alpha|unique:admin_roles,slug,'.$this->id,
             'name' => 'required',
             'permissions' => 'required',
         ];

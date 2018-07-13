@@ -4,6 +4,7 @@ namespace App\Admin\Bls\Auth;
 
 use App\Admin\Bls\Auth\Model\Administrator;
 use App\Admin\Bls\BasicBls;
+use App\Admin\Bls\Common\Traits\RelationTraits;
 use Redirect;
 
 /**
@@ -11,6 +12,8 @@ use Redirect;
  */
 class AdminUserBls extends BasicBls
 {
+    use RelationTraits;
+
     public static function getAdminUser(Redirect $request, $order = '`id` DESC', $limit = 20)
     {
         $model = Administrator::query();
@@ -49,7 +52,7 @@ class AdminUserBls extends BasicBls
                 $model->password =  bcrypt($request->password);
             }
 
-            return $model->save();
+            return $model->touch();
         });
     }
 

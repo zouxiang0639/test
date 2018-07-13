@@ -1,7 +1,12 @@
 $(function(){
     var locked = true;
-    $('#form-submit').click(function(){
-        var config = initialAjAx;
+    var config = initialAjAx;
+
+    /**
+    *  表单ajax提交
+    */
+    $('#form-submit').click(function() {
+
         try {
             if (typeof(eval('formValidate')) == "function") {
                 error = formValidate();
@@ -33,14 +38,13 @@ $(function(){
             success:function(res) {
                 if(res.code != 0) {
                     var error = res.data;
-                    console.log(error);
                     for ( var i in error ) {
                         $('.'+i).after("<div class='text-danger'>" + error[i][0] + "</div>");
                     }
                     _this.attr('disabled',false);
                     locked = true;
                 } else {
-                    alert(res.data);
+                    swal(res.data, '', 'success');
                     window.location.href = config.backUrl;
                 }
             },
@@ -51,5 +55,56 @@ $(function(){
 
         });
         return false;
+    });
+
+    /**
+     *  数据删除
+     */
+    $('.item-delete').click(function() {
+
+        var _this = $(this);
+        swal({
+                title: "确认删除?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+                closeOnConfirm: false,
+                cancelButtonText: "取消"
+            },
+            function(){
+
+                if (! locked) {
+                    return false;
+                }
+
+                locked = false;
+                $.ajax({
+                    url: _this.attr('data-url'),
+                    type: 'POST',
+                    data: {
+                        "_method":"DELETE",
+                        "_token":$('meta[name="csrf-token"]').attr('content')
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    success:function(res) {
+
+                        if(res.code != 0) {
+                            swal(res.data, '', 'error');
+                            locked = true;
+                        } else {
+                            swal(res.data, '', 'success');
+                            window.location.href = document.location;
+                        }
+                    },
+                    error:function () {
+                        locked = true;
+                    }
+
+                });
+
+            }
+        );
     });
 });

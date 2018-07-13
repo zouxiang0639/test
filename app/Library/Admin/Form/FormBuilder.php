@@ -13,22 +13,17 @@ class FormBuilder extends \Collective\Html\FormBuilder
         return $this;
     }
 
-    public function text($name, $value = null, $options = [])
+    /**
+     * 展示数据
+     * @param string $data
+     */
+    public function display($data)
     {
-        return $this->iconLabel('fa-pencil') .
-                parent::text($name, $value, $options);
+        if($data) {
+           return $this->html->tag('div', e($data), ['class' => 'box box-body  box-solid box-default no-margin']);
+        }
     }
 
-    public function password($name, $options = [])
-    {
-        return $this->iconLabel('fa-eye-slash') .
-        parent::password($name, $options);
-    }
-
-    public function iconLabel($icon)
-    {
-        return '<span class="input-group-addon"><i class="fa fa-fw ' . $icon . '"></i></span>';
-    }
 
     /**
      * Create a multipleSelect box field.
