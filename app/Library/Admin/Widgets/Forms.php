@@ -2,6 +2,7 @@
 
 namespace App\Library\Admin\Widgets;
 
+use App\Library\Admin\Form\HtmlFormTpl;
 use Illuminate\Support\Collection;
 use Form;
 
@@ -12,11 +13,9 @@ class Forms
 {
 
     public $date;
-
+    public $open = [];
     public $form;
-
     public $formHtml = '';
-    public $options = ['class'=>'form-control'];
 
     public function __construct()
     {
@@ -24,17 +23,48 @@ class Forms
         $this->form = Form::createFormBuilder();
     }
 
-    public function form(\Closure $callback, $open)
+    public function form(\Closure $callback)
     {
         $callback($this);
-        $open = array_merge(['class'=> 'form-horizontal box-body fields-group'], $open);
+        return $this;
+    }
+
+    public function create($title, \Closure $callback){
+        $html = new HtmlFormTpl();
+        $html->title = $title;
+        $callback($html);
+        $this->date->push($html);
+
+    }
+
+    private function formGroup($item)
+    {
+        if($item->input) {
+            $required = $item->required === true ? '<span class="text-danger">*</span>' : '';
+            return <<<EOT
+
+            <div class="form-group">
+                <label for="username" class="col-sm-2 control-label">
+                    $required
+                    $item->title:
+                </label>
+                <div class="col-sm-7 $item->name">
+                    <div class="input-group" style="width:100%">
+                     $item->input
+                     </div>
+                </div>
+            </div>
+EOT;
+        }
+    }
+
+    public function getFormHtml()
+    {
+        $open = array_merge(['class'=> 'form-horizontal box-body fields-group'], $this->open);
         $this->formHtml .=  Form::open($open);
 
         $this->date->each(function($item) {
-
-            list($title, $name, $required, $input) = $item;
-            $this->formHtml .= $this->formGroup($title, $name, $required, $input);
-
+            $this->formHtml .= $this->formGroup($item);
         });
 
         $id = array_get($open,'submit_id', 'form-submit');
@@ -48,27 +78,5 @@ EOT;
         $this->formHtml .=  Form::close();
         return $this->formHtml;
     }
-
-    private function formGroup($title, $name, $required, $input)
-    {
-        if($input) {
-            $required = $required === true ? '<span class="text-danger">*</span>' : '';
-            return <<<EOT
-
-            <div class="form-group">
-                <label for="username" class="col-sm-2 control-label">
-                    $required
-                    $title:
-                </label>
-                <div class="col-sm-7 $name">
-                    <div class="input-group" style="width:100%">
-                     $input
-                     </div>
-                </div>
-            </div>
-EOT;
-        }
-    }
-
 
 }

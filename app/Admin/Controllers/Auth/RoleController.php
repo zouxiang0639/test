@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\Auth;
 
 use App\Admin\Bls\Auth\Requests\RoleRequest;
 use App\Admin\Bls\Auth\RoleBls;
@@ -25,7 +25,7 @@ class RoleController extends Controller
     {
         $model = RoleBls::getRoleList($request);
 
-        return view('admin::role.index',[
+        return view('admin::auth.role.index',[
             'list' => $model
         ]);
     }
@@ -36,7 +36,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return View::make('admin::role.create',[
+        return View::make('admin::auth.role.create',[
             'form' =>  $this->form()
         ]);
     }
@@ -65,7 +65,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         $model = RoleBls::find($id);
-        return View::make('admin::role.edit',[
+        return View::make('admin::auth.role.edit',[
             'form' =>  $this->form($model),
             'info' =>  $model
         ]);
@@ -111,23 +111,30 @@ class RoleController extends Controller
 
         return Admin::form(function($item) use ($info)  {
             $form = $item->form;
-            $date = $item->date;
-            $options = $item->options;
-            $date->push(['标识', 'slug', true,
-                $form->text('slug', array_get($info, 'slug'), $options) ]);
 
-            $date->push(['名称', 'name', true,
-                $form->text('name', array_get($info, 'name'), $options) ]);
+            $item->create('标识', function($h) use ($form, $info){
+                $h->input = $form->text('slug', array_get($info, 'slug'), $h->options);
+                return $h->set('slug', true);
+            });
 
-            $date->push(['权限', 'permissions', true,
-                $form->dualListBox('permissions[]',  Permission::all()->pluck('name', 'id'), array_get($info, 'permissions'), $options) ]);
+            $item->create('名称', function($h) use ($form, $info){
+                $h->input = $form->text('name', array_get($info, 'name'), $h->options);
+                return $h->set('name', true);
+            });
 
-            $date->push(['创建时间', 'created_at', false,
-                $form->display(array_get($info, 'created_at')) ]);
+            $item->create('权限', function($h) use ($form, $info){
+                $h->input =  $form->dualListBox('permissions[]',  Permission::all()->pluck('name', 'id'), array_get($info, 'permissions'),  $h->options);
+                return $h->set('permissions', true);
+            });
 
-            $date->push(['更新时间', 'updated_at', false,
-                $form->display(array_get($info, 'updated_at')) ]);
+            $item->create('创建时间', function($h) use ($form, $info){
+                $h->input = $form->display(array_get($info, 'created_at'));
+            });
 
-        }, []);
+            $item->create('更新时间', function($h) use ($form, $info){
+                $h->input = $form->display(array_get($info, 'updated_at'));
+            });
+
+        })->getFormHtml();
     }
 }

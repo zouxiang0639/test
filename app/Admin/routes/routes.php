@@ -7,34 +7,36 @@ Route::group([
 ], function(){
 
     Route::get('/', ['uses' => "HomeController@index", 'as' => 'm.home']);
-    Route::get('login', ['uses' => "AuthController@login", 'as' => 'm.login']);
-    Route::post('login', ['uses' => "AuthController@postLogin", 'as' => 'm.postLogin']);
-    Route::get('logout', ['uses' => "AuthController@logout", 'as' => 'm.logout']);
+    Route::get('login', ['uses' => "Auth\\AuthController@login", 'as' => 'm.login']);
+    Route::post('login', ['uses' => "Auth\\AuthController@postLogin", 'as' => 'm.postLogin']);
+    Route::get('logout', ['uses' => "Auth\\AuthController@logout", 'as' => 'm.logout']);
+    Route::get('auth/users', ['uses' => "Auth\\AuthController@index", 'as' => 'm.auth.users']);
 
-
+    //后台管理员
     Route::group(['prefix'=>'users'], function(){
-        Route::get('', ['uses' => "UserController@index", 'as' => 'm.user.list']);
-        Route::get('edit/{id}', ['uses' => "UserController@edit", 'as' => 'm.user.edit']);
-        Route::post('update/{id}', ['uses' => "UserController@update", 'as' => 'm.user.update']);
-//        $router->resource('auth/roles', 'RoleController');
-//        $router->resource('auth/permissions', 'PermissionController');
-//        $router->resource('auth/menu', 'MenuController', ['except' => ['create']]);
-//        $router->resource('auth/logs', 'LogController', ['only' => ['index', 'destroy']]);
+        Route::get('', ['uses' => "Auth\\UserController@index", 'as' => 'm.user.list']);
+        Route::get('edit/{id}', ['uses' => "Auth\\UserController@edit", 'as' => 'm.user.edit']);
+        Route::post('update/{id}', ['uses' => "Auth\\UserController@update", 'as' => 'm.user.update']);
     });
 
+    //角色
     Route::group(['prefix'=>'role'], function(){
-        Route::get('', ['uses' => "RoleController@index", 'as' => 'm.role.list']);
-        Route::get('edit/{id}', ['uses' => "RoleController@edit", 'as' => 'm.role.edit']);
-        Route::post('update/{id}', ['uses' => "RoleController@update", 'as' => 'm.role.update']);
-        Route::get('create', ['uses' => "RoleController@create", 'as' => 'm.role.create']);
-        Route::post('store', ['uses' => "RoleController@store", 'as' => 'm.role.store']);
-        Route::delete('destroy/{id}', ['uses' => "RoleController@destroy", 'as' => 'm.role.destroy']);
-//        $router->resource('auth/roles', 'RoleController');
-//        $router->resource('auth/permissions', 'PermissionController');
-//        $router->resource('auth/menu', 'MenuController', ['except' => ['create']]);
-//        $router->resource('auth/logs', 'LogController', ['only' => ['index', 'destroy']]);
+        Route::get('', ['uses' => "Auth\\RoleController@index", 'as' => 'm.role.list']);
+        Route::get('edit/{id}', ['uses' => "Auth\\RoleController@edit", 'as' => 'm.role.edit']);
+        Route::post('update/{id}', ['uses' => "Auth\\RoleController@update", 'as' => 'm.role.update']);
+        Route::get('create', ['uses' => "Auth\\RoleController@create", 'as' => 'm.role.create']);
+        Route::post('store', ['uses' => "Auth\\RoleController@store", 'as' => 'm.role.store']);
+        Route::delete('destroy/{id}', ['uses' => "Auth\\RoleController@destroy", 'as' => 'm.role.destroy']);
     });
-    Route::get('auth/users', ['uses' => "AuthController@index", 'as' => 'm.auth.users']);
+
+    //权限
+    Route::group(['prefix'=>'permissions'], function(){
+        Route::get('', ['uses' => "Auth\\PermissionsController@index", 'as' => 'm.permissions.list']);
+        Route::get('/create', ['uses' => "Auth\\PermissionsController@create", 'as' => 'm.permissions.create']);
+
+    });
+
+
 });
 
 

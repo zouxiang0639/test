@@ -57,9 +57,9 @@ class Admin
         return \Request::route()->getName();
     }
 
-    public function form(\Closure $callback, $open)
+    public function form(\Closure $callback)
     {
-        return (new Forms())->form($callback, $open);
+        return (new Forms())->form($callback);
     }
 
     public function setCss($type, $data)
