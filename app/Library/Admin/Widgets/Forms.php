@@ -2,6 +2,7 @@
 
 namespace App\Library\Admin\Widgets;
 
+use App\Library\Admin\Form\FormBuilder;
 use App\Library\Admin\Form\HtmlFormTpl;
 use Illuminate\Support\Collection;
 use Form;
@@ -14,7 +15,12 @@ class Forms
 
     public $date;
     public $open = [];
+
+    /**
+     * @var FormBuilder
+     */
     public $form;
+
     public $formHtml = '';
     public $helpBlock = '';
 
@@ -37,7 +43,7 @@ class Forms
     public function create($title, \Closure $callback){
         $html = new HtmlFormTpl();
         $html->title = $title;
-        $callback($html);
+        $callback($html, $this->form);
         $this->date->push($html);
 
     }
@@ -62,8 +68,9 @@ class Forms
                 <div class="col-sm-7 $item->name">
                     <div class="input-group" style="width:100%">
                      $item->input
-                     $getHelpBlock
+
                      </div>
+                      $getHelpBlock
                 </div>
             </div>
 EOT;

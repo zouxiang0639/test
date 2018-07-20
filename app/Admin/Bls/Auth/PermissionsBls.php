@@ -4,7 +4,6 @@ namespace App\Admin\Bls\Auth;
 
 use App\Admin\Bls\Auth\Model\Permission;
 use App\Admin\Bls\Auth\Requests\PermissionsRequest;
-use App\Admin\Bls\BasicBls;
 use App\Exceptions\LogicException;
 use Redirect;
 
@@ -13,7 +12,7 @@ use Redirect;
  * @author: zouxiang
  * @date:
  */
-class PermissionsBls extends BasicBls
+class PermissionsBls
 {
 
     /**

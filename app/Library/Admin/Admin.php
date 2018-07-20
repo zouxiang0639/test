@@ -5,6 +5,7 @@ namespace App\Library\Admin;
 use App\Library\Admin\Consts\StyleTypeConst;
 use App\Library\Admin\Widgets\Forms;
 use App\Library\Admin\Widgets\NavBar;
+use App\Library\Admin\Widgets\Tree;
 use Auth;
 use App\Admin\Bls\Auth\Model\Menu;
 use Collective\Html\HtmlFacade as Form;
@@ -48,8 +49,18 @@ class Admin
      */
     public function menu()
     {
-
         return (new Menu())->toTree();
+    }
+
+    /**
+     * @param  $model
+     * @param \Closure $callback
+     *
+     * @return Tree
+     */
+    public static function tree($model, \Closure $callback = null)
+    {
+        return new Tree($model , $callback);
     }
 
     public function getRouteName()

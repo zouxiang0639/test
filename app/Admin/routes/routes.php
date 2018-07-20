@@ -39,6 +39,19 @@ Route::group([
         Route::delete('destroy/{id}', ['uses' => "Auth\\PermissionsController@destroy", 'as' => 'm.permissions.destroy']);
     });
 
+    //菜单
+    Route::group(['prefix'=>'menu'], function(){
+        Route::get('', ['uses' => "Auth\\MenuController@index", 'as' => 'm.menu.list']);
+        Route::post('store', ['uses' => "Auth\\MenuController@store", 'as' => 'm.menu.store']);
+        Route::get('edit/{id}', ['uses' => "Auth\\MenuController@edit", 'as' => 'm.menu.edit']);
+        Route::post('update/{id}', ['uses' => "Auth\\MenuController@update", 'as' => 'm.menu.update']);
+        Route::delete('destroy/{id}', ['uses' => "Auth\\MenuController@destroy", 'as' => 'm.menu.destroy']);
+    });
+
+    //配置
+    Route::group(['prefix'=>'config'], function(){
+        Route::get('', ['uses' => "Auth\\MenuController@index", 'as' => 'm.config.list']);
+    });
 });
 
 

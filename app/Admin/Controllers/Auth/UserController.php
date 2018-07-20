@@ -8,6 +8,7 @@ use App\Admin\Bls\Auth\Model\Permission;
 use App\Admin\Bls\Auth\Model\Role;
 use App\Exceptions\LogicException;
 use App\Http\Controllers\Controller;
+use App\Library\Admin\Form\FormBuilder;
 use App\Library\Response\JsonResponse;
 use Redirect;
 use Admin;
@@ -58,36 +59,35 @@ class UserController extends Controller
     {
 
         return Admin::form(function($item) use ($info)  {
-            $form = $item->form;
 
-            $item->create('用户名', function($h) use ($form, $info){
+            $item->create('用户名', function($h, FormBuilder $form) use ($info){
                 $h->input = $form->text('username', array_get($info, 'username'), $h->options);
-                return $h->set('username', true);
+                $h->set('username', true);
             });
 
-            $item->create('名称', function($h) use ($form, $info){
+            $item->create('名称', function($h, FormBuilder $form) use ($info){
                 $h->input = $form->text('name', array_get($info, 'name'), $h->options);
-                return $h->set('name', true);
+                $h->set('name', true);
             });
 
-            $item->create('密码', function($h) use ($form, $info){
+            $item->create('密码', function($h, FormBuilder $form) use ($info){
                 $h->input = $form->password('password', $h->options);
-                return $h->set('password', true);
+                $h->set('password', true);
             });
 
-            $item->create('确认密码', function($h) use ($form, $info){
+            $item->create('确认密码', function($h, FormBuilder $form) use ($info){
                 $h->input = $form->password('password_confirmation', $h->options);
-                return $h->set('password_confirmation', true);
+                $h->set('password_confirmation', true);
             });
 
-            $item->create('角色', function($h) use ($form, $info){
+            $item->create('角色', function($h, FormBuilder $form) use ($info){
                 $h->input = $form->multipleSelect('roles[]',  Role::all()->pluck('name', 'id'), array_get($info, 'roles'), $h->options);
-                return $h->set('roles', true);
+                $h->set('roles', true);
             });
 
-            $item->create('权限', function($h) use ($form, $info){
+            $item->create('权限', function($h, FormBuilder $form) use ($info){
                 $h->input = $form->multipleSelect('permissions[]', Permission::all()->pluck('name', 'id'), array_get($info, 'permissions'), $h->options);
-                return $h->set('permissions', true);
+                $h->set('permissions', true);
             });
 
         })->getFormHtml();

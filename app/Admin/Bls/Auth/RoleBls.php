@@ -3,14 +3,13 @@
 namespace App\Admin\Bls\Auth;
 
 use App\Admin\Bls\Auth\Model\Role;
-use App\Admin\Bls\BasicBls;
 use App\Admin\Bls\Common\Traits\RelationTraits;
 use App\Exceptions\LogicException;
 
 /**
  * Class RoleBls.
  */
-class RoleBls extends BasicBls
+class RoleBls
 {
     use RelationTraits;
 

@@ -3,14 +3,13 @@
 namespace App\Admin\Bls\Auth;
 
 use App\Admin\Bls\Auth\Model\Administrator;
-use App\Admin\Bls\BasicBls;
 use App\Admin\Bls\Common\Traits\RelationTraits;
 use Redirect;
 
 /**
  * Class AdminUserBls.
  */
-class AdminUserBls extends BasicBls
+class AdminUserBls
 {
     use RelationTraits;
 

@@ -5,8 +5,8 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="{{  assets_path("/lib/AdminLTE/dist/css/skins/" . config('admin.skin') .".min.css") }}">
 
+<link rel="stylesheet" href="{{  assets_path("/admin/css/admin.css") }}">
 
-<link rel="stylesheet" href="{{  assets_path("/lib/laravel-admin/laravel-admin.css") }}">
 <link rel="stylesheet" href="{{  assets_path("/lib/nprogress/nprogress.css") }}">
 <link rel="stylesheet" href="{{  assets_path("/lib/sweetalert/dist/sweetalert.css") }}">
 <link rel="stylesheet" href="{{  assets_path("/lib/nestable/nestable.css") }}">
@@ -22,6 +22,7 @@
 <script src="{{  assets_path("/lib/AdminLTE/dist/js/app.min.js") }}"></script>
 {{--<script src="{{  assets_path("/lib/jquery-pjax/jquery.pjax.js") }}"></script>--}}
 <script src="{{  assets_path("/lib/nprogress/nprogress.js") }}"></script>
+
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
