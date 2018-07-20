@@ -286,31 +286,30 @@ trait ModelTree
         return parent::delete();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::saving(function (Model $branch) {
-            $parentColumn = $branch->getParentColumn();
-
-            if (Request::has($parentColumn) && Request::input($parentColumn) == $branch->getKey()) {
-                throw new \Exception(trans('admin.parent_select_error'));
-            }
-
-            if (Request::has('_order')) {
-                $order = Request::input('_order');
-
-                Request::offsetUnset('_order');
-
-                static::tree()->saveOrder($order);
-
-                return false;
-            }
-
-            return $branch;
-        });
-    }
+//    /**
+//     * {@inheritdoc}
+//     */
+//    protected static function boot()
+//    {
+//        parent::boot();
+//        static::saving(function (Model $branch) {
+//            $parentColumn = $branch->getParentColumn();
+//
+//            if (Request::has($parentColumn) && Request::input($parentColumn) == $branch->getKey()) {
+//                throw new \Exception(trans('admin.parent_select_error'));
+//            }
+//
+//            if (Request::has('_order')) {
+//                $order = Request::input('_order');
+//
+//                Request::offsetUnset('_order');
+//
+//                static::tree()->saveOrder($order);
+//
+//                return false;
+//            }
+//
+//            return $branch;
+//        });
+//    }
 }

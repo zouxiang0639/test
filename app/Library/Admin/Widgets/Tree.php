@@ -195,25 +195,7 @@ class Tree implements Renderable
         $this->useRefresh = false;
     }
 
-    /**
-     * Save tree order from a input.
-     *
-     * @param string $serialize
-     *
-     * @return bool
-     */
-    public function saveOrder($serialize)
-    {
-        $tree = json_decode($serialize, true);
 
-        if (json_last_error() != JSON_ERROR_NONE) {
-            throw new \InvalidArgumentException(json_last_error_msg());
-        }
-
-        $this->model->saveOrder($tree);
-
-        return true;
-    }
 
     /**
      * Build tree grid scripts.
@@ -222,23 +204,23 @@ class Tree implements Renderable
      */
     protected function script()
     {
-        $deleteConfirm = '确认删除';
-        $saveSucceeded = '保存成功';
-        $refreshSucceeded = '刷新成功';
-        $deleteSucceeded = '删除成功';
-        $confirm = '确认';
-        $cancel = '取消';
 
         $nestableOptions = json_encode($this->nestableOptions);
 
         return <<<SCRIPT
-
-        $('#{$this->elementId}').nestable($nestableOptions);
-
-        $('.{$this->elementId}-refresh').click(function () {
-            $.pjax.reload('#pjax-container');
-            toastr.success('{$refreshSucceeded}');
+        $('.{$this->elementId}-save').click(function () {
+            var serialize = $('#{$this->elementId}').nestable('serialize');
+            $.post('{$this->path}', {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                _order: JSON.stringify(serialize)
+            },
+            function(res){
+                res = JSON.parse(res);
+                swal(res.data, '', 'success');
+                //window.location.href = document.location;
+            });
         });
+        $('#{$this->elementId}').nestable($nestableOptions);
 
         $('.{$this->elementId}-tree-tools').on('click', function(e){
             var target = $(e.target),

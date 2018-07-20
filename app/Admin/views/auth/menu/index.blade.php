@@ -4,7 +4,7 @@
 @stop
 @section('content-header')
     <h1>
-        管理员<small>列表</small>
+        菜单<small>列表</small>
     </h1>
 @stop
 @section('content')

@@ -12,6 +12,8 @@ use Admin;
  */
 class MenuBls
 {
+    static $branchOrder = 1;
+
     /**
      * @return Tree
      */
@@ -24,6 +26,7 @@ class MenuBls
                 'tree'   => 'admin::auth.menu.tree.menu',
                 'branch' => 'admin::auth.menu.tree.menu_branch',
             ]);
+            $tree->path = route('m.menu.sort');
 
             $tree->disableCreate();
 
@@ -45,6 +48,11 @@ class MenuBls
         });
     }
 
+    /**
+     * 存储菜单数据
+     * @param MenuRequest $request
+     * @return mixed
+     */
     public static function storeMenu(MenuRequest $request)
     {
         $model = new Menu();
@@ -57,15 +65,76 @@ class MenuBls
 
     }
 
+    /**
+     * 更新菜单数据
+     * @param MenuRequest $request
+     * @param Menu $model
+     * @return mixed
+     */
+    public static function updateMenu(MenuRequest $request, Menu $model)
+    {
+        $model->parent_id = $request->parent_id;
+        $model->title = $request->title;
+        $model->icon = $request->icon;
+        $model->route = $request->route;
+        $model->url = \Route::has($request->route) ? route($request->route, [], false) :  $model->route;
+        return $model->save();
+    }
+
+    /**
+     * 获取菜单select数据
+     * @return \Illuminate\Support\Collection
+     */
     public static function selectOptions()
     {
         return Menu::selectOptions();
     }
 
+
+    /**
+     * @param $id
+     * @return mixed
+     */
     public static function find($id)
     {
         return Menu::find($id);
     }
+
+
+    public static function sort($sort)
+    {
+        $tree = json_decode($sort, true);
+
+        if (json_last_error() != JSON_ERROR_NONE) {
+            throw new \InvalidArgumentException(json_last_error_msg());
+        }
+        static::saveOrder($tree);
+
+        return true;
+    }
+
+    /**
+     * Save tree order from a tree like array.
+     *
+     * @param array $tree
+     * @param int   $parentId
+     */
+    public static function saveOrder($tree = [], $parentId = 0)
+    {
+
+        foreach ($tree as $branch) {
+            $model = static::find($branch['id']);
+            $model->parent_id = $parentId;
+            $model->order = static::$branchOrder ++;
+
+            $model->save();
+
+            if (isset($branch['children'])) {
+                static::saveOrder($branch['children'], $branch['id']);
+            }
+        }
+    }
+
 
 
 
