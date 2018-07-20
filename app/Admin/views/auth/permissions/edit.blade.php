@@ -5,7 +5,7 @@
 @stop
 @section('content-header')
     <h1>
-        角色<small>编辑</small>
+        权限<small>编辑</small>
     </h1>
 @stop
 @section('content')
@@ -16,7 +16,7 @@
 
                     <div class="box-tools">
                         <div class="btn-group pull-right" style="margin-right: 10px">
-                            <a href="{!! route('m.role.list') !!}" class="btn btn-sm btn-default">
+                            <a href="{!! route('m.permissions.list') !!}" class="btn btn-sm btn-default">
                                 <i class="fa fa-list"></i>&nbsp;列表
                             </a>
                         </div> <div class="btn-group pull-right" style="margin-right: 10px">
@@ -37,8 +37,8 @@
 @section('script')
     <script>
         var initialAjAx = {
-            "url":"{!! route('m.role.update', ['id' => $info->id]) !!}",
-            "backUrl":"{!! route('m.role.list') !!}"
+            "url":"{!! route('m.permissions.update', ['id' => $info->id]) !!}",
+            "backUrl":"{!! route('m.permissions.list') !!}"
         }
     </script>
 @stop

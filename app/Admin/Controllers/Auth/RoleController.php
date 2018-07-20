@@ -52,7 +52,7 @@ class RoleController extends Controller
         if(RoleBls::storeRole($request)) {
             return (new JsonResponse())->success('操作成功');
         } else {
-            throw new LogicException(1010001, ['操作失败']);
+            throw new LogicException(1010002, '操作失败');
         }
     }
 
@@ -83,7 +83,7 @@ class RoleController extends Controller
         if(RoleBls::updateRole($request, $id)) {
             return (new JsonResponse())->success('操作成功');
         } else {
-            throw new LogicException(1010001, ['操作失败']);
+            throw new LogicException(1010002, '操作失败');
         }
     }
 
@@ -98,7 +98,7 @@ class RoleController extends Controller
         if(RoleBls::destroyRole($id)) {
             return (new JsonResponse())->success('操作成功');
         } else {
-            throw new LogicException(1010001, ['操作失败']);
+            throw new LogicException(1010002, '操作失败');
         }
     }
 

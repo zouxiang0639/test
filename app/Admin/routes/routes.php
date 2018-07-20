@@ -33,9 +33,11 @@ Route::group([
     Route::group(['prefix'=>'permissions'], function(){
         Route::get('', ['uses' => "Auth\\PermissionsController@index", 'as' => 'm.permissions.list']);
         Route::get('/create', ['uses' => "Auth\\PermissionsController@create", 'as' => 'm.permissions.create']);
-
+        Route::post('store', ['uses' => "Auth\\PermissionsController@store", 'as' => 'm.permissions.store']);
+        Route::get('edit/{id}', ['uses' => "Auth\\PermissionsController@edit", 'as' => 'm.permissions.edit']);
+        Route::post('update/{id}', ['uses' => "Auth\\PermissionsController@update", 'as' => 'm.permissions.update']);
+        Route::delete('destroy/{id}', ['uses' => "Auth\\PermissionsController@destroy", 'as' => 'm.permissions.destroy']);
     });
-
 
 });
 

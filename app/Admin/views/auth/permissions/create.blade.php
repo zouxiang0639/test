@@ -16,7 +16,9 @@
 
                     <div class="box-tools">
                         <div class="btn-group pull-right" style="margin-right: 10px">
-                            <a href="http://bbs.com/admin/auth/users" class="btn btn-sm btn-default"><i class="fa fa-list"></i>&nbsp;列表</a>
+                            <a href="{!! route('m.permissions.list') !!}" class="btn btn-sm btn-default">
+                                <i class="fa fa-list"></i>&nbsp;列表
+                            </a>
                         </div> <div class="btn-group pull-right" style="margin-right: 10px">
                             <a href="JavaScript:history.go(-1)" class="btn btn-sm btn-default"><i class="fa fa-arrow-left"></i>&nbsp;返回</a>
                         </div>
@@ -35,8 +37,8 @@
 @section('script')
     <script>
         var initialAjAx = {
-            "url":"{!! route('m.role.store') !!}",
-            "backUrl":"{!! route('m.role.list') !!}"
+            "url":"{!! route('m.permissions.store') !!}",
+            "backUrl":"{!! route('m.permissions.list') !!}"
         }
     </script>
 @stop

@@ -9,17 +9,20 @@ use Illuminate\Support\Str;
 
 class Permission extends Model
 {
+
     /**
+     * The attributes that should be cast to native types.
+     *
      * @var array
      */
-    protected $fillable = ['name', 'slug', 'http_method', 'http_path'];
+    protected $casts = [
+        'http_method' => 'array',
+    ];
 
     /**
      * @var array
      */
-    public static $httpMethods = [
-        'GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD',
-    ];
+    protected $fillable = ['name', 'slug', 'http_method', 'http_path'];
 
     /**
      * Create a new Eloquent model instance.
@@ -42,13 +45,19 @@ class Permission extends Model
      *
      * @return BelongsToMany
      */
-    public function roles() : BelongsToMany
+    public function roles()
     {
-        $pivotTable = config('admin.database.role_permissions_table');
+        return $this->belongsToMany(Role::class, 'admin_role_permissions', 'permission_id', 'role_id');
+    }
 
-        $relatedModel = config('admin.database.roles_model');
-
-        return $this->belongsToMany($relatedModel, $pivotTable, 'permission_id', 'role_id');
+    /**
+     * Permission belongs to many user.
+     *
+     * @return BelongsToMany
+     */
+    public function adminUser()
+    {
+        return $this->belongsToMany(Administrator::class, 'admin_user_permissions', 'permission_id', 'user_id');
     }
 
     /**
@@ -105,30 +114,6 @@ class Permission extends Model
         });
 
         return $method->isEmpty() || $method->contains($request->method());
-    }
-
-    /**
-     * @param $method
-     */
-    public function setHttpMethodAttribute($method)
-    {
-        if (is_array($method)) {
-            $this->attributes['http_method'] = implode(',', $method);
-        }
-    }
-
-    /**
-     * @param $method
-     *
-     * @return array
-     */
-    public function getHttpMethodAttribute($method)
-    {
-        if (is_string($method)) {
-            return array_filter(explode(',', $method));
-        }
-
-        return $method;
     }
 
     /**

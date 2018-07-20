@@ -36,7 +36,11 @@ $(function(){
             cache: false,
             dataType: 'json',
             success:function(res) {
-                if(res.code != 0) {
+                if(res.code == 1010002){
+                    swal(res.data, '', 'error');
+                    _this.attr('disabled',false);
+                    locked = true;
+                } else if(res.code != 0) {
                     var error = res.data;
                     for ( var i in error ) {
                         $('.'+i).after("<div class='text-danger'>" + error[i][0] + "</div>");

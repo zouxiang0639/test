@@ -16,6 +16,7 @@ class Forms
     public $open = [];
     public $form;
     public $formHtml = '';
+    public $helpBlock = '';
 
     public function __construct()
     {
@@ -23,6 +24,10 @@ class Forms
         $this->form = Form::createFormBuilder();
     }
 
+    /**
+     * @param \Closure $callback
+     * @return $this
+     */
     public function form(\Closure $callback)
     {
         $callback($this);
@@ -37,10 +42,16 @@ class Forms
 
     }
 
+    /**
+     * 设置表单元素
+     * @param $item
+     * @return string
+     */
     private function formGroup($item)
     {
         if($item->input) {
-            $required = $item->required === true ? '<span class="text-danger">*</span>' : '';
+            $required = $this->getRequired($item->required);
+            $getHelpBlock = $this->getHelpBlock($item->helpBlock);
             return <<<EOT
 
             <div class="form-group">
@@ -51,6 +62,7 @@ class Forms
                 <div class="col-sm-7 $item->name">
                     <div class="input-group" style="width:100%">
                      $item->input
+                     $getHelpBlock
                      </div>
                 </div>
             </div>
@@ -58,6 +70,10 @@ EOT;
         }
     }
 
+    /**
+     * 获取form表单
+     * @return string
+     */
     public function getFormHtml()
     {
         $open = array_merge(['class'=> 'form-horizontal box-body fields-group'], $this->open);
@@ -77,6 +93,45 @@ EOT;
 EOT;
         $this->formHtml .=  Form::close();
         return $this->formHtml;
+    }
+
+
+    /**
+     * 获取说明
+     * @param $helpBlock
+     * @return string
+     */
+    public function getHelpBlock($helpBlock)
+    {
+        if(empty($helpBlock)) {
+            return '';
+        }
+
+        return <<<EOT
+
+            <span class="help-block">
+                <i class="fa fa-info-circle"></i>&nbsp;$helpBlock
+            </span>
+EOT;
+
+    }
+
+    /**
+     * 获取必须标记
+     * @param $required
+     * @return string
+     */
+    public function getRequired($required)
+    {
+        if(empty($required)) {
+            return '';
+        }
+
+        return <<<EOT
+
+           <span class="text-danger">*</span>
+EOT;
+
     }
 
 }

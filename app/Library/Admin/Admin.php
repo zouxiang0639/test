@@ -2,12 +2,12 @@
 
 namespace App\Library\Admin;
 
-
 use App\Library\Admin\Consts\StyleTypeConst;
 use App\Library\Admin\Widgets\Forms;
 use App\Library\Admin\Widgets\NavBar;
 use Auth;
 use App\Admin\Bls\Auth\Model\Menu;
+use Collective\Html\HtmlFacade as Form;
 
 class Admin
 {
@@ -60,6 +60,18 @@ class Admin
     public function form(\Closure $callback)
     {
         return (new Forms())->form($callback);
+    }
+
+    public function tag($tag, $class)
+    {
+
+        $tagHtml = [];
+        foreach($tag as $value) {
+
+            $tagHtml[] =  Form::tag('span', e($value), ['class' => "label $class", "sta"]);
+
+        }
+        return implode('&nbsp;', $tagHtml);
     }
 
     public function setCss($type, $data)

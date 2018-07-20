@@ -31,15 +31,18 @@ class HtmlFormTpl
      * @var string
      */
     public $input = '';
+    public $helpBlock = '';
 
     /**
      * @param string $name
      * @param string $required
+     * @param string $helpBlock
      * @return $this
      */
-    public function set($name = '', $required = '')
+    public function set($name = '', $required = '', $helpBlock = '')
     {
         $this->name = $name;
         $this->required = $required;
+        $this->helpBlock = $helpBlock;
     }
 }

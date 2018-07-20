@@ -45,7 +45,7 @@ class UserController extends Controller
         if(AdminUserBls::updateAdminUser($request, $id)) {
             return (new JsonResponse())->success('操作成功');
         } else {
-            throw new LogicException(1010001, ['操作失败']);
+            throw new LogicException(1010002, '操作失败');
         }
     }
 

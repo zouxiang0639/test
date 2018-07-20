@@ -4,7 +4,7 @@ namespace App\Admin\Bls\Auth\Requests;
 
 use App\Library\Validators\JsonResponseValidator;
 
-class UserRequest extends JsonResponseValidator
+class PermissionsRequest extends JsonResponseValidator
 {
 
     /**
@@ -15,8 +15,9 @@ class UserRequest extends JsonResponseValidator
     public function rules()
     {
         return [
-            'password' => 'confirmed|max:255',
-            'roles' => 'required',
+            'slug' => 'required|unique:admin_permissions,slug,'.$this->id,
+            'name' => 'required',
+            'http_path' => 'required',
         ];
     }
 
@@ -28,8 +29,10 @@ class UserRequest extends JsonResponseValidator
     public function messages()
     {
         return [
-            'password.confirmed' => '两次密码输入不一致',
-            'roles.required' => '请选择角色',
+            'slug.required' => '标识不能为空',
+            'slug.unique' => '标识只能唯一',
+            'name.required' => '名称不能为空',
+            'http_path.required' => 'HTTP路径不能为空',
         ];
     }
 
