@@ -43,8 +43,6 @@ class PermissionsBls
         $model = new Permission();
         $model->slug = $request->slug;
         $model->name = $request->name;
-        $model->http_method = $request->http_method;
-        $model->http_path = $request->http_path;
         return $model->save();
     }
 
@@ -56,8 +54,6 @@ class PermissionsBls
         }
         $model->slug = $request->slug;
         $model->name = $request->name;
-        $model->http_method = $request->http_method;
-        $model->http_path = $request->http_path;
         return $model->save();
     }
 

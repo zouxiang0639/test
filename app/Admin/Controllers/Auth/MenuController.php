@@ -158,6 +158,14 @@ class MenuController extends Controller
                 $h->helpBlock = '路由只能是路由别名,http,https';
             });
 
+            $item->create('创建时间', function($h, FormBuilder $form) use ($info){
+                $h->input = $form->display(array_get($info, 'created_at'));
+            });
+
+            $item->create('更新时间', function($h, FormBuilder $form) use ($info){
+                $h->input = $form->display(array_get($info, 'updated_at'));
+            });
+
         })->getFormHtml();
     }
 }

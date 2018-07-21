@@ -51,7 +51,7 @@
                     <tr>
                         <td></td>
                         <td>{!! $item->id !!}</td>
-                        <td>{!! $item->username !!}</td>
+                        <td>{!! $item->slug !!}</td>
                         <td>{!! $item->name !!}</td>
                         <td>
                             @if($roles = $item->permissions)

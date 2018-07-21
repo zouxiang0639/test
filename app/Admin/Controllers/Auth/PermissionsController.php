@@ -16,12 +16,6 @@ class PermissionsController extends Controller
 {
 
 
-    /**
-     * @var array
-     */
-    public $httpMethods = [
-        'GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD',
-    ];
 
     /**
      * 列表
@@ -130,17 +124,13 @@ class PermissionsController extends Controller
                 $h->set('slug', true);
             });
 
-            $item->create('HTTP方法', function($h, FormBuilder $form) use ($info){
-                $array =  array_combine($this->httpMethods, $this->httpMethods);
-                $h->input = $form->multipleSelect('http_method[]', $array, array_get($info, 'http_method'), $h->options);
-                $h->set('http_method', '', '为空默认为所有方法');
+            $item->create('创建时间', function($h, FormBuilder $form) use ($info){
+                $h->input = $form->display(array_get($info, 'created_at'));
             });
 
-            $item->create('HTTP路径', function($h, FormBuilder $form) use ($info){
-                $h->input = $form->textarea('http_path', array_get($info, 'http_path'), $h->options);
-                $h->set('http_path', true);
+            $item->create('更新时间', function($h, FormBuilder $form) use ($info){
+                $h->input = $form->display(array_get($info, 'updated_at'));
             });
-
         })->getFormHtml();
     }
 }

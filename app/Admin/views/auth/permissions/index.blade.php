@@ -34,7 +34,6 @@
                     </th>
                     <th>标识</th>
                     <th>名称</th>
-                    <th>路由</th>
                     <th>创建时间</th>
                     <th>更新时间</th>
                     <th>操作</th>
@@ -45,14 +44,7 @@
                         <td>{!! $item->id !!}</td>
                         <td>{!! $item->name !!}</td>
                         <td>{!! $item->slug !!}</td>
-                        <td>
-                            @foreach($item->http_path as $value)
-                            <div style="margin-bottom: 5px;">
-                                {!! Admin::tag($item->http_method ?: ['ANY'], 'label-primary') !!}
-                                <code>{!! $value !!}</code>
-                            </div>
-                            @endforeach
-                        </td>
+
                         <td>{!! $item->created_at !!}</td>
                         <td>{!! $item->updated_at !!}</td>
                         <td>
