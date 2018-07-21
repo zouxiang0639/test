@@ -19,9 +19,12 @@ class MenuBls
      */
     public static function treeView()
     {
-        $model = new Menu();
 
-        return Admin::tree($model, function (Tree $tree) {
+        return Admin::tree(new Menu(), function (Tree $tree) {
+            $tree->setDate(function(Menu $query){
+                return $query;
+            })->toArray()->setItems();
+
             $tree->setView([
                 'tree'   => 'admin::auth.menu.tree.menu',
                 'branch' => 'admin::auth.menu.tree.menu_branch',
@@ -89,7 +92,11 @@ class MenuBls
      */
     public static function selectOptions()
     {
-        return Menu::selectOptions();
+        return Admin::tree(new Menu(), function (Tree $tree) {
+            $tree->setDate(function (Menu $query) {
+                return $query;
+            })->toArray()->setItems(Tree::BUILD_SELECT_OPTIONS);
+        })->getItems();
     }
 
 
@@ -100,6 +107,7 @@ class MenuBls
     public static function find($id)
     {
         return Menu::find($id);
+
     }
 
 
@@ -137,8 +145,18 @@ class MenuBls
         }
     }
 
-
-
+    /**
+     * 获取menu树数据
+     * @return mixed
+     */
+    public static function menuTree()
+    {
+       return Admin::tree(new Menu(), function (Tree $tree) {
+            $tree->setDate(function (Menu $query) {
+                return $query;
+            })->toArray()->setItems();
+        })->getItems();
+    }
 
 }
 

@@ -2,6 +2,7 @@
 
 namespace App\Library\Admin;
 
+use App\Admin\Bls\Auth\MenuBls;
 use App\Library\Admin\Consts\StyleTypeConst;
 use App\Library\Admin\Widgets\Forms;
 use App\Library\Admin\Widgets\NavBar;
@@ -49,7 +50,7 @@ class Admin
      */
     public function menu()
     {
-        return (new Menu())->toTree();
+        return MenuBls::menuTree();
     }
 
     /**

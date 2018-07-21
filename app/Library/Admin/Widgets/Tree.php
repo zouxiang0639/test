@@ -11,11 +11,25 @@ use Admin;
 
 class Tree implements Renderable
 {
+
+    /**
+     * 生成树
+     */
+    const BUILD_TREE = 1;
+    /**
+     * 生成select树选项
+     */
+
+    const BUILD_SELECT_OPTIONS = 2;
     /**
      * @var array
      */
     protected $items = [];
 
+    /**
+     * @var array
+     */
+    protected $data = [];
     /**
      * @var string
      */
@@ -247,14 +261,104 @@ SCRIPT;
         $this->view = $view;
     }
 
+
     /**
-     * Return all items of the tree.
+     * 设置数据树
+     * @param int $type
+     */
+    public function setItems($type = Tree::BUILD_TREE)
+    {
+        switch($type) {
+            case self::BUILD_TREE :
+                $this->items = $this->buildTree();
+                break;
+            case self::BUILD_SELECT_OPTIONS :
+                $this->items = $this->buildSelectOptions();
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    /**
+     * @param Closure $model
+     * @return $this
+     */
+    public function setDate(\Closure $model)
+    {
+        $this->data = $model($this->model)->get();
+        return $this;
+    }
+
+    public function toArray()
+    {
+        $this->data = $this->data->toArray();
+        return $this;
+    }
+
+    /**
+     * 生成成数据树
+     * @param int $parentId
+     * @return array
+     */
+    public function buildTree($parentId = 0)
+    {
+        $branch = [];
+        foreach ($this->data as $node) {
+
+            if ($node['parent_id'] == $parentId) {
+
+                $children = $this->buildTree($node[$this->model->getKeyName()]);
+
+                if ($children) {
+                    $node['children'] = $children;
+
+                }
+                $branch[] = $node;
+
+            }
+        }
+
+        return $branch;
+    }
+    /**
+     * Build options of select field in form.
      *
-     * @param array $items
+     * @param int    $parentId
+     * @param string $prefix
+     *
+     * @return array
+     */
+    protected function buildSelectOptions($parentId = 0, $prefix = '')
+    {
+        $prefix = $prefix ?: str_repeat('&nbsp;', 6);
+
+        $options = [];
+
+        foreach ($this->data as $node) {
+            $node['title'] = $prefix.'&nbsp;'.$node['title'];
+            if ($node['parent_id'] == $parentId) {
+                $children = $this->buildSelectOptions($node[$this->model->getKeyName()], $prefix.$prefix);
+
+                $options[$node[$this->model->getKeyName()]] = $node['title'];
+
+                if ($children) {
+                    $options += $children;
+                }
+            }
+        }
+
+        return $options;
+    }
+
+
+    /**
+     * @return array
      */
     public function getItems()
     {
-        return $this->model->withQuery($this->queryCallback)->toTree();
+        return $this->items;
     }
 
     /**
@@ -304,6 +408,7 @@ SCRIPT;
 
         return view($this->view['tree'], $this->variables())->render();
     }
+
 
     /**
      * Get the string contents of the grid view.

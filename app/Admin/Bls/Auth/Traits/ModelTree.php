@@ -16,7 +16,6 @@ trait ModelTree
     /**
      * @var string
      */
-    protected $parentColumn = 'parent_id';
 
     /**
      * @var string
@@ -33,83 +32,8 @@ trait ModelTree
      */
     protected $queryCallback;
 
-    /**
-     * Get children of current node.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function children()
-    {
-        return $this->hasMany(static::class, $this->parentColumn);
-    }
 
-    /**
-     * Get parent of current node.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function parent()
-    {
-        return $this->belongsTo(static::class, $this->parentColumn);
-    }
 
-    /**
-     * @return string
-     */
-    public function getParentColumn()
-    {
-        return $this->parentColumn;
-    }
-
-    /**
-     * Set parent column.
-     *
-     * @param string $column
-     */
-    public function setParentColumn($column)
-    {
-        $this->parentColumn = $column;
-    }
-
-    /**
-     * Get title column.
-     *
-     * @return string
-     */
-    public function getTitleColumn()
-    {
-        return $this->titleColumn;
-    }
-
-    /**
-     * Set title column.
-     *
-     * @param string $column
-     */
-    public function setTitleColumn($column)
-    {
-        $this->titleColumn = $column;
-    }
-
-    /**
-     * Get order column name.
-     *
-     * @return string
-     */
-    public function getOrderColumn()
-    {
-        return $this->orderColumn;
-    }
-
-    /**
-     * Set order column.
-     *
-     * @param string $column
-     */
-    public function setOrderColumn($column)
-    {
-        $this->orderColumn = $column;
-    }
 
     /**
      * Set query callback to model.
@@ -149,12 +73,12 @@ trait ModelTree
         $branch = [];
 
         if (empty($nodes)) {
-
             $nodes = $this->allNodes();
+
         }
 
         foreach ($nodes as $node) {
-            if ($node[$this->parentColumn] == $parentId) {
+            if ($node['parent_id'] == $parentId) {
 
                 $children = $this->buildNestedArray($nodes, $node[$this->getKeyName()]);
 
@@ -176,16 +100,7 @@ trait ModelTree
      */
     public function allNodes()
     {
-        $orderColumn = DB::getQueryGrammar()->wrap($this->orderColumn);
-        $byOrder = $orderColumn.' = 0,'.$orderColumn;
 
-        $self = new static();
-
-        if ($this->queryCallback instanceof \Closure) {
-            $self = call_user_func($this->queryCallback, $self);
-        }
-
-        return $self->orderByRaw($byOrder)->get()->toArray();
     }
 
     /**
@@ -219,7 +134,7 @@ trait ModelTree
         foreach ($tree as $branch) {
             $node = static::find($branch['id']);
 
-            $node->{$node->getParentColumn()} = $parentId;
+            $node->parent_id = $parentId;
             $node->{$node->getOrderColumn()} = static::$branchOrder[$branch['id']];
             $node->save();
 
@@ -261,11 +176,11 @@ trait ModelTree
         }
 
         foreach ($nodes as $node) {
-            $node[$this->titleColumn] = $prefix.'&nbsp;'.$node[$this->titleColumn];
-            if ($node[$this->parentColumn] == $parentId) {
+            $node['title'] = $prefix.'&nbsp;'.$node['title'];
+            if ($node['parent_id'] == $parentId) {
                 $children = $this->buildSelectOptions($nodes, $node[$this->getKeyName()], $prefix.$prefix);
 
-                $options[$node[$this->getKeyName()]] = $node[$this->titleColumn];
+                $options[$node[$this->getKeyName()]] = $node['title'];
 
                 if ($children) {
                     $options += $children;
@@ -275,41 +190,4 @@ trait ModelTree
 
         return $options;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function delete()
-    {
-        $this->where($this->parentColumn, $this->getKey())->delete();
-
-        return parent::delete();
-    }
-
-//    /**
-//     * {@inheritdoc}
-//     */
-//    protected static function boot()
-//    {
-//        parent::boot();
-//        static::saving(function (Model $branch) {
-//            $parentColumn = $branch->getParentColumn();
-//
-//            if (Request::has($parentColumn) && Request::input($parentColumn) == $branch->getKey()) {
-//                throw new \Exception(trans('admin.parent_select_error'));
-//            }
-//
-//            if (Request::has('_order')) {
-//                $order = Request::input('_order');
-//
-//                Request::offsetUnset('_order');
-//
-//                static::tree()->saveOrder($order);
-//
-//                return false;
-//            }
-//
-//            return $branch;
-//        });
-//    }
 }

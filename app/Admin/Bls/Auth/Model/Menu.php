@@ -2,67 +2,33 @@
 
 namespace App\Admin\Bls\Auth\Model;
 
-use App\Admin\Bls\Auth\Traits\ModelTree;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Facades\DB;
 
-/**
- * Class Menu.
- *
- * @property int $id
- *
- * @method where($parent_id, $id)
- */
+use Illuminate\Database\Eloquent\Model;
+
 class Menu extends Model
 {
-    use  ModelTree;
+
+    protected $table = 'admin_menu';
+
 
     /**
-     * The attributes that are mass assignable.
+     * Get children of current node.
      *
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    protected $fillable = ['parent_id', 'order', 'title', 'icon', 'uri'];
-
-    /**
-     * Create a new Eloquent model instance.
-     *
-     * @param array $attributes
-     */
-    public function __construct(array $attributes = [])
+    public function children()
     {
-        $connection = config('admin.database.connection') ?: config('database.default');
-
-        $this->setConnection($connection);
-
-        $this->setTable(config('admin.database.menu_table'));
-
-        parent::__construct($attributes);
+        return $this->hasMany(static::class, 'parent_id');
     }
 
     /**
-     * A Menu belongs to many roles.
+     * Get parent of current node.
      *
-     * @return BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function roles()
+    public function parent()
     {
-        $pivotTable = config('admin.database.role_menu_table');
-
-        $relatedModel = config('admin.database.roles_model');
-
-        return $this->belongsToMany($relatedModel, $pivotTable, 'menu_id', 'role_id');
+        return $this->belongsTo(static::class, 'parent_id');
     }
 
-    /**
-     * @return array
-     */
-    public function allNodes() : array
-    {
-        $orderColumn = DB::getQueryGrammar()->wrap($this->orderColumn);
-        $byOrder = $orderColumn.' = 0,'.$orderColumn;
-
-        return static::with('roles')->orderByRaw($byOrder)->get()->toArray();
-    }
 }
