@@ -140,6 +140,12 @@ class MenuController extends Controller
                 $h->set('title', true);
             });
 
+            $item->create('标识', function($h, FormBuilder $form) use ($info){
+                $h->input = $form->text('slug', array_get($info, 'slug'), $h->options);
+                $h->set('slug', true);
+                $h->helpBlock = '这个标识作用于权限绑定是否显示菜单';
+            });
+
             $item->create('图标', function($h, FormBuilder $form) use ($info){
                 $h->input = $form->icon('icon', array_get($info, 'icon'), $h->options);
                 $h->set('password', true);

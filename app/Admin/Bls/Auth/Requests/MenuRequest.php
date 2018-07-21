@@ -25,6 +25,7 @@ class MenuRequest extends JsonResponseValidator
         return [
             'parent_id' => 'required',
             'title' => 'required',
+            'slug' => 'required',
             'icon' => 'required',
             'route' => 'required|route',
         ];
@@ -40,6 +41,7 @@ class MenuRequest extends JsonResponseValidator
         return [
             'parent_id.required' => '请选择父级菜单',
             'title.required' => '标题不能为空',
+            'slug.required' => '标识不能为空',
             'icon.required' => '图标不能为空',
             'route.required' => '路由不能为空',
             'route.route' => '路由只能是路由别名,http,https',

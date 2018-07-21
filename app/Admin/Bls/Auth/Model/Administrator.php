@@ -25,12 +25,11 @@ class Administrator extends Model implements AuthenticatableContract
      */
     public function __construct(array $attributes = [])
     {
-        $connection = config('admin.database.connection') ?: config('database.default');
 
-        $this->setConnection($connection);
 
-        $this->setTable(config('admin.database.users_table'));
+        $this->setTable('admin_users');
 
         parent::__construct($attributes);
     }
+
 }

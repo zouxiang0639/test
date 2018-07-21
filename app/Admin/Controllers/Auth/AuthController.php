@@ -38,8 +38,8 @@ class AuthController extends Controller
 
         /** @var \Illuminate\Validation\Validator $validator */
         $validator = Validator::make($credentials, [
-            $this->username()   => 'required',
-            'password'          => 'required',
+            'username' => 'required',
+            'password' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -60,8 +60,9 @@ class AuthController extends Controller
      *
      * @return Redirect
      */
-    public function getLogout(Request $request)
+    public function logout(Request $request)
     {
+
         Auth::guard('admin')->logout();
 
         $request->session()->invalidate();

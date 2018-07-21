@@ -13,14 +13,14 @@ Route::group([
     Route::get('auth/users', ['uses' => "Auth\\AuthController@index", 'as' => 'm.auth.users']);
 
     //后台管理员
-    Route::group(['prefix'=>'users'], function(){
+    Route::group(['prefix'=>'users', 'middleware' => 'admin.auth:m_users'], function(){
         Route::get('', ['uses' => "Auth\\UserController@index", 'as' => 'm.user.list']);
         Route::get('edit/{id}', ['uses' => "Auth\\UserController@edit", 'as' => 'm.user.edit']);
         Route::post('update/{id}', ['uses' => "Auth\\UserController@update", 'as' => 'm.user.update']);
     });
 
     //角色
-    Route::group(['prefix'=>'role'], function(){
+    Route::group(['prefix'=>'role', 'middleware' => 'admin.auth:m_role'], function(){
         Route::get('', ['uses' => "Auth\\RoleController@index", 'as' => 'm.role.list']);
         Route::get('edit/{id}', ['uses' => "Auth\\RoleController@edit", 'as' => 'm.role.edit']);
         Route::post('update/{id}', ['uses' => "Auth\\RoleController@update", 'as' => 'm.role.update']);
@@ -40,7 +40,7 @@ Route::group([
     });
 
     //菜单
-    Route::group(['prefix'=>'menu'], function(){
+    Route::group(['prefix'=>'menu', 'middleware' => 'admin.auth:m_menu'], function(){
         Route::get('', ['uses' => "Auth\\MenuController@index", 'as' => 'm.menu.list']);
         Route::post('store', ['uses' => "Auth\\MenuController@store", 'as' => 'm.menu.store']);
         Route::get('edit/{id}', ['uses' => "Auth\\MenuController@edit", 'as' => 'm.menu.edit']);

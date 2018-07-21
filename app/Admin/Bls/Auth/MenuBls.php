@@ -59,6 +59,7 @@ class MenuBls
         $model->parent_id = $request->parent_id;
         $model->title = $request->title;
         $model->icon = $request->icon;
+        $model->slug = $request->slug;
         $model->route = $request->route;
         $model->url = \Route::has($request->route) ? route($request->route, [], false) :  $model->route;
         return $model->save();
@@ -76,6 +77,7 @@ class MenuBls
         $model->parent_id = $request->parent_id;
         $model->title = $request->title;
         $model->icon = $request->icon;
+        $model->icon = $request->slug;
         $model->route = $request->route;
         $model->url = \Route::has($request->route) ? route($request->route, [], false) :  $model->route;
         return $model->save();

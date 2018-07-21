@@ -2,8 +2,10 @@
 
 namespace App\Admin\Bls\Auth\Traits;
 
+use App\Admin\Bls\Auth\Model\Permission;
+use App\Admin\Bls\Auth\Model\Role;
+use App\Consts\Admin\Role\RoleSlugConst;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
 trait HasPermissions
@@ -29,13 +31,9 @@ trait HasPermissions
      *
      * @return BelongsToMany
      */
-    public function roles() : BelongsToMany
+    public function roles()
     {
-        $pivotTable = config('admin.database.role_users_table');
-
-        $relatedModel = config('admin.database.roles_model');
-
-        return $this->belongsToMany($relatedModel, $pivotTable, 'user_id', 'role_id');
+        return $this->belongsToMany(Role::class, 'admin_role_users', 'user_id', 'role_id');
     }
 
     /**
@@ -43,13 +41,82 @@ trait HasPermissions
      *
      * @return BelongsToMany
      */
-    public function permissions() : BelongsToMany
+    public function permissions()
     {
-        $pivotTable = config('admin.database.user_permissions_table');
+        return $this->belongsToMany(Permission::class, 'admin_user_permissions', 'user_id', 'permission_id');
+    }
 
-        $relatedModel = config('admin.database.permissions_model');
 
-        return $this->belongsToMany($relatedModel, $pivotTable, 'user_id', 'permission_id');
+    /**
+     * Determine whether the user has role that given by name parameter.
+     *
+     * @param $name
+     *
+     * @return bool
+     */
+    public function is($name)
+    {
+        foreach ($this->roles as $role) {
+            if ($role->name == $name || $role->slug == $name || $role->id == $name) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Determine whether the user can do specific permission that given by name parameter.
+     *
+     * @param $name
+     *
+     * @return bool
+     */
+    public function can($name)
+    {
+        foreach ($this->roles as $role) {
+            foreach ($role->permissions as $permission) {
+                if ($permission->name == $name || $permission->slug == $name || $permission->id == $name) {
+
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * 判断是否有用户权限
+     * @param $name
+     * @return bool
+     */
+    public function isPermissions($name)
+    {
+        $permissions = $this->permissions;
+        foreach($permissions as $value){
+            if ($value->name == $name || $value->slug == $name || $value->id == $name) {
+
+                return true;
+            }
+        }
+
+    }
+
+
+    /**
+     * If visible for roles.
+     *
+     * @param $slug
+     *
+     * @return bool
+     */
+    public function visible($slug)
+    {
+        if (empty($slug)) {
+            return true;
+        }
+
+        return $this->is(RoleSlugConst::ROLE_SUPER) || $this->can($slug) || $this->isPermissions($slug);
     }
 
     /**
@@ -57,108 +124,9 @@ trait HasPermissions
      *
      * @return mixed
      */
-    public function allPermissions() : Collection
+    public function allPermissions()
     {
         return $this->roles()->with('permissions')->get()->pluck('permissions')->flatten()->merge($this->permissions);
     }
 
-    /**
-     * Check if user has permission.
-     *
-     * @param $permission
-     *
-     * @return bool
-     */
-    public function can(string $permission) : bool
-    {
-        if ($this->isAdministrator()) {
-            return true;
-        }
-
-        if ($this->permissions->pluck('slug')->contains($permission)) {
-            return true;
-        }
-
-        return $this->roles->pluck('permissions')->flatten()->pluck('slug')->contains($permission);
-    }
-
-    /**
-     * Check if user has no permission.
-     *
-     * @param $permission
-     *
-     * @return bool
-     */
-    public function cannot(string $permission) : bool
-    {
-        return !$this->can($permission);
-    }
-
-    /**
-     * Check if user is administrator.
-     *
-     * @return mixed
-     */
-    public function isAdministrator() : bool
-    {
-        return $this->isRole('administrator');
-    }
-
-    /**
-     * Check if user is $role.
-     *
-     * @param string $role
-     *
-     * @return mixed
-     */
-    public function isRole(string $role) : bool
-    {
-        return $this->roles->pluck('slug')->contains($role);
-    }
-
-    /**
-     * Check if user in $roles.
-     *
-     * @param array $roles
-     *
-     * @return mixed
-     */
-    public function inRoles(array $roles = []) : bool
-    {
-        return $this->roles->pluck('slug')->intersect($roles)->isNotEmpty();
-    }
-
-    /**
-     * If visible for roles.
-     *
-     * @param $roles
-     *
-     * @return bool
-     */
-    public function visible(array $roles = []) : bool
-    {
-        if (empty($roles)) {
-            return true;
-        }
-
-        $roles = array_column($roles, 'slug');
-
-        return $this->inRoles($roles) || $this->isAdministrator();
-    }
-
-    /**
-     * Detach models from the relationship.
-     *
-     * @return void
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::deleting(function ($model) {
-            $model->roles()->detach();
-
-            $model->permissions()->detach();
-        });
-    }
 }

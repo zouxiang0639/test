@@ -1,4 +1,5 @@
-@if(Admin::user()->visible($item['roles']))
+
+@if(Admin::user()->visible($item['slug']))
     @if(!isset($item['children']))
         <li  {!! $item['route'] == Admin::getRouteName() ?'class="active"':'' !!}>
             @if(Route::has($item['route']))

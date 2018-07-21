@@ -2,26 +2,78 @@
 
 namespace App\Library\Admin\Middleware;
 
+use App\Consts\Admin\Role\RoleSlugConst;
+use App\Consts\Common\WhetherConst;
 use Closure;
 use Auth;
+use Illuminate\Contracts\Auth\Guard;
 
 class Authenticate
 {
     /**
+     * The Guard implementation.
+     *
+     * @var Guard
+     */
+    protected $auth;
+
+    /**
+     * Create a new filter instance.
+     */
+    public function __construct()
+    {
+        $this->auth = Auth::guard('admin');
+    }
+
+    /**
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param \Closure $next
+     * @param $permissionCode
      *
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $permissionCode = '')
     {
-        if (Auth::guard('admin')->guest() && !$this->shouldPassThrough($request)) {
-            return redirect()->guest(route('m.login'));
+
+        if (!$this->shouldPassThrough($request)){
+
+
+            if ($this->auth->guest()) {
+                if ($request->ajax()) {
+                    return response('Unauthorized.', 401);
+                } else {
+                    return redirect()->route('m.login');
+                }
+            }
+
+            if($this->auth->user()->is_block == WhetherConst::YES){
+                Auth::logout();
+                return redirect()->route('m.login');
+            }
+
+            if ($permissionCode && !$this->can($this->auth->user(), $permissionCode)) {
+                return redirect()->route('m.login');
+            }
         }
 
         return $next($request);
+    }
+
+    /**
+     * 判断该用户是否有该权限点
+     * @param $user
+     * @param $permission
+     * @return bool
+     * @author liujian <liujian@piaoshifu.cn>
+     */
+    protected function can($user, $permission)
+    {
+        if ( $user->is(RoleSlugConst::ROLE_SUPER) || $user->can($permission) ||  $user->isPermissions($permission)) {
+            return true;
+        }
+        return false;
     }
 
     /**
