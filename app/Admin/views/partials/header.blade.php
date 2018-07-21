@@ -40,12 +40,12 @@
 
                             <p>
                                 {{ Admin::user()->name }}
-                                <small>Member since admin {{ Admin::user()->created_at }}</small>
+                                <small>会员创建为{{ Admin::user()->created_at }}</small>
                             </p>
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="auth/setting" class="btn btn-default btn-flat">设置</a>
+                                <a href="{!! route('m.setting') !!}" class="btn btn-default btn-flat">设置</a>
                             </div>
                             <div class="pull-right">
                                 <a href="{!! route('m.logout') !!}" class="btn btn-default btn-flat">退出</a>

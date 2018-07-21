@@ -164,4 +164,32 @@ EOT;
         return $this->html->tag('span', '', ['class' => 'input-group-addon'])
                . self::text($name, $value ?:'fa-bars', $options);
     }
+
+    /**
+     * 创建一个货币text
+     *
+     * @param  string $name
+     * @param  string $value
+     * @param  array  $options
+     *
+     * @return \Illuminate\Support\HtmlString
+     */
+    public function currency($name, $value = null, $options = [])
+    {
+        Admin::setJs(StyleTypeConst::FILE, '/lib/AdminLTE/plugins/input-mask/jquery.inputmask.bundle.min.js');
+
+        $code = <<<EOT
+           $("input[name=$name]").inputmask({
+               "alias":"currency",
+               "autoGroup": !0,
+               "placeholder": "0",
+               "prefix":"",
+               "removeMaskOnSubmit":true
+
+           });\n
+EOT;
+        Admin::setJs(StyleTypeConst::CODE, $code);
+        return $this->html->tag('span', '$', ['class' => 'input-group-addon'])
+        . self::text($name, $value , $options);
+    }
 }

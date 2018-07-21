@@ -8,6 +8,7 @@ use App\Admin\Bls\Auth\Model\Permission;
 use App\Exceptions\LogicException;
 use App\Http\Controllers\Controller;
 use App\Library\Admin\Form\FormBuilder;
+use App\Library\Admin\Form\HtmlFormTpl;
 use App\Library\Response\JsonResponse;
 use Redirect;
 use Admin;
@@ -112,26 +113,26 @@ class RoleController extends Controller
 
         return Admin::form(function($item) use ($info)  {
 
-            $item->create('标识', function($h, FormBuilder $form) use ($info){
+            $item->create('标识', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->text('slug', array_get($info, 'slug'), $h->options);
                 $h->set('slug', true);
             });
 
-            $item->create('名称', function($h, FormBuilder $form) use ($info){
+            $item->create('名称', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->text('name', array_get($info, 'name'), $h->options);
                  $h->set('name', true);
             });
 
-            $item->create('权限', function($h, FormBuilder $form) use ($info){
+            $item->create('权限', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input =  $form->dualListBox('permissions[]',  Permission::all()->pluck('name', 'id'), array_get($info, 'permissions'),  $h->options);
                  $h->set('permissions', true);
             });
 
-            $item->create('创建时间', function($h, FormBuilder $form) use ($info){
+            $item->create('创建时间', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->display(array_get($info, 'created_at'));
             });
 
-            $item->create('更新时间', function($h, FormBuilder $form) use ($info){
+            $item->create('更新时间', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->display(array_get($info, 'updated_at'));
             });
 

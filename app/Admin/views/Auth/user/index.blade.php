@@ -9,8 +9,11 @@
 
     <div class="box">
         <div class="box-header">
-
-            <h3 class="box-title"></h3>
+            <div class="btn-group" style="margin-right: 10px">
+                <a href="{!! route('m.user.create') !!}" class="btn btn-sm btn-success">
+                    <i class="fa fa-save"></i>&nbsp;&nbsp;新增
+                </a>
+            </div>
 
             <div class="pull-right">
             </div>

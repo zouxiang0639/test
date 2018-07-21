@@ -3,6 +3,7 @@
 namespace App\Admin\Bls\Auth;
 
 use App\Admin\Bls\Auth\Model\Administrator;
+use App\Admin\Bls\Auth\Requests\UserRequest;
 use App\Admin\Bls\Common\Traits\RelationTraits;
 use Redirect;
 
@@ -36,7 +37,7 @@ class AdminUserBls
      * @param $id
      * @return mixed
      */
-    public static function updateAdminUser($request, $id)
+    public static function updateAdminUser(UserRequest $request, $id)
     {
         return Administrator::query()->getQuery()->getConnection()->transaction(function () use($request, $id) {
             $only = ['roles', 'permissions'];
@@ -55,8 +56,19 @@ class AdminUserBls
         });
     }
 
-    public static function storeAdminUser()
+    public static function storeAdminUser(UserRequest $request)
     {
+        return Administrator::query()->getQuery()->getConnection()->transaction(function () use($request) {
+            $only = ['roles', 'permissions'];
+            $model = new Administrator();
+            $model->username = $request->username;
+            $model->name = $request->name;
+            $model->password = bcrypt($request->password);
+            $result = $model->save();
+            static::updateRelation($model, $request->only($only));
+
+            return $result;
+        });
 
     }
 

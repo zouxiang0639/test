@@ -10,11 +10,15 @@ Route::group([
     Route::get('login', ['uses' => "Auth\\AuthController@login", 'as' => 'm.login']);
     Route::post('login', ['uses' => "Auth\\AuthController@postLogin", 'as' => 'm.postLogin']);
     Route::get('logout', ['uses' => "Auth\\AuthController@logout", 'as' => 'm.logout']);
+    Route::get('setting', ['uses' => "Auth\\AuthController@setting", 'as' => 'm.setting']);
+    Route::post('setting/update', ['uses' => "Auth\\AuthController@settingUpdate", 'as' => 'm.setting.update']);
     Route::get('auth/users', ['uses' => "Auth\\AuthController@index", 'as' => 'm.auth.users']);
 
     //后台管理员
     Route::group(['prefix'=>'users', 'middleware' => 'admin.auth:m_users'], function(){
         Route::get('', ['uses' => "Auth\\UserController@index", 'as' => 'm.user.list']);
+        Route::get('create', ['uses' => "Auth\\UserController@create", 'as' => 'm.user.create']);
+        Route::post('store', ['uses' => "Auth\\UserController@store", 'as' => 'm.user.store']);
         Route::get('edit/{id}', ['uses' => "Auth\\UserController@edit", 'as' => 'm.user.edit']);
         Route::post('update/{id}', ['uses' => "Auth\\UserController@update", 'as' => 'm.user.update']);
     });

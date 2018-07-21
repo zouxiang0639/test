@@ -2,13 +2,24 @@
 
 namespace App\Admin\Controllers\Auth;
 
+use App\Admin\Bls\Auth\Requests\settingRequest;
+use App\Exceptions\LogicException;
+use App\Library\Admin\Form\FormBuilder;
+use App\Library\Admin\Form\HtmlFormTpl;
+use App\Library\Response\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Admin;
+use Auth;
 
+/**
+ * Created by AuthController.
+ * @author: zouxiang
+ * @date:
+ */
 class AuthController extends Controller
 {
     /**
@@ -22,7 +33,7 @@ class AuthController extends Controller
             return redirect($this->redirectPath());
         }
 
-        return view('admin::login');
+        return view('admin::auth.login');
     }
 
     /**
@@ -34,7 +45,7 @@ class AuthController extends Controller
      */
     public function postLogin(Request $request)
     {
-        $credentials = $request->only([$this->username(), 'password']);
+        $credentials = $request->only(['username', 'password']);
 
         /** @var \Illuminate\Validation\Validator $validator */
         $validator = Validator::make($credentials, [
@@ -47,17 +58,18 @@ class AuthController extends Controller
         }
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            return $this->sendLoginResponse($request);
+            return $this->sendLoginResponse($rxequest);
         }
 
         return back()->withInput()->withErrors([
-            $this->username() => $this->getFailedLoginMessage(),
+            'username' => $this->getFailedLoginMessage(),
         ]);
     }
 
+
     /**
-     * User logout.
-     *
+     * 用户退出
+     * @param Request $request
      * @return Redirect
      */
     public function logout(Request $request)
@@ -75,64 +87,66 @@ class AuthController extends Controller
      *
      * @return mixed
      */
-    public function getSetting()
+    public function setting()
     {
-        return Admin::content(function (Content $content) {
-            $content->header(trans('admin.user_setting'));
-            $form = $this->settingForm();
-            $form->tools(
-                function (Form\Tools $tools) {
-                    $tools->disableBackButton();
-                    $tools->disableListButton();
-                }
-            );
-            $content->body($form->edit(Admin::user()->id));
-        });
-    }
+        $info = Auth::guard('admin')->user();
 
-    /**
-     * Update user setting.
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function putSetting()
-    {
-        return $this->settingForm()->update(Admin::user()->id);
-    }
+        $form = Admin::form(function($item) use ($info) {
 
-    /**
-     * Model-form for user setting.
-     *
-     * @return Form
-     */
-    protected function settingForm()
-    {
-        return Administrator::form(function (Form $form) {
-            $form->display('username', trans('admin.username'));
-            $form->text('name', trans('admin.name'))->rules('required');
-            $form->image('avatar', trans('admin.avatar'));
-            $form->password('password', trans('admin.password'))->rules('confirmed|required');
-            $form->password('password_confirmation', trans('admin.password_confirmation'))->rules('required')
-                ->default(function ($form) {
-                    return $form->model()->password;
-                });
-
-            $form->setAction(admin_base_path('auth/setting'));
-
-            $form->ignore(['password_confirmation']);
-
-            $form->saving(function (Form $form) {
-                if ($form->password && $form->model()->password != $form->password) {
-                    $form->password = bcrypt($form->password);
-                }
+            $item->create('用户名', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->display(array_get($info, 'username'));
             });
 
-            $form->saved(function () {
-                admin_toastr(trans('admin.update_succeeded'));
-
-                return redirect(admin_base_path('auth/setting'));
+            $item->create('名称', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->text('name', array_get($info, 'name'), $h->options);
+                $h->set('name', true);
             });
-        });
+
+            $item->create('密码', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->password('password', $h->options);
+                $h->set('password', true);
+            });
+
+            $item->create('确认密码', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->password('password_confirmation', $h->options);
+                $h->set('password_confirmation', true);
+            });
+
+            $item->create('创建时间', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->display(array_get($info, 'created_at'));
+            });
+
+            $item->create('更新时间', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->display(array_get($info, 'updated_at'));
+            });
+        })->getFormHtml();;
+
+        return view('admin::auth.setting', [
+            'form' => $form,
+            'info' => $info
+        ]);
+
+    }
+
+
+    /**
+     * @param settingRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
+    public function settingUpdate(settingRequest $request)
+    {
+        $model = Auth::guard('admin')->user();
+        $model->name = $request->name;
+        if($request->password) {
+            $model->password =  bcrypt($request->password);
+        }
+        if($model->update()) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010002, '操作失败');
+        }
+
     }
 
     /**
@@ -173,16 +187,6 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         return redirect()->intended($this->redirectPath());
-    }
-
-    /**
-     * Get the login username to be used by the controller.
-     *
-     * @return string
-     */
-    protected function username()
-    {
-        return 'username';
     }
 
 }
