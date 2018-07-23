@@ -58,7 +58,7 @@ class AuthController extends Controller
         }
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            return $this->sendLoginResponse($rxequest);
+            return $this->sendLoginResponse($request);
         }
 
         return back()->withInput()->withErrors([
@@ -119,7 +119,7 @@ class AuthController extends Controller
             $item->create('更新时间', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->display(array_get($info, 'updated_at'));
             });
-        })->getFormHtml();;
+        })->getFormHtml();
 
         return view('admin::auth.setting', [
             'form' => $form,

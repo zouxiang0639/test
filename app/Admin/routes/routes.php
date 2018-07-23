@@ -53,10 +53,23 @@ Route::group([
         Route::delete('destroy/{id}', ['uses' => "Auth\\MenuController@destroy", 'as' => 'm.menu.destroy']);
     });
 
+    //示例
+    Route::group(['prefix'=>'demo'], function(){
+        Route::get('form', ['uses' => "Demo\\WidgetsController@form", 'as' => 'm.demo.form']);
+        Route::post('formPost', ['uses' => "Demo\\WidgetsController@formPost", 'as' => 'm.demo.widgets.formPost']);
+    });
+
     //配置
     Route::group(['prefix'=>'config'], function(){
         Route::get('', ['uses' => "Auth\\MenuController@index", 'as' => 'm.config.list']);
     });
+
+    //文件上传
+    Route::group(['prefix'=>'system'], function(){
+        Route::put('upload/image', ['uses' => "System\\UploadController@image", 'as' => 'm.system.upload.image']);
+    });
+
+
 });
 
 

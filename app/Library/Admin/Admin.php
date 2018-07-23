@@ -7,6 +7,7 @@ use App\Library\Admin\Consts\StyleTypeConst;
 use App\Library\Admin\Widgets\Forms;
 use App\Library\Admin\Widgets\NavBar;
 use App\Library\Admin\Widgets\Tree;
+use App\Library\Admin\Widgets\Upload;
 use Auth;
 use App\Admin\Bls\Auth\Model\Menu;
 use Collective\Html\HtmlFacade as Form;
@@ -30,6 +31,14 @@ class Admin
             $this->navbar = new Navbar();
         }
         return $this->navbar;
+    }
+
+    /**
+     * @return Upload
+     */
+    public function upload()
+    {
+        return new Upload();
     }
 
 

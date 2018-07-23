@@ -31,3 +31,17 @@ if (!function_exists('admin_toastr')) {
         \Illuminate\Support\Facades\Session::flash('toastr', $toastr);
     }
 }
+
+if (!function_exists('get_image')) {
+
+    /**
+     * 获取图片
+     *
+     * @param string  $path
+     * @return string
+     */
+    function get_image($path)
+    {
+        return \Storage::disk('admin')->url($path);
+    }
+}

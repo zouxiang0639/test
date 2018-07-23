@@ -192,4 +192,61 @@ EOT;
         return $this->html->tag('span', '$', ['class' => 'input-group-addon'])
         . self::text($name, $value , $options);
     }
+
+    /**
+     * 创建一个上传单个文件
+     * @param $name
+     * @param null $value
+     * @param array $options
+     * @return string
+     */
+    public function imageOne($name, $value = null, $options = [])
+    {
+        $path = $value ? get_image($value) : $value;
+        $options['data-initial-preview'] = $path;
+        $options['data-initial-caption'] = $value;
+        Admin::setCss(StyleTypeConst::FILE, '/lib/bootstrap-fileinput/css/fileinput.min.css?v=4.3.7');
+        Admin::setJs(StyleTypeConst::FILE, '/lib/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js?v=4.3.7');
+        Admin::setJs(StyleTypeConst::FILE, '/lib/bootstrap-fileinput/js/fileinput.min.js?v=4.3.7');
+
+        $route = route('m.system.upload.image');
+        $code = <<<EOT
+
+            $("input[name=$name]").fileinput({
+                "showRemove": false,
+                theme: "explorer",
+                uploadUrl: "$route",
+                "browseLabel": "浏览",
+                minFileCount: 1,
+                maxFileCount: 2,
+                overwriteInitial: false,
+                showUpload: false,
+                initialPreviewAsData: true,
+                allowedFileExtensions: ['jpg', 'png', 'gif'],
+                msgInvalidFileExtension: '文件 "{name}". 扩展名无效, 只支持 "{extensions}" 扩展名',
+                uploadExtraData: {
+                    "_token": $('meta[name="csrf-token"]').attr('content'),
+                    "_method": "PUT",
+                    "name": "$name"
+                },
+                preferIconicPreview: true
+            }).on("filebatchselected", function(event, files) {
+                if(files['length'] > 0) {
+                    $(this).fileinput("upload");
+                }
+            }).on("fileuploaded", function(event, data) {
+                if(data.response) {
+                    $(this).fileinput("reset");
+                    $(this).fileinput("cancel");
+
+                    $('.kv-upload-progress').hide();
+                    $('.$name .file-preview-image').attr('src',data.response.data.url);
+                    $(".$name").find('input[name=$name]').val(data.response.data.filePath)
+                }
+            });\n
+EOT;
+        Admin::setJs(StyleTypeConst::CODE, $code);
+
+        return self::hidden($name, $value).self::file($name, $options);
+    }
 }
