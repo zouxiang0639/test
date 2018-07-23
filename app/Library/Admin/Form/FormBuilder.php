@@ -202,7 +202,7 @@ EOT;
      */
     public function imageOne($name, $value = null, $options = [])
     {
-        $path = $value ? get_image($value) : $value;
+        $path = $value ? uploads_path($value) : $value;
         $options['data-initial-preview'] = $path;
         $options['data-initial-caption'] = $value;
         Admin::setCss(StyleTypeConst::FILE, '/lib/bootstrap-fileinput/css/fileinput.min.css?v=4.3.7');

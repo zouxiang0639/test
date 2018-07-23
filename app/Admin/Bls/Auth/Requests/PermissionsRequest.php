@@ -17,7 +17,6 @@ class PermissionsRequest extends JsonResponseValidator
         return [
             'slug' => 'required|unique:admin_permissions,slug,'.$this->id,
             'name' => 'required',
-            'http_path' => 'required',
         ];
     }
 
@@ -32,7 +31,6 @@ class PermissionsRequest extends JsonResponseValidator
             'slug.required' => '标识不能为空',
             'slug.unique' => '标识只能唯一',
             'name.required' => '名称不能为空',
-            'http_path.required' => 'HTTP路径不能为空',
         ];
     }
 

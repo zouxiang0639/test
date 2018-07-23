@@ -32,7 +32,7 @@ if (!function_exists('admin_toastr')) {
     }
 }
 
-if (!function_exists('get_image')) {
+if (!function_exists('uploads_path')) {
 
     /**
      * 获取图片
@@ -40,7 +40,7 @@ if (!function_exists('get_image')) {
      * @param string  $path
      * @return string
      */
-    function get_image($path)
+    function uploads_path($path)
     {
         return \Storage::disk('admin')->url($path);
     }

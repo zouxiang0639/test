@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers\Auth;
 
+use App\Admin\Bls\Auth\PermissionsBls;
 use App\Admin\Bls\Auth\Requests\RoleRequest;
 use App\Admin\Bls\Auth\RoleBls;
 use App\Admin\Bls\Auth\Model\Permission;
@@ -124,7 +125,7 @@ class RoleController extends Controller
             });
 
             $item->create('权限', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input =  $form->dualListBox('permissions[]',  Permission::all()->pluck('name', 'id'), array_get($info, 'permissions'),  $h->options);
+                $h->input =  $form->dualListBox('permissions[]', PermissionsBls::PermissionByName(), array_get($info, 'permissions'),  $h->options);
                  $h->set('permissions', true);
             });
 

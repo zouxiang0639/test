@@ -2,7 +2,7 @@
 
 namespace App\Admin\Bls\Auth;
 
-use App\Admin\Bls\Auth\Model\Administrator;
+use App\Admin\Bls\Auth\Model\AdministratorModel;
 use App\Admin\Bls\Auth\Requests\UserRequest;
 use App\Admin\Bls\Common\Traits\RelationTraits;
 use Redirect;
@@ -16,7 +16,7 @@ class AdminUserBls
 
     public static function getAdminUser(Redirect $request, $order = '`id` DESC', $limit = 20)
     {
-        $model = Administrator::query();
+        $model = AdministratorModel::query();
 
         if(!empty($request->id)) {
             $model->where('id', $request->id);
@@ -27,7 +27,7 @@ class AdminUserBls
 
     public static function find($id)
     {
-       return Administrator::where('id', $id)->first();
+       return AdministratorModel::where('id', $id)->first();
     }
 
 
@@ -39,10 +39,10 @@ class AdminUserBls
      */
     public static function updateAdminUser(UserRequest $request, $id)
     {
-        return Administrator::query()->getQuery()->getConnection()->transaction(function () use($request, $id) {
+        return AdministratorModel::query()->getQuery()->getConnection()->transaction(function () use($request, $id) {
             $only = ['roles', 'permissions'];
 
-            $model = Administrator::with($only)->findOrFail($id);
+            $model = AdministratorModel::with($only)->findOrFail($id);
 
             static::updateRelation($model, $request->only($only));
 
@@ -58,9 +58,9 @@ class AdminUserBls
 
     public static function storeAdminUser(UserRequest $request)
     {
-        return Administrator::query()->getQuery()->getConnection()->transaction(function () use($request) {
+        return AdministratorModel::query()->getQuery()->getConnection()->transaction(function () use($request) {
             $only = ['roles', 'permissions'];
-            $model = new Administrator();
+            $model = new AdministratorModel();
             $model->username = $request->username;
             $model->name = $request->name;
             $model->password = bcrypt($request->password);

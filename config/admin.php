@@ -58,7 +58,7 @@ return [
         'providers' => [
             'admin' => [
                 'driver' => 'eloquent',
-                'model'  => \App\Admin\Bls\Auth\Model\Administrator::class,
+                'model'  => \App\Admin\Bls\Auth\Model\AdministratorModel::class,
             ],
         ],
     ],
@@ -79,34 +79,34 @@ return [
     /*
      * Laravel-admin database setting.
      */
-    'database' => [
-
-        // Database connection for following tables.
-        'connection' => '',
-
-        // User tables and model.
-        'users_table' => 'admin_users',
-        'users_model' => \App\Admin\Bls\Auth\Model\Administrator::class,
-
-        // Role table and model.
-        'roles_table' => 'admin_roles',
-        'roles_model' => \App\Admin\Bls\Auth\Model\Role::class,
-
-        // Permission table and model.
-        'permissions_table' => 'admin_permissions',
-        'permissions_model' => \App\Admin\Bls\Auth\Model\Permission::class,
-
-        // Menu table and model.搭min
-        'menu_table' => 'admin_menu',
-        'menu_model' => \App\Admin\Bls\Auth\Model\Menu::class,
-
-        // Pivot table for table above.
-        'operation_log_table'    => 'admin_operation_log',
-        'user_permissions_table' => 'admin_user_permissions',
-        'role_users_table'       => 'admin_role_users',
-        'role_permissions_table' => 'admin_role_permissions',
-        'role_menu_table'        => 'admin_role_menu',
-    ],
+//    'database' => [
+//
+//        // Database connection for following tables.
+//        'connection' => '',
+//
+//        // User tables and model.
+//        'users_table' => 'admin_users',
+//        'users_model' => \App\Admin\Bls\Auth\Model\Administrator::class,
+//
+//        // Role table and model.
+//        'roles_table' => 'admin_roles',
+//        'roles_model' => \App\Admin\Bls\Auth\Model\Role::class,
+//
+//        // Permission table and model.
+//        'permissions_table' => 'admin_permissions',
+//        'permissions_model' => \App\Admin\Bls\Auth\Model\Permission::class,
+//
+//        // Menu table and model.搭min
+//        'menu_table' => 'admin_menu',
+//        'menu_model' => \App\Admin\Bls\Auth\Model\Menu::class,
+//
+//        // Pivot table for table above.
+//        'operation_log_table'    => 'admin_operation_log',
+//        'user_permissions_table' => 'admin_user_permissions',
+//        'role_users_table'       => 'admin_role_users',
+//        'role_permissions_table' => 'admin_role_permissions',
+//        'role_menu_table'        => 'admin_role_menu',
+//    ],
 
     /*
      * By setting this option to open or close operation log in laravel-admin.

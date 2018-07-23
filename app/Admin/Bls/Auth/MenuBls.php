@@ -2,7 +2,7 @@
 
 namespace App\Admin\Bls\Auth;
 
-use App\Admin\Bls\Auth\Model\Menu;
+use App\Admin\Bls\Auth\Model\MenuModel;
 use App\Admin\Bls\Auth\Requests\MenuRequest;
 use App\Library\Admin\Widgets\Tree;
 use Admin;
@@ -20,8 +20,8 @@ class MenuBls
     public static function treeView()
     {
 
-        return Admin::tree(new Menu(), function (Tree $tree) {
-            $tree->setDate(function(Menu $query){
+        return Admin::tree(new MenuModel(), function (Tree $tree) {
+            $tree->setDate(function(MenuModel $query){
                 return $query;
             })->toArray()->setItems();
 
@@ -58,7 +58,7 @@ class MenuBls
      */
     public static function storeMenu(MenuRequest $request)
     {
-        $model = new Menu();
+        $model = new MenuModel();
         $model->parent_id = $request->parent_id;
         $model->title = $request->title;
         $model->icon = $request->icon;
@@ -75,7 +75,7 @@ class MenuBls
      * @param Menu $model
      * @return mixed
      */
-    public static function updateMenu(MenuRequest $request, Menu $model)
+    public static function updateMenu(MenuRequest $request, MenuModel $model)
     {
         $model->parent_id = $request->parent_id;
         $model->title = $request->title;
@@ -92,8 +92,8 @@ class MenuBls
      */
     public static function selectOptions()
     {
-        return Admin::tree(new Menu(), function (Tree $tree) {
-            $tree->setDate(function (Menu $query) {
+        return Admin::tree(new MenuModel(), function (Tree $tree) {
+            $tree->setDate(function (MenuModel $query) {
                 return $query;
             })->toArray()->setItems(Tree::BUILD_SELECT_OPTIONS);
         })->getItems();
@@ -106,7 +106,7 @@ class MenuBls
      */
     public static function find($id)
     {
-        return Menu::find($id);
+        return MenuModel::find($id);
 
     }
 
@@ -151,8 +151,8 @@ class MenuBls
      */
     public static function menuTree()
     {
-       return Admin::tree(new Menu(), function (Tree $tree) {
-            $tree->setDate(function (Menu $query) {
+       return Admin::tree(new MenuModel(), function (Tree $tree) {
+            $tree->setDate(function (MenuModel $query) {
                 return $query;
             })->toArray()->setItems();
         })->getItems();

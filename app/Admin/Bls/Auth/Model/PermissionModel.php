@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class Permission extends Model
+class PermissionModel extends Model
 {
 
     /**
@@ -33,7 +33,7 @@ class Permission extends Model
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'admin_role_permissions', 'permission_id', 'role_id');
+        return $this->belongsToMany(RoleModel::class, 'admin_role_permissions', 'permission_id', 'role_id');
     }
 
     /**
@@ -43,7 +43,7 @@ class Permission extends Model
      */
     public function adminUser()
     {
-        return $this->belongsToMany(Administrator::class, 'admin_user_permissions', 'permission_id', 'user_id');
+        return $this->belongsToMany(AdministratorModel::class, 'admin_user_permissions', 'permission_id', 'user_id');
     }
 
 }

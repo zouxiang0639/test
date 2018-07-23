@@ -5,7 +5,7 @@ namespace App\Admin\Bls\Auth\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Menu extends Model
+class MenuModel extends Model
 {
 
     protected $table = 'admin_menu';

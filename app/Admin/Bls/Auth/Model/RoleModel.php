@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @author: zouxiang
  * @date:
  */
-class Role extends Model
+class RoleModel extends Model
 {
     /**
      * The table associated with the model.
@@ -26,7 +26,7 @@ class Role extends Model
      */
     public function administrators()
     {
-        return $this->belongsToMany(Administrator::class, 'admin_role_users', 'role_id', 'user_id');
+        return $this->belongsToMany(AdministratorModel::class, 'admin_role_users', 'role_id', 'user_id');
     }
 
     /**
@@ -36,7 +36,7 @@ class Role extends Model
      */
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class, 'admin_role_permissions', 'role_id', 'permission_id');
+        return $this->belongsToMany(PermissionModel::class, 'admin_role_permissions', 'role_id', 'permission_id');
     }
 
 

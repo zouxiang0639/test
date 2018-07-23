@@ -2,7 +2,6 @@
 
 namespace App\Admin\Bls\Auth\Model;
 
-use App\Admin\Bls\Auth\Traits\HasPermissions;
 use App\Consts\Admin\Role\RoleSlugConst;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -13,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property Role[] $roles
  */
-class Administrator extends Model implements AuthenticatableContract
+class AdministratorModel extends Model implements AuthenticatableContract
 {
     use Authenticatable;
 
@@ -34,10 +33,10 @@ class Administrator extends Model implements AuthenticatableContract
     public function getAvatarAttribute($avatar)
     {
         if ($avatar) {
-            return \Storage::disk(config('admin.upload.disk'))->url($avatar);
+            return $avatar;
         }
 
-        return assets_path('/lib/AdminLTE/dist/img/user2-160x160.jpg');
+        return 'user2-160x160.jpg';
     }
 
     /**
@@ -47,7 +46,7 @@ class Administrator extends Model implements AuthenticatableContract
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'admin_role_users', 'user_id', 'role_id');
+        return $this->belongsToMany(RoleModel::class, 'admin_role_users', 'user_id', 'role_id');
     }
 
     /**
@@ -57,7 +56,7 @@ class Administrator extends Model implements AuthenticatableContract
      */
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class, 'admin_user_permissions', 'user_id', 'permission_id');
+        return $this->belongsToMany(PermissionModel::class, 'admin_user_permissions', 'user_id', 'permission_id');
     }
 
 

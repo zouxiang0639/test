@@ -2,7 +2,7 @@
 
 namespace App\Admin\Bls\Auth;
 
-use App\Admin\Bls\Auth\Model\Permission;
+use App\Admin\Bls\Auth\Model\PermissionModel;
 use App\Admin\Bls\Auth\Requests\PermissionsRequest;
 use App\Exceptions\LogicException;
 use Redirect;
@@ -24,7 +24,7 @@ class PermissionsBls
      */
     public static function permissionsList(Redirect $request, $order = '`id` DESC', $limit = 20)
     {
-        $model = Permission::query();
+        $model = PermissionModel::query();
 
         if(!empty($request->id)) {
             $model->where('id', $request->id);
@@ -40,7 +40,7 @@ class PermissionsBls
      */
     public static function storePermissions(PermissionsRequest $request)
     {
-        $model = new Permission();
+        $model = new PermissionModel();
         $model->slug = $request->slug;
         $model->name = $request->name;
         return $model->save();
@@ -73,7 +73,16 @@ class PermissionsBls
      */
     public static function find($id)
     {
-        return Permission::find($id);
+        return PermissionModel::find($id);
+    }
+
+    /**
+     * 获取所有权限名称
+     * @return \Illuminate\Support\Collection
+     */
+    public static function PermissionByName()
+    {
+        return PermissionModel::all()->pluck('name', 'id');
     }
 
 

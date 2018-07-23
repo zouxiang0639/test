@@ -3,6 +3,7 @@
 namespace App\Admin\Bls\Auth;
 
 use App\Admin\Bls\Auth\Model\Role;
+use App\Admin\Bls\Auth\Model\RoleModel;
 use App\Admin\Bls\Common\Traits\RelationTraits;
 use App\Exceptions\LogicException;
 
@@ -24,7 +25,7 @@ class RoleBls
      */
     public static function getRoleList($request, $order = '`id` DESC', $limit = 20)
     {
-        $model = Role::query();
+        $model = RoleModel::query();
 
         if(!empty($request->id)) {
             $model->where('id', $request->id);
@@ -36,7 +37,7 @@ class RoleBls
 
     public static function find($id)
     {
-        return Role::where('id', $id)->first();
+        return RoleModel::where('id', $id)->first();
     }
 
 
@@ -47,9 +48,9 @@ class RoleBls
      */
     public static function storeRole($request)
     {
-        return Role::query()->getQuery()->getConnection()->transaction(function () use($request) {
+        return RoleModel::query()->getQuery()->getConnection()->transaction(function () use($request) {
 
-            $model = new Role();
+            $model = new RoleModel();
             $model->name = $request->name;
             $model->slug = $request->slug;
             $result = $model->touch();
@@ -68,9 +69,9 @@ class RoleBls
      */
     public static function updateRole($request, $id)
     {
-        return Role::query()->getQuery()->getConnection()->transaction(function () use($request, $id) {
+        return RoleModel::query()->getQuery()->getConnection()->transaction(function () use($request, $id) {
 
-            $model = Role::with(self::ONLY)->findOrFail($id);
+            $model = RoleModel::with(self::ONLY)->findOrFail($id);
 
             static::updateRelation($model, $request->only(self::ONLY));
 
@@ -87,9 +88,9 @@ class RoleBls
      */
     public static function destroyRole($id)
     {
-        return Role::query()->getQuery()->getConnection()->transaction(function () use($id) {
+        return RoleModel::query()->getQuery()->getConnection()->transaction(function () use($id) {
 
-            $model = Role::with(self::ONLY)->findOrFail($id);
+            $model = RoleModel::with(self::ONLY)->findOrFail($id);
             if($model->administrators->count()) {
                 throw new LogicException(1010001, '请先解除用户关联的角色');
             }
@@ -98,6 +99,11 @@ class RoleBls
 
             return $model->delete();
         });
+    }
+
+    public static function roleByName()
+    {
+        return RoleModel::all()->pluck('name', 'id');
     }
 }
 

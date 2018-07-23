@@ -2,10 +2,12 @@
 
 namespace App\Admin\Controllers\Auth;
 
+use App\Admin\Bls\Auth\PermissionsBls;
 use App\Admin\Bls\Auth\Requests\UserRequest;
 use App\Admin\Bls\Auth\AdminUserBls;
 use App\Admin\Bls\Auth\Model\Permission;
 use App\Admin\Bls\Auth\Model\Role;
+use App\Admin\Bls\Auth\RoleBls;
 use App\Exceptions\LogicException;
 use App\Http\Controllers\Controller;
 use App\Library\Admin\Form\FormBuilder;
@@ -121,12 +123,12 @@ class UserController extends Controller
             });
 
             $item->create('角色', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->multipleSelect('roles[]',  Role::all()->pluck('name', 'id'), array_get($info, 'roles'), $h->options);
+                $h->input = $form->multipleSelect('roles[]',  RoleBls::roleByName(), array_get($info, 'roles'), $h->options);
                 $h->set('roles', true);
             });
 
             $item->create('权限', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->multipleSelect('permissions[]', Permission::all()->pluck('name', 'id'), array_get($info, 'permissions'), $h->options);
+                $h->input = $form->multipleSelect('permissions[]', PermissionsBls::PermissionByName(), array_get($info, 'permissions'), $h->options);
                 $h->set('permissions', true);
             });
 
