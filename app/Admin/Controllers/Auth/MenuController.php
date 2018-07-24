@@ -24,7 +24,7 @@ class MenuController extends Controller
     {
         $list = MenuBls::treeView();
 
-        return view('admin::auth.menu.index',[
+        return View::make('admin::auth.menu.index',[
             'list' => $list,
             'form' =>  $this->form([]),
         ]);
@@ -147,6 +147,14 @@ class MenuController extends Controller
                 $h->helpBlock = '这个标识作用于权限绑定是否显示菜单';
             });
 
+            if(empty($info)) {
+                $item->create('权限', function(HtmlFormTpl $h, FormBuilder $form) {
+                    $h->input = $form->switchOff('permissions');
+                    $h->set('permissions', true);
+                    $h->helpBlock = 'YES开关同时生成和菜单标识一样的权限';
+                });
+            }
+
             $item->create('图标', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->icon('icon', array_get($info, 'icon'), $h->options);
                 $h->set('password', true);
@@ -155,7 +163,7 @@ class MenuController extends Controller
 
             $item->create('路由', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->text('route', array_get($info, 'route'), $h->options);
-                $h->set('route', true);
+                $h->set('route', false);
                 $h->helpBlock = '路由只能是路由别名,http,https';
             });
 

@@ -25,7 +25,7 @@ class PermissionsController extends Controller
     {
         $model = PermissionsBls::permissionsList($request);
 
-        return view('admin::auth.permissions.index',[
+        return View::make('admin::auth.permissions.index',[
             'list' => $model
         ]);
     }
@@ -36,7 +36,7 @@ class PermissionsController extends Controller
      */
     public function create()
     {
-        return view('admin::auth.permissions.create',[
+        return View::make('admin::auth.permissions.create',[
             'form' =>  $this->form([]),
         ]);
     }
@@ -52,7 +52,7 @@ class PermissionsController extends Controller
         if(PermissionsBls::storePermissions($request)) {
             return (new JsonResponse())->success('操作成功');
         } else {
-            throw new LogicException(1010002, ['操作失败']);
+            throw new LogicException(1010002, '操作失败');
         }
     }
 

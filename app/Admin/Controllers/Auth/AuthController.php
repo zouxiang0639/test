@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Admin;
 use Auth;
+use View;
 
 /**
  * Created by AuthController.
@@ -33,7 +34,7 @@ class AuthController extends Controller
             return redirect($this->redirectPath());
         }
 
-        return view('admin::auth.login');
+        return View::make('admin::auth.login');
     }
 
     /**
@@ -121,7 +122,7 @@ class AuthController extends Controller
             });
         })->getFormHtml();
 
-        return view('admin::auth.setting', [
+        return View::make('admin::auth.setting', [
             'form' => $form,
             'info' => $info
         ]);

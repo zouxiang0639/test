@@ -249,4 +249,25 @@ EOT;
 
         return self::hidden($name, $value).self::file($name, $options);
     }
+
+    public function switchOff($name,  $value = 2)
+    {
+        Admin::setCss(StyleTypeConst::FILE, '/lib/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css');
+        Admin::setJs(StyleTypeConst::FILE, '/lib/bootstrap-switch/dist/js/bootstrap-switch.min.js');
+        $code = <<<EOT
+           $(".$name .switch").bootstrapSwitch({
+                size:'small',
+                onText: 'YES',
+                offText: 'NO',
+                onColor: 'primary',
+                offColor: 'default',
+                onSwitchChange: function(event, state) {
+                    $(event.target).closest('.bootstrap-switch').next().val(state ? '1' : '2').change();
+                }
+            })\n
+EOT;
+        Admin::setJs(StyleTypeConst::CODE, $code);
+        return self::checkbox('', '', '',  ['class' => 'switch la_checkbox']).self::hidden($name,$value);
+
+    }
 }

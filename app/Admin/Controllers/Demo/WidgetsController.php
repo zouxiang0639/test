@@ -15,6 +15,11 @@ class WidgetsController extends Controller
     {
         $form = Admin::form(function(Forms $item) {
 
+            $item->create('switchOff', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->switchOff('switchOff','');
+                $h->set('switchOff', true);
+            });
+
             $item->create('display', function(HtmlFormTpl $h, FormBuilder $form) {
                 $h->input = $form->display('display');
             });
@@ -53,6 +58,7 @@ class WidgetsController extends Controller
                 $h->input = $form->imageOne('imageOne', 'user2-160x160.jpg', $h->options);
                 $h->set('imageOne', true);
             });
+
 
 
 

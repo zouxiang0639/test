@@ -59,14 +59,19 @@ Route::group([
         Route::post('formPost', ['uses' => "Demo\\WidgetsController@formPost", 'as' => 'm.demo.widgets.formPost']);
     });
 
-    //配置
-    Route::group(['prefix'=>'config'], function(){
-        Route::get('', ['uses' => "Auth\\MenuController@index", 'as' => 'm.config.list']);
-    });
-
-    //文件上传
+    //系统
     Route::group(['prefix'=>'system'], function(){
         Route::put('upload/image', ['uses' => "System\\UploadController@image", 'as' => 'm.system.upload.image']);
+
+        //配置
+        Route::group(['prefix'=>'config'], function(){
+            Route::get('', ['uses' => "System\\ConfigController@index", 'as' => 'm.system.config.list']);
+            Route::get('/create', ['uses' => "System\\ConfigController@create", 'as' => 'm.system.config.create']);
+            Route::post('store', ['uses' => "System\\ConfigController@store", 'as' => 'm.system.config.store']);
+            Route::get('edit/{id}', ['uses' => "System\\ConfigController@edit", 'as' => 'm.system.config.edit']);
+            Route::post('update/{id}', ['uses' => "System\\ConfigController@update", 'as' => 'm.system.config.update']);
+            Route::delete('destroy/{id}', ['uses' => "System\\ConfigController@destroy", 'as' => 'm.system.config.destroy']);
+        });
     });
 
 

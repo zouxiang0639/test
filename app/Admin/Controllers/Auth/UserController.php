@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         $model = AdminUserBls::getAdminUser($request);
 
-        return view('admin::auth.user.index', [
+        return View::make('admin::auth.user.index', [
             'list' => $model
         ]);
     }
@@ -41,7 +41,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin::auth.user.create', [
+        return View::make('admin::auth.user.create', [
             'form' => $this->form([]),
         ]);
     }

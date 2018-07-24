@@ -5,7 +5,7 @@
 @stop
 @section('content-header')
     <h1>
-        管理员<small>创建</small>
+        配置管理<small>创建</small>
     </h1>
 @stop
 @section('content')
@@ -16,7 +16,7 @@
 
                     <div class="box-tools">
                         <div class="btn-group pull-right" style="margin-right: 10px">
-                            <a href="{!! route('m.role.list') !!}" class="btn btn-sm btn-default">
+                            <a href="{!! route('m.system.config.list') !!}" class="btn btn-sm btn-default">
                                 <i class="fa fa-list"></i>&nbsp;列表
                             </a>
                         </div> <div class="btn-group pull-right" style="margin-right: 10px">
@@ -37,8 +37,8 @@
 @section('script')
     <script>
         var initialAjAx = {
-            "url":"{!! route('m.role.store') !!}",
-            "backUrl":"{!! route('m.role.list') !!}"
+            "url":"{!! route('m.system.config.store') !!}",
+            "backUrl":"{!! route('m.system.config.list') !!}"
         }
     </script>
 @stop

@@ -78,6 +78,10 @@ class Admin
         return \Request::route()->getName();
     }
 
+    /**
+     * @param \Closure $callback
+     * @return $this
+     */
     public function form(\Closure $callback)
     {
         return (new Forms())->form($callback);

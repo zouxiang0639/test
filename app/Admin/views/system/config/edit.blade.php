@@ -5,14 +5,14 @@
 @stop
 @section('content-header')
     <h1>
-        管理员<small>创建</small>
+        配置管理<small>编辑</small>
     </h1>
 @stop
 @section('content')
 
     <div class="row"><div class="col-md-12"><div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">创建</h3>
+                    <h3 class="box-title">编辑</h3>
 
                     <div class="box-tools">
                         <div class="btn-group pull-right" style="margin-right: 10px">
@@ -37,8 +37,8 @@
 @section('script')
     <script>
         var initialAjAx = {
-            "url":"{!! route('m.role.store') !!}",
-            "backUrl":"{!! route('m.role.list') !!}"
+            "url":"{!! route('m.system.config.update', ['id' => $info->id]) !!}",
+            "backUrl":"{!! route('m.system.config.list') !!}"
         }
     </script>
 @stop

@@ -28,7 +28,7 @@ class RoleController extends Controller
     {
         $model = RoleBls::getRoleList($request);
 
-        return view('admin::auth.role.index',[
+        return View::make('admin::auth.role.index',[
             'list' => $model
         ]);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Admin\Bls\System\ConfigBls;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
+        //注入配置
+        ConfigBls::load();
+
     }
 
     /**

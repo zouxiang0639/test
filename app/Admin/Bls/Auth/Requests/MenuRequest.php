@@ -16,9 +16,14 @@ class MenuRequest extends JsonResponseValidator
     public function rules()
     {
         \Validator::extendImplicit('route', function ($attribute, $value, $parameters, $validator) {
+            if(empty($value)) {
+                return true;
+            }
+
             if(Route::has($value) || preg_match('/(http|https):\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is', $value)) {
                 return true;
             }
+
             return false;
         });
 
@@ -27,7 +32,7 @@ class MenuRequest extends JsonResponseValidator
             'title' => 'required',
             'slug' => 'required',
             'icon' => 'required',
-            'route' => 'required|route',
+            'route' => 'route',
         ];
     }
 
@@ -43,7 +48,6 @@ class MenuRequest extends JsonResponseValidator
             'title.required' => '标题不能为空',
             'slug.required' => '标识不能为空',
             'icon.required' => '图标不能为空',
-            'route.required' => '路由不能为空',
             'route.route' => '路由只能是路由别名,http,https',
         ];
     }

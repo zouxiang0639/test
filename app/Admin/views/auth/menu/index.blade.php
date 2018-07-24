@@ -1,6 +1,7 @@
 @extends('admin::layouts.master')
 
 @section('style')
+    <link rel="stylesheet" href="{{  assets_path("/lib/nestable/nestable.css") }}">
 @stop
 @section('content-header')
     <h1>
@@ -29,6 +30,7 @@
 
 @stop
 @section('script')
+    <script src="{{  assets_path("/lib/nestable/jquery.nestable.js") }}"></script>
     <script>
         var initialAjAx = {
             "url":"{!! route('m.menu.store') !!}",
