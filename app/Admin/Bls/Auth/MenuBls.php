@@ -87,7 +87,11 @@ class MenuBls
                     $model->route = $request->route;
                     $model->url = \Route::has($request->route) ? route($request->route, [], false) : $model->route;
                 }
-            return $model->save();
+
+            if($model->save()){
+                return $model;
+            }
+            return false;
         });
 
     }
@@ -147,7 +151,6 @@ class MenuBls
         }
 
         static::saveOrder($tree);
-        dd(1);
         return true;
     }
 

@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
 
         //注入配置
-        ConfigBls::load();
+        //ConfigBls::load();
 
     }
 

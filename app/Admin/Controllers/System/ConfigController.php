@@ -28,7 +28,6 @@ class ConfigController extends Controller
      */
     public function index(Request $request)
     {
-        dd(config());
         $list = ConfigBls::getConfigList($request);
 
         return View::make('admin::system.config.index',[
