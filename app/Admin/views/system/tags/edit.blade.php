@@ -5,7 +5,7 @@
 @stop
 @section('content-header')
     <h1>
-        配置管理<small>编辑</small>
+        标签<small>编辑</small>
     </h1>
 @stop
 @section('content')
@@ -16,7 +16,7 @@
 
                     <div class="box-tools">
                         <div class="btn-group pull-right" style="margin-right: 10px">
-                            <a href="{!! route('m.system.config.list') !!}" class="btn btn-sm btn-default">
+                            <a href="{!! route('m.system.tags.list') !!}" class="btn btn-sm btn-default">
                                 <i class="fa fa-list"></i>&nbsp;列表
                             </a>
                         </div> <div class="btn-group pull-right" style="margin-right: 10px">
@@ -24,8 +24,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.box-header -->
-                <!-- form start -->
               {!! $form !!}
             </div>
 
@@ -37,8 +35,8 @@
 @section('script')
     <script>
         var initialAjAx = {
-            "url":"{!! route('m.system.config.update', ['id' => $info->id]) !!}",
-            "backUrl":"{!! route('m.system.config.list') !!}"
+            "url":"{!! route('m.system.tags.update', ['id' => $info->id]) !!}",
+            "backUrl":"{!! route('m.system.tags.list') !!}"
         }
     </script>
 @stop

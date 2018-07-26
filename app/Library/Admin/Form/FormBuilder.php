@@ -3,14 +3,35 @@
 namespace App\Library\Admin\Form;
 
 use Admin;
+use App\Consts\Common\WhetherConst;
 use App\Library\Admin\Consts\StyleTypeConst;
 
 class FormBuilder extends \Collective\Html\FormBuilder
 {
 
+    private $resource = [
+        'bootstrap-switch.min.css' => '/lib/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css',
+        'bootstrap-switch.min.js' => '/lib/bootstrap-switch/dist/js/bootstrap-switch.min.js',
+        'fileinput.min.css' => '/lib/bootstrap-fileinput/css/fileinput.min.css?v=4.3.7',
+        'fileinput.min.js' => '/lib/bootstrap-fileinput/js/fileinput.min.js?v=4.3.7',
+        'canvas-to-blob.min.js' => '/lib/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js?v=4.3.7',
+        'jquery.inputmask.bundle.min.js' => '/lib/AdminLTE/plugins/input-mask/jquery.inputmask.bundle.min.js',
+        'fontawesome-iconpicker.min.css' => '/lib/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css',
+        'fontawesome-iconpicker.min.js' => '/lib/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.min.js',
+        'bootstrap-duallistbox.min.css' => '/lib/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css',
+        'bootstrap-duallistbox.min.js' => '/lib/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js',
+        'select2.full.min.js' => '/lib/AdminLTE/plugins/select2/select2.full.min.js',
+        'select2.min.css' => '/lib/AdminLTE/plugins/select2/select2.min.css',
+    ];
+
     public function createFormBuilder()
     {
         return $this;
+    }
+
+    private function getResource($name)
+    {
+        return array_get($this->resource, $name);
     }
 
 
@@ -47,8 +68,8 @@ class FormBuilder extends \Collective\Html\FormBuilder
         array $optgroupsAttributes = []
     ) {
 
-        Admin::setCss(StyleTypeConst::FILE, '/lib/AdminLTE/plugins/select2/select2.min.css');
-        Admin::setJs(StyleTypeConst::FILE, '/lib/AdminLTE/plugins/select2/select2.full.min.js');
+        Admin::setCss(StyleTypeConst::FILE, $this->getResource('select2.min.css'));
+        Admin::setJs(StyleTypeConst::FILE, $this->getResource('select2.full.min.js'));
 
         $code = <<<EOT
 
@@ -84,8 +105,8 @@ EOT;
         array $optgroupsAttributes = []
     ) {
 
-        Admin::setCss(StyleTypeConst::FILE, '/lib/AdminLTE/plugins/select2/select2.min.css');
-        Admin::setJs(StyleTypeConst::FILE, '/lib/AdminLTE/plugins/select2/select2.full.min.js');
+        Admin::setCss(StyleTypeConst::FILE, $this->getResource('select2.min.css'));
+        Admin::setJs(StyleTypeConst::FILE, $this->getResource('select2.full.min.js'));
 
         $code = <<<EOT
 
@@ -122,8 +143,8 @@ EOT;
         array $optgroupsAttributes = []
     ) {
 
-        Admin::setCss(StyleTypeConst::FILE, '/lib/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css');
-        Admin::setJs(StyleTypeConst::FILE, '/lib/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js');
+        Admin::setCss(StyleTypeConst::FILE, $this->getResource('bootstrap-duallistbox.min.css'));
+        Admin::setJs(StyleTypeConst::FILE, $this->getResource('bootstrap-duallistbox.min.js'));
 
         $code = <<<EOT
 
@@ -154,8 +175,8 @@ EOT;
     public function icon($name, $value = null, $options = [])
     {
 
-        Admin::setCss(StyleTypeConst::FILE, '/lib/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css');
-        Admin::setJs(StyleTypeConst::FILE, '/lib/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.min.js');
+        Admin::setCss(StyleTypeConst::FILE, $this->getResource('fontawesome-iconpicker.min.css'));
+        Admin::setJs(StyleTypeConst::FILE, $this->getResource('fontawesome-iconpicker.min.js'));
 
         $code = <<<EOT
            $("input[name=$name]").iconpicker({placement:'bottomLeft'});\n
@@ -176,7 +197,7 @@ EOT;
      */
     public function currency($name, $value = null, $options = [])
     {
-        Admin::setJs(StyleTypeConst::FILE, '/lib/AdminLTE/plugins/input-mask/jquery.inputmask.bundle.min.js');
+        Admin::setJs(StyleTypeConst::FILE, $this->getResource('jquery.inputmask.bundle.min.js'));
 
         $code = <<<EOT
            $("input[name=$name]").inputmask({
@@ -205,9 +226,9 @@ EOT;
         $path = $value ? uploads_path($value) : $value;
         $options['data-initial-preview'] = $path;
         $options['data-initial-caption'] = $value;
-        Admin::setCss(StyleTypeConst::FILE, '/lib/bootstrap-fileinput/css/fileinput.min.css?v=4.3.7');
-        Admin::setJs(StyleTypeConst::FILE, '/lib/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js?v=4.3.7');
-        Admin::setJs(StyleTypeConst::FILE, '/lib/bootstrap-fileinput/js/fileinput.min.js?v=4.3.7');
+        Admin::setCss(StyleTypeConst::FILE, $this->getResource('fileinput.min.css'));
+        Admin::setJs(StyleTypeConst::FILE, $this->getResource('fileinput.min.js'));
+        Admin::setJs(StyleTypeConst::FILE, $this->getResource('canvas-to-blob.min.js'));
 
         $route = route('m.system.upload.image');
         $code = <<<EOT
@@ -250,10 +271,11 @@ EOT;
         return self::hidden($name, $value).self::file($name, $options);
     }
 
-    public function switchOff($name,  $value = 2)
+    public function switchOff($name,  $value = WhetherConst::NO)
     {
-        Admin::setCss(StyleTypeConst::FILE, '/lib/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css');
-        Admin::setJs(StyleTypeConst::FILE, '/lib/bootstrap-switch/dist/js/bootstrap-switch.min.js');
+
+        Admin::setCss(StyleTypeConst::FILE, $this->getResource('bootstrap-switch.min.css'));
+        Admin::setJs(StyleTypeConst::FILE, $this->getResource('bootstrap-switch.min.js'));
         $code = <<<EOT
            $(".$name .switch").bootstrapSwitch({
                 size:'small',
@@ -267,7 +289,8 @@ EOT;
             })\n
 EOT;
         Admin::setJs(StyleTypeConst::CODE, $code);
-        return self::checkbox('', '', '',  ['class' => 'switch la_checkbox']).self::hidden($name,$value);
+        $checked = $value == WhetherConst::YES ? 'checked' : '';
+        return self::checkbox('', '', '',  ['class' => 'switch la_checkbox', $checked]).self::hidden($name, $value);
 
     }
 }

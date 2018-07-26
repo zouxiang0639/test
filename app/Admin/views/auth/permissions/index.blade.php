@@ -32,8 +32,8 @@
                     <th>ID
                         <a class="fa fa-fw fa-sort-amount-asc" href="http://bbs.com/admin/auth/users?_sort%5Bcolumn%5D=id&amp;_sort%5Btype%5D=desc"></a>
                     </th>
-                    <th>标识</th>
                     <th>名称</th>
+                    <th>标识</th>
                     <th>创建时间</th>
                     <th>更新时间</th>
                     <th>操作</th>

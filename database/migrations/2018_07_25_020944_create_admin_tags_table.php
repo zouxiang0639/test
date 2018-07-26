@@ -18,7 +18,7 @@ class CreateAdminTagsTable extends Migration
             $table->string('tag_name')->comment('标签名称');
             $table->tinyInteger('type')->comment('类型');
             $table->tinyInteger('status')->comment('状态');
-            $table->tinyInteger('sort')->comment('排序');
+            $table->integer('hot')->default(0)->comment('热度');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['id']);

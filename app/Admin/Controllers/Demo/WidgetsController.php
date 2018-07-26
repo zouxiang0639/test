@@ -24,19 +24,14 @@ class WidgetsController extends Controller
                 $h->input = $form->display('display');
             });
 
-            $item->create('text', function(HtmlFormTpl $h, FormBuilder $form) {
-                $h->input = $form->text('text', '', $h->options);
-                $h->set('text', true);
+            $item->create('icon', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->icon('icon','', $h->options);
+                $h->set('icon', true);
             });
 
             $item->create('currency', function(HtmlFormTpl $h, FormBuilder $form) {
                 $h->input = $form->currency('currency', '', $h->options);
                 $h->set('currency', true);
-            });
-
-            $item->create('password', function(HtmlFormTpl $h, FormBuilder $form) {
-                $h->input = $form->password('password', $h->options);
-                $h->set('password', true);
             });
 
             $item->create('select2', function(HtmlFormTpl $h, FormBuilder $form) {
@@ -58,11 +53,6 @@ class WidgetsController extends Controller
                 $h->input = $form->imageOne('imageOne', 'user2-160x160.jpg', $h->options);
                 $h->set('imageOne', true);
             });
-
-
-
-
-
 
         })->getFormHtml();
 

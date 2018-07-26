@@ -64,13 +64,25 @@ Route::group([
         Route::put('upload/image', ['uses' => "System\\UploadController@image", 'as' => 'm.system.upload.image']);
 
         //配置
-        Route::group(['prefix'=>'config'], function(){
+        Route::group(['prefix'=>'config', 'middleware' => 'admin.auth:m_config'], function(){
             Route::get('', ['uses' => "System\\ConfigController@index", 'as' => 'm.system.config.list']);
             Route::get('/create', ['uses' => "System\\ConfigController@create", 'as' => 'm.system.config.create']);
             Route::post('store', ['uses' => "System\\ConfigController@store", 'as' => 'm.system.config.store']);
             Route::get('edit/{id}', ['uses' => "System\\ConfigController@edit", 'as' => 'm.system.config.edit']);
             Route::post('update/{id}', ['uses' => "System\\ConfigController@update", 'as' => 'm.system.config.update']);
             Route::delete('destroy/{id}', ['uses' => "System\\ConfigController@destroy", 'as' => 'm.system.config.destroy']);
+        });
+
+        //标签
+        Route::group(['prefix'=>'tags', 'middleware' => 'admin.auth:m_tags'], function(){
+            Route::get('', ['uses' => "System\\TagsController@index", 'as' => 'm.system.tags.list']);
+            Route::get('/create', ['uses' => "System\\TagsController@create", 'as' => 'm.system.tags.create']);
+            Route::post('store', ['uses' => "System\\TagsController@store", 'as' => 'm.system.tags.store']);
+            Route::get('edit/{id}', ['uses' => "System\\TagsController@edit", 'as' => 'm.system.tags.edit']);
+            Route::post('update/{id}', ['uses' => "System\\TagsController@update", 'as' => 'm.system.tags.update']);
+            Route::delete('destroy/{id}', ['uses' => "System\\TagsController@destroy", 'as' => 'm.system.tags.destroy']);
+            Route::put('status/{id}', ['uses' => "System\\TagsController@status", 'as' => 'm.system.tags.status']);
+            Route::put('hot', ['uses' => "System\\TagsController@hot", 'as' => 'm.system.tags.hot']);
         });
     });
 

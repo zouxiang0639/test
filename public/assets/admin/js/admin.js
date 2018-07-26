@@ -111,4 +111,40 @@ $(function(){
             }
         );
     });
+
+    /**
+     *  开关状态更新
+     */
+    $("input[name=switch_submit]").change(function(){
+        if (! locked) {
+            return false;
+        }
+
+        locked = false;
+
+        $.ajax({
+            url: $(this).parent('.switch_submit').attr('data-href'),
+            type: 'POST',
+            data: {
+                "_method": "PUT",
+                "_token": $('meta[name="csrf-token"]').attr('content'),
+                "status": $(this).val()
+            },
+            cache: false,
+            dataType: 'json',
+            success:function(res) {
+                if(res.code != 0) {
+                    swal(res.data, '', 'error');
+                    locked = true;
+                } else {
+                    swal(res.data, '', 'success');
+                    locked = true;
+                }
+            },
+            error:function () {
+                locked = true;
+            }
+
+        });
+    })
 });

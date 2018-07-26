@@ -141,5 +141,15 @@ class AdminAuthSeeder extends Seeder
         ]);
         MenuBls::storeMenu($menuRequest);
 
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '标签',
+            'icon' => 'fa-tags',
+            'route' => 'm.system.tags.list',
+            'slug' => 'm_system_tags',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);
+
     }
 }
