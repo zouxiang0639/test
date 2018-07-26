@@ -68,6 +68,9 @@ class RoleController extends Controller
     public function edit($id)
     {
         $model = RoleBls::find($id);
+
+        $this->isEmpty($model);
+
         return View::make('admin::auth.role.edit',[
             'form' =>  $this->form($model),
             'info' =>  $model

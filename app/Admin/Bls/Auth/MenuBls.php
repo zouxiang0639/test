@@ -99,7 +99,7 @@ class MenuBls
     /**
      * 更新菜单数据
      * @param MenuRequest $request
-     * @param Menu $model
+     * @param MenuModel $model
      * @return mixed
      */
     public static function updateMenu(MenuRequest $request, MenuModel $model)

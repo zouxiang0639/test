@@ -15,7 +15,7 @@ class Controller extends BaseController
     public function isEmpty($data)
     {
         if(! $data) {
-            throw new LogicException(1010002, '参数错误');
+            throw new LogicException(1010003, '数据查询失败');
         }
     }
 }

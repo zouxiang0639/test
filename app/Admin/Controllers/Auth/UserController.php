@@ -69,6 +69,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $model = AdminUserBls::find($id);
+
+        $this->isEmpty($model);
+
         return View::make('admin::auth.user.edit', [
           'form' =>  $this->form($model),
           'info' =>  $model
@@ -99,7 +102,6 @@ class UserController extends Controller
      */
     protected function form($info)
     {
-
         return Admin::form(function($item) use ($info) {
 
             $item->create('用户名', function(HtmlFormTpl $h, FormBuilder $form) use ($info){

@@ -16,8 +16,6 @@ use View;
 class PermissionsController extends Controller
 {
 
-
-
     /**
      * 列表
      */
@@ -65,6 +63,8 @@ class PermissionsController extends Controller
     public function edit($id)
     {
         $model = PermissionsBls::find($id);
+        $this->isEmpty($model);
+
         return View::make('admin::auth.permissions.edit',[
           'form' =>  $this->form($model),
           'info' =>  $model

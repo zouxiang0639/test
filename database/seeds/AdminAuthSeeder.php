@@ -78,7 +78,7 @@ class AdminAuthSeeder extends Seeder
             'title' => '管理员',
             'icon' => 'fa-users',
             'route' => 'm.user.list',
-            'slug' => 'm_users',
+            'slug' => 'm_auth_users',
             'permissions' => WhetherConst::YES
         ]);
 
@@ -89,7 +89,7 @@ class AdminAuthSeeder extends Seeder
             'title' => '角色',
             'icon' => 'fa-user',
             'route' => 'm.role.list',
-            'slug' => 'm_role',
+            'slug' => 'm_auth_role',
             'permissions' => WhetherConst::YES
         ]);
         MenuBls::storeMenu($menuRequest);
@@ -99,7 +99,7 @@ class AdminAuthSeeder extends Seeder
             'title' => '权限',
             'icon' => 'fa-ban',
             'route' => 'm.permissions.list',
-            'slug' => 'm_permissions',
+            'slug' => 'm_auth_permissions',
             'permissions' => WhetherConst::YES
         ]);
         MenuBls::storeMenu($menuRequest);
@@ -109,7 +109,7 @@ class AdminAuthSeeder extends Seeder
             'title' => '菜单',
             'icon' => 'fa-bars',
             'route' => 'm.menu.list',
-            'slug' => 'm_menu',
+            'slug' => 'm_auth_menu',
             'permissions' => WhetherConst::YES
         ]);
         MenuBls::storeMenu($menuRequest);
@@ -147,6 +147,16 @@ class AdminAuthSeeder extends Seeder
             'icon' => 'fa-tags',
             'route' => 'm.system.tags.list',
             'slug' => 'm_system_tags',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);
+
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '系统日志',
+            'icon' => 'fa-database',
+            'route' => 'm.system.log.list',
+            'slug' => 'm_system_log',
             'permissions' => WhetherConst::YES
         ]);
         MenuBls::storeMenu($menuRequest);
