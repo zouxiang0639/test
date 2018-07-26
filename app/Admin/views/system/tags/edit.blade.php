@@ -36,7 +36,7 @@
     <script>
         var initialAjAx = {
             "url":"{!! route('m.system.tags.update', ['id' => $info->id]) !!}",
-            "backUrl":"{!! route('m.system.tags.list') !!}"
+            "backUrl":"{!! route('m.system.tags.list', ['type' => Input::get('type')]) !!}"
         }
     </script>
 @stop

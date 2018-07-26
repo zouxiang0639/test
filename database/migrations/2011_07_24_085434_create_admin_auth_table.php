@@ -77,15 +77,6 @@ class CreateAdminAuthTable extends Migration
             $table->timestamps();
         });
         \DB::statement("ALTER TABLE `admin_user_permissions` comment '后台管理员与权限关联表'");
-
-        Schema::create('admin_config', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name')->unique()->comment('配置名称');
-            $table->string('value')->comment('配置值');
-            $table->text('description')->nullable()->comment('配置描述');
-            $table->timestamps();
-        });
-        \DB::statement("ALTER TABLE `admin_config` comment '后台配置表'");
     }
 
     /**
@@ -102,6 +93,5 @@ class CreateAdminAuthTable extends Migration
         Schema::dropIfExists('admin_role_users');
         Schema::dropIfExists('admin_role_permissions');
         Schema::dropIfExists('admin_user_permissions');
-        Schema::dropIfExists('admin_config');
     }
 }

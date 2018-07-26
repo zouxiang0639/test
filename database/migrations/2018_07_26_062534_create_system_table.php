@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdminTagsTable extends Migration
+class CreateSystemTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,6 +13,15 @@ class CreateAdminTagsTable extends Migration
      */
     public function up()
     {
+        Schema::create('admin_config', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->unique()->comment('配置名称');
+            $table->string('value')->comment('配置值');
+            $table->text('description')->nullable()->comment('配置描述');
+            $table->timestamps();
+        });
+        \DB::statement("ALTER TABLE `admin_config` comment '后台配置表'");
+
         Schema::create('admin_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tag_name')->comment('标签名称');
@@ -24,7 +33,6 @@ class CreateAdminTagsTable extends Migration
             $table->index(['id']);
         });
         \DB::statement("ALTER TABLE `admin_tags` comment '标签表'");
-
     }
 
     /**
@@ -34,6 +42,7 @@ class CreateAdminTagsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('admin_config');
         Schema::dropIfExists('admin_tags');
     }
 }
