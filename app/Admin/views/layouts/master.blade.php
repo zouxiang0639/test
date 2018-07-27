@@ -36,6 +36,9 @@
 
 
 <script>
+    var initial = {
+        "CKEditorUpload": "{{ route('m.system.upload.ckeditor') }}?_method=PUT&_token=" + $('meta[name="csrf-token"]').attr('content')
+    };
     var initialAjAx = {};
     $(function () {
         $('.active').parents('ul').show();

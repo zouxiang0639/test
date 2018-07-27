@@ -59,6 +59,7 @@ Route::group([
     //系统
     Route::group(['prefix'=>'system'], function(){
         Route::put('upload/image', ['uses' => "System\\UploadController@image", 'as' => 'm.system.upload.image']);
+        Route::put('upload/ckeditor', ['uses' => "System\\UploadController@ckeditor", 'as' => 'm.system.upload.ckeditor']);
 
         //配置
         Route::group(['prefix'=>'config', 'middleware' => 'admin.auth:m_system_config'], function(){

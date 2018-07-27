@@ -22,6 +22,7 @@ class FormBuilder extends \Collective\Html\FormBuilder
         'bootstrap-duallistbox.min.js' => '/lib/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js',
         'select2.full.min.js' => '/lib/AdminLTE/plugins/select2/select2.full.min.js',
         'select2.min.css' => '/lib/AdminLTE/plugins/select2/select2.min.css',
+        'ckeditor.js' => '/lib/ckeditor/ckeditor.js',
     ];
 
     public function createFormBuilder()
@@ -291,6 +292,49 @@ EOT;
         Admin::setJs(StyleTypeConst::CODE, $code);
         $checked = $value == WhetherConst::YES ? 'checked' : '';
         return self::checkbox('', '', '',  ['class' => 'switch la_checkbox', $checked]).self::hidden($name, $value);
+    }
 
+    public function ckeditorMini($name, $value = null, $options = [])
+    {
+        Admin::setJs(StyleTypeConst::FILE, $this->getResource('ckeditor.js'));
+        $code = <<<EOT
+           CKEDITOR.replace('$name',
+            {
+                toolbar : [
+                    //加粗     斜体，     下划线      穿过线      下标字        上标字
+                    ['Bold','Italic','Underline','Strike','Subscript','Superscript'],
+                    //数字列表          实体列表            减小缩进    增大缩进
+                    ['NumberedList','BulletedList','-','Outdent','Indent'],
+                    //左对齐             居中对齐          右对齐          两端对齐
+                    ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+                    //超链接 取消超链接 锚点
+                    ['Link','Unlink','Anchor'],
+                     //文本颜色     背景颜色
+                    ['TextColor','BGColor'],
+                    //全屏           显示区块
+                    ['Maximize', 'ShowBlocks','-'],
+                    '/',
+                    //图片     表格       水平线            表情       特殊字符        分页符
+                    ['Image','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+                      //样式       格式      字体    字体大小
+                    ['Styles','Format','Font','FontSize'],
+                ]
+            }
+        );\n
+EOT;
+
+        Admin::setJs(StyleTypeConst::CODE, $code);
+        return self::textarea($name, $value = null, $options = []);
+    }
+
+    public function ckeditor($name, $value = null, $options = [])
+    {
+        Admin::setJs(StyleTypeConst::FILE, $this->getResource('ckeditor.js'));
+        $code = <<<EOT
+           CKEDITOR.replace('$name')
+EOT;
+
+        Admin::setJs(StyleTypeConst::CODE, $code);
+        return self::textarea($name, $value = null, $options = []);
     }
 }

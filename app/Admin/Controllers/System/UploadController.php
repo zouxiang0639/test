@@ -18,4 +18,17 @@ class UploadController extends Controller
         $data = Admin::upload()->uploadOneImage($file);
         return (new JsonResponse())->success($data);
     }
+
+    public function ckeditor(Request $request)
+    {
+        $file = $request->file('upload');
+
+        $data = Admin::upload()->uploadOneImage($file);
+        $data = [
+            'uploaded' => 1,
+            'fileName' =>$data['url'],
+            'url' => $data['url']
+        ];
+        return json_encode($data);
+    }
 }

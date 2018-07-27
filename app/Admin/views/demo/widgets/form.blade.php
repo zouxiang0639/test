@@ -17,14 +17,6 @@
                     <h3 class="box-title">编辑</h3>
                 </div>
                 {!! $form !!}
-
-                <div class="form-group ">
-                    <label for="1" class="col-sm-2 control-label">1</label>
-                    <div class="col-sm-8">
-                        <input type="checkbox" class="1 la_checkbox" />
-                        <input type="hidden" class="1" name="1" class="" value="off" />
-                    </div>
-                </div>
         </div>
 
         </div>
@@ -34,6 +26,15 @@
 
 @section('script')
     <script>
+        function formValidate()
+        {
+            //解决ckeditor编辑器 ajax上传问他
+            if(typeof CKEDITOR=="object"){
+                for(instance in CKEDITOR.instances){
+                    CKEDITOR.instances[instance].updateElement();
+                }
+            }
+        }
         var initialAjAx = {
             "url":"{!! route('m.role.store') !!}",
             "backUrl":"{!! route('m.role.list') !!}"

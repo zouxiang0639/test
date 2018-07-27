@@ -53,6 +53,10 @@ class WidgetsController extends Controller
                 $h->input = $form->imageOne('imageOne', 'user2-160x160.jpg', $h->options);
                 $h->set('imageOne', true);
             });
+            $item->create('ckeditor', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->ckeditor('ckeditor', 'adsdas');
+                $h->set('ckeditor', true);
+            });
 
         })->getFormHtml();
 
