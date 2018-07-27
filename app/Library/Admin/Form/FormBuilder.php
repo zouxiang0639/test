@@ -25,11 +25,18 @@ class FormBuilder extends \Collective\Html\FormBuilder
         'ckeditor.js' => '/lib/ckeditor/ckeditor.js',
     ];
 
+    /**
+     * @return $this
+     */
     public function createFormBuilder()
     {
         return $this;
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     */
     private function getResource($name)
     {
         return array_get($this->resource, $name);
@@ -272,9 +279,14 @@ EOT;
         return self::hidden($name, $value).self::file($name, $options);
     }
 
-    public function switchOff($name,  $value = WhetherConst::NO)
+    /**
+     * @param $name
+     * @param int $value
+     * @return string
+     */
+    public function switchOff($name, $value = WhetherConst::NO)
     {
-
+        $options['id'] = $name;
         Admin::setCss(StyleTypeConst::FILE, $this->getResource('bootstrap-switch.min.css'));
         Admin::setJs(StyleTypeConst::FILE, $this->getResource('bootstrap-switch.min.js'));
         $code = <<<EOT
@@ -287,15 +299,22 @@ EOT;
                 onSwitchChange: function(event, state) {
                     $(event.target).closest('.bootstrap-switch').next().val(state ? '1' : '2').change();
                 }
-            })\n
+            });\n
 EOT;
         Admin::setJs(StyleTypeConst::CODE, $code);
         $checked = $value == WhetherConst::YES ? 'checked' : '';
         return self::checkbox('', '', '',  ['class' => 'switch la_checkbox', $checked]).self::hidden($name, $value);
     }
 
+    /**
+     * @param $name
+     * @param null $value
+     * @param array $options
+     * @return \Illuminate\Support\HtmlString
+     */
     public function ckeditorMini($name, $value = null, $options = [])
     {
+        $options['id'] = $name;
         Admin::setJs(StyleTypeConst::FILE, $this->getResource('ckeditor.js'));
         $code = <<<EOT
            CKEDITOR.replace('$name',
@@ -327,11 +346,17 @@ EOT;
         return self::textarea($name, $value = null, $options = []);
     }
 
+    /**
+     * @param $name
+     * @param null $value
+     * @param array $options
+     * @return \Illuminate\Support\HtmlString
+     */
     public function ckeditor($name, $value = null, $options = [])
     {
         Admin::setJs(StyleTypeConst::FILE, $this->getResource('ckeditor.js'));
         $code = <<<EOT
-           CKEDITOR.replace('$name')
+           CKEDITOR.replace('$name');
 EOT;
 
         Admin::setJs(StyleTypeConst::CODE, $code);
