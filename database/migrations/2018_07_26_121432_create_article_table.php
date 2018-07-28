@@ -20,7 +20,7 @@ class CreateArticleTable extends Migration
             $table->tinyInteger('tag')->default(0)->comment('标签');
             $table->tinyInteger('status')->default(0)->comment('状态');
             $table->integer('hot')->default(0)->comment('热度');
-            $table->text('content')->default('')->comment('内容');
+            $table->text('content')->comment('内容');
 
             $table->timestamps();
         });
