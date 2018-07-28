@@ -16,7 +16,7 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'insert' },
 		{ name: 'forms' },
 		{ name: 'tools' },
-		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
+		{ name: 'document',    groups: [ 'mode', 'document', 'doctools' ] },
 		{ name: 'others' },
 		'/',
 		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
@@ -25,6 +25,12 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'colors' },
 		{ name: 'about' }
 	];
+
+	config.filebrowserImageUploadUrl = initial.CKEditorUploadImage;  //图片上传
+	config.allowedContent=true;
+
+	config.filebrowserHtml5videoUploadUrl = "/HmCode/Shop/uploads";//上传视频的地址
+	config.extraPlugins = 'html5video';
 
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
