@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Library\Admin\AdminServiceProvider::class,
+        App\Library\Forum\ForumServiceProvider::class,
         App\Library\Admin\Form\HtmlServiceProvider::class,
 
     ],
@@ -229,6 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Admin' => App\Library\Admin\Facades\Admin::class,
+        'Forum' => App\Library\Forum\Facades\Forum::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'Form' => Collective\Html\FormFacade::class,
     ],

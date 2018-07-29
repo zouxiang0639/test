@@ -1,0 +1,132 @@
+.post-contianer{
+	margin: 10px 0 0 0;
+}
+.post-con{
+	background: #f6f6f6;
+	border-radius: 5px;
+	padding-bottom: 30px;
+}
+.post-tit{
+	height: 35px;
+	background: #46586b;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	padding: 0 15px;
+	color: #cccccc;
+	font-size: 14px;
+	line-height: 35px;
+}
+.post-txt{
+	padding: 0 15px;
+}
+.tep1{
+	margin: 20px 0 0 0;
+}
+.tep1 > p{
+	float: left;
+	margin-right: 30px;
+	font-size: 14px;
+	color: #4b4b4b;
+	line-height: 28px;
+}
+.tep1 > p select{
+	cursor: pointer;
+	width: 110px;
+	height: 26px;
+	border: 1px solid #1a3148;
+}
+.tep1 > p.ck{
+	cursor: pointer;
+}
+.tep1 > p .check{
+	width: 16px;
+	height: 16px;
+	border: 1px solid #1a3148;
+	vertical-align: middle;
+	margin: -2px 5px 0 0;
+	background: #fff;
+}
+.tep2{
+	margin: 20px 0 0 0;
+}
+.tep2 input{
+	width: 790px;
+	padding: 0 15px;
+	height: 38px;
+	font-size: 14px;
+	border: 1px solid #1a3148;
+}
+.tep3 .link{
+	padding: 12px 0;
+}
+.tep3 .link a{
+	float: left;
+	margin: 0 12px;
+	height: 23px;
+	background: url(../img/post-icons.png) no-repeat;
+}
+.tep3 .link a.a-1{
+	width: 14px;
+}
+.tep3 .link a.a-2{
+	width: 21px;
+	background-position: -30px 0;
+}
+.tep3 .link a.a-3{
+	width: 17px;
+	background-position: -66px 0;
+}
+.tep3 .link a.a-4{
+	width: 14px;
+	background-position: -97px 0;
+}
+.tep3 .link a.a-5{
+	width: 22px;
+	background-position: -129px 0;
+}
+.tep3 .link a.a-6{
+	width: 23px;
+	background-position: -169px 0;
+}
+.tep3 .link a.a-7{
+	width: 21px;
+	background-position: -209px 0;
+}
+.tep3 .area textarea{
+	width: 800px;
+	height: 618px;
+	border: 1px solid #1a3148;
+	resize: none;
+	padding: 10px;
+}
+.tep3 .text{
+	margin: 7px 0 0 0;
+}
+.tep3 .text input{
+	width: 790px;
+	padding: 0 15px;
+	height: 38px;
+	font-size: 14px;
+	border: 1px solid #1a3148;
+}
+.tep4{
+	padding: 15px 0;
+	text-align: center;
+}
+.tep4 > a{
+	display: inline-block;
+	margin: 0 8px;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 14px;
+}
+.tep4 > a.post-btn{
+	background: #479fed;
+}
+.tep4 > a.cancel-btn{
+	background: #999999;
+}

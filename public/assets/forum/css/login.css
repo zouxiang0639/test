@@ -1,0 +1,177 @@
+.fixed{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background:rgba(0, 0, 0, 0.4);
+	filter:alpha(opacity=60);  /*设置透明度为60%*/
+    z-index: 9;
+}
+.com-box{
+	position: absolute;
+	z-index: 99;
+	left: 50%;
+	margin-left: -214px;
+	top: 20%;
+	width: 428px;
+	background: #fff;
+	padding: 0 0 20px 0;
+	box-shadow: 0 0 3px rgba(0,0,0,0.5);
+	border-radius: 5px;
+}
+.com-box .top{
+	height: 32px;
+	line-height: 32px;
+	overflow: hidden;
+	position: relative;
+}
+.com-box .top .tit{
+	position: absolute;
+	left: 5px;
+	color: #479fed;
+	font-size: 24px;
+}
+.com-box .top .close{
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	width: 24px;
+	height: 23px;
+	background: url(../img/close-icon.png) no-repeat;
+	transition:all .5s;
+	-moz-transition:all .5s;
+	-ms-transition:all .5s;
+	-o-transition:all .5s;
+	-webkit-transition:all .5s;
+}
+.com-box .top .close:hover{
+	transform:rotate(180deg);
+	-moz-transform:rotate(180deg);
+	-ms-transform:rotate(180deg);
+	-o-transform:rotate(180deg);
+	-webkit-transform:rotate(180deg)
+}
+.com-box .center{
+	width: 354px;
+	margin: 0 auto;
+}
+.txt-input{
+	margin: 15px 0 0 0;
+}
+.txt-input input{
+	height: 38px;
+	width: 354px;
+	border-bottom: 1px solid #479fed;
+	text-align: center;
+	font-size: 24px;
+}
+.txt-input > .spel{
+	height: 38px;
+	width: 354px;
+	margin: 15px 0 0 0;
+	position: relative;
+}
+.txt-input > .spel .jc{
+	position: absolute;
+	right: 0;
+	bottom: 5px;
+	width: 66px;
+	height: 18px;
+	color: #fff;
+	line-height: 18px;
+	border-radius: 4px;
+	background: #459fed;
+	text-align: center;
+	font-size: 14px;
+}
+.txt-opt{
+	margin: 5px 0 0 0;
+}
+.txt-opt p{
+	line-height: 24px;
+	color: #999999;
+	font-size: 14px;
+}
+.txt-opt p a{
+	color: #999;
+}
+.txt-opt p.rt{
+	cursor: pointer;
+}
+.txt-opt p .check{
+	vertical-align: middle;
+	margin: -2px 5px 0 0;
+}
+.dl-con{
+	margin: 15px 0 0 0;
+}
+.dl-con .login-btn{
+	display: block;
+	margin: 0 auto;
+	width: 122px;
+	height: 40px;
+	background: #219d98;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 18px;
+	line-height: 40px;
+	text-align: center;
+}
+.other-dl{
+	margin: 70px 0 0 0;
+	color: #479fed;
+	font-size: 14px;
+}
+.other-dl a{
+	display: inline-block;
+	vertical-align: middle;
+	margin: -3px 0 0 35px;
+	width: 41px;
+	height: 41px;
+	background: url(../img/login-icons.png) no-repeat;
+}
+.other-dl a.qq{
+	background-position: 0 0;
+}
+.other-dl a.wb{
+	background-position: -75px 0;
+}
+.agree{
+	text-align: center;
+	line-height: 24px;
+	font-size: 14px;
+	color: #999999;
+}
+.agree .check{
+	vertical-align: middle;
+	margin: -2px 5px 0 0;
+}
+.agree .agree-link{
+	color: #479fed;
+	text-decoration: underline;
+}
+.res-con{
+	margin: 30px 0 20px 0;
+}
+.res-con .register-btn{
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 123px;
+	width: 122px;
+	height: 40px;
+	background: #219d98;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 18px;
+	line-height: 40px;
+	text-align: center;
+}
+.res-con .login-link{
+	display: inline-block;
+	vertical-align: middle;
+	color: #999999;
+	font-size: 14px;
+	line-height: 40px;
+	margin-left: 5px;
+}

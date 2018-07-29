@@ -1,0 +1,562 @@
+.new-container {
+    padding-top: 0;
+}
+.com-info{
+	margin-top: 10px;
+}
+.info{
+	background: #31465b;
+	height: 90px;
+	overflow: hidden;
+	position: relative;
+}
+.info .step1{
+	position: absolute;
+	left: 0;
+	width: 90px;
+}
+.info .step1 a{
+	margin: 67px 0 0 10px;
+	display: inline-block;
+	background: url(../img/my-icons.png) no-repeat;
+}
+.info .step1 a.edit{
+	background-position: 0 0;
+	width: 15px;
+	height: 15px;
+}
+.info .step1 a.right{
+	width: 18px;
+	height: 15px;
+	background-position: -26px 0;
+}
+.info .step2{
+	position: absolute;
+	left: 90px;
+	width: 200px;
+}
+.info .step2 div{
+	color: #fff;
+	font-size: 24px;
+	height: 90px;
+	display: table;
+}
+.info .step2 div p{
+	display: table-cell;
+	vertical-align: middle;
+}
+.info .step3{
+	position: absolute;
+	left: 290px;
+	width: 180px;
+}
+.info .step3 > div{
+	display: table;
+	height: 90px;
+}
+.info .step3 > div > div{
+	display: table-cell;
+	vertical-align: middle;
+	color: #fff;
+}
+.info .step3 > div > div span{
+	line-height: 20px;
+}
+.info .step3 > div > div span i{
+	color: #f0f182;
+}
+.info .step4{
+	position: absolute;
+	left: 475px;
+	width: 350px;
+}
+.info .step4 li{
+	float: left;
+	width: 70px;
+	text-align: center;
+}
+.info .step4 li a{
+	display: block;
+	font-size: 14px;
+	color: #fff;
+	margin: 20px 0 0 0;
+}
+.info .step4 li a span{
+	display: block;
+	line-height: 18px;
+}
+.info .step4 li a span.num{
+	margin: 10px 0 0 0;
+	color: #e15844;
+}
+.info .step4 li a i{
+	display: block;
+	margin: 4px auto 0 auto;
+	width: 27px;
+	height: 18px;
+	background: url(../img/my-icons.png) no-repeat;
+	background-position: -56px 0;
+}
+.info-continer{
+	margin: 10px 0 0 0;
+}
+.info-tab{
+	background: #fff;
+	padding-bottom: 20px;
+}
+.tab-tit{
+	height: 26px;
+	background: #31465b;
+	position: relative;
+}
+.tab-tit li{
+	float: left;
+	height: 26px;
+	width: 252px;
+	border-right: 1px solid #607080;
+	text-align: center;
+	color: #fff;
+	line-height: 26px;
+	cursor: pointer;
+}
+.tab-tit li.on{
+	background: #fff;
+	color: #000;
+}
+.tab-tit li span{
+	display: inline-block;
+	vertical-align: middle;
+	margin:-3px 0 0 5px;
+	color: #e15844;
+}
+.tab-tit li:last-child{
+	border-right: 0;
+}
+.tab-tit .read{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 89px;
+	height: 26px;
+	line-height: 26px;
+	text-align: center;
+	color: #fff;
+	background: #219d98;
+}
+.tab-con{
+	padding: 25px;
+}
+.tab-con li{
+	width: 730px;
+	height: 30px;
+	line-height: 30px;
+	padding: 2px 0;
+	position: relative;
+	color: #999999;
+	font-size: 14px;
+}
+.tab-con li.new{
+	color: #000;
+}
+.tab-con li span{
+	position: absolute;
+}
+.tab-con li span.time{
+	width: 70px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.tab-con li span.type{
+	left: 72px;
+	width: 95px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.tab-con li span.con{
+	left: 175px;
+	width: 535px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.new-table-tie{
+	margin-bottom: 1px;
+}
+.new-container-tie{
+	padding-bottom: 0;
+	margin-bottom: 10px;
+	border-radius: 0;
+}
+.com-tie li{
+	background: #fff;
+	padding: 6px 20px 12px 30px;
+}
+.com-tie li.color-1{
+	background: #59bab6;
+}
+.com-tie li .top{
+	height: 24px;
+	line-height: 24px;
+	margin-bottom: 12px;
+	position: relative;
+}
+.com-tie li .top .left{
+	position: absolute;
+	left: 0;
+	width: 450px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: #666666;
+}
+.com-tie li .top .left b{
+	font-weight: bold;
+}
+.com-tie li .top .right{
+	position: absolute;
+	right: 0;
+	text-align: right;
+}
+.com-tie li .top .right a{
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 15px;
+	color: #cc6633;
+	font-size: 14px;
+}
+.com-tie li .top .right a i{
+	display: inline-block;
+	vertical-align: middle;
+	margin: -3px 5px 0 0;
+	background: url(../img/tie-icons.png) no-repeat;
+}
+.com-tie li .top .right a.delete i{
+	width:14px;
+	height: 14px;
+	background-position: 0 0;
+}
+.com-tie li .top .right a.review i{
+	width: 4px;
+	height: 14px;
+	background-position: -83px 0;
+}
+.com-tie li .top .right a.inf i{
+	width: 16px;
+	height: 16px;
+	background-position: -100px 0;
+}
+.com-tie li .top .right a.praise i{
+	width: 15px;
+	height: 14px;
+	background-position: -24px 0;
+}
+.com-tie li .top .right a.neg i{
+	width: 15px;
+	height: 14px;
+	background-position: -53px 0;
+}
+.com-tie li .con p{
+	line-height: 24px;
+	font-size: 14px;
+}
+.inner-info{
+	padding: 6px 20px;
+	color: #999999;
+}
+.inner-info p{
+	line-height:20px;
+}
+.inner-info p span{
+	padding-right: 20px;
+}
+.art-con{
+	background: #f6f6f6;
+	padding: 8px 17px;
+	border-radius: 5px;
+}
+.art-con .tit{
+	border: 1px solid #1a3148;
+	height: 38px;
+	line-height: 38px;
+	width: 787px;
+	padding: 0 15px;
+	font-size: 14px;
+	background: #fff;
+}
+.art-con .con-in{
+	padding: 30px 20px;
+}
+.art-con .source{
+	color: #999999;
+	line-height: 24px;
+}
+.art-con .link{
+	margin: 10px 0 0 0;
+	line-height: 24px;
+}
+.art-con .link .address{
+	color: #479fed;
+}
+.art-con .link .address a{
+	color: #999999;
+}
+.art-con .link .address a i{
+	display: inline-block;
+	vertical-align: middle;
+	margin: -2px 5px 0 0;
+	width: 13px;
+	height: 15px;
+	background: url(../img/tie-icons.png) no-repeat;
+	background-position: -271px 0;
+}
+.art-con .link .share{
+	width: 420px;
+	text-align: right;
+}
+.art-con .link .share > a,.art-con .link .share > p{
+	display: inline-block;
+	vertical-align: middle;
+}
+.art-con .link .share > a{
+	color: #000;
+	margin-left: 20px;
+}
+.art-con .link .share > a i{
+	display: inline-block;
+	vertical-align: middle;
+	margin: -2px 4px 0 0;
+	background: url(../img/tie-icons.png) no-repeat;
+}
+.art-con .link .share > a.col i{
+	width: 11px;
+	height: 8px;
+	background-position: -147px -35px;
+}
+.art-con .link .share > a.pink i{
+	width: 10px;
+	height: 11px;
+	background-position: -169px -35px;
+}
+.art-con .link .share > p{
+	margin-left: 20px;
+	color: #000;
+}
+.art-con .link .share > p a{
+	display: inline-block;
+	vertical-align: middle;
+	margin: -2px 3px 0 3px;
+	width: 26px;
+	height: 26px;
+	background: url(../img/tie-icons.png) no-repeat;
+}
+.art-con .link .share > p a.sm1{
+	background-position: -189px -35px;
+}
+.art-con .link .share > p a.sm2{
+	background-position: -226px -35px;
+}
+.art-con .link .share > p a.sm3{
+	background-position: -258px -35px;
+}
+.art-con .link .share > p a.sm4{
+	background-position: -189px -66px;
+}
+.art-con .link .share > p a.sm5{
+	background-position: -226px -66px;
+}
+.fabulous-con{
+	height: 140px;
+	text-align: center;
+	position: relative;
+}
+.fabulous-con .are{
+	position: absolute;
+	right: 20px;
+	color: #da5953;
+	top: 12px;
+}
+.fabulous-con .good,.fabulous-con .bad{
+	display: inline-block;
+	margin: 30px 30px 0 30px;
+}
+.fabulous-con .good i{
+	width: 48px;
+	height: 48px;
+	display: block;
+	background: url(../img/tie-icons.png) no-repeat;
+	background-position: 0 -32px;
+}
+.fabulous-con .bad i{
+	width: 48px;
+	height: 48px;
+	display: block;
+	background: url(../img/tie-icons.png) no-repeat;
+	background-position: -74px -31px;
+}
+.fabulous-con .good span,.fabulous-con .bad span{
+	display:block;
+	margin: 10px 0 0 0;
+	font-size: 18px;
+}
+.fabulous-con .good span{
+	color: #e15844;
+}
+.fabulous-con .bad span{
+	color: #999999;
+}
+.new-inner-tit{
+	height: 36px;
+	line-height: 36px;
+	text-align: center;
+	background: #3b4f62;
+	color: #cccccc;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+}
+.new-inner .com-tie li{
+	border-bottom: 1px solid #1a3148;
+}
+.com-tie li.color-2{
+	background: #c6f6cd;
+}
+.new-inner{
+	background: none;
+	padding-bottom: 0;
+}
+.new-inner .com-tie li{
+	position: relative;
+}
+.new-inner .com-tie li .other{
+	position: absolute;
+	bottom: 5px;
+	right: 20px;
+	color: #666666;
+}
+.new-inner .com-tie li .other i{
+	display: inline-block;
+	vertical-align: middle;
+	margin: -2px 0 0 5px;
+	width: 10px;
+	height: 8px;
+	background: url(../img/tie-icons.png) no-repeat;
+	background-position: -184px 0;
+}
+.new-inner .com-tie li.share{
+	padding: 0;
+	background: none;
+}
+.new-inner .com-tie li .sh-l{
+	width: 56px;
+	position: relative;
+}
+.new-inner .com-tie li .sh-l i{
+	position: absolute;
+	top: 17px;
+	left: 22px;
+	width: 18px;
+	height: 13px;
+	background: url(../img/tie-icons.png) no-repeat;
+	background-position: -206px 0;
+}
+.new-inner .com-tie li .sh-r{
+	width: 754px;
+	padding: 6px 20px 12px 20px;
+}
+.new-inner .com-tie li.color-3 .sh-r{
+	background: #f9f9f9;
+}
+.new-inner .com-tie li.color-4 .sh-r{
+	background: #fbe4e0;
+}
+.com-tie li.color-5{
+	background: #f3eeb5;
+}
+.page{
+	background: #f9f9f9;
+}
+.edit-container{
+	background: #f9f9f9;
+	padding-bottom:20px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+.edit-container .con{
+	width: 813px;
+	height: 105px;
+	border: 1px solid #1a3148;
+	margin: 0 auto;
+	position: relative;
+}
+.edit-container .con .tea{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 761px;
+	height: 105px;
+	overflow: hidden;
+}
+.edit-container .con .tea textarea{
+	width: 100%;
+	height: 100%;
+	resize: none;
+	padding: 10px;
+}
+.edit-container .con .opt{
+	position: absolute;
+	right: 0;
+	width: 52px;
+	height: 105px;
+	background: #479fed;
+	border-left: 1px solid #1a3148;
+}
+.edit-container .con .opt .img{
+	height: 52px;
+	display: block;
+	text-align: center;
+	width: 52px;
+	line-height: 52px;
+	overflow: hidden;
+	border-bottom:1px solid #1a3148;
+}
+.edit-container .con .opt .img i{
+	display: inline-block;
+	vertical-align: middle;
+	width: 24px;
+	height: 25px;
+	background: url(../img/tie-icons.png) no-repeat;
+	background-position: -238px 0;
+}
+.edit-container .con .opt .txt{
+	height: 52px;
+	line-height: 52px;
+	text-align: center;
+	color: #ffffff;
+	display: block;
+}
+.new-list{
+	background: #fff;
+	padding: 12px 0;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+.new-list ul{
+	width: 827px;
+	margin: 0 auto;
+}
+
+.new-list li{
+	float: left;
+	margin: 0 7px;
+	width: 89px;
+	height: 89px;
+	overflow: hidden;
+	overflow: hidden;
+}
+.new-list li a{
+	display: block;
+}
+.new-list li  img{
+	max-width: 100%;
+}

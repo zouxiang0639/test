@@ -12,7 +12,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          $this->call([
-             AdminAuthSeeder::class
+             AdminAuthSeeder::class,
+             ForumTagsSeeder::class
          ]);
     }
 }
