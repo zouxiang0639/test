@@ -16,12 +16,16 @@ Route::group([
 
     Route::group(['prefix'=>'member'], function(){
         Route::get('', ['uses' => "MemberController@index", 'as' => 'f.member.index']);
-        Route::get('login', ['uses' => "MemberController@login", 'as' => 'f.member.login']);
-        Route::put('login/put', ['uses' => "MemberController@index", 'as' => 'f.member.login.put']);
-        Route::get('register', ['uses' => "MemberController@register", 'as' => 'f.member.register']);
+
         Route::get('logout', ['uses' => "MemberController@create", 'as' => 'f.member.logout']);
         Route::get('info', ['uses' => "MemberController@info", 'as' => 'f.member.info']);
         Route::get('reply', ['uses' => "MemberController@reply", 'as' => 'f.member.reply']);
+    });
+    Route::group(['prefix'=>'auth'], function(){
+        Route::get('login', ['uses' => "AuthController@login", 'as' => 'f.auth.login']);
+        Route::put('login/put', ['uses' => "AuthController@index", 'as' => 'f.auth.login.put']);
+        Route::get('register', ['uses' => "AuthController@register", 'as' => 'f.auth.register']);
+        Route::put('register/put', ['uses' => "AuthController@registerPut", 'as' => 'f.auth.register.put']);
     });
 
 });

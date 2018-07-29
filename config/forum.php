@@ -15,7 +15,7 @@ return [
         'providers' => [
             'forum' => [
                 'driver' => 'eloquent',
-                'model'  => \App\Admin\Bls\Auth\Model\AdministratorModel::class,
+                'model'  => \App\Forum\Bls\Users\Model\UsersModel::class,
             ],
         ],
     ],

@@ -8,8 +8,8 @@
                 <!--登陆后的状态-->
                 <!--<span class="news"><i></i>2</span>-->
                 <!--<a class="info" href="javascript:void(0)">江南小雨</a>-->
-                <a class="register" href="{!! route('f.member.register') !!}">注册</a>
-                <a class="login" href="{!! route('f.member.login') !!}">登陆</a>
+                <a class="register" href="{!! route('f.auth.register') !!}">注册</a>
+                <a class="login" href="{!! route('f.auth.login') !!}">登陆</a>
             </div>
             <div class="search clearfix">
                 <input class="s-txt" type="text" placeholder="" />
