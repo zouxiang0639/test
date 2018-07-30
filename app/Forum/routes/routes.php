@@ -9,9 +9,10 @@ Route::group([
 
     Route::get('/', ['uses' => "HomeController@index", 'as' => 'f.home']);
     Route::group(['prefix'=>'article'], function(){
-        Route::get('list/{id}', ['uses' => "ArticleController@index", 'as' => 'f.article.list']);
+        Route::get('list/{tag}', ['uses' => "ArticleController@index", 'as' => 'f.article.list']);
         Route::get('create', ['uses' => "ArticleController@create", 'as' => 'f.article.create']);
-        Route::get('info', ['uses' => "ArticleController@info", 'as' => 'f.article.info']);
+        Route::put('create/put', ['uses' => "ArticleController@createPut", 'as' => 'f.article.create.put']);
+        Route::get('info/{id}', ['uses' => "ArticleController@info", 'as' => 'f.article.info']);
     });
 
     Route::group(['prefix'=>'member'], function(){

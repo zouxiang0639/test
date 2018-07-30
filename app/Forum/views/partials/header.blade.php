@@ -1,6 +1,6 @@
 <div class="com-top">
     <div class="wm-850 clearfix">
-        <a class="logo" href="javascript:void(0)">
+        <a class="logo" href="{!! route('f.home') !!}">
             <img src="{!! assets_path("/forum/img/logo.png") !!}" alt="" title="" />
         </a>
         <div class="right">
@@ -30,14 +30,14 @@
     </div>
 </div>
 <?php
-    $tags =  Forum::getTags();
+    $tags =  Forum::tags()->getTagsList();
 ?>
 <div class="com-nav">
     <div class="wm-850">
         <div class="nav clearfix">
             <div class="nav-list fl clearfix">
                 @foreach($tags as $value)
-                    <a class="{{ $value['icon'] }}" href="{!! route('f.article.list', ['id' => $value['id']]) !!}" title="{{ $value['tag_name'] }}" ></a>
+                    <a class="{{ $value['icon'] }}" href="{!! route('f.article.list', ['tag' => $value['id']]) !!}" title="{{ $value['tag_name'] }}" ></a>
                 @endforeach
             </div>
             <a class="post fr" href="{!! route('f.article.create') !!}"><i></i>发帖</a>

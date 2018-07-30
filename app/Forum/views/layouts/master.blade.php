@@ -24,5 +24,6 @@
     @include('forum::partials.auth')
     <script src="{{  assets_path("/forum/js/common.js") }}"></script>
     <script src="{{  assets_path("/lib/sweetalert/dist/sweetalert.min.js") }}"></script>
+    @yield('script')
 </body>
 </html>

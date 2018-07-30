@@ -56,8 +56,16 @@
 	font-size: 14px;
 	border: 1px solid #1a3148;
 }
+.tep3 {
+
+	margin: 20px 30px 0px 0px;
+}
 .tep3 .link{
 	padding: 12px 0;
+}
+.tep3 .area{
+	border: 1px solid #1a3148;
+	min-height: 308px;
 }
 .tep3 .link a{
 	float: left;
@@ -94,7 +102,7 @@
 }
 .tep3 .area textarea{
 	width: 800px;
-	height: 618px;
+	height: 440px;
 	border: 1px solid #1a3148;
 	resize: none;
 	padding: 10px;
