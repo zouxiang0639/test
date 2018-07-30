@@ -15,7 +15,7 @@ html {
 	-webkit-text-size-adjust: none;
 	font-size: 12px;
 	font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
-	background: #1a3148;
+	background: #1a3148; !important
 }
 
 body,
@@ -221,7 +221,7 @@ acronym {
 }
 .com-top .search{
 	width: 258px;
-	height: 28px;
+	height: 30px;
 	border: 1px solid #2c56a5;
 	background: #31465b;
 }
@@ -257,6 +257,7 @@ acronym {
 	background: #2c56a5;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
+	height: -moz-min-content;
 }
 .nav-list{
 	margin-left: 10px;

@@ -23,7 +23,7 @@ Route::group([
     });
     Route::group(['prefix'=>'auth'], function(){
         Route::get('login', ['uses' => "AuthController@login", 'as' => 'f.auth.login']);
-        Route::put('login/put', ['uses' => "AuthController@index", 'as' => 'f.auth.login.put']);
+        Route::put('login/put', ['uses' => "AuthController@loginPut", 'as' => 'f.auth.login.put']);
         Route::get('register', ['uses' => "AuthController@register", 'as' => 'f.auth.register']);
         Route::put('register/put', ['uses' => "AuthController@registerPut", 'as' => 'f.auth.register.put']);
     });

@@ -57,7 +57,7 @@
 	margin: 0 auto;
 }
 .txt-input{
-	margin: 15px 0 0 0;
+	margin: 15px 0 0 16px;
 }
 .txt-input input{
 	height: 38px;
@@ -104,6 +104,7 @@
 	margin: -2px 5px 0 0;
 }
 .dl-con{
+	text-align: center;
 	margin: 15px 0 0 0;
 }
 .dl-con .login-btn{
@@ -119,7 +120,7 @@
 	text-align: center;
 }
 .other-dl{
-	margin: 70px 0 0 0;
+	margin: 30px 0 0 0;
 	color: #479fed;
 	font-size: 14px;
 }
@@ -152,7 +153,8 @@
 	text-decoration: underline;
 }
 .res-con{
-	margin: 30px 0 20px 0;
+	margin: 6px 0 11px 0;
+	text-align: right;
 }
 .res-con .register-btn{
 	display: inline-block;
@@ -174,4 +176,8 @@
 	font-size: 14px;
 	line-height: 40px;
 	margin-left: 5px;
+	padding-right: 31px;
+}
+.blue{
+	color: #479fed;
 }

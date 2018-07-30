@@ -6,10 +6,14 @@
         <div class="right">
             <div class="login-state">
                 <!--登陆后的状态-->
-                <!--<span class="news"><i></i>2</span>-->
-                <!--<a class="info" href="javascript:void(0)">江南小雨</a>-->
-                <a class="register" href="{!! route('f.auth.register') !!}">注册</a>
-                <a class="login" href="{!! route('f.auth.login') !!}">登陆</a>
+                @if(Auth::guard('forum')->check())
+                    <span class="news"><i></i>2</span>
+                    <a  href="{!! route('f.member.index') !!}">{!! Auth::guard('forum')->user()->name !!}</a>
+                @else
+                    <a  class="register" data-toggle="modal" data-target="#registerModal" href="javascript:void(0)">注册</a>
+                    <a  class="login" data-toggle="modal" data-target="#loginModal" href="javascript:void(0)">登陆</a>
+                @endif
+
             </div>
             <div class="search clearfix">
                 <input class="s-txt" type="text" placeholder="" />

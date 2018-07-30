@@ -13,7 +13,7 @@ class UsersBls
         $model = new UsersModel();
         $model->name = $request->name;
         $model->email = $request->email;
-        $model->password = $request->password;
+        $model->password = bcrypt($request->password);;
 
         if($model->save()) {
             return $model;
