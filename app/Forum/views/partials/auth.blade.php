@@ -72,8 +72,9 @@
 
                     </div>
                     <div class="other-dl">
-                        其他登录<a class="qq" href="javascript:void(0)"></a>
-                        <a class="wb" href="javascript:void(0)"></a>
+                        其他登录
+                        <a class="qq" href="{!! route('f.auth.qq') !!}"></a>
+                        <a class="wb" href="{!! route('f.auth.weibo') !!}"></a>
                     </div>
                 </div>
             </div>

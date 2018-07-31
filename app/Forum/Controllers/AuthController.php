@@ -9,6 +9,7 @@ use App\Forum\Bls\Users\UsersBls;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
 use Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -23,9 +24,13 @@ class AuthController extends Controller
         $credentials = $request->only(['email', 'password']);
 
         if (Auth::guard('forum')->attempt($credentials)) {
+            $user = Auth::guard('forum')->user();
+            $user->login_num ++;
+            $user->save();
+
             return (new JsonResponse())->success('登录成功');
         } else {
-            throw new LogicException(1010002, '邮箱或密码错误');
+            throw new LogicException(1010002, [['邮箱或密码错误']]);
         }
     }
 
@@ -43,9 +48,19 @@ class AuthController extends Controller
 
             return (new JsonResponse())->success('注册成功');
         } else {
-            throw new LogicException(1010002, '注册失败');
+            throw new LogicException(1010002, [['注册失败']]);
         }
 
+    }
+
+    public function qq()
+    {
+        return Socialite::with('qq')->redirect();
+    }
+
+    public function weibo()
+    {
+        return Socialite::with('weibo')->redirect();
     }
 
 

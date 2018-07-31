@@ -30,6 +30,7 @@ class ArticleBls
         $model->is_hide = $request->is_hide ? WhetherConst::YES : WhetherConst::NO;
         $model->contents = $request->contents;
         $model->issuer = Auth::guard('forum')->id();
+        $model->ip =  $request->getClientIp();
         return $model->save();
     }
 

@@ -180,7 +180,7 @@ return [
         App\Library\Admin\AdminServiceProvider::class,
         App\Library\Forum\ForumServiceProvider::class,
         App\Library\Admin\Form\HtmlServiceProvider::class,
-
+        SocialiteProviders\Manager\ServiceProvider::class, // 添加
     ],
 
     /*
@@ -233,6 +233,7 @@ return [
         'Forum' => App\Library\Forum\Facades\Forum::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'Form' => Collective\Html\FormFacade::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

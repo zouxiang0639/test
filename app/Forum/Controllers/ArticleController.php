@@ -7,7 +7,6 @@ use App\Forum\Bls\Article\ArticleBls;
 use App\Forum\Bls\Article\Requests\ArticleCreateRequest;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
-use Forum;
 
 class ArticleController extends Controller
 {
@@ -38,6 +37,10 @@ class ArticleController extends Controller
         $model = ArticleBls::find($id);
 
         $this->isEmpty($model);
+        $this->isEmpty($model->issuers);
+        $model->browse ++;
+        $model->save();
+
         return view('forum::article.info', [
             'info' => $model
         ]);

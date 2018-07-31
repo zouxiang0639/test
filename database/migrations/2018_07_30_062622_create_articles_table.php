@@ -22,6 +22,12 @@ class CreateArticlesTable extends Migration
             $table->tinyInteger('is_hide')->default(0)->comment('是否匿名 1是 2否 详细WhetherConst');
             $table->text('contents')->comment('内容');
             $table->integer('issuer')->comment('发布人');
+            $table->string('ip')->comment('IP地址');
+            $table->integer('recommend')->default(0)->comment('推荐');
+            $table->integer('browse')->default(0)->comment('浏览');
+            $table->integer('reply')->default(0)->comment('回复');
+            $table->integer('praise')->default(0)->comment('赞');
+            $table->integer('weak')->default(0)->comment('弱');
             $table->index(['id', 'tags', 'issuer']);
             $table->timestamps();
         });

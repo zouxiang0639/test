@@ -9,15 +9,18 @@
         <div class="wm-850">
             <div class="inner-info">
                 <p>帖子ID : {!! $info->id !!}</p>
-                <p>发帖人 : 就近法子★ (注册时间:2013-10-17 登陆次数:1001)</p>
                 <p>
-                    <span>推荐 : 63</span>
-                    <span>浏览 : 10019</span>
-                    <span>回复: 25</span>
+                    发帖人 : {{ $info->issuers->name  }}
+                    (注册时间:{{ mb_substr($info->issuers->created_at, 0, 10) }} 登陆次数:{{ $info->issuers->login_num }})
+                </p>
+                <p>
+                    <span>推荐 : {{ $info->recommend }}</span>
+                    <span>浏览 : {{ $info->browse }}</span>
+                    <span>回复: {{ $info->reply }}</span>
                 </p>
                 <p>
                     <span>发帖时间 : {{ $info->created_at }}</span>
-                    <span>IP : 118.220.***.248</span>
+                    <span>IP : {{ $info->ip }}</span>
                 </p>
             </div>
         </div>
@@ -28,23 +31,7 @@
             <div class="art-con">
                 <p class="tit">{{ $info->title }}</p>
                 <div class="con-in">
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">1、</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">三个小孩在一起聊天说什么东西最毒！</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">小孩甲：“蚊子最毒，我哥的手被蚊子叮了一下，又红又痒。”</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">小孩乙：“黄蜂最毒，我哥哥被黄蜂蛰了一下脸，现在还是又肿又痛。”</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">小孩丙想了半天，说：“我也不知道什么东西扎了我姐，她肚子肿的又圆又大！”</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">2、</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">妻子外出讨债，几个月后却空手而归。</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">老公生气地说：“你真无能！”</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">妻子不服地说：“我虽然没有要到钱，但老板的孩子被我当了人质！”</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">老公大喜，问道：“人呢？” 妻子一拍肚子，说：“关在里面了！”</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">3、</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">同桌把QQ名改为“你爹临死前”后加了我们班主任。</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">于是班主任的QQ就经常被提示：</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">你爹临死前请求加您为好友。</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">你爹临死前邀请您玩抢车位。</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">你爹临死前赠送了你QQ秀。</p>
-                    <p style="font-size: 14px;color: #000; line-height: 36px;">你爹临死前偷了您的菜。</p>
+                   {!! $info->contents !!}
 
                 </div>
                 <p class="source">来源：网易</p>

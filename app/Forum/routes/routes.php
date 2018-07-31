@@ -23,6 +23,10 @@ Route::group([
         Route::get('reply', ['uses' => "MemberController@reply", 'as' => 'f.member.reply']);
     });
     Route::group(['prefix'=>'auth'], function(){
+        Route::get('qq', ['uses' => "AuthController@qq", 'as' => 'f.auth.qq']);
+        Route::get('qq/login', ['uses' => "AuthController@qqLogin", 'as' => 'f.auth.qq.login']);
+        Route::get('weibo', ['uses' => "AuthController@weibo", 'as' => 'f.auth.weibo']);
+        Route::get('weibo/login', ['uses' => "AuthController@qqLogin", 'as' => 'f.auth.weibo.login']);
         Route::get('login', ['uses' => "AuthController@login", 'as' => 'f.auth.login']);
         Route::put('login/put', ['uses' => "AuthController@loginPut", 'as' => 'f.auth.login.put']);
         Route::get('register', ['uses' => "AuthController@register", 'as' => 'f.auth.register']);
