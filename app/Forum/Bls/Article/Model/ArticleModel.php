@@ -7,13 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class ArticleModel extends Model
 {
-
     /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'articles';
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'thumbs_up' => 'array',
+        'thumbs_down' => 'array',
+    ];
 
     /**
      * 发布人

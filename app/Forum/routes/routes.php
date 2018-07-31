@@ -13,11 +13,13 @@ Route::group([
         Route::get('create', ['uses' => "ArticleController@create", 'as' => 'f.article.create']);
         Route::put('create/put', ['uses' => "ArticleController@createPut", 'as' => 'f.article.create.put']);
         Route::get('info/{id}', ['uses' => "ArticleController@info", 'as' => 'f.article.info']);
+
+        Route::put('thumbsup/{id}', ['uses' => "ArticleController@thumbsUp", 'as' => 'f.article.thumbsUp']);
+        Route::put('thumbsdown/{id}', ['uses' => "ArticleController@thumbsDown", 'as' => 'f.article.thumbsDown']);
     });
 
     Route::group(['prefix'=>'member'], function(){
         Route::get('', ['uses' => "MemberController@index", 'as' => 'f.member.index']);
-
         Route::get('logout', ['uses' => "MemberController@create", 'as' => 'f.member.logout']);
         Route::get('info', ['uses' => "MemberController@info", 'as' => 'f.member.info']);
         Route::get('reply', ['uses' => "MemberController@reply", 'as' => 'f.member.reply']);

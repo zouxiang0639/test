@@ -7,6 +7,7 @@ use App\Forum\Bls\Article\ArticleBls;
 use App\Forum\Bls\Article\Requests\ArticleCreateRequest;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
+use Auth;
 
 class ArticleController extends Controller
 {
@@ -42,7 +43,38 @@ class ArticleController extends Controller
         $model->save();
 
         return view('forum::article.info', [
-            'info' => $model
+            'info' => $model,
+            'userId' => Auth::guard('forum')->id(),
         ]);
     }
+
+
+    public function thumbsUp($id)
+    {
+        $model = ArticleBls::find($id);
+
+        $this->isEmpty($model);
+
+        if($data = ArticleBls::thumbsUp($model)) {
+            return (new JsonResponse())->success($data['data']);
+        } else {
+            throw new LogicException(1010002);
+        }
+    }
+
+    public function thumbsDown($id)
+    {
+
+        $model = ArticleBls::find($id);
+
+        $this->isEmpty($model);
+
+        if($data = ArticleBls::thumbsDown($model)) {
+            return (new JsonResponse())->success($data['data']);
+        } else {
+            throw new LogicException(1010002);
+        }
+    }
+
+
 }

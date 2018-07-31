@@ -377,35 +377,26 @@
 	color: #da5953;
 	top: 12px;
 }
-.fabulous-con .good,.fabulous-con .bad{
+
+
+.fabulous-con .thumbs-up,.fabulous-con .thumbs-down{
+
 	display: inline-block;
 	margin: 30px 30px 0 30px;
-}
-.fabulous-con .good i{
-	width: 48px;
-	height: 48px;
-	display: block;
-	background: url(../img/tie-icons.png) no-repeat;
-	background-position: 0 -32px;
-}
-.fabulous-con .bad i{
-	width: 48px;
-	height: 48px;
-	display: block;
-	background: url(../img/tie-icons.png) no-repeat;
-	background-position: -74px -31px;
-}
-.fabulous-con .good span,.fabulous-con .bad span{
-	display:block;
-	margin: 10px 0 0 0;
-	font-size: 18px;
-}
-.fabulous-con .good span{
-	color: #e15844;
-}
-.fabulous-con .bad span{
 	color: #999999;
 }
+.fabulous-con .thumbs-up i,.fabulous-con .thumbs-down i{
+	width: 48px;
+	height: 48px;
+	font-size: 50px;
+	display: block;
+	cursor:pointer;
+
+}
+.fabulous-con .default{
+	color: #e15844;
+}
+
 .new-inner-tit{
 	height: 36px;
 	line-height: 36px;

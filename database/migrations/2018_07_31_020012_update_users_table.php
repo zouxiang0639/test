@@ -16,7 +16,7 @@ class UpdateUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->integer('login_num')->default(0)->comment('登录次数');;
             $table->integer('integral')->default(0)->comment('积分');;
-            $table->integer('praise')->default(0)->comment('收到赞数');;
+            $table->integer('thumbs_up')->default(0)->comment('收到赞数');;
         });
     }
 
@@ -28,7 +28,7 @@ class UpdateUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['login_num', 'integral', 'praise']);
+            $table->dropColumn(['login_num', 'integral', 'thumbs_up']);
         });
     }
 }

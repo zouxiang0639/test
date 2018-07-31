@@ -58,8 +58,16 @@
         <div class="wm-850">
             <div class="fabulous-con">
                 <a class="are" href="javascript:void(0)">举报!</a>
-                <a class="good" href="javascript:void(0)"><i></i><span>152</span></a>
-                <a class="bad" href="javascript:void(0)"><i></i><span>20</span></a>
+
+                <p class="thumbs-up thumbs {!! in_array($userId, $info->thumbs_up) ? "default" : "" !!}" data-href="{!! route('f.article.thumbsUp',['id' => $info->id]) !!}" href="javascript:void(0)">
+                    <i class="fa fa-thumbs-o-up"></i>
+                    <span class="num">{!! count($info->thumbs_up) !!}</span>
+                </p>
+
+                <p class=" thumbs-down thumbs {!! in_array($userId, $info->thumbs_down) ? "default" : "" !!}" data-href="{!! route('f.article.thumbsDown',['id' => $info->id]) !!}" href="javascript:void(0)">
+                    <i class="fa fa-thumbs-o-down"></i>
+                    <span class="num">{!! count($info->thumbs_down) !!}</span>
+                </p>
             </div>
         </div>
     </div>
@@ -410,4 +418,59 @@
     </div>
 
     @include('forum::partials.ad')
+@stop
+
+@section('script')
+<script>
+
+
+    var locked = true;
+    /**
+     *  开关状态更新
+     */
+    $(".thumbs").click(function(){
+
+        var numClass = $(this).children(".num");
+        var num = parseInt(numClass.text());
+        var _this = $(this);
+
+        if (! locked) {
+            return false;
+        }
+
+        locked = false;
+
+        $.ajax({
+            url: $(this).attr('data-href'),
+            type: 'POST',
+            data: {
+                "_method": "PUT",
+                "_token": $('meta[name="csrf-token"]').attr('content'),
+            },
+            cache: false,
+            dataType: 'json',
+            success:function(res) {
+                if(res.code != 0) {
+                    swal(res.data, '', 'error');
+                    locked = true;
+                } else {
+
+                    if(res.data == true) {
+                        _this.addClass('default');
+                        numClass.text(num + 1);
+                    } else {
+                        _this.removeClass('default');
+                        numClass.text(num - 1);
+                    }
+                    locked = true;
+                }
+            },
+            error:function () {
+                locked = true;
+            }
+
+        });
+    })
+
+</script>
 @stop

@@ -26,8 +26,8 @@ class CreateArticlesTable extends Migration
             $table->integer('recommend')->default(0)->comment('推荐');
             $table->integer('browse')->default(0)->comment('浏览');
             $table->integer('reply')->default(0)->comment('回复');
-            $table->integer('praise')->default(0)->comment('赞');
-            $table->integer('weak')->default(0)->comment('弱');
+            $table->text('thumbs_up')->comment('赞');
+            $table->text('thumbs_down')->comment('弱');
             $table->index(['id', 'tags', 'issuer']);
             $table->timestamps();
         });
