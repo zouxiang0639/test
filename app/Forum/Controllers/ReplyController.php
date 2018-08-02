@@ -14,7 +14,12 @@ class ReplyController extends Controller
 
     public function store(ReplyCreateRequest $request)
     {
-        ReplyBls::storeReply($request);
+        if (ReplyBls::storeReply($request)) {
+            return (new JsonResponse())->success('回复成功');
+        } else {
+            throw new LogicException(1010002, '回复失败');
+        }
+
     }
 
     public function show($article_id, Request $request)
@@ -40,6 +45,20 @@ class ReplyController extends Controller
         }
 
     }
+
+    public function destroy($id)
+    {
+        $model = ReplyBls::find($id);
+
+        $this->isEmpty($model);
+        if( ReplyBls::destroyReply($model)){
+            return (new JsonResponse())->success('删除成功');
+        } else {
+            throw new LogicException(1010002, '删除成功');
+        }
+
+    }
+
     public function thumbsUp($id)
     {
         $model = ReplyBls::find($id);

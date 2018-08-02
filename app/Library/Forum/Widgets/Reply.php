@@ -91,9 +91,15 @@ class Reply implements Renderable
         $model->thumbsUpCheck = in_array($this->userId, $model->thumbs_up); //是否赞过
         $model->thumbsDownCount = count($model->thumbs_down); //弱数量
         $model->thumbsDownCheck = in_array($this->userId, $model->thumbs_down); //是否弱过
+        $model->isDelete = $this->userId == $model->issuer; //是否有删除的权限
+        $model->atName = ''; //@的用户名称
 
         if($issuer = $model->issuers) {
             $model->issuerName = $issuer->name;
+        }
+
+        if(!empty($model->at) && $at = $model->ats) {
+            $model->atName = $at->name;
         }
 
         return $model;

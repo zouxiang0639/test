@@ -117,9 +117,16 @@ $(function(){
             cache: false,
             dataType: 'json',
             success:function(res) {
-                if(res.code != 0) {
+                if(res.code == 1020001){
+                    swal({
+                        title: "",
+                        text: "<p class='text-danger'>" + res.msg + "</p>",
+                        html: true
+                    });
+
+                }else if(res.code != 0) {
                     swal(res.data, '', 'error');
-                    locked = true;
+
                 } else {
 
                     if(res.data == true) {
@@ -129,8 +136,8 @@ $(function(){
                         _this.removeClass('default');
                         numClass.text(num - 1);
                     }
-                    locked = true;
                 }
+                locked = true;
             },
             error:function () {
                 locked = true;

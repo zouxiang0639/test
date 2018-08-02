@@ -9,6 +9,7 @@
                 @if(Auth::guard('forum')->check())
                     <span class="news"><i></i>2</span>
                     <a  href="{!! route('f.member.index') !!}">{!! Auth::guard('forum')->user()->name !!}</a>
+                    <a  href="{!! route('f.auth.logout') !!}">退出</a>
                 @else
                     <a  class="register" data-toggle="modal" data-target="#registerModal" href="javascript:void(0)">注册</a>
                     <a  class="login" data-toggle="modal" data-target="#loginModal" href="javascript:void(0)">登陆</a>

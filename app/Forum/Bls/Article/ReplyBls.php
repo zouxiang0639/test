@@ -2,6 +2,7 @@
 
 namespace App\Forum\Bls\Article;
 
+use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\Model\ReplyModel;
 use App\Forum\Bls\Article\Requests\ReplyCreateRequest;
 use App\Forum\Bls\Article\Traits\ThumbsTraits;
@@ -25,8 +26,15 @@ class ReplyBls
         $model->contents = $request->contents;
         $model->thumbs_down = [];
         $model->thumbs_up = [];
-        dd($model->save());
         return $model->save();
+    }
+
+    public static function destroyReply(ReplyModel $model)
+    {
+        if($model->issuer != Auth::guard('forum')->id()) {
+            throw new LogicException(1010001, '参数错误');
+        }
+        return $model->delete();
     }
 
     public static function showReply($article_id, $page)

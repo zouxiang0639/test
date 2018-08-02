@@ -2,7 +2,6 @@
 
 namespace App\Library\Forum;
 
-use App\Library\Forum\Middleware\Authenticate;
 use Illuminate\Support\ServiceProvider;
 
 class ForumServiceProvider extends ServiceProvider
@@ -24,7 +23,7 @@ class ForumServiceProvider extends ServiceProvider
      * @var array
      */
     protected $routeMiddleware = [
-        'forum.auth'       => Authenticate::class,
+        'forum.auth'       => \App\Library\Forum\Middleware\Authenticate::class,
     ];
 
     /**

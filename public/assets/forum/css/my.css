@@ -449,6 +449,12 @@
 .page{
 	background: #f9f9f9;
 }
+
+.page-reply{
+	background: #f9f9f9;
+	text-align: center;
+	padding: 14px;
+}
 .edit-container{
 	background: #f9f9f9;
 	padding-bottom:20px;

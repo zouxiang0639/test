@@ -4,6 +4,7 @@ namespace App\Library\Forum\Middleware;
 
 use App\Consts\Admin\Role\RoleSlugConst;
 use App\Consts\Common\WhetherConst;
+use App\Exceptions\LogicException;
 use Closure;
 use Auth;
 use Illuminate\Contracts\Auth\Guard;
@@ -37,16 +38,11 @@ class Authenticate
     public function handle($request, Closure $next, $permissionCode = '')
     {
 
+
 //        if (!$this->shouldPassThrough($request)){
 //
 //
-//            if ($this->auth->guest()) {
-//                if ($request->ajax()) {
-//                    return response('Unauthorized.', 401);
-//                } else {
-//                    return redirect()->route('m.login');
-//                }
-//            }
+//
 //
 //            if($this->auth->user()->is_block == WhetherConst::YES){
 //                Auth::logout();
@@ -57,6 +53,15 @@ class Authenticate
 //                return redirect()->route('m.login');
 //            }
 //        }
+        if(!empty($permissionCode)) {
+            if ($this->auth->guest()) {
+                if ($request->ajax()) {
+                    throw new LogicException(1020001);
+                } else {
+                    return redirect()->route('f.home',['']);
+                }
+            }
+        }
 
         return $next($request);
     }

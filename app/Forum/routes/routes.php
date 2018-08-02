@@ -1,7 +1,7 @@
 <?php
 
 Route::group([
-    'prefix'        => 'forum',
+    'prefix'        => '/',
     'namespace'     => 'App\\Forum\\Controllers',
     'middleware'    => ['web', 'forum'],
 ], function(){
@@ -11,19 +11,27 @@ Route::group([
     Route::group(['prefix'=>'article'], function(){
         Route::get('list/{tag}', ['uses' => "ArticleController@index", 'as' => 'f.article.list']);
         Route::get('create', ['uses' => "ArticleController@create", 'as' => 'f.article.create']);
-        Route::put('create/put', ['uses' => "ArticleController@createPut", 'as' => 'f.article.create.put']);
+
         Route::get('info/{id}', ['uses' => "ArticleController@info", 'as' => 'f.article.info']);
 
-        Route::put('thumbsup/{id}', ['uses' => "ArticleController@thumbsUp", 'as' => 'f.article.thumbsUp']);
-        Route::put('thumbsdown/{id}', ['uses' => "ArticleController@thumbsDown", 'as' => 'f.article.thumbsDown']);
+        Route::group(['middleware' => 'forum.auth:f_member'], function(){
+            Route::put('thumbsup/{id}', ['uses' => "ArticleController@thumbsUp", 'as' => 'f.article.thumbsUp']);
+            Route::put('thumbsdown/{id}', ['uses' => "ArticleController@thumbsDown", 'as' => 'f.article.thumbsDown']);
+
+            Route::put('create/put', ['uses' => "ArticleController@createPut", 'as' => 'f.article.create.put']);
+        });
     });
 
     Route::group(['prefix'=>'reply'], function(){
-        Route::put('store', ['uses' => "ReplyController@store", 'as' => 'f.reply.store']);
         Route::put('show/child', ['uses' => "ReplyController@showChild", 'as' => 'f.reply.show.child']);
         Route::put('show/{article_id}', ['uses' => "ReplyController@show", 'as' => 'f.reply.show']);
-        Route::put('thumbsup/{id}', ['uses' => "ReplyController@thumbsUp", 'as' => 'f.reply.thumbsUp']);
-        Route::put('thumbsdown/{id}', ['uses' => "ReplyController@thumbsDown", 'as' => 'f.reply.thumbsDown']);
+
+        Route::group(['middleware' => 'forum.auth:f_member'], function(){
+            Route::put('store', ['uses' => "ReplyController@store", 'as' => 'f.reply.store']);
+            Route::delete('destroy/{id}', ['uses' => "ReplyController@destroy", 'as' => 'f.reply.destroy']);
+            Route::put('thumbsup/{id}', ['uses' => "ReplyController@thumbsUp", 'as' => 'f.reply.thumbsUp']);
+            Route::put('thumbsdown/{id}', ['uses' => "ReplyController@thumbsDown", 'as' => 'f.reply.thumbsDown']);
+        });
     });
 
     Route::group(['prefix'=>'member'], function(){
@@ -39,8 +47,10 @@ Route::group([
         Route::get('weibo/login', ['uses' => "AuthController@qqLogin", 'as' => 'f.auth.weibo.login']);
         Route::get('login', ['uses' => "AuthController@login", 'as' => 'f.auth.login']);
         Route::put('login/put', ['uses' => "AuthController@loginPut", 'as' => 'f.auth.login.put']);
+        Route::get('logout', ['uses' => "AuthController@logout", 'as' => 'f.auth.logout']);
         Route::get('register', ['uses' => "AuthController@register", 'as' => 'f.auth.register']);
         Route::put('register/put', ['uses' => "AuthController@registerPut", 'as' => 'f.auth.register.put']);
+
     });
 
 });

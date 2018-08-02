@@ -9,11 +9,11 @@ use App\Forum\Bls\Users\UsersBls;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
 use Auth;
+use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
-
     public function login()
     {
         return view('forum::auth.login');
@@ -34,10 +34,15 @@ class AuthController extends Controller
         }
     }
 
-    public function register()
+    public function logout(Request $request)
     {
-        return view('forum::auth.register');
+        Auth::guard('forum')->logout();
+
+        $request->session()->invalidate();
+
+        return redirect()->route('f.home');
     }
+
 
     public function registerPut(RegisterUserRequest $request)
     {

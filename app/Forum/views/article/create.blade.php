@@ -110,7 +110,14 @@
                 cache: false,
                 dataType: 'json',
                 success:function(res) {
-                    if(res.code != 0){
+                    if(res.code == 1020001){
+                        swal({
+                            title: "",
+                            text: "<p class='text-danger'>" + res.msg + "</p>",
+                            html: true
+                        });
+                        locked = true;
+                    }else if(res.code != 0){
                         var errorHtml = '';
                         var error = res.data;
                         for ( var i in error ) {

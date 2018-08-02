@@ -81,11 +81,25 @@
 
                     </ul>
                 </div>
-                <div class="page">
+                <div class="page-reply">
                     <a id="reply-page">加载更多</a>
                 </div>
                 <div class="edit-container">
-
+                    <div class="con" style="margin: 0px 17px;">
+                        <form class="reply-form">
+                            <input type="hidden" name="article_id" value="{!! $info->id !!}">
+                            <input type="hidden" name="at" value="0">
+                            <input type="hidden" name="parent_id" value="0">
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <div class="tea">
+                                <textarea name="contents"></textarea>
+                            </div>
+                            <div class="opt">
+                                <button   class="btn btn-primary txt reply—submit" data-href="{!! route('f.reply.store') !!}">回复</button>
+                            </div>
+                        </form>
+                    <div>
                 </div>
 
                 <div style="display: none">
@@ -341,7 +355,7 @@
             var locked = true;
 
             /**
-             *  点赞
+             *  回复
              */
             $(".com-tie").on('click', '.reply—submit', function(){
                 var _this = $(this);
@@ -359,7 +373,14 @@
                     cache: false,
                     dataType: 'json',
                     success:function(res) {
-                        if(res.code != 0) {
+                        if(res.code == 1020001){
+                            swal({
+                               title: "",
+                               text: "<p class='text-danger'>" + res.msg + "</p>",
+                               html: true
+                            });
+
+                        }else if(res.code != 0) {
                             var errorHtml = '';
                             var error = res.data;
                             for ( var i in error ) {
@@ -370,18 +391,12 @@
                                 text: errorHtml,
                                 html: true
                             });
-                            locked = true;
-                        } else {
 
-                            if(res.data == true) {
-                                _this.addClass('default');
-                                numClass.text(num + 1);
-                            } else {
-                                _this.removeClass('default');
-                                numClass.text(num - 1);
-                            }
-                            locked = true;
+                        } else {
+                            swal(res.data, '', 'success');
+                            window.location.href =  window.location.href;
                         }
+                        locked = true;
                     },
                     error:function () {
                         locked = true;
@@ -415,7 +430,7 @@
                     dataType: 'json',
                     success:function(res) {
                         if(res.code != 0) {
-                            $('.page').html(res.data);
+                            $('.page-reply').html(res.data);
                         } else {
                             $('#reply-content').append(res.data);
                             page ++;
@@ -505,9 +520,8 @@
 
             });
 
+            //评论点赞
             $(".com-tie").on('click', '.thumbs', function(){
-
-
                 var numClass = $(this).children(".num");
                 var num = parseInt(numClass.text());
                 var _this = $(this);
@@ -528,9 +542,15 @@
                     cache: false,
                     dataType: 'json',
                     success:function(res) {
-                        if(res.code != 0) {
+                        if(res.code == 1020001){
+                            swal({
+                                title: "",
+                                text: "<p class='text-danger'>" + res.msg + "</p>",
+                                html: true
+                            });
+
+                        }else  if(res.code != 0) {
                             swal(res.data, '', 'error');
-                            locked = true;
                         } else {
 
                             if(res.data == true) {
@@ -540,8 +560,8 @@
                                 _this.children("i").removeClass('default');
                                 numClass.text(num - 1);
                             }
-                            locked = true;
                         }
+                        locked = true;
                     },
                     error:function () {
                         locked = true;
@@ -550,7 +570,53 @@
                 });
             })
 
+            //评论删除
+            $(".com-tie").on('click', '.delete-reply', function(){
+                var _this = $(this);
+                swal({
+                            title: "确认删除?",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "确定",
+                            closeOnConfirm: false,
+                            cancelButtonText: "取消"
+                        },
+                        function(){
 
+                            if (! locked) {
+                                return false;
+                            }
+
+                            locked = false;
+                            $.ajax({
+                                url: _this.attr('data-href'),
+                                type: 'POST',
+                                data: {
+                                    "_method":"DELETE",
+                                    "_token":$('meta[name="csrf-token"]').attr('content')
+                                },
+                                cache: false,
+                                dataType: 'json',
+                                success:function(res) {
+
+                                    if(res.code != 0) {
+                                        swal(res.data, '', 'error');
+                                        locked = true;
+                                    } else {
+                                        swal(res.data, '', 'success');
+                                        _this.parents('li').remove();
+                                    }
+                                },
+                                error:function () {
+                                    locked = true;
+                                }
+
+                            });
+
+                        }
+                );
+            })
 
         });
 
