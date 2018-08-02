@@ -16,10 +16,14 @@ class ArticleBls
 
     use ThumbsTraits;
 
-    public static function getArticleLise($tags, $order = '`id` DESC', $limit = 20)
+    public static function getArticleLise($request, $order = '`id` DESC', $limit = 20)
     {
         $model = ArticleModel::query();
-        $model->where('tags', $tags);
+
+        if(!empty($request->tag)) {
+            $model->where('tags', $request->tag);
+        }
+
         return $model->orderByRaw($order)->paginate($limit);
     }
 

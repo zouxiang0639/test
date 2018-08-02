@@ -8,22 +8,38 @@ use App\Forum\Bls\Article\Requests\ArticleCreateRequest;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
 use Auth;
+use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    public function index($tag)
+    /**
+     * 列表
+     * @param $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(Request $request)
     {
-        $list = ArticleBls::getArticleLise($tag);
+        $list = ArticleBls::getArticleLise($request);
         return view('forum::article.index', [
             'list' => $list
         ]);
     }
 
+    /**
+     * 创建
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view('forum::article.create');
     }
 
+    /**
+     * 处理创建数据
+     * @param ArticleCreateRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
     public function createPut(ArticleCreateRequest $request)
     {
          if (ArticleBls::createArticle($request)) {
@@ -33,6 +49,12 @@ class ArticleController extends Controller
          }
     }
 
+    /**
+     *  详情
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws LogicException
+     */
     public function info($id)
     {
         $model = ArticleBls::find($id);
@@ -49,6 +71,12 @@ class ArticleController extends Controller
     }
 
 
+    /**
+     * 赞
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
     public function thumbsUp($id)
     {
         $model = ArticleBls::find($id);
@@ -62,6 +90,12 @@ class ArticleController extends Controller
         }
     }
 
+    /**
+     * 弱
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
     public function thumbsDown($id)
     {
 
@@ -73,6 +107,18 @@ class ArticleController extends Controller
             return (new JsonResponse())->success($data['data']);
         } else {
             throw new LogicException(1010002);
+        }
+    }
+
+    public function all(Request $request)
+    {
+        $list = ArticleBls::getArticleLise($request,$order = '`id` DESC', $limit = 1);
+        $html = view('forum::article.all', ['list' => $list])->render();
+
+        if($html) {
+            return (new JsonResponse())->success($html);
+        } else {
+            throw new LogicException(1010001);
         }
     }
 

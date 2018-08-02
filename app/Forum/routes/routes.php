@@ -8,11 +8,14 @@ Route::group([
 
 
     Route::get('/', ['uses' => "HomeController@index", 'as' => 'f.home']);
+
+    //文章
     Route::group(['prefix'=>'article'], function(){
         Route::get('list/{tag}', ['uses' => "ArticleController@index", 'as' => 'f.article.list']);
         Route::get('create', ['uses' => "ArticleController@create", 'as' => 'f.article.create']);
-
         Route::get('info/{id}', ['uses' => "ArticleController@info", 'as' => 'f.article.info']);
+
+        Route::put('all', ['uses' => "ArticleController@all", 'as' => 'f.article.all']);
 
         Route::group(['middleware' => 'forum.auth:f_member'], function(){
             Route::put('thumbsup/{id}', ['uses' => "ArticleController@thumbsUp", 'as' => 'f.article.thumbsUp']);
@@ -22,6 +25,7 @@ Route::group([
         });
     });
 
+    //回复
     Route::group(['prefix'=>'reply'], function(){
         Route::put('show/child', ['uses' => "ReplyController@showChild", 'as' => 'f.reply.show.child']);
         Route::put('show/{article_id}', ['uses' => "ReplyController@show", 'as' => 'f.reply.show']);
@@ -34,12 +38,15 @@ Route::group([
         });
     });
 
+    //会员
     Route::group(['prefix'=>'member'], function(){
         Route::get('', ['uses' => "MemberController@index", 'as' => 'f.member.index']);
         Route::get('logout', ['uses' => "MemberController@create", 'as' => 'f.member.logout']);
         Route::get('info', ['uses' => "MemberController@info", 'as' => 'f.member.info']);
         Route::get('reply', ['uses' => "MemberController@reply", 'as' => 'f.member.reply']);
     });
+
+    //登录等功能
     Route::group(['prefix'=>'auth'], function(){
         Route::get('qq', ['uses' => "AuthController@qq", 'as' => 'f.auth.qq']);
         Route::get('qq/login', ['uses' => "AuthController@qqLogin", 'as' => 'f.auth.qq.login']);
