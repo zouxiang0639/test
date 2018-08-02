@@ -130,10 +130,10 @@ $(function(){
                 } else {
 
                     if(res.data == true) {
-                        _this.addClass('default');
+                        _this.children("i").addClass('default');
                         numClass.text(num + 1);
                     } else {
-                        _this.removeClass('default');
+                        _this.children("i").removeClass('default');
                         numClass.text(num - 1);
                     }
                 }

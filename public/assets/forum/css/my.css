@@ -1,5 +1,5 @@
 
-.fabulous-con .default, #reply-content .default, .article-star .default {
+.thumbs .default, #reply-content .default, .article-star .default, .inner-info .default{
 	color: #e15844; !important;
 }
 

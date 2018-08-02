@@ -15,9 +15,7 @@
                 </p>
                 <p>
                     <span>
-                        <a class="article-recommend">推荐  :
-                            <span class="num">{{ count($info->recommend) }}</span>
-                        </a>
+                        <a class="article-recommend {!! in_array($userId, $info->recommend) ? "default" : "" !!}">推荐  : <span class="num">{{ count($info->recommend) }}</span></a>
 
                     </span>
                     <span>浏览 : {{ $info->browse }}</span>
@@ -61,13 +59,13 @@
             <div class="fabulous-con">
                 <a class="are" href="javascript:void(0)">举报!</a>
 
-                <p class="thumbs-up thumbs {!! in_array($userId, $info->thumbs_up) ? "default" : "" !!}" data-href="{!! route('f.article.thumbsUp',['id' => $info->id]) !!}" href="javascript:void(0)">
-                    <i class="fa fa-thumbs-o-up"></i>
+                <p class="thumbs-up thumbs" data-href="{!! route('f.article.thumbsUp',['id' => $info->id]) !!}" href="javascript:void(0)">
+                    <i class="fa fa-thumbs-o-up {!! in_array($userId, $info->thumbs_up) ? "default" : "" !!}"></i>
                     <span class="num">{!! count($info->thumbs_up) !!}</span>
                 </p>
 
-                <p class=" thumbs-down thumbs {!! in_array($userId, $info->thumbs_down) ? "default" : "" !!}" data-href="{!! route('f.article.thumbsDown',['id' => $info->id]) !!}" href="javascript:void(0)">
-                    <i class="fa fa-thumbs-o-down"></i>
+                <p class=" thumbs-down thumbs" data-href="{!! route('f.article.thumbsDown',['id' => $info->id]) !!}" href="javascript:void(0)">
+                    <i class="fa fa-thumbs-o-down {!! in_array($userId, $info->thumbs_down) ? "default" : "" !!}"></i>
                     <span class="num">{!! count($info->thumbs_down) !!}</span>
                 </p>
             </div>
@@ -213,6 +211,7 @@
             $('.article-recommend').click(function() {
                 var numClass = $(this).children(".num");
                 var num = parseInt(numClass.text());
+                var _this = $(this);
 
                 if (! locked) {
                     return false;
@@ -245,8 +244,10 @@
 
                         } else {
                             if(res.data == true) {
+                                _this.addClass('default');
                                 numClass.text(num + 1);
                             } else {
+                                _this.removeClass('default');
                                 numClass.text(num - 1);
                             }
                         }
