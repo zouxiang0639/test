@@ -92,6 +92,52 @@ $(function(){
         return false;
     });
 
+    /**
+     *  点赞
+     */
+    $(".thumbs").click(function(){
+
+        var numClass = $(this).children(".num");
+        var num = parseInt(numClass.text());
+        var _this = $(this);
+
+        if (! locked) {
+            return false;
+        }
+
+        locked = false;
+
+        $.ajax({
+            url: $(this).attr('data-href'),
+            type: 'POST',
+            data: {
+                "_method": "PUT",
+                "_token": $('meta[name="csrf-token"]').attr('content')
+            },
+            cache: false,
+            dataType: 'json',
+            success:function(res) {
+                if(res.code != 0) {
+                    swal(res.data, '', 'error');
+                    locked = true;
+                } else {
+
+                    if(res.data == true) {
+                        _this.addClass('default');
+                        numClass.text(num + 1);
+                    } else {
+                        _this.removeClass('default');
+                        numClass.text(num - 1);
+                    }
+                    locked = true;
+                }
+            },
+            error:function () {
+                locked = true;
+            }
+
+        });
+    })
 
 
 });

@@ -5,14 +5,14 @@ namespace App\Forum\Bls\Article\Model;
 use App\Forum\Bls\Users\Model\UsersModel;
 use Illuminate\Database\Eloquent\Model;
 
-class ArticleModel extends Model
+class ReplyModel extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'articles';
+    protected $table = 'reply';
 
     /**
      * The attributes that should be cast to native types.
@@ -34,5 +34,14 @@ class ArticleModel extends Model
         return $this->belongsTo(UsersModel::class, 'issuer');
     }
 
+    /**
+     * @的人
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function ats()
+    {
+        return $this->belongsTo(UsersModel::class, 'at');
+    }
 
 }

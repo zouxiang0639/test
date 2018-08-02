@@ -77,120 +77,34 @@
             <div class="new-container new-inner">
                 <div class="new-inner-tit">*超过10赞底色变为浅绿色，超过100赞底色变为绿色，弱数超过赞数10个底色变为浅红色，楼主回复底色为黄色</div>
                 <div class="com-tie">
-                    <ul>
-                        <li class="color-1">
-                            <div class="top">
-                                <p class="left"><b>江南小雨</b>(2018/05/20 16:00) 211.38.***.118 </p>
-                                <p class="right">
-                                    <a class="delete" href="javascript:void(0)"><i></i></a>
-                                    <a class="praise" href="javascript:void(0)"><i></i>59</a>
-                                    <a class="neg" href="javascript:void(0)"><i></i>0</a>
-                                    <a class="review" href="javascript:void(0)"><i></i></a>
-                                    <a class="inf" href="javascript:void(0)"><i></i></a>
-                                </p>
-                            </div>
-                            <div class="con">
-                                <p>自己坐沙发 搞笑。。</p>
-                            </div>
-                        </li>
-                        <li class="color-2">
-                            <div class="top">
-                                <p class="left"><b>江南小雨</b>(2018/05/20 16:00) 211.38.***.118 </p>
-                                <p class="right">
-                                    <a class="delete" href="javascript:void(0)"><i></i></a>
-                                    <a class="praise" href="javascript:void(0)"><i></i>59</a>
-                                    <a class="neg" href="javascript:void(0)"><i></i>0</a>
-                                    <a class="review" href="javascript:void(0)"><i></i></a>
-                                    <a class="inf" href="javascript:void(0)"><i></i></a>
-                                </p>
-                            </div>
-                            <div class="con">
-                                <p>自己坐沙发 搞笑。。</p>
-                            </div>
-                            <a class="other" href="javascript:void(0)">回复 15<i></i></a>
+                    <ul id="reply-content">
 
-                        </li>
-                        <li class="share color-3 clearfix">
-                            <div class="sh-l fl">
-                                <i></i>
-                            </div>
-                            <div class="sh-r fr">
-                                <div class="top">
-                                    <p class="left"><b>江南小雨</b>(2018/05/20 16:00) 211.38.***.118 </p>
-                                    <p class="right">
-                                        <a class="delete" href="javascript:void(0)"><i></i></a>
-                                        <a class="praise" href="javascript:void(0)"><i></i>59</a>
-                                        <a class="neg" href="javascript:void(0)"><i></i>0</a>
-                                        <a class="review" href="javascript:void(0)"><i></i></a>
-                                    </p>
-                                </div>
-                                <div class="con">
-                                    <p>自己坐沙发 搞笑。。</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="share color-4 clearfix">
-                            <div class="sh-l fl">
-                                <i></i>
-                            </div>
-                            <div class="sh-r fr">
-                                <div class="top">
-                                    <p class="left"><b>江南小雨</b>(2018/05/20 16:00) 211.38.***.118 </p>
-                                    <p class="right">
-                                        <a class="delete" href="javascript:void(0)"><i></i></a>
-                                        <a class="praise" href="javascript:void(0)"><i></i>59</a>
-                                        <a class="neg" href="javascript:void(0)"><i></i>0</a>
-                                        <a class="review" href="javascript:void(0)"><i></i></a>
-                                    </p>
-                                </div>
-                                <div class="con">
-                                    <p>自己坐沙发 搞笑。。</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="color-5">
-                            <div class="top">
-                                <p class="left"><b>江南小雨</b>(2018/05/20 16:00) 211.38.***.118 </p>
-                                <p class="right">
-                                    <a class="delete" href="javascript:void(0)"><i></i></a>
-                                    <a class="praise" href="javascript:void(0)"><i></i>59</a>
-                                    <a class="neg" href="javascript:void(0)"><i></i>0</a>
-                                    <a class="review" href="javascript:void(0)"><i></i></a>
-                                    <a class="inf" href="javascript:void(0)"><i></i></a>
-                                </p>
-                            </div>
-                            <div class="con">
-                                <p>自己坐沙发 搞笑。。</p>
-                            </div>
-                        </li>
                     </ul>
                 </div>
                 <div class="page">
-                    <div class="com-page">
-                        <a class="home" href="javascript:void(0)"></a>
-                        <a class="prev" href="javascript:void(0)"></a>
-                        <a href="javascript:void(0)">1</a>
-                        <a href="javascript:void(0)">2</a>
-                        <a href="javascript:void(0)">3</a>
-                        <a href="javascript:void(0)">4</a>
-                        <a href="javascript:void(0)">5</a>
-                        <a href="javascript:void(0)">6</a>
-                        <a href="javascript:void(0)">7</a>
-                        <a href="javascript:void(0)">8</a>
-                        <a href="javascript:void(0)">9</a>
-                        <a href="javascript:void(0)">10</a>
-                        <a class="next" href="javascript:void(0)"></a>
-                        <a class="end" href="javascript:void(0)"></a>
-                    </div>
+                    <a id="reply-page">加载更多</a>
                 </div>
                 <div class="edit-container">
-                    <div class="con">
-                        <div class="tea">
-                            <textarea></textarea>
-                        </div>
-                        <div class="opt">
-                            <a class="img" href="javascript:void(0)"><i></i></a>
-                            <a class="txt" href="javascript:void(0)">回复</a>
+
+                </div>
+
+                <div style="display: none">
+                    <div class="reply">
+                        <div class="con">
+                            <form class="reply-form">
+                                <input type="hidden" name="article_id" value="{!! $info->id !!}">
+                                <input type="hidden" name="at" value="0">
+                                <input type="hidden" name="parent_id" value="0">
+                                <input type="hidden" name="_method" value="PUT">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="tea">
+                                    <textarea name="contents"></textarea>
+                                </div>
+                                <div class="opt">
+                                    <button   class="btn btn-primary txt reply—submit" data-href="{!! route('f.reply.store') !!}">回复</button>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -421,56 +335,225 @@
 @stop
 
 @section('script')
-<script>
+    <script>
 
+        $(function(){
+            var locked = true;
 
-    var locked = true;
-    /**
-     *  开关状态更新
-     */
-    $(".thumbs").click(function(){
+            /**
+             *  点赞
+             */
+            $(".com-tie").on('click', '.reply—submit', function(){
+                var _this = $(this);
 
-        var numClass = $(this).children(".num");
-        var num = parseInt(numClass.text());
-        var _this = $(this);
-
-        if (! locked) {
-            return false;
-        }
-
-        locked = false;
-
-        $.ajax({
-            url: $(this).attr('data-href'),
-            type: 'POST',
-            data: {
-                "_method": "PUT",
-                "_token": $('meta[name="csrf-token"]').attr('content'),
-            },
-            cache: false,
-            dataType: 'json',
-            success:function(res) {
-                if(res.code != 0) {
-                    swal(res.data, '', 'error');
-                    locked = true;
-                } else {
-
-                    if(res.data == true) {
-                        _this.addClass('default');
-                        numClass.text(num + 1);
-                    } else {
-                        _this.removeClass('default');
-                        numClass.text(num - 1);
-                    }
-                    locked = true;
+                if (! locked) {
+                    return false;
                 }
-            },
-            error:function () {
-                locked = true;
-            }
+
+                locked = false;
+
+                $.ajax({
+                    url: $(this).attr('data-href'),
+                    type: 'POST',
+                    data: $(this).parents('.reply-form').serialize(),
+                    cache: false,
+                    dataType: 'json',
+                    success:function(res) {
+                        if(res.code != 0) {
+                            var errorHtml = '';
+                            var error = res.data;
+                            for ( var i in error ) {
+                                errorHtml += "<p class='text-danger'>" + error[i][0] + "</p>"
+                            }
+                            swal({
+                                title: "",
+                                text: errorHtml,
+                                html: true
+                            });
+                            locked = true;
+                        } else {
+
+                            if(res.data == true) {
+                                _this.addClass('default');
+                                numClass.text(num + 1);
+                            } else {
+                                _this.removeClass('default');
+                                numClass.text(num - 1);
+                            }
+                            locked = true;
+                        }
+                    },
+                    error:function () {
+                        locked = true;
+                    }
+
+                });
+
+                return false;
+            });
+
+            //异步加载数据
+            var  lockedPage = true;
+            var page = 0;
+            $('#reply-page').click(function() {
+
+                if (! lockedPage) {
+                    return false;
+                }
+
+                lockedPage = false;
+
+                $.ajax({
+                    url: '{!! route('f.reply.show', ['article_id' => $info->id]) !!}',
+                    type: 'POST',
+                    data: {
+                        'page' : page,
+                        "_method": "PUT",
+                        "_token": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    success:function(res) {
+                        if(res.code != 0) {
+                            $('.page').html(res.data);
+                        } else {
+                            $('#reply-content').append(res.data);
+                            page ++;
+                            lockedPage = true;
+                        }
+                    },
+                    error:function () {
+                        lockedPage = true;
+                    }
+
+                });
+
+            }).trigger("click");
+
+            //异步加载回复子数据
+            $(".com-tie").on('click', '.reply-show-child', function(){
+                var parentId = $(this).attr('data-id');
+                if (! locked) {
+                    return false;
+                }
+
+                locked = false;
+
+                $.ajax({
+                    url: '{!! route('f.reply.show.child') !!}',
+                    type: 'POST',
+                    data: {
+                        "_method": "PUT",
+                        'parent_id' : parentId,
+                        "_token": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    success:function(res) {
+                        if(res.code != 0) {
+                            $('.page').html(res.data);
+                        } else {
+                            $('.child-' + parentId).html(res.data);
+                            locked = true;
+                        }
+                    },
+                    error:function () {
+                        locked = true;
+                    }
+
+                });
+
+            });
+
+            $(".com-tie").on('click', '.reply-one-edit', function(){
+                var id = $(this).attr('data-id');
+                if($(this).attr('data-check') == '1') {
+
+                    $(this).attr('data-check', '0');
+                    $(".delete-"+ id).remove();
+                } else {
+                    $('.reply input[name=at]').val($(this).attr('data-at'));
+                    $('.reply input[name=parent_id]').val(id);
+
+                    $(this).attr('data-check', '1');
+
+                    var html ='<li class="edit-container delete-'+ id +'"><div class="con">';
+                    html += $(".reply").html();
+                    html += '</div></li>';
+                    $(this).parents('.reply-' + id).after(html);
+                }
+
+            });
+
+            $(".com-tie").on('click', '.reply-two-edit', function(){
+                var id = $(this).attr('data-id');
+
+                if($(this).attr('data-check') == '1') {
+                    $(this).attr('data-check', '0');
+                    $(".delete-"+ id).remove();
+                } else {
+                    $('.reply input[name=at]').val($(this).attr('data-at'));
+                    $('.reply input[name=parent_id]').val($(this).attr('data-pid'));
+
+                    $(this).attr('data-check', '1');
+
+                    var html ='<li class="share clearfix delete-'+ id +' "><div class="sh-l fl"><i></i></div><div class="sh-r fr edit-container"> <div class="con">';
+                    html += $(".reply").html();
+                    html += '</div></div></li>';
+                    $(this).parents('.reply-' + id).after(html);
+                }
+
+            });
+
+            $(".com-tie").on('click', '.thumbs', function(){
+
+
+                var numClass = $(this).children(".num");
+                var num = parseInt(numClass.text());
+                var _this = $(this);
+
+                if (! locked) {
+                    return false;
+                }
+
+                locked = false;
+
+                $.ajax({
+                    url: $(this).attr('data-href'),
+                    type: 'POST',
+                    data: {
+                        "_method": "PUT",
+                        "_token": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    success:function(res) {
+                        if(res.code != 0) {
+                            swal(res.data, '', 'error');
+                            locked = true;
+                        } else {
+
+                            if(res.data == true) {
+                                _this.children("i").addClass('default');
+                                numClass.text(num + 1);
+                            } else {
+                                _this.children("i").removeClass('default');
+                                numClass.text(num - 1);
+                            }
+                            locked = true;
+                        }
+                    },
+                    error:function () {
+                        locked = true;
+                    }
+
+                });
+            })
+
+
 
         });
-    })
 
-</script>
+
+    </script>
 @stop

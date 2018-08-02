@@ -18,6 +18,14 @@ Route::group([
         Route::put('thumbsdown/{id}', ['uses' => "ArticleController@thumbsDown", 'as' => 'f.article.thumbsDown']);
     });
 
+    Route::group(['prefix'=>'reply'], function(){
+        Route::put('store', ['uses' => "ReplyController@store", 'as' => 'f.reply.store']);
+        Route::put('show/child', ['uses' => "ReplyController@showChild", 'as' => 'f.reply.show.child']);
+        Route::put('show/{article_id}', ['uses' => "ReplyController@show", 'as' => 'f.reply.show']);
+        Route::put('thumbsup/{id}', ['uses' => "ReplyController@thumbsUp", 'as' => 'f.reply.thumbsUp']);
+        Route::put('thumbsdown/{id}', ['uses' => "ReplyController@thumbsDown", 'as' => 'f.reply.thumbsDown']);
+    });
+
     Route::group(['prefix'=>'member'], function(){
         Route::get('', ['uses' => "MemberController@index", 'as' => 'f.member.index']);
         Route::get('logout', ['uses' => "MemberController@create", 'as' => 'f.member.logout']);

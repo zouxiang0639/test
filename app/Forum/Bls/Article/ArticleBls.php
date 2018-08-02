@@ -2,8 +2,8 @@
 
 namespace App\Forum\Bls\Article;
 
-use App\Admin\Bls\Auth\Model\ArticleModel;
 use App\Consts\Common\WhetherConst;
+use App\Forum\Bls\Article\Model\ArticleModel;
 use App\Forum\Bls\Article\Requests\ArticleCreateRequest;
 use App\Forum\Bls\Article\Traits\ThumbsTraits;
 use Auth;
