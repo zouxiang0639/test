@@ -9,7 +9,10 @@ class MemberController extends Controller
 
     public function index()
     {
-        return view('forum::member.index');
+        $info = \Auth::guard('forum')->user();
+        return view('forum::member.index', [
+            'info' => $info,
+        ]);
     }
 
     public function login()

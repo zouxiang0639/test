@@ -459,6 +459,7 @@ acronym {
 	background: #fff;
 	border-radius: 5px;
 	padding: 12px 0 30px 0;
+	min-height: 400px;
 }
 .new-tit{
 	width: 827px;
@@ -531,7 +532,6 @@ acronym {
 	padding: 20px 0;
 }
 .com-page{
-	height: 54px;
 	text-align: center;
 }
 .com-page > a{

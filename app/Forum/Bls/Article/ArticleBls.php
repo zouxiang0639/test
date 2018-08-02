@@ -43,9 +43,10 @@ class ArticleBls
      */
     public static function createArticle(ArticleCreateRequest $request)
     {
+
         $model = new ArticleModel();
         $model->title = $request->title;
-        $model->source = $request->source;
+        $model->source = $request->source ?: '';
         $model->tags = $request->tags;
         $model->status = WhetherConst::NO;
         $model->is_hide = $request->is_hide ? WhetherConst::YES : WhetherConst::NO;
@@ -56,6 +57,7 @@ class ArticleBls
         $model->thumbs_down =  [];
         $model->star =  [];
         $model->recommend =  [];
+
         return $model->save();
     }
 

@@ -1,9 +1,9 @@
 @foreach($list as $item)
-    <li class="share color-3 clearfix reply-{!! $item->id !!}">
+    <li class="share clearfix reply-{!! $item->id !!}">
         <div class="sh-l fl">
             <i></i>
         </div>
-        <div class="sh-r fr">
+        <div class="sh-r fr {!! $item->color !!}">
             <div class="top">
                 <p class="left"><b>{{ $item->issuerName }}</b>({!! mb_substr($item->created_at, 0, 16) !!}) 211.38.***.118 </p>
                 <p class="right">

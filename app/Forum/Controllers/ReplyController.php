@@ -37,7 +37,7 @@ class ReplyController extends Controller
     public function showChild(Request $request)
     {
 
-        $html = ReplyBls::showChildReply($request->parent_id);
+        $html = ReplyBls::showChildReply($request->parent_id, $request->article_id);
         if($html){
             return (new JsonResponse())->success($html);
         } else {

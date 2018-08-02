@@ -19,7 +19,7 @@
 
                     </span>
                     <span>浏览 : {{ $info->browse }}</span>
-                    <span>回复: {{ $info->reply }}</span>
+                    <span>回复: {{ $replyCount }}</span>
                 </p>
                 <p>
                     <span>发帖时间 : {{ $info->created_at }}</span>
@@ -366,6 +366,7 @@
                     data: {
                         "_method": "PUT",
                         'parent_id' : parentId,
+                        'article_id' : '{!! $info->id !!}',
                         "_token": $('meta[name="csrf-token"]').attr('content')
                     },
                     cache: false,

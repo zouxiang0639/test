@@ -2,29 +2,89 @@
 
 namespace App\Library\Forum\Widgets;
 
+use App\Forum\Bls\Article\ArticleBls;
 use Auth;
 use Illuminate\Contracts\Support\Renderable;
 
 class Reply implements Renderable
 {
+    /**
+     * 初始化数据
+     * @var
+     */
     protected $item;
+
+    /**
+     * 二维数据
+     * @var
+     */
     protected $tree;
+
+    /**
+     * 每页显示多少条数据
+     * @var int
+     */
     protected $limit = 10;
+
+    /**
+     * 当前用户ID
+     * @var int|null
+     */
     protected $userId;
+
+    /**
+     * 文章发布人
+     * @var
+     */
+    protected $articlesIssuer;
+
+    /**
+     * 处理完成数据
+     * @var
+     */
     protected $data;
+
+    /**
+     * 渲染前端页面
+     * @var string
+     */
     protected $view = 'forum::reply.show';
 
-    public function __construct()
+    /**
+     * 回复颜色
+     * @var array
+     */
+    protected $color = [
+           'green' => 'color-green',
+           'lightGreen' => 'color-light-green',
+           'white' => 'color-white',
+           'lightRed' => 'color-light-red',
+           'yellow' => 'color-yellow'
+    ];
+
+    /**
+     *
+     * Reply constructor.
+     * @param $data
+     */
+    public function __construct($data, $articlesId)
     {
+        $model = ArticleBls::find($articlesId);
+        $this->articlesIssuer = $model->issuer;
+        $this->item = $data;
         $this->userId = Auth::guard('forum')->id();
     }
 
-    public function setTree($data)
+    /**
+     * 设置二维数据
+     * @return $this
+     */
+    public function setTree()
     {
 
-        foreach($data as $value) {
+        foreach($this->item as $value) {
             if($value['parent_id'] == 0) {
-                $children = self::children($data, $value->id);
+                $children = self::children($value->id);
                 $value->childrenCount = 0;
 
                 if(!empty($children)) {
@@ -32,16 +92,21 @@ class Reply implements Renderable
                     $value->childrenCount = count($children);
                 }
 
-                $this->item[] = $value;
+                $this->tree[] = $value;
             }
         }
         return $this;
     }
 
-    protected function children($data, $parentId)
+    /**
+     * 子集数据
+     * @param $parentId
+     * @return array
+     */
+    protected function children($parentId)
     {
         $array = [];
-        foreach($data as $value) {
+        foreach($this->item as $value) {
             if($value->parent_id == $parentId) {
                 $array[] = $value;
             }
@@ -49,11 +114,18 @@ class Reply implements Renderable
         return $array;
     }
 
-    public function getItem($page)
+    /**
+     * 分页
+     * @param $page
+     * @return $this
+     */
+    public function getPage($page)
     {
         $offset = $page * $this->limit;
         $length = $offset + $this->limit;
-        $data = array_slice($this->item, $offset, $length);
+
+        $data = array_slice($this->tree, $offset, $length);
+
         foreach($data as $key => $value){
 
             //子回复格式化数据并且只取2条
@@ -74,16 +146,26 @@ class Reply implements Renderable
         return $this;
     }
 
-    public function setDate($data)
+    /**
+     * 设置一维数据
+     * @return $this
+     */
+    public function setDate()
     {
 
-        foreach ($data as $key => $value) {
+        foreach ($this->item as $key => $value) {
             $this->data[] = $this->formatItem($value);
         }
 
         return $this;
     }
 
+
+    /**
+     * 格式数据
+     * @param $model
+     * @return mixed
+     */
     protected function formatItem($model)
     {
         $model->issuerName = '-';  //发布人
@@ -93,6 +175,7 @@ class Reply implements Renderable
         $model->thumbsDownCheck = in_array($this->userId, $model->thumbs_down); //是否弱过
         $model->isDelete = $this->userId == $model->issuer; //是否有删除的权限
         $model->atName = ''; //@的用户名称
+        $model->color = $this->getColor($model); //更近需求判断颜色
 
         if($issuer = $model->issuers) {
             $model->issuerName = $issuer->name;
@@ -105,13 +188,40 @@ class Reply implements Renderable
         return $model;
     }
 
+    /**
+     * 设置渲染的页面
+     * @param $view
+     * @return $this
+     */
     public function setView($view)
     {
         $this->view = $view;
         return $this;
     }
 
+    protected function getColor($model)
+    {
+        if($model->issuer == $this->articlesIssuer) {
+            return $this->color['yellow'];
+        } else if($model->thumbsDownCount > 9) {
+            return $this->color['lightRed'];
+        } else if($model->thumbsUpCount > 99) {
+            return $this->color['green'];
+        } else if($model->thumbsUpCount > 9) {
+            return $this->color['lightGreen'];
+        } else {
+            return $this->color['white'];
+        }
+    }
 
+
+    /**
+     * 获取渲染视图HTML代码
+     * @param array $array  附加变量
+     * @return string
+     * @throws \Exception
+     * @throws \Throwable
+     */
     public function render($array = [])
     {
         return view($this->view, array_merge(['list' => $this->data], $array))->render();

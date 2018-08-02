@@ -6,15 +6,15 @@
                 <a class="right" href="javascript:void(0)"></a>
             </div>
             <div class="step2">
-                <div><p>江南小雨</p></div>
+                <div><p>{{ $info->name }}</p></div>
             </div>
             <div class="step3">
                 <div>
                     <div>
-                        <span>收到赞数：2156</span><br />
-                        <span>登录次数：1235</span><br />
-                        <span>注册时间：2018/05/01</span><br />
-                        <span><i>？</i>积分 ：120</span>
+                        <span>收到赞数：{!! $info->thumbs_up !!}</span><br />
+                        <span>登录次数：{!! $info->login_num !!}</span><br />
+                        <span>注册时间：{!! mb_substr($info->created_at, 0, 10) !!}</span><br />
+                        <span><i>？</i>积分 ：{!! $info->integral !!}</span>
                     </div>
                 </div>
 

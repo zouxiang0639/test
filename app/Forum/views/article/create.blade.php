@@ -18,7 +18,7 @@
                                 <label>选择板块:</label>
                                 {!! Form::select('tags', Forum::Tags()->getTagsOption(), '', ['placeholder'=>'请选择']) !!}
                             </p>
-                            <p class="ck">
+                            <p class="ck" style="display: none">
                                 <input type="checkbox" id="check1" value="123" name="is_hide" class="check">
                                 <label for="check1">匿名</label>
                             </p>
@@ -33,7 +33,7 @@
                                 <textarea name="contents" ></textarea>
                             </p>
                             <p class="text">
-                                <input name="source" type="text" placeholder="转载内容请填写原作者与来源，原创内容无需填写" />
+                                <input name="source" value=" " type="text" placeholder="转载内容请填写原作者与来源，原创内容无需填写" />
                             </p>
                         </div>
                         <div class="tep4">
@@ -51,11 +51,21 @@
 
     <script src="{{ assets_path("/lib/ckeditor/ckeditor.js") }}"></script>
     <script>
+
         var initial = {
             "CKEditorUploadImage": "{{ route('m.system.upload.ckeditor') }}?_method=PUT&_token=" + $('meta[name="csrf-token"]').attr('content')
         };
 
         $(function(){
+            $('select[name=tags]').change(function() {
+                var tags = $(this).val();
+                if(tags == 4) {
+                    $('.ck').show();
+                } else {
+                    $('.ck').hide();
+                }
+            });
+
             CKEDITOR.replace('contents',
                 {
                     toolbar : [

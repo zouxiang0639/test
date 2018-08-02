@@ -4,6 +4,7 @@ namespace App\Forum\Controllers;
 
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ArticleBls;
+use App\Forum\Bls\Article\ReplyBls;
 use App\Forum\Bls\Article\Requests\ArticleCreateRequest;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
@@ -67,6 +68,7 @@ class ArticleController extends Controller
         return view('forum::article.info', [
             'info' => $model,
             'userId' => Auth::guard('forum')->id(),
+            'replyCount' => ReplyBls::countReply($id),
         ]);
     }
 
