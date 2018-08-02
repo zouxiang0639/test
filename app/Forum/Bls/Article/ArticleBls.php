@@ -4,6 +4,8 @@ namespace App\Forum\Bls\Article;
 
 use App\Consts\Common\WhetherConst;
 use App\Forum\Bls\Article\Model\ArticleModel;
+use App\Forum\Bls\Article\Model\ArticlesRecommendModel;
+use App\Forum\Bls\Article\Model\ArticlesStarModel;
 use App\Forum\Bls\Article\Requests\ArticleCreateRequest;
 use App\Forum\Bls\Article\Traits\ThumbsTraits;
 use Auth;
@@ -16,6 +18,13 @@ class ArticleBls
 
     use ThumbsTraits;
 
+    /**
+     * 文章列表
+     * @param $request
+     * @param string $order
+     * @param int $limit
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
     public static function getArticleLise($request, $order = '`id` DESC', $limit = 20)
     {
         $model = ArticleModel::query();
@@ -27,6 +36,11 @@ class ArticleBls
         return $model->orderByRaw($order)->paginate($limit);
     }
 
+    /**
+     * 创建文章
+     * @param ArticleCreateRequest $request
+     * @return bool
+     */
     public static function createArticle(ArticleCreateRequest $request)
     {
         $model = new ArticleModel();
@@ -40,14 +54,25 @@ class ArticleBls
         $model->ip =  $request->getClientIp();
         $model->thumbs_up =  [];
         $model->thumbs_down =  [];
+        $model->star =  [];
+        $model->recommend =  [];
         return $model->save();
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public static function find($id)
     {
         return ArticleModel::find($id);
     }
 
+    /**
+     * 弱
+     * @param ArticleModel $model
+     * @return array|bool
+     */
     public static function thumbsUp(ArticleModel $model)
     {
         $user = Auth::guard('forum')->user();
@@ -68,6 +93,11 @@ class ArticleBls
         return false;
     }
 
+    /**
+     * 赞
+     * @param ArticleModel $model
+     * @return array|bool
+     */
     public static function thumbsDown(ArticleModel $model)
     {
         $user = Auth::guard('forum')->user();
@@ -84,6 +114,60 @@ class ArticleBls
         }
         return false;
 
+    }
+
+    /**
+     * 收藏文章
+     * @param ArticleModel $model
+     * @return array|bool
+     */
+    public static function starArticle(ArticleModel $model)
+    {
+        $userId = Auth::guard('forum')->id();
+        if(in_array($userId, $model->star)) {
+            ArticlesStarModel::where('user_id', $userId)->where('articles_id', $model->id)->delete();
+            $model->star = static::thumbsMinus($model->star, $userId);
+            $data = false;
+        } else {
+            $star = new ArticlesStarModel();
+            $star->user_id = $userId;
+            $star->articles_id = $model->id;
+            $star->save();
+            $model->star = static::thumbsPlus($model->star, $userId);
+            $data = true;
+        }
+
+        if($model->save()) {
+            return ['data' => $data];
+        }
+        return false;
+    }
+
+    /**
+     * 推荐文章
+     * @param ArticleModel $model
+     * @return array|bool
+     */
+    public static function recommendArticle(ArticleModel $model)
+    {
+        $userId = Auth::guard('forum')->id();
+        if(in_array($userId, $model->recommend)) {
+            ArticlesRecommendModel::where('user_id', $userId)->where('articles_id', $model->id)->delete();
+            $model->recommend = static::thumbsMinus($model->recommend, $userId);
+            $data = false;
+        } else {
+            $star = new ArticlesRecommendModel();
+            $star->user_id = $userId;
+            $star->articles_id = $model->id;
+            $star->save();
+            $model->recommend = static::thumbsPlus($model->recommend, $userId);
+            $data = true;
+        }
+
+        if($model->save()) {
+            return ['data' => $data];
+        }
+        return false;
     }
 
 

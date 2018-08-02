@@ -25,6 +25,7 @@ class CreateReplyTable extends Migration
             $table->index(['id', 'parent_id', 'article_id']);
             $table->timestamps();
         });
+        \DB::statement("ALTER TABLE `reply` comment '回复表'");
     }
 
     /**

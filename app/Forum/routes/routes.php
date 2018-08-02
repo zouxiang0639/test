@@ -22,6 +22,8 @@ Route::group([
             Route::put('thumbsdown/{id}', ['uses' => "ArticleController@thumbsDown", 'as' => 'f.article.thumbsDown']);
 
             Route::put('create/put', ['uses' => "ArticleController@createPut", 'as' => 'f.article.create.put']);
+            Route::put('star/{id}', ['uses' => "ArticleController@star", 'as' => 'f.article.star']);
+            Route::put('recommend/{id}', ['uses' => "ArticleController@recommend", 'as' => 'f.article.recommend']);
         });
     });
 

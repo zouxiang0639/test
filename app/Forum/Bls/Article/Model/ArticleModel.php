@@ -4,6 +4,7 @@ namespace App\Forum\Bls\Article\Model;
 
 use App\Forum\Bls\Users\Model\UsersModel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class ArticleModel extends Model
 {
@@ -22,6 +23,8 @@ class ArticleModel extends Model
     protected $casts = [
         'thumbs_up' => 'array',
         'thumbs_down' => 'array',
+        'star' => 'array',
+        'recommend' => 'array',
     ];
 
     /**
@@ -32,6 +35,16 @@ class ArticleModel extends Model
     public function issuers()
     {
         return $this->belongsTo(UsersModel::class, 'issuer');
+    }
+
+    /**
+     * 收藏
+     *
+     * @return BelongsToMany
+     */
+    public function articlesStar()
+    {
+        return $this->belongsToMany(UsersModel::class, 'articles_star', 'articles_id', 'user_id');
     }
 
 

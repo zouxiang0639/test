@@ -110,6 +110,13 @@ class ArticleController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     * @throws \Exception
+     * @throws \Throwable
+     */
     public function all(Request $request)
     {
         $list = ArticleBls::getArticleLise($request,$order = '`id` DESC', $limit = 1);
@@ -119,6 +126,30 @@ class ArticleController extends Controller
             return (new JsonResponse())->success($html);
         } else {
             throw new LogicException(1010001);
+        }
+    }
+
+    public function star($id)
+    {
+        $model = ArticleBls::find($id);
+        $this->isEmpty($model);
+
+        if($data = ArticleBls::starArticle($model)) {
+            return (new JsonResponse())->success($data['data']);
+        } else {
+            throw new LogicException(1010002);
+        }
+    }
+
+    public function recommend($id)
+    {
+        $model = ArticleBls::find($id);
+        $this->isEmpty($model);
+
+        if($data = ArticleBls::recommendArticle($model)) {
+            return (new JsonResponse())->success($data['data']);
+        } else {
+            throw new LogicException(1010002);
         }
     }
 

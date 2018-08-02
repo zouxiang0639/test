@@ -1,3 +1,8 @@
+
+.fabulous-con .default, #reply-content .default, .article-star .default {
+	color: #e15844; !important;
+}
+
 .new-container {
     padding-top: 0;
 }
@@ -305,17 +310,12 @@
 	color: #000;
 	margin-left: 20px;
 }
-.art-con .link .share > a i{
+.article-star i{
 	display: inline-block;
 	vertical-align: middle;
-	margin: -2px 4px 0 0;
-	background: url(../img/tie-icons.png) no-repeat;
+	color: #999999;
 }
-.art-con .link .share > a.col i{
-	width: 11px;
-	height: 8px;
-	background-position: -147px -35px;
-}
+
 .art-con .link .share > a.pink i{
 	width: 10px;
 	height: 11px;
@@ -375,9 +375,7 @@
 	cursor:pointer;
 
 }
-.fabulous-con .default, #reply-content .default{
-	color: #e15844; !important;
-}
+
 
 .new-inner-tit{
 	height: 36px;

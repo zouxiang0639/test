@@ -23,14 +23,15 @@ class CreateArticlesTable extends Migration
             $table->text('contents')->comment('内容');
             $table->integer('issuer')->comment('发布人');
             $table->string('ip')->comment('IP地址');
-            $table->integer('recommend')->default(0)->comment('推荐');
             $table->integer('browse')->default(0)->comment('浏览');
-            $table->integer('reply')->default(0)->comment('回复');
+            $table->text('recommend')->comment('推荐');
             $table->text('thumbs_up')->comment('赞');
             $table->text('thumbs_down')->comment('弱');
+            $table->text('star')->comment('收藏');
             $table->index(['id', 'tags', 'issuer']);
             $table->timestamps();
         });
+        \DB::statement("ALTER TABLE `articles` comment '文章表'");
     }
 
     /**

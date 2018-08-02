@@ -14,7 +14,12 @@
                     (注册时间:{{ mb_substr($info->issuers->created_at, 0, 10) }} 登陆次数:{{ $info->issuers->login_num }})
                 </p>
                 <p>
-                    <span>推荐 : {{ $info->recommend }}</span>
+                    <span>
+                        <a class="article-recommend">推荐  :
+                            <span class="num">{{ count($info->recommend) }}</span>
+                        </a>
+
+                    </span>
                     <span>浏览 : {{ $info->browse }}</span>
                     <span>回复: {{ $info->reply }}</span>
                 </p>
@@ -38,16 +43,13 @@
                 <div class="link clearfix">
                     <div class="address fl">复制本帖地址<a href="javascript:void(0)"><i></i> http://kongdi.com/humor_1215</a></div>
                     <div class="share fr">
-                        <a class="col" href="javascript:void(0)"><i></i>收藏</a>
-                        <a class="pink" href="javascript:void(0)"><i></i>一键分享</a>
-                        <p class="some">
-                            分享至：
-                            <a class="sm1" href="javascript:void(0)"></a>
-                            <a class="sm2" href="javascript:void(0)"></a>
-                            <a class="sm3" href="javascript:void(0)"></a>
-                            <a class="sm4" href="javascript:void(0)"></a>
-                            <a class="sm5" href="javascript:void(0)"></a>
-                        </p>
+                        <div style="float: inherit; margin-top: 4px;">
+                            <a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=e2f4016d-a184-49b4-832b-65b5519a06ec&style=2&textcolor=#000000&bgcolor=none&bp=weixin,qzone,sinaminiblog,qqim&text=分享"></script>
+                        </div>
+                            <a class="col article-star" style="padding-right: 15px;" href="javascript:void(0)">
+                                <i class="fa fa-heart {!! in_array($userId, $info->star) ? "default" : "" !!}"></i>收藏
+                            </a>
+
                     </div>
                 </div>
             </div>
@@ -157,6 +159,106 @@
 
         $(function(){
             var locked = true;
+
+            //收藏
+            $('.article-star').click(function() {
+                var _this = $(this);
+                if (! locked) {
+                    return false;
+                }
+
+                locked = false;
+
+                $.ajax({
+                    url: '{!! route('f.article.star', ['id' => $info->id]) !!}',
+                    type: 'POST',
+                    data: {
+                        "_method": "PUT",
+                        "_token": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    success:function(res) {
+                        if(res.code == 1020001){
+                            swal({
+                                title: "",
+                                text: "<p class='text-danger'>" + res.msg + "</p>",
+                                html: true
+                            });
+                        }else if(res.code != 0) {
+                            swal({
+                                title: "",
+                                text: "<p class='text-danger'>" + res.data + "</p>",
+                                html: true
+                            });
+
+                        } else {
+                            if(res.data == true) {
+                                _this.children("i").addClass('default');
+                            } else {
+                                _this.children("i").removeClass('default');
+                            }
+                        }
+
+                        locked = true;
+                    },
+                    error:function () {
+                        locked = true;
+                    }
+
+                });
+            });
+
+            //推荐
+            $('.article-recommend').click(function() {
+                var numClass = $(this).children(".num");
+                var num = parseInt(numClass.text());
+
+                if (! locked) {
+                    return false;
+                }
+
+                locked = false;
+
+                $.ajax({
+                    url: '{!! route('f.article.recommend', ['id' => $info->id]) !!}',
+                    type: 'POST',
+                    data: {
+                        "_method": "PUT",
+                        "_token": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    success:function(res) {
+                        if(res.code == 1020001){
+                            swal({
+                                title: "",
+                                text: "<p class='text-danger'>" + res.msg + "</p>",
+                                html: true
+                            });
+                        }else if(res.code != 0) {
+                            swal({
+                                title: "",
+                                text: "<p class='text-danger'>" + res.data + "</p>",
+                                html: true
+                            });
+
+                        } else {
+                            if(res.data == true) {
+                                numClass.text(num + 1);
+                            } else {
+                                numClass.text(num - 1);
+                            }
+                        }
+
+                        locked = true;
+                    },
+                    error:function () {
+                        locked = true;
+                    }
+
+                });
+            });
 
             /**
              *  回复
