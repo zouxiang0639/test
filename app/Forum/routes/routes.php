@@ -41,11 +41,12 @@ Route::group([
     });
 
     //会员
-    Route::group(['prefix'=>'member'], function(){
+    Route::group(['prefix'=>'member', 'middleware' => 'forum.auth:f_member'], function(){
         Route::get('', ['uses' => "MemberController@index", 'as' => 'f.member.index']);
-        Route::get('logout', ['uses' => "MemberController@create", 'as' => 'f.member.logout']);
-        Route::get('info', ['uses' => "MemberController@info", 'as' => 'f.member.info']);
         Route::get('reply', ['uses' => "MemberController@reply", 'as' => 'f.member.reply']);
+        Route::get('recommend', ['uses' => "MemberController@recommend", 'as' => 'f.member.recommend']);
+        Route::get('star', ['uses' => "MemberController@star", 'as' => 'f.member.star']);
+        Route::get('info', ['uses' => "MemberController@info", 'as' => 'f.member.info']);
     });
 
     //登录等功能

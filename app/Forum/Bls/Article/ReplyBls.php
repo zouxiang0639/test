@@ -134,5 +134,29 @@ class ReplyBls
     {
         return ReplyModel::where('article_id', $articleId)->count();
     }
+
+    /**
+     * 根据用户去统计回复
+     * @param $issuer
+     * @return mixed
+     */
+    public static function countReplyByUser($issuer)
+    {
+        return ReplyModel::where('issuer', $issuer)->count();
+    }
+
+    public static function replyJoinArticle($userId, $limit = 10)
+    {
+        $model = ReplyModel::query();
+        $model->leftJoin('articles as a','reply.article_id','=','a.id');
+        $model->leftJoin('users as u','a.issuer','=','u.id');
+        $model->where('reply.issuer', $userId);
+        $model->orderBy('r_id', 'desc');
+        $model->select('reply.created_at as r_created_at', 'reply.contents as r_contents', 'reply.thumbs_up as r_thumbs_up',
+            'reply.thumbs_down as r_thumbs_down', 'reply.id as r_id', 'u.name as u_name', 'a.browse as a_browse',
+            'a.title as a_title', 'a.tags as a_tags','a.recommend as a_recommend', 'a.created_at as a_created_at'
+        );
+        return $model->paginate($limit);
+    }
 }
 

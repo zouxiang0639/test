@@ -23,7 +23,7 @@
     </div>
     <div class="com-new">
         <div class="wm-850">
-            <div class="new-container">
+            <div class="new-container" style="min-height: 400px;">
                 <div class="new-tit"><i></i></div>
                 <table class="new-table">
                     <thead>

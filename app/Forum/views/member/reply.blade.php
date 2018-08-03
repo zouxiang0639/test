@@ -10,20 +10,25 @@
 
     <div class="com-new">
         <div class="wm-850">
+            @foreach($list as $item)
             <div class="new-container new-container-tie">
                 <table class="new-table new-table-tie">
                     <tbody>
                     <tr>
-                        <td width="55">11</td>
-                        <td class="l" width="515"><a href="javascript:void(0)"><i class="i-1"></i>生娃已有六个月，目前为止没有一次性生活，这样正常吗？会不..</a></td>
-                        <td width="95">清歌莫断肠</td>
+                        <td width="55">{!! $item->r_id !!}</td>
+                        <td class="l" width="515">
+                            <a href="javascript:void(0)">
+                                <i class="i-1"></i>
+                                {{ $item->a_title }}
+                            </a>
+                        </td>
+                        <td width="95">{{ $item->u_name }}</td>
                         <td width="95">
-                            537533
-                            <span class="red">2445</span>
+                            {!! $item->a_browse !!}
+                            <span class="red">{!! count(\GuzzleHttp\json_decode($item->a_recommend)) !!}</span>
                         </td>
                         <td width="90">
-                            2018/5/1<br />
-                            16:00
+                            {!! mb_substr($item->a_created_at, 0, 16) !!}
                         </td>
                     </tr>
 
@@ -33,101 +38,89 @@
                     <ul>
                         <li class="color-1">
                             <div class="top">
-                                <p class="left"><b>江南小雨</b>(2018/05/20 16:00) 211.38.***.118 </p>
+                                <p class="left"><b>江南小雨</b>({!! mb_substr($item->r_created_at, 0,16) !!}) 211.38.***.118 </p>
                                 <p class="right">
-                                    <a class="delete" href="javascript:void(0)"><i></i></a>
-                                    <a class="praise" href="javascript:void(0)"><i></i>59</a>
-                                    <a class="neg" href="javascript:void(0)"><i></i>0</a>
-                                    <a class="review" href="javascript:void(0)"><i></i></a>
-                                    <a class="inf" href="javascript:void(0)"><i></i></a>
+                                    <span class="delete-reply" data-href="{!! route('f.reply.destroy',['id' => $item->r_id]) !!}"  href="javascript:void(0)" style="margin-right: 10px; cursor:pointer">
+                                        <i class="fa fa-trash"></i>
+                                    </span>
+                                    <span class="praise" href="javascript:void(0)">
+                                        <i class="fa fa-thumbs-o-up"></i>
+                                        {!! count(\GuzzleHttp\json_decode($item->r_thumbs_up)) !!}
+                                    </span>
+                                    <span class="neg" href="javascript:void(0)">
+                                        <i class="fa fa-thumbs-o-down"></i>
+                                        {!! count(\GuzzleHttp\json_decode($item->r_thumbs_down)) !!}
+                                    </span>
+
                                 </p>
                             </div>
                             <div class="con">
-                                <p>自己坐沙发 搞笑。。</p>
+                                <p>{{ $item->r_contents }}</p>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="new-container new-container-tie">
-                <table class="new-table new-table-tie">
-                    <tbody>
-                    <tr>
-                        <td width="55">11</td>
-                        <td class="l" width="515"><a href="javascript:void(0)"><i class="i-1"></i>生娃已有六个月，目前为止没有一次性生活，这样正常吗？会不..</a></td>
-                        <td width="95">清歌莫断肠</td>
-                        <td width="95">
-                            537533
-                            <span class="red">2445</span>
-                        </td>
-                        <td width="90">
-                            2018/5/1<br />
-                            16:00
-                        </td>
-                    </tr>
-
-                    </tbody>
-                </table>
-                <div class="com-tie">
-                    <ul>
-                        <li class="color-1">
-                            <div class="top">
-                                <p class="left"><b>江南小雨</b>(2018/05/20 16:00) 211.38.***.118 </p>
-                                <p class="right">
-                                    <a class="delete" href="javascript:void(0)"><i></i></a>
-                                    <a class="praise" href="javascript:void(0)"><i></i>59</a>
-                                    <a class="neg" href="javascript:void(0)"><i></i>0</a>
-                                    <a class="review" href="javascript:void(0)"><i></i></a>
-                                    <a class="inf" href="javascript:void(0)"><i></i></a>
-                                </p>
-                            </div>
-                            <div class="con">
-                                <p>自己坐沙发 搞笑。。</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="new-container new-container-tie">
-                <table class="new-table new-table-tie">
-                    <tbody>
-                    <tr>
-                        <td width="55">11</td>
-                        <td class="l" width="515"><a href="javascript:void(0)"><i class="i-1"></i>生娃已有六个月，目前为止没有一次性生活，这样正常吗？会不..</a></td>
-                        <td width="95">清歌莫断肠</td>
-                        <td width="95">
-                            537533
-                            <span class="red">2445</span>
-                        </td>
-                        <td width="90">
-                            2018/5/1<br />
-                            16:00
-                        </td>
-                    </tr>
-
-                    </tbody>
-                </table>
-                <div class="com-tie">
-                    <ul>
-                        <li>
-                            <div class="top">
-                                <p class="left"><b>江南小雨</b>(2018/05/20 16:00) 211.38.***.118 </p>
-                                <p class="right">
-                                    <a class="delete" href="javascript:void(0)"><i></i></a>
-                                    <a class="praise" href="javascript:void(0)"><i></i>59</a>
-                                    <a class="neg" href="javascript:void(0)"><i></i>0</a>
-                                    <a class="review" href="javascript:void(0)"><i></i></a>
-                                    <a class="inf" href="javascript:void(0)"><i></i></a>
-                                </p>
-                            </div>
-                            <div class="con">
-                                <p>自己坐沙发 搞笑。。</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
+            @endforeach
         </div>
     </div>
+    <div class="com-page">
+        {!! $list->appends(Input::get())->render() !!}
+    </div>
+@stop
+
+@section('script')
+    <script>
+        $(function(){
+            var locked = true;
+            //评论删除
+            $(".delete-reply").on('click', function(){
+                var _this = $(this);
+
+                swal({
+                            title: "确认删除?",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "确定",
+                            closeOnConfirm: false,
+                            cancelButtonText: "取消"
+                        },
+                        function(){
+
+                            if (! locked) {
+                                return false;
+                            }
+
+                            locked = false;
+                            $.ajax({
+                                url: _this.attr('data-href'),
+                                type: 'POST',
+                                data: {
+                                    "_method":"DELETE",
+                                    "_token":$('meta[name="csrf-token"]').attr('content')
+                                },
+                                cache: false,
+                                dataType: 'json',
+                                success:function(res) {
+
+                                    if(res.code != 0) {
+                                        swal(res.data, '', 'error');
+                                    } else {
+                                        swal(res.data, '', 'success');
+                                        _this.parents('.new-container-tie').remove();
+                                    }
+                                    locked = true;
+                                },
+                                error:function () {
+                                    locked = true;
+                                }
+
+                            });
+
+                        }
+                );
+            })
+        })
+    </script>
 @stop

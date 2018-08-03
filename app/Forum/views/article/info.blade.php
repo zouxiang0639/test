@@ -506,14 +506,14 @@
                                 cache: false,
                                 dataType: 'json',
                                 success:function(res) {
-
                                     if(res.code != 0) {
                                         swal(res.data, '', 'error');
-                                        locked = true;
+
                                     } else {
                                         swal(res.data, '', 'success');
                                         _this.parents('li').remove();
                                     }
+                                    locked = true;
                                 },
                                 error:function () {
                                     locked = true;

@@ -2,6 +2,7 @@
 
 namespace App\Library\Forum;
 
+use App\Forum\Composers\Composer;
 use Illuminate\Support\ServiceProvider;
 
 class ForumServiceProvider extends ServiceProvider
@@ -44,7 +45,7 @@ class ForumServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        Composer::boot(); //注册视图Composer
         $this->loadAdminAuthConfig();
         $this->registerRouteMiddleware();
         $this->loadViewsFrom(app_path('Forum/views'), 'forum');

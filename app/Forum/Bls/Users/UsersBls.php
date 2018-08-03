@@ -21,4 +21,15 @@ class UsersBls
 
         return false;
     }
+
+
+    public static function articlesStarCount($issuer)
+    {
+        return UsersModel::find($issuer)->articlesStar()->count();
+    }
+
+    public static function articlesRecommendCount($issuer)
+    {
+        return UsersModel::find($issuer)->articlesRecommend()->count();
+    }
 }

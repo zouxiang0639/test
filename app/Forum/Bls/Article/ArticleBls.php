@@ -29,8 +29,14 @@ class ArticleBls
     {
         $model = ArticleModel::query();
 
+        //标签
         if(!empty($request->tag)) {
             $model->where('tags', $request->tag);
+        }
+
+        //发布人
+        if(!empty($request->issuer)) {
+            $model->where('issuer', $request->issuer);
         }
 
         return $model->orderByRaw($order)->paginate($limit);
@@ -172,6 +178,15 @@ class ArticleBls
         return false;
     }
 
+    /**
+     * 统计用户发了多少文章
+     * @param $issuer
+     * @return mixed
+     */
+    public static function ArticleCount($issuer)
+    {
+        return ArticleModel::where('issuer', $issuer)->count();
+    }
 
 }
 

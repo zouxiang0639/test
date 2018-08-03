@@ -237,6 +237,15 @@
 	font-size: 16px;
 }
 
+
+.com-tie li .top .right span{
+	display: inline-block;
+	vertical-align: middle;
+	margin: -3px 10px 0 0;
+	color: #999999;
+	font-size: 16px;
+}
+
 .com-tie li .top .right a span{
 	font-size: 16px;
 	color: #cc6633;
