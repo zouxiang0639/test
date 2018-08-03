@@ -28,7 +28,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|Redirect|\Illuminate\View\View
      */
-    public function Login()
+    public function login()
     {
         if (Auth::guard('admin')->check()) {
             return redirect($this->redirectPath());
