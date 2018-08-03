@@ -10,6 +10,9 @@
     <div class="box">
         <div class="box-header">
             <div class="btn-group" style="margin-right: 10px">
+                <a href="{!! route('m.system.config.set') !!}" class="btn btn-sm btn-success">
+                    <i class="fa fa-arrow-left"></i>&nbsp;&nbsp;返回
+                </a>
                 <a href="{!! route('m.system.config.create') !!}" class="btn btn-sm btn-success">
                     <i class="fa fa-save"></i>&nbsp;&nbsp;新增
                 </a>

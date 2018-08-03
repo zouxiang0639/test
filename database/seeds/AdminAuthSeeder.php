@@ -135,7 +135,7 @@ class AdminAuthSeeder extends Seeder
             'parent_id' => $menu->getKey(),
             'title' => '配置管理',
             'icon' => 'fa-cog',
-            'route' => 'm.system.config.list',
+            'route' => 'm.system.config.set',
             'slug' => 'm_system_config',
             'permissions' => WhetherConst::YES
         ]);

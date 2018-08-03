@@ -1,9 +1,9 @@
 <?php
 
 Route::group([
-    'prefix'        => config('admin.route.prefix'),
-    'namespace'     => config('admin.route.namespace'),
-    'middleware'    => config('admin.route.middleware'),
+    'prefix' => 'admin',
+    'namespace' => 'App\\Admin\\Controllers',
+    'middleware' => ['web', 'admin'],
 ], function(){
 
     Route::get('/', ['uses' => "HomeController@index", 'as' => 'm.home']);
@@ -69,6 +69,8 @@ Route::group([
             Route::get('edit/{id}', ['uses' => "System\\ConfigController@edit", 'as' => 'm.system.config.edit']);
             Route::post('update/{id}', ['uses' => "System\\ConfigController@update", 'as' => 'm.system.config.update']);
             Route::delete('destroy/{id}', ['uses' => "System\\ConfigController@destroy", 'as' => 'm.system.config.destroy']);
+            Route::get('/set', ['uses' => "System\\ConfigController@set", 'as' => 'm.system.config.set']);
+            Route::post('/set', ['uses' => "System\\ConfigController@setPost", 'as' => 'm.system.config.set.post']);
         });
 
         //标签
