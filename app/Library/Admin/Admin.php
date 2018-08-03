@@ -5,7 +5,7 @@ namespace App\Library\Admin;
 use App\Admin\Bls\Auth\MenuBls;
 use App\Library\Admin\Consts\StyleTypeConst;
 use App\Library\Admin\Widgets\Forms;
-use App\Library\Admin\Widgets\NavBar;
+use App\Library\Admin\Widgets\Navbar;
 use App\Library\Admin\Widgets\Tree;
 use App\Library\Admin\Widgets\Upload;
 use Auth;
