@@ -14,6 +14,7 @@ Route::group([
     Route::post('setting/update', ['uses' => "Auth\\AuthController@settingUpdate", 'as' => 'm.setting.update']);
     Route::get('auth/users', ['uses' => "Auth\\AuthController@index", 'as' => 'm.auth.users']);
 
+    //后台管理
     Route::group(['prefix'=>'auth'], function(){
         //后台管理员
         Route::group(['prefix'=>'users', 'middleware' => 'admin.auth:m_auth_users'], function(){
@@ -22,6 +23,7 @@ Route::group([
             Route::post('store', ['uses' => "Auth\\UserController@store", 'as' => 'm.user.store']);
             Route::get('edit/{id}', ['uses' => "Auth\\UserController@edit", 'as' => 'm.user.edit']);
             Route::post('update/{id}', ['uses' => "Auth\\UserController@update", 'as' => 'm.user.update']);
+            Route::delete('destroy/{id}', ['uses' => "Auth\\UserController@destroy", 'as' => 'm.user.destroy']);
         });
 
         //角色
@@ -56,7 +58,7 @@ Route::group([
 
     });
 
-    //系统
+    //系统管理
     Route::group(['prefix'=>'system'], function(){
         Route::put('upload/image', ['uses' => "System\\UploadController@image", 'as' => 'm.system.upload.image']);
         Route::put('upload/ckeditor', ['uses' => "System\\UploadController@ckeditor", 'as' => 'm.system.upload.ckeditor']);

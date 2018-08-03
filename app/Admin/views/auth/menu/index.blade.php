@@ -20,7 +20,6 @@
                             <h3 class="box-title">新增</h3>
                         </div>
                         {!! $form !!}
-
                     </div>
 
                 </div>

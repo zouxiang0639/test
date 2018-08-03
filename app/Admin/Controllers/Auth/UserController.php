@@ -144,4 +144,23 @@ class UserController extends Controller
 
         })->getFormHtml();
     }
+
+    /**
+     * 删除
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
+    public function destroy($id)
+    {
+        if($id == 1) {
+            throw new LogicException(1010002, 'ID为1的不能删除');
+        }
+
+        if(AdminUserBls::destroyAdmin($id)) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010002, '操作失败');
+        }
+    }
 }

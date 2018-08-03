@@ -30,7 +30,6 @@
         <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
                 <tr>
-                    <th></th>
                     <th>编号</th>
                     <th>配置名称</th>
                     <th>配置值</th>
@@ -41,7 +40,6 @@
                 </tr>
                 @foreach($list as $item)
                     <tr>
-                        <td></td>
                         <td>{!! $item->id !!}</td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->value }}</td>
