@@ -117,6 +117,9 @@ class ConfigController extends Controller
         }
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\View
+     */
     public function set()
     {
         $info = ConfigBls::configPluck();
@@ -149,11 +152,19 @@ class ConfigController extends Controller
             $item->create('默认图片', function(HtmlFormTpl $h, FormBuilder $form) use($info) {
                 $h->input = $form->imageOne('default_picture', array_get($info, 'default_picture'), $h->options);
                 $h->set('default_picture', false);
+                $h->helpBlock = '（图片损坏或者默认显示图片）';
             });
 
             $item->create('浏览器上ico logo', function(HtmlFormTpl $h, FormBuilder $form) use($info) {
                 $h->input = $form->imageOne('ico', array_get($info, 'ico'), $h->options);
                 $h->set('ico', false);
+                $h->helpBlock = '（ 后缀为.ico）';
+            });
+
+            $item->create('logo', function(HtmlFormTpl $h, FormBuilder $form) use($info) {
+                $h->input = $form->imageOne('logo', array_get($info, 'logo'), $h->options);
+                $h->set('logo', false);
+                $h->helpBlock = '（ 网址logo）';
             });
 
 
@@ -164,12 +175,24 @@ class ConfigController extends Controller
         ]);
     }
 
+    /**
+     * 批量修改配置
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
     public function setPost(Request $request)
     {
-        ConfigBls::configUpdateByArray($request->all());
+        if( ConfigBls::configUpdateByArray($request->all())) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010002, '操作失败');
+        }
     }
 
     /**
+     * 设置配置
+     *
      * Make a form builder.
      * @param $info
      * @return mixed

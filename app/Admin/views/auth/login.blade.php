@@ -26,7 +26,7 @@
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ route('m.home') }}"><b>{{config('admin.name')}}</b></a>
+        <a href="{{ route('m.home') }}"><b style="color: white">{{config('admin.name')}}</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">

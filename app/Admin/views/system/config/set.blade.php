@@ -11,7 +11,7 @@
 
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#settings" data-toggle="tab">系统配置</a></li>
+                <li class="active"><a href="#settings" data-toggle="tab">网址配置</a></li>
                 {{--<li><a href="#timeline" data-toggle="tab">Timeline</a></li>--}}
                 {{--<li><a href="#activity" data-toggle="tab">activity</a></li>--}}
                 <li style="float: right"><a href="{!! route('m.system.config.list') !!}" >配置列表</a></li>

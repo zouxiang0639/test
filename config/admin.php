@@ -23,6 +23,13 @@ return [
     'title' => 'Admin',
 
     /*
+     * admin_config 数据库配置注入
+     */
+    'config' => env('ADMIN_CONFIG', false),
+
+
+    'login_background_image' => assets_path("/admin/img/login_background.jpg"),
+    /*
      * Laravel-admin auth setting.
      */
     'auth' => [

@@ -38,11 +38,16 @@ class AdminConfigSeeder extends Seeder
             [
                 'name' => 'default_picture',
                 'description' => '默认图片',
-                'value' => '',
+                'value' => 'default-picture.png',
             ],
             [
                 'name' => 'ico',
                 'description' => '浏览器上logo',
+                'value' => '',
+            ],
+            [
+                'name' => 'logo',
+                'description' => 'logo',
                 'value' => '',
             ],
         ]);

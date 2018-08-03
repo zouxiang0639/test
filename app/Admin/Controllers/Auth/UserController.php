@@ -20,7 +20,6 @@ use View;
 class UserController extends Controller
 {
 
-
     /**
      * 管理员列表
      * @param Redirect $request

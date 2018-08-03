@@ -19,6 +19,7 @@ class CreateAdminAuthTable extends Migration
             $table->string('password', 60)->comment('密码');
             $table->string('name')->comment('昵称');
             $table->string('avatar')->default('')->comment('头像');
+            $table->tinyInteger('status')->comment('状态 :WhetherConst');
             $table->string('remember_token', 100)->default('')->comment('令牌');
             $table->timestamps();
         });

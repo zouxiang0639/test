@@ -16,8 +16,9 @@ class AppServiceProvider extends ServiceProvider
     {
 
         //注入配置
-        //ConfigBls::load();
-
+        if(config('admin.config')) {
+            ConfigBls::load();
+        }
     }
 
     /**
