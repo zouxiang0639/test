@@ -87,17 +87,6 @@ class Admin
         return (new Forms())->form($callback);
     }
 
-    public function tag($tag, $class)
-    {
-
-        $tagHtml = [];
-        foreach($tag as $value) {
-
-            $tagHtml[] =  Form::tag('span', e($value), ['class' => "label $class", "sta"]);
-
-        }
-        return implode('&nbsp;', $tagHtml);
-    }
 
     public function setCss($type, $data)
     {

@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
     {
          $this->call([
              AdminAuthSeeder::class,
-             ForumTagsSeeder::class
+             ForumTagsSeeder::class,
+             AdminConfigSeeder::class
          ]);
     }
 }

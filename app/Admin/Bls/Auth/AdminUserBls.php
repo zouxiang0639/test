@@ -14,6 +14,15 @@ class AdminUserBls
 {
     use RelationTraits;
 
+    const ONLY = ['roles', 'permissions'];
+
+    /**
+     * 管理员列表
+     * @param Redirect $request
+     * @param string $order
+     * @param int $limit
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
     public static function getAdminUser(Redirect $request, $order = '`id` DESC', $limit = 20)
     {
         $model = AdministratorModel::query();
@@ -25,6 +34,10 @@ class AdminUserBls
         return $model->orderByRaw($order)->paginate($limit);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public static function find($id)
     {
        return AdministratorModel::where('id', $id)->first();
@@ -56,6 +69,11 @@ class AdminUserBls
         });
     }
 
+    /**
+     * 存储
+     * @param UserRequest $request
+     * @return mixed
+     */
     public static function storeAdminUser(UserRequest $request)
     {
         return AdministratorModel::query()->getQuery()->getConnection()->transaction(function () use($request) {
@@ -69,7 +87,20 @@ class AdminUserBls
 
             return $result;
         });
+    }
 
+    /**
+     * 删除管理员
+     * @param $id
+     * @return mixed
+     */
+    public static function destroyAdmin($id)
+    {
+        return AdministratorModel::query()->getQuery()->getConnection()->transaction(function () use($id) {
+            $model = AdministratorModel::with(self::ONLY)->findOrFail($id);
+            static::deleteRelation($model, self::ONLY);
+            return $model->delete();
+        });
     }
 
 }

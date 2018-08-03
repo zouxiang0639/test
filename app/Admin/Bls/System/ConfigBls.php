@@ -77,4 +77,22 @@ class ConfigBls
         $model = ConfigModel::all(['name', 'value'])->pluck('value', 'name')->toArray();
         config(['config' => $model]);
     }
+
+    public static function configPluck()
+    {
+        $model = ConfigModel::all(['name', 'value'])->pluck('value', 'name')->toArray();
+        return $model;
+    }
+
+    public static function configUpdateByArray($array)
+    {
+        foreach($array as $key => $value) {
+            $model = ConfigModel::where('name', $key)->first();
+            if($model) {
+                $model->value = $value;
+                $model->save();
+            }
+        }
+        return true;
+    }
 }

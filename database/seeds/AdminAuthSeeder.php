@@ -30,15 +30,16 @@ class AdminAuthSeeder extends Seeder
         //创建角色
         RoleModel::truncate();
         $role =  RoleModel::create([
-            'name' => '创建管理员',
+            'name' => '超级管理员',
             'slug' => RoleSlugConst::ROLE_SUPER,
         ]);
 
         //给超级管理员关联角色
-        $administrator->roles()->save($role);
+        $administrator->roles()->sync($role);
 
         //清空权限
         PermissionModel::truncate();
+
 
         //创建后台菜单以及权限
         $menuRequest = new MenuRequest();
@@ -135,7 +136,7 @@ class AdminAuthSeeder extends Seeder
             'parent_id' => $menu->getKey(),
             'title' => '配置管理',
             'icon' => 'fa-cog',
-            'route' => 'm.system.config.list',
+            'route' => 'm.system.config.set',
             'slug' => 'm_system_config',
             'permissions' => WhetherConst::YES
         ]);

@@ -1,9 +1,9 @@
 <?php
 
 Route::group([
-    'prefix'        => config('admin.route.prefix'),
-    'namespace'     => config('admin.route.namespace'),
-    'middleware'    => config('admin.route.middleware'),
+    'prefix' => 'admin',
+    'namespace' => 'App\\Admin\\Controllers',
+    'middleware' => ['web', 'admin'],
 ], function(){
 
     Route::get('/', ['uses' => "HomeController@index", 'as' => 'm.home']);
@@ -14,6 +14,7 @@ Route::group([
     Route::post('setting/update', ['uses' => "Auth\\AuthController@settingUpdate", 'as' => 'm.setting.update']);
     Route::get('auth/users', ['uses' => "Auth\\AuthController@index", 'as' => 'm.auth.users']);
 
+    //后台管理
     Route::group(['prefix'=>'auth'], function(){
         //后台管理员
         Route::group(['prefix'=>'users', 'middleware' => 'admin.auth:m_auth_users'], function(){
@@ -22,6 +23,7 @@ Route::group([
             Route::post('store', ['uses' => "Auth\\UserController@store", 'as' => 'm.user.store']);
             Route::get('edit/{id}', ['uses' => "Auth\\UserController@edit", 'as' => 'm.user.edit']);
             Route::post('update/{id}', ['uses' => "Auth\\UserController@update", 'as' => 'm.user.update']);
+            Route::delete('destroy/{id}', ['uses' => "Auth\\UserController@destroy", 'as' => 'm.user.destroy']);
         });
 
         //角色
@@ -56,7 +58,7 @@ Route::group([
 
     });
 
-    //系统
+    //系统管理
     Route::group(['prefix'=>'system'], function(){
         Route::put('upload/image', ['uses' => "System\\UploadController@image", 'as' => 'm.system.upload.image']);
         Route::put('upload/ckeditor', ['uses' => "System\\UploadController@ckeditor", 'as' => 'm.system.upload.ckeditor']);
@@ -69,6 +71,8 @@ Route::group([
             Route::get('edit/{id}', ['uses' => "System\\ConfigController@edit", 'as' => 'm.system.config.edit']);
             Route::post('update/{id}', ['uses' => "System\\ConfigController@update", 'as' => 'm.system.config.update']);
             Route::delete('destroy/{id}', ['uses' => "System\\ConfigController@destroy", 'as' => 'm.system.config.destroy']);
+            Route::get('/set', ['uses' => "System\\ConfigController@set", 'as' => 'm.system.config.set']);
+            Route::post('/set', ['uses' => "System\\ConfigController@setPost", 'as' => 'm.system.config.set.post']);
         });
 
         //标签

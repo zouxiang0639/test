@@ -27,10 +27,7 @@
         <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
                 <tr>
-                    <th></th>
-                    <th>ID
-                        <a class="fa fa-fw fa-sort-amount-asc" href="http://bbs.com/admin/auth/users?_sort%5Bcolumn%5D=id&amp;_sort%5Btype%5D=desc"></a>
-                    </th>
+                    <th>编号</th>
                     <th>用户名</th>
                     <th>名称</th>
                     <th>角色</th>
@@ -40,24 +37,20 @@
                 </tr>
                 @foreach($list as $item)
                     <tr>
-                        <td></td>
                         <td>{!! $item->id !!}</td>
                         <td>{!! $item->username !!}</td>
                         <td>{!! $item->name !!}</td>
                         <td>
-                            @if($roles = $item->roles)
-                                @foreach($roles as $value)
-                                    <span class="label label-success">{!! $value->name !!}</span>
-                                @endforeach
-                            @else
-                                -
-                            @endif
+                            {!! Html::getTag($item->roles->pluck('name'),'label label-success') !!}
                         </td>
                         <td>{!! $item->created_at !!}</td>
                         <td>{!! $item->updated_at !!}</td>
                         <td>
                             <a href="{!! route('m.user.edit', ['id' => $item->id]) !!}">
                                 <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="javascript:void(0);" data-url="{!! route('m.user.destroy', ['id' => $item->id]) !!}" class="item-delete">
+                                <i class="fa fa-trash"></i>
                             </a>
                         </td>
                     </tr>

@@ -10,6 +10,9 @@
     <div class="box">
         <div class="box-header">
             <div class="btn-group" style="margin-right: 10px">
+                <a href="{!! route('m.system.config.set') !!}" class="btn btn-sm btn-success">
+                    <i class="fa fa-arrow-left"></i>&nbsp;&nbsp;返回
+                </a>
                 <a href="{!! route('m.system.config.create') !!}" class="btn btn-sm btn-success">
                     <i class="fa fa-save"></i>&nbsp;&nbsp;新增
                 </a>
@@ -27,7 +30,6 @@
         <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
                 <tr>
-                    <th></th>
                     <th>编号</th>
                     <th>配置名称</th>
                     <th>配置值</th>
@@ -38,7 +40,6 @@
                 </tr>
                 @foreach($list as $item)
                     <tr>
-                        <td></td>
                         <td>{!! $item->id !!}</td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->value }}</td>

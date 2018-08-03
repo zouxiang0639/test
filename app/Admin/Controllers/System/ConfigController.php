@@ -117,8 +117,82 @@ class ConfigController extends Controller
         }
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function set()
+    {
+        $info = ConfigBls::configPluck();
+        $form = Admin::form(function(Forms $item) use ($info)  {
+
+            $item->create('网站标题', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->text('title', array_get($info, 'title'), $h->options);
+                $h->set('title', false);
+                $h->helpBlock = '（网站显示标题）';
+            });
+
+            $item->create('网站描述', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->textarea('description', array_get($info, 'description'), $h->options);
+                $h->set('description', false);
+                $h->helpBlock = '（网站搜索引擎描述）';
+            });
+
+            $item->create('网站关键字', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->textarea('keywords', array_get($info, 'keywords'), $h->options);
+                $h->set('keywords', false);
+                $h->helpBlock = '（网站搜索引擎关键字） 多个用 ( , )隔开';
+            });
+
+            $item->create('网站备案号', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->text('icp', array_get($info, 'icp'), $h->options);
+                $h->set('icp', false);
+                $h->helpBlock = '（设置在网站底部显示的备案号，如“沪ICP备12007941号-2）';
+            });
+
+            $item->create('默认图片', function(HtmlFormTpl $h, FormBuilder $form) use($info) {
+                $h->input = $form->imageOne('default_picture', array_get($info, 'default_picture'), $h->options);
+                $h->set('default_picture', false);
+                $h->helpBlock = '（图片损坏或者默认显示图片）';
+            });
+
+            $item->create('浏览器上ico logo', function(HtmlFormTpl $h, FormBuilder $form) use($info) {
+                $h->input = $form->imageOne('ico', array_get($info, 'ico'), $h->options);
+                $h->set('ico', false);
+                $h->helpBlock = '（ 后缀为.ico）';
+            });
+
+            $item->create('logo', function(HtmlFormTpl $h, FormBuilder $form) use($info) {
+                $h->input = $form->imageOne('logo', array_get($info, 'logo'), $h->options);
+                $h->set('logo', false);
+                $h->helpBlock = '（ 网址logo）';
+            });
+
+
+        })->getFormHtml();
+
+        return View::make('admin::system.config.set',[
+            'form' => $form
+        ]);
+    }
 
     /**
+     * 批量修改配置
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
+    public function setPost(Request $request)
+    {
+        if( ConfigBls::configUpdateByArray($request->all())) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010002, '操作失败');
+        }
+    }
+
+    /**
+     * 设置配置
+     *
      * Make a form builder.
      * @param $info
      * @return mixed

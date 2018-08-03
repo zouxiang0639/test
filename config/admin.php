@@ -18,32 +18,17 @@ return [
     'logo-mini' => '<b>La</b>',
 
     /*
-     * Route configuration.
-     */
-    'route' => [
-
-        'prefix' => 'admin',
-
-        'namespace' => 'App\\Admin\\Controllers',
-
-        'middleware' => ['web', 'admin'],
-    ],
-
-    /*
-     * Laravel-admin install directory.
-     */
-    'directory' => app_path('Admin'),
-
-    /*
      * Laravel-admin html title.
      */
     'title' => 'Admin',
 
     /*
-     * Use `https`.
+     * admin_config 数据库配置注入
      */
-    'secure' => false,
+    'config' => env('ADMIN_CONFIG', false),
 
+
+    'login_background_image' => assets_path("/admin/img/login_background.jpg"),
     /*
      * Laravel-admin auth setting.
      */
@@ -64,69 +49,6 @@ return [
     ],
 
     /*
-     * Laravel-admin upload setting.
-     */
-    'upload' => [
-
-        'disk' => 'admin',
-
-        'directory' => [
-            'image' => 'images',
-            'file'  => 'files',
-        ],
-    ],
-
-    /*
-     * Laravel-admin database setting.
-     */
-//    'database' => [
-//
-//        // Database connection for following tables.
-//        'connection' => '',
-//
-//        // User tables and model.
-//        'users_table' => 'admin_users',
-//        'users_model' => \App\Admin\Bls\Auth\Model\Administrator::class,
-//
-//        // Role table and model.
-//        'roles_table' => 'admin_roles',
-//        'roles_model' => \App\Admin\Bls\Auth\Model\Role::class,
-//
-//        // Permission table and model.
-//        'permissions_table' => 'admin_permissions',
-//        'permissions_model' => \App\Admin\Bls\Auth\Model\Permission::class,
-//
-//        // Menu table and model.搭min
-//        'menu_table' => 'admin_menu',
-//        'menu_model' => \App\Admin\Bls\Auth\Model\Menu::class,
-//
-//        // Pivot table for table above.
-//        'operation_log_table'    => 'admin_operation_log',
-//        'user_permissions_table' => 'admin_user_permissions',
-//        'role_users_table'       => 'admin_role_users',
-//        'role_permissions_table' => 'admin_role_permissions',
-//        'role_menu_table'        => 'admin_role_menu',
-//    ],
-
-    /*
-     * By setting this option to open or close operation log in laravel-admin.
-     */
-    'operation_log' => [
-
-        'enable' => true,
-
-        /*
-         * Routes that will not log to database.
-         *
-         * All method to path like: admin/auth/logs
-         * or specific method to path like: get:admin/auth/logs
-         */
-        'except' => [
-            'admin/auth/logs*',
-        ],
-    ],
-
-    /*
      * @see https://adminlte.io/docs/2.4/layout
      */
     'skin' => 'skin-blue-light',
@@ -143,19 +65,9 @@ return [
     'layout' => ['sidebar-mini'],
 
     /*
-     * Background image in login page
-     */
-    'login_background_image' => '',
-
-    /*
      * Version displayed in footer.
      */
-    'version' => '1.5.x-dev',
+    'version' => 'v1.0-dev',
 
-    /*
-     * Settings for extensions.
-     */
-    'extensions' => [
 
-    ],
 ];

@@ -101,6 +101,10 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
+        if($id == 1) {
+            throw new LogicException(1010002, 'ID为1的不能删除');
+        }
+
         if(RoleBls::destroyRole($id)) {
             return (new JsonResponse())->success('操作成功');
         } else {
@@ -117,10 +121,17 @@ class RoleController extends Controller
 
         return Admin::form(function($item) use ($info)  {
 
-            $item->create('标识', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->text('slug', array_get($info, 'slug'), $h->options);
-                $h->set('slug', true);
-            });
+            if($info) {
+                $item->create('标识', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                    $h->input = $form->display(array_get($info, 'slug'));
+                    $h->input .= $form->hidden('slug', array_get($info, 'slug'));
+                });
+            } else {
+                $item->create('标识', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                    $h->input = $form->text('slug', array_get($info, 'slug'), $h->options);
+                    $h->set('slug', true);
+                });
+            }
 
             $item->create('名称', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->text('name', array_get($info, 'name'), $h->options);
