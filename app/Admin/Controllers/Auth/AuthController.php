@@ -31,7 +31,7 @@ class AuthController extends Controller
     public function login()
     {
         if (Auth::guard('admin')->check()) {
-            return redirect($this->redirectPath());
+            return redirect()->route('m.home');
         }
 
         return View::make('admin::auth.login');
@@ -52,6 +52,9 @@ class AuthController extends Controller
         $validator = Validator::make($credentials, [
             'username' => 'required',
             'password' => 'required',
+        ],[
+            'username.required' => '用户名不能为空',
+            'password.required' => '密码不能为空'
         ]);
 
         if ($validator->fails()) {
@@ -63,7 +66,7 @@ class AuthController extends Controller
         }
 
         return back()->withInput()->withErrors([
-            'username' => $this->getFailedLoginMessage(),
+            'username' => '账号或密码错误',
         ]);
     }
 
@@ -80,7 +83,7 @@ class AuthController extends Controller
 
         $request->session()->invalidate();
 
-        return redirect(config('admin.route.prefix'));
+        return redirect()->route('m.login');
     }
 
     /**
@@ -151,30 +154,6 @@ class AuthController extends Controller
     }
 
     /**
-     * @return string|\Symfony\Component\Translation\TranslatorInterface
-     */
-    protected function getFailedLoginMessage()
-    {
-        return Lang::has('auth.failed')
-            ? trans('auth.failed')
-            : 'These credentials do not match our records.';
-    }
-
-    /**
-     * Get the post login redirect path.
-     *
-     * @return string
-     */
-    protected function redirectPath()
-    {
-        if (method_exists($this, 'redirectTo')) {
-            return $this->redirectTo();
-        }
-
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : config('admin.route.prefix');
-    }
-
-    /**
      * Send the response after the user was authenticated.
      *
      * @param \Illuminate\Http\Request $request
@@ -183,11 +162,10 @@ class AuthController extends Controller
      */
     protected function sendLoginResponse(Request $request)
     {
-        admin_toastr(trans('admin.login_successful'));
-
+        admin_toastr('登录成功');
         $request->session()->regenerate();
 
-        return redirect()->intended($this->redirectPath());
+        return redirect()->route('m.home');
     }
 
 }
