@@ -92,6 +92,11 @@ Route::group([
             Route::get('', ['uses' => "System\\LogController@index", 'as' => 'm.system.log.list']);
         });
 
+        //数据空备份
+        Route::group(['prefix'=>'backup', 'middleware' => 'admin.auth:m_system_backup'], function(){
+            Route::get('', ['uses' => "System\\BackupController@index", 'as' => 'm.system.backup.list']);
+        });
+
     });
 
     //示例
