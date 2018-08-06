@@ -162,5 +162,15 @@ class AdminAuthSeeder extends Seeder
         ]);
         MenuBls::storeMenu($menuRequest);
 
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '数据备份',
+            'icon' => 'fa-copy',
+            'route' => 'm.system.backup.list',
+            'slug' => 'm_system_backup',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);
+
     }
 }
