@@ -14,7 +14,7 @@
                 <li class="active"><a href="#settings" data-toggle="tab">网址配置</a></li>
                 {{--<li><a href="#timeline" data-toggle="tab">Timeline</a></li>--}}
                 {{--<li><a href="#activity" data-toggle="tab">activity</a></li>--}}
-                <li style="float: right"><a href="{!! route('m.system.config.list') !!}" >配置列表</a></li>
+                <li class="btn-primary" style="float: right;"><a style="color: white" href="{!! route('m.system.config.list') !!}" >配置列表</a></li>
             </ul>
             <div class="tab-content">
                 <div class="active tab-pane" id="settings">

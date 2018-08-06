@@ -60,8 +60,12 @@ Route::group([
 
     //系统管理
     Route::group(['prefix'=>'system'], function(){
-        Route::put('upload/image', ['uses' => "System\\UploadController@image", 'as' => 'm.system.upload.image']);
-        Route::put('upload/ckeditor', ['uses' => "System\\UploadController@ckeditor", 'as' => 'm.system.upload.ckeditor']);
+
+        //上传文件
+        Route::group(['prefix'=>'upload'], function(){
+            Route::put('image', ['uses' => "System\\UploadController@image", 'as' => 'm.system.upload.image']);
+            Route::put('ckeditor', ['uses' => "System\\UploadController@ckeditor", 'as' => 'm.system.upload.ckeditor']);
+        });
 
         //配置
         Route::group(['prefix'=>'config', 'middleware' => 'admin.auth:m_system_config'], function(){
@@ -95,6 +99,18 @@ Route::group([
         //数据空备份
         Route::group(['prefix'=>'backup', 'middleware' => 'admin.auth:m_system_backup'], function(){
             Route::get('', ['uses' => "System\\BackupController@index", 'as' => 'm.system.backup.list']);
+            Route::post('export', ['uses' => "System\\BackupController@export", 'as' => 'm.system.backup.export']);
+            Route::put('export', ['uses' => "System\\BackupController@exportPut", 'as' => 'm.system.backup.export.put']);
+            Route::post('optimize', ['uses' => "System\\BackupController@optimize", 'as' => 'm.system.backup.optimize']);
+            Route::post('repair', ['uses' => "System\\BackupController@repair", 'as' => 'm.system.backup.repair']);
+            Route::get('file', ['uses' => "System\\BackupController@file", 'as' => 'm.system.backup.file']);
+            Route::delete('destroy/{file}', ['uses' => "System\\BackupController@destroy", 'as' => 'm.system.backup.destroy']);
+            Route::get('download/{file}', ['uses' => "System\\BackupController@download", 'as' => 'm.system.backup.download']);
+
+            if(config('admin.data_backup_import')) {
+                Route::post('import', ['uses' => "System\\BackupController@import", 'as' => 'm.system.backup.import']);
+                Route::put('import', ['uses' => "System\\BackupController@importPut", 'as' => 'm.system.backup.import.put']);
+            }
         });
 
     });

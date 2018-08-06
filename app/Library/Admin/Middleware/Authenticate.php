@@ -4,10 +4,16 @@ namespace App\Library\Admin\Middleware;
 
 use App\Consts\Admin\Role\RoleSlugConst;
 use App\Consts\Common\WhetherConst;
+use App\Exceptions\LogicException;
 use Closure;
 use Auth;
 use Illuminate\Contracts\Auth\Guard;
 
+/**
+ * Created by Authenticate.
+ * @author: zouxiang
+ * @date:
+ */
 class Authenticate
 {
     /**
@@ -27,22 +33,26 @@ class Authenticate
 
     /**
      * Handle an incoming request.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
-     * @param $permissionCode
-     *
-     * @return mixed
+     * @param $request
+     * @param Closure $next
+     * @param string $permissionCode
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws LogicException
      */
     public function handle($request, Closure $next, $permissionCode = '')
     {
+        //如果是数据库还原就跳出所有权限
+        if(config('admin.data_backup_import')) {
+            if (in_array(\Request::route()->getName(), ['m.system.backup.import.put', 'm.system.backup.import'])) {
+                return $next($request);
+            }
+        }
 
         if (!$this->shouldPassThrough($request)){
 
-
             if ($this->auth->guest()) {
                 if ($request->ajax()) {
-                    return response('Unauthorized.', 401);
+                    throw new LogicException(1010004);
                 } else {
                     return redirect()->route('m.login');
                 }
