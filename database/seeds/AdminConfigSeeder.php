@@ -18,17 +18,17 @@ class AdminConfigSeeder extends Seeder
             [
                 'name' => 'title',
                 'description' => '网站标题',
-                'value' => '',
+                'value' => '空地社区',
             ],
             [
                 'name' => 'description',
                 'description' => '网站描述',
-                'value' => '',
+                'value' => '空地社区',
             ],
             [
                 'name' => 'keywords',
                 'description' => '网站关键字',
-                'value' => '',
+                'value' => '空地社区',
             ],
             [
                 'name' => 'icp',

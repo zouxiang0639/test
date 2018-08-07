@@ -253,11 +253,10 @@ acronym {
 }
 .nav{
 	padding: 10px 0;
-	height: 28px;
+	height: 48px;
 	background: #2c56a5;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
-	height: -moz-min-content;
 }
 .nav-list{
 	margin-left: 10px;

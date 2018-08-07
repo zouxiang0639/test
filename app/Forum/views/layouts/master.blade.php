@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>板块列表</title>
+    <title>{!! config('config.title', '空地社区') !!}</title>
+    <meta name='keywords' content="{!! config('config.keywords', '空地社区') !!}" />
+    <meta name='description' content="{!! config('config.description', '空地社区') !!}" />
     <script src="{{  assets_path("/forum/js/jQuery-2.1.4.min.js") }}"></script>
 
     <link rel="stylesheet" href="{!! assets_path("/forum/css/common.css") !!}" />

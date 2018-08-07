@@ -8,12 +8,15 @@ use App\Forum\Bls\Article\Requests\ReplyCreateRequest;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
 use Illuminate\Http\Request;
+use Forum;
 
 class ReplyController extends Controller
 {
 
     public function store(ReplyCreateRequest $request)
     {
+        // 敏感词替换为***为例
+        $request->contents = Forum::sensitive($request->contents);
         if (ReplyBls::storeReply($request)) {
             return (new JsonResponse())->success('回复成功');
         } else {

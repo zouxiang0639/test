@@ -9,6 +9,7 @@ use App\Forum\Bls\Article\Requests\ArticleCreateRequest;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
 use Auth;
+use Forum;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -32,6 +33,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
+
         return view('forum::article.create');
     }
 
@@ -43,6 +45,10 @@ class ArticleController extends Controller
      */
     public function createPut(ArticleCreateRequest $request)
     {
+
+         // 敏感词替换为***为例
+         $request->contents = Forum::sensitive($request->contents);
+         $request->title = Forum::sensitive($request->title);
          if (ArticleBls::createArticle($request)) {
              return (new JsonResponse())->success('发布成功');
          } else {
