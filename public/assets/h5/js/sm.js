@@ -1978,7 +1978,7 @@ Device/OS Detection
 
             /**
              * 处理选择年份时的手势操作事件
-             * 
+             *
              * Start - edit by JSoon
              */
             function handleYearTouchStart (e) {
@@ -2090,7 +2090,7 @@ Device/OS Detection
             p.container.find('.current-year-value').on('click', handleYearSelector);
 
             // 选择月份
-            p.container.find('.current-month-value').on('click', handleMonthSelector); 
+            p.container.find('.current-month-value').on('click', handleMonthSelector);
             /**
              * End - edit by JSoon
              */
@@ -2099,7 +2099,7 @@ Device/OS Detection
             if (p.params.touchMove) {
                 /**
                  * 给年份选择器绑定手势操作事件
-                 * 
+                 *
                  * Start - edit by JSoon
                  */
                 p.yearsPickerWrapper.on($.touchEvents.start, handleYearTouchStart);
@@ -2134,7 +2134,7 @@ Device/OS Detection
         };
 
         // Calendar Methods
-        
+
         /**
          * 1. 生成年份和月份选择器DOM结构
          * 2. 年份选择和月份选择的pick事件函数
@@ -2253,8 +2253,8 @@ Device/OS Detection
         };
         /**
          * End - edit by JSoon
-         */ 
-        
+         */
+
         p.daysInMonth = function (date) {
             var d = new Date(date);
             return new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
@@ -2670,7 +2670,7 @@ Device/OS Detection
             var layoutDate = p.value && p.value.length ? p.value[0] : new Date().setHours(0,0,0,0);
             /**
              * 生成年份组和月份组DOM
-             * 
+             *
              * Start - edit by JSoon
              */
             var prevYearsHTML = p.yearsGroupHTML(layoutDate, 'prev');
@@ -2708,7 +2708,7 @@ Device/OS Detection
 
             /**
              * 将年份组/月份组DOM添加document中
-             * 
+             *
              * Start - edit by JSoon
              */
             pickerHTML =
@@ -2783,7 +2783,7 @@ Device/OS Detection
                  * 修复[#308](https://github.com/sdc-alibaba/SUI-Mobile/issues/308)
                  * 场景：内联页面中存在日历控件的input
                  * 问题：因未在关闭时unbind click openOnInput事件导致多次调用p.open()而生成多个日历
-                 * 
+                 *
                  * Start - edit by JSoon
                  */
                 $(document).on('beforePageSwitch', function() {
@@ -2846,7 +2846,7 @@ Device/OS Detection
                 /**
                  * 获取全局年份组及其wrapper的zepto对象
                  * 获取全局月份组wrapper的zepto对象
-                 * 
+                 *
                  * Start - edit by JSoon
                  */
                 p.yearsPickerWrapper = p.container.find('.picker-calendar-years-picker-wrapper');
@@ -2866,7 +2866,7 @@ Device/OS Detection
                 // Set initial translate
                 /**
                  * 初始化年份组过渡动画位置
-                 * 
+                 *
                  * Start - edit by JSoon
                  */
                 p.yearsTranslate = 0;
@@ -3431,7 +3431,7 @@ Device/OS Detection
 
         p.opened = false;
         p.open = function () {
-       
+
             if (!p.opened) {
 
                 // Layout
@@ -3442,12 +3442,12 @@ Device/OS Detection
                     p.container = $(p.pickerHTML);
                     p.container.addClass('picker-modal-inline');
                     $(p.params.container).append(p.container);
-                    
+
                 }
                 else {
 
                     p.container = $($.pickerModal(p.pickerHTML));
-                    
+
                     $(p.container)
                         .on('close', function () {
                             onPickerClose();
@@ -3511,7 +3511,7 @@ Device/OS Detection
     });
 
     $.fn.picker = function(params) {
-      
+
         var args = arguments;
         return this.each(function() {
             if(!this) return;
@@ -3686,7 +3686,7 @@ Device/OS Detection
 
         me.extend = function(target, obj) {
             for (var i in obj) {  // jshint ignore:line
-                    target[i] = obj[i]; 
+                    target[i] = obj[i];
             }
         };
 
@@ -3933,7 +3933,7 @@ Device/OS Detection
 
             snapThreshold: 0.334,
 
-            // INSERT POINT: OPTIONS 
+            // INSERT POINT: OPTIONS
 
             startX: 0,
             startY: 0,
@@ -3999,7 +3999,7 @@ Device/OS Detection
 
         // INSERT POINT: NORMALIZATION
 
-        // Some defaults    
+        // Some defaults
         this.x = 0;
         this.y = 0;
         this.directionX = 0;
@@ -7992,9 +7992,9 @@ Device/OS Detection
         // 如果 panel 的 effect 是 reveal 时,似乎是 page 的动画或别的样式原因导致了 transitionEnd 时间不会触发
         // 这里暂且处理一下
         $('body').removeClass('panel-closing');
-        $.allowPanelOpen = true;  
+        $.allowPanelOpen = true;
     });
-   
+
     $(window).on('pageInit', function() {
         $.hideIndicator();
         $.lastPosition({

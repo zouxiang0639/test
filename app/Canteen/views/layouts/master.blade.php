@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{!!  assets_path("/h5/css/sm.css")  !!}">
     <link rel="stylesheet" href="{!!  assets_path("/h5/css/swiper.min.css")  !!}">
     <link rel="stylesheet" href="{!!  assets_path("/h5/css/megalife.css")  !!}">
+    <link rel="stylesheet" href="{{  assets_path("/lib/font-awesome/css/font-awesome.min.css") }}">
     <script src="{!!  assets_path("/h5/js/zepto.js")  !!}"></script>
     <script src="{!!  assets_path("/h5/js/config.js")  !!}"></script>
     <script src="{!!  assets_path("/h5/js/ajax.js")  !!}"></script>
