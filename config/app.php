@@ -179,7 +179,7 @@ return [
 
         App\Library\Admin\AdminServiceProvider::class,
         App\Library\Admin\Form\HtmlServiceProvider::class,
-
+        \App\Library\Canteen\CanteenServiceProvider::class
     ],
 
     /*
@@ -231,6 +231,7 @@ return [
         'Admin' => App\Library\Admin\Facades\Admin::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'Form' => Collective\Html\FormFacade::class,
+        'Canteen' => \App\Library\Canteen\Facades\Canteen::class
     ],
 
 ];
