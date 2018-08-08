@@ -51,5 +51,18 @@ class AdminConfigSeeder extends Seeder
                 'value' => '',
             ],
         ]);
+
+        ConfigModel::insert([
+            [
+                'name' => 'browse',
+                'description' => '设置上热门浏览量',
+                'value' => '1000',
+            ],
+            [
+                'name' => 'recommend',
+                'description' => '设置上热门推荐量',
+                'value' => '1000',
+            ]
+        ]);
     }
 }

@@ -77,6 +77,7 @@ Route::group([
             Route::delete('destroy/{id}', ['uses' => "System\\ConfigController@destroy", 'as' => 'm.system.config.destroy']);
             Route::get('/set', ['uses' => "System\\ConfigController@set", 'as' => 'm.system.config.set']);
             Route::post('/set', ['uses' => "System\\ConfigController@setPost", 'as' => 'm.system.config.set.post']);
+            Route::post('/sensitive', ['uses' => "System\\ConfigController@sensitive", 'as' => 'm.system.config.sensitive']);
         });
 
         //标签

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Admin;
 use View;
+use Storage;
 
 /**
  * Created by ConfigController.
@@ -169,9 +170,28 @@ class ConfigController extends Controller
 
 
         })->getFormHtml();
+        $forum = Admin::form(function(Forms $item) use ($info)  {
+
+            $item->create('浏览量', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->text('browse', array_get($info, 'browse'), $h->options);
+                $h->set('browse', false);
+                $h->helpBlock = '（设置上热门浏览量）';
+            });
+
+            $item->create('推荐量', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->text('recommend', array_get($info, 'browse'), $h->options);
+                $h->set('browse', false);
+                $h->helpBlock = '（设置上热门推荐量）';
+            });
+
+        })->getFormHtml();
+
+        $words = Storage::disk('local')->get('words.txt');
 
         return View::make('admin::system.config.set',[
-            'form' => $form
+            'form' => $form,
+            'forum' => $forum,
+            'words' => $words
         ]);
     }
 
@@ -184,6 +204,21 @@ class ConfigController extends Controller
     public function setPost(Request $request)
     {
         if( ConfigBls::configUpdateByArray($request->all())) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010002, '操作失败');
+        }
+    }
+
+    /**
+     * 保存铭感词汇
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
+    public function sensitive(Request $request)
+    {
+        if(Storage::disk('local')->put('words.txt', $request->words)) {
             return (new JsonResponse())->success('操作成功');
         } else {
             throw new LogicException(1010002, '操作失败');
