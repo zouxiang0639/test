@@ -3,6 +3,7 @@
 namespace App\Forum\Bls\Article;
 
 use App\Consts\Common\WhetherConst;
+use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\Model\ArticleModel;
 use App\Forum\Bls\Article\Model\ArticlesRecommendModel;
 use App\Forum\Bls\Article\Model\ArticlesStarModel;
@@ -32,6 +33,19 @@ class ArticleBls
         //标签
         if(!empty($request->tag)) {
             $model->where('tags', $request->tag);
+        }
+
+        //排序
+        if(!empty($request->order) && $request->order == 'hot') {
+            $order = '`browse` DESC';
+        }
+
+        //热门条件
+        if(!empty($request->type) && $request->type == 'hot') {
+            $order = '`browse` DESC';
+            $model->where(function($query) {
+                return $query->where('browse','>=', config('config.browse'))->orWhere('recommend_count','>=', config('config.recommend'));
+            });
         }
 
         //发布人
@@ -151,24 +165,29 @@ class ArticleBls
         return false;
     }
 
+
     /**
      * 推荐文章
      * @param ArticleModel $model
      * @return array|bool
+     * @throws LogicException
      */
     public static function recommendArticle(ArticleModel $model)
     {
         $userId = Auth::guard('forum')->id();
         if(in_array($userId, $model->recommend)) {
-            ArticlesRecommendModel::where('user_id', $userId)->where('articles_id', $model->id)->delete();
-            $model->recommend = static::thumbsMinus($model->recommend, $userId);
-            $data = false;
+//            ArticlesRecommendModel::where('user_id', $userId)->where('articles_id', $model->id)->delete();
+//            $model->recommend = static::thumbsMinus($model->recommend, $userId);
+//            $data = false;
+
+            throw new LogicException(1010002,'你已推荐');
         } else {
             $star = new ArticlesRecommendModel();
             $star->user_id = $userId;
             $star->articles_id = $model->id;
             $star->save();
             $model->recommend = static::thumbsPlus($model->recommend, $userId);
+            $model->recommend_count ++;
             $data = true;
         }
 

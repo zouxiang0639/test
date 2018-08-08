@@ -25,6 +25,7 @@ class CreateArticlesTable extends Migration
             $table->string('ip')->comment('IP地址');
             $table->integer('browse')->default(0)->comment('浏览');
             $table->text('recommend')->comment('推荐');
+            $table->integer('recommend_count')->default(0)->comment('推荐量');
             $table->text('thumbs_up')->comment('赞');
             $table->text('thumbs_down')->comment('弱');
             $table->text('star')->comment('收藏');

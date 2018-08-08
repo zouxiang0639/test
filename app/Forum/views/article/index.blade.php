@@ -14,9 +14,9 @@
                     <p style="color: #cccccc;line-height:20px;">其他类型内容请发到相应的板块，否则将删除或自动转移到相应板块</p>
                 </div>
                 <div class="list-other">
-                    点击查看幽默板块→
-                    <a href="javascript:void(0)">热门</a>
-                    <a href="javascript:void(0)">最新</a>
+                    点击查看{!! $tags->tag_name !!}板块→
+                    <a href="{!! route('f.article.list', ['tag' => $tags->id, 'order' => 'hot']) !!}">热门</a>
+                    <a href="{!! route('f.article.list', ['tag' => $tags->id, 'order' => 'new']) !!}">最新</a>
                 </div>
             </div>
         </div>
@@ -24,42 +24,15 @@
     <div class="com-new">
         <div class="wm-850">
             <div class="new-container" style="min-height: 400px;">
-                <div class="new-tit"><i></i></div>
-                <table class="new-table">
-                    <thead>
-                    <tr>
-                        <th width="55">编号</th>
-                        <th width="515">题目</th>
-                        <th width="95">ID</th>
-                        <th width="95">浏览/推荐</th>
-                        <th width="90">时间</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($list as $item)
-                        <tr>
-                            <td width="55"> {{ $item->id }}</td>
-                            <td class="l" width="515">
-                                <a href="{!! route('f.article.info', ['id' => $item->id]) !!}">
-                                    <i class="i-1"></i>
-                                    {{ $item->title }}
-                                </a>
-                            </td>
-                            <td width="95">清歌莫断肠</td>
-                            <td width="95">
-                                {{ $item->browse }}
-                                <span class="red"> {{ count($item->recommend) }}</span>
-                            </td>
-                            <td width="90">
-                               {!! mb_substr($item->created_at, 0, 16) !!}
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-                <div class="com-page">
-                    {!! $list->appends(Input::get())->render() !!}
-                </div>
+                @if(Input::get('order') == 'hot')
+                    <div class="hot-tit clearfix" style="width: 827px;margin: 0 auto;">
+                        <span class="icon fl" style="margin: 2px 0 0 8px;"></span>
+                    </div>
+                @else
+                    <div class="new-tit"><i></i></div>
+                @endif
+
+                @include('forum::article.all')
             </div>
         </div>
     </div>

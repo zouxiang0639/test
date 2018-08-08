@@ -52,6 +52,7 @@ class AdminConfigSeeder extends Seeder
             ],
         ]);
 
+        //论坛设置
         ConfigModel::insert([
             [
                 'name' => 'browse',
@@ -61,7 +62,7 @@ class AdminConfigSeeder extends Seeder
             [
                 'name' => 'recommend',
                 'description' => '设置上热门推荐量',
-                'value' => '1000',
+                'value' => '100',
             ]
         ]);
     }

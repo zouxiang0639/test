@@ -253,7 +253,7 @@ acronym {
 }
 .nav{
 	padding: 10px 0;
-	height: 48px;
+	min-height: 48px;
 	background: #2c56a5;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
@@ -432,7 +432,7 @@ acronym {
 	background-position: -176px 0;
 }
 .com-ad{
-	margin: 10px 0 0 0;
+	margin: 10px 0 8px 0px;
 }
 .com-ad .ad{
 	display: block;

@@ -21,9 +21,24 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
+        $tags = Forum::Tags()->getTags($request->tag);
+
+        $this->isEmpty($tags);
+
         $list = ArticleBls::getArticleLise($request);
+
         return view('forum::article.index', [
-            'list' => $list
+            'list' => $list,
+            'tags' => $tags
+        ]);
+    }
+
+    public function gather(Request $request)
+    {
+        $list = ArticleBls::getArticleLise($request);
+
+        return view('forum::article.gather', [
+            'list' => $list,
         ]);
     }
 
@@ -137,6 +152,12 @@ class ArticleController extends Controller
         }
     }
 
+    /**
+     * 收藏
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
     public function star($id)
     {
         $model = ArticleBls::find($id);
@@ -149,6 +170,12 @@ class ArticleController extends Controller
         }
     }
 
+    /**
+     * 推荐
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
     public function recommend($id)
     {
         $model = ArticleBls::find($id);

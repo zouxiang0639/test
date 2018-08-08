@@ -179,8 +179,8 @@ class ConfigController extends Controller
             });
 
             $item->create('推荐量', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->text('recommend', array_get($info, 'browse'), $h->options);
-                $h->set('browse', false);
+                $h->input = $form->text('recommend', array_get($info, 'recommend'), $h->options);
+                $h->set('recommend', false);
                 $h->helpBlock = '（设置上热门推荐量）';
             });
 
@@ -203,6 +203,7 @@ class ConfigController extends Controller
      */
     public function setPost(Request $request)
     {
+
         if( ConfigBls::configUpdateByArray($request->all())) {
             return (new JsonResponse())->success('操作成功');
         } else {

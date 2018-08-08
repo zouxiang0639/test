@@ -12,6 +12,7 @@ Route::group([
     //文章
     Route::group(['prefix'=>'article'], function(){
         Route::get('list/{tag}', ['uses' => "ArticleController@index", 'as' => 'f.article.list']);
+        Route::get('gather', ['uses' => "ArticleController@gather", 'as' => 'f.article.gather']);
         Route::get('create', ['uses' => "ArticleController@create", 'as' => 'f.article.create']);
         Route::get('info/{id}', ['uses' => "ArticleController@info", 'as' => 'f.article.info']);
 

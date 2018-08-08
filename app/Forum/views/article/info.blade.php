@@ -15,7 +15,7 @@
                 </p>
                 <p>
                     <span>
-                        <a class="article-recommend {!! in_array($userId, $info->recommend) ? "default" : "" !!}">推荐  : <span class="num">{{ count($info->recommend) }}</span></a>
+                        <a class="article-recommend {!! in_array($userId, $info->recommend) ? "default" : "" !!}">推荐  : <span class="num">{{ $info->recommend_count }}</span></a>
 
                     </span>
                     <span>浏览 : {{ $info->browse }}</span>
@@ -37,7 +37,9 @@
                    {!! $info->contents !!}
 
                 </div>
-                <p class="source">来源：网易</p>
+                @if($info->source)
+                <p class="source">来源：{!! $info->source !!}</p>
+                @endif
                 <div class="link clearfix">
                     <div class="address fl">复制本帖地址<a href="javascript:void(0)"><i></i> http://kongdi.com/humor_1215</a></div>
                     <div class="share fr">
@@ -81,8 +83,11 @@
 
                     </ul>
                 </div>
+
                 <div class="page-reply">
+                    @if($replyCount)
                     <a id="reply-page">加载更多</a>
+                    @endif
                 </div>
                 <div class="edit-container">
                     <div class="con" style="margin: 0px 17px;">

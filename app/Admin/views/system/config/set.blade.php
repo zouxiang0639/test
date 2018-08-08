@@ -21,7 +21,7 @@
                 <div class="active tab-pane" id="settings">
                     {!! $form !!}
                 </div>
-                <div class="active tab-pane" id="forum">
+                <div class="tab-pane" id="forum">
                     {!! $forum !!}
                 </div>
                 <div class="tab-pane" id="timeline">
