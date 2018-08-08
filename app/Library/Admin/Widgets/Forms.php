@@ -93,7 +93,7 @@ EOT;
         $id = array_get($open,'submit_id', 'form-submit');
         $this->formHtml .= <<<EOT
         <div class="box-footer">
-            <a id='$id'  class="btn btn-info col-md-offset-2" data-loading-text="<i class='fa fa-spinner fa-spin'></i> 提交">
+            <a class="btn btn-info col-md-offset-2 {$id}" data-loading-text="<i class='fa fa-spinner fa-spin'></i> 提交">
                 提交
             </a>
         </div>
