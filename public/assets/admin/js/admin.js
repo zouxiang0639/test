@@ -5,7 +5,7 @@ $(function(){
     /**
     *  表单ajax提交
     */
-    $('#form-submit').click(function() {
+    $('.form-submit').click(function() {
 
         try {
             if (typeof(eval('formValidate')) == "function") {
@@ -25,7 +25,7 @@ $(function(){
 
         locked = false;
         var _this = $(this);
-        var data  = $(".form-horizontal").serialize();
+        var data  = $(this).parents(".form-horizontal").serialize();
 
         _this.attr('disabled',true);
         $('div.text-danger').text('');
