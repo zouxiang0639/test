@@ -48,7 +48,6 @@ class ArticleController extends Controller
      */
     public function create()
     {
-
         return view('forum::article.create');
     }
 
@@ -61,14 +60,17 @@ class ArticleController extends Controller
     public function createPut(ArticleCreateRequest $request)
     {
 
-         // 敏感词替换为***为例
-         $request->contents = Forum::sensitive($request->contents);
-         $request->title = Forum::sensitive($request->title);
-         if (ArticleBls::createArticle($request)) {
-             return (new JsonResponse())->success('发布成功');
-         } else {
-             throw new LogicException(1010002, '发布失败');
-         }
+        // 敏感词替换为***为例
+        $request->contents = Forum::sensitive($request->contents);
+        $request->title = Forum::sensitive($request->title);
+
+
+
+        if (ArticleBls::createArticle($request)) {
+            return (new JsonResponse())->success('发布成功');
+        } else {
+            throw new LogicException(1010002, '发布失败');
+        }
     }
 
     /**

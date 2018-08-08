@@ -2,8 +2,8 @@
     <div class="wm-850">
         <div class="info">
             <div class="step1">
-                <a class="edit" href="javascript:void(0)"></a>
-                <a class="right" href="javascript:void(0)"></a>
+                <a class="edit" href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i></a>
+                <a class="right" href="javascript:void(0)"><i class="fa fa-check-square-o"></i></a>
             </div>
             <div class="step2">
                 <div><p>{{ $info->name }}</p></div>

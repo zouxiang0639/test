@@ -63,6 +63,11 @@ class AdminConfigSeeder extends Seeder
                 'name' => 'recommend',
                 'description' => '设置上热门推荐量',
                 'value' => '100',
+            ],
+            [
+                'name' => 'day_article',
+                'description' => '当天可发布文章',
+                'value' => '10',
             ]
         ]);
     }

@@ -14,19 +14,29 @@ use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
-    public function login()
-    {
-        return view('forum::auth.login');
-    }
+    /**
+     * 登录
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+//    public function login()
+//    {
+//        return view('forum::auth.login');
+//    }
 
+    /**
+     * 登录数据提交
+     * @param LoginUserRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
     public function loginPut(LoginUserRequest $request)
     {
         $credentials = $request->only(['email', 'password']);
 
         if (Auth::guard('forum')->attempt($credentials)) {
             $user = Auth::guard('forum')->user();
-            $user->login_num ++;
-            $user->save();
+            UsersBls::loginPolicy($user);
+
 
             return (new JsonResponse())->success('登录成功');
         } else {
@@ -34,6 +44,11 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     * 退出
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout(Request $request)
     {
         Auth::guard('forum')->logout();
@@ -44,6 +59,12 @@ class AuthController extends Controller
     }
 
 
+    /**
+     * 注册
+     * @param RegisterUserRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
     public function registerPut(RegisterUserRequest $request)
     {
         if(UsersBls::createUser($request)) {

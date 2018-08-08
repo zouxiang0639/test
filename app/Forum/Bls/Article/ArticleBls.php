@@ -63,22 +63,27 @@ class ArticleBls
      */
     public static function createArticle(ArticleCreateRequest $request)
     {
+        return ArticleModel::query()->getQuery()->getConnection()->transaction(function () use($request) {
 
-        $model = new ArticleModel();
-        $model->title = $request->title;
-        $model->source = $request->source ?: '';
-        $model->tags = $request->tags;
-        $model->status = WhetherConst::NO;
-        $model->is_hide = $request->is_hide ? WhetherConst::YES : WhetherConst::NO;
-        $model->contents = $request->contents;
-        $model->issuer = Auth::guard('forum')->id();
-        $model->ip =  $request->getClientIp();
-        $model->thumbs_up =  [];
-        $model->thumbs_down =  [];
-        $model->star =  [];
-        $model->recommend =  [];
+            $user = Auth::guard('forum')->user();
+            static::articleStrategy($user);
 
-        return $model->save();
+            $model = new ArticleModel();
+            $model->title = $request->title;
+            $model->source = $request->source ?: '';
+            $model->tags = $request->tags;
+            $model->status = WhetherConst::NO;
+            $model->is_hide = $request->is_hide ? WhetherConst::YES : WhetherConst::NO;
+            $model->contents = $request->contents;
+            $model->issuer = $user->id;
+            $model->ip =  $request->getClientIp();
+            $model->thumbs_up =  [];
+            $model->thumbs_down =  [];
+            $model->star =  [];
+            $model->recommend =  [];
+
+            return $model->save();
+        });
     }
 
     /**
@@ -205,6 +210,31 @@ class ArticleBls
     public static function ArticleCount($issuer)
     {
         return ArticleModel::where('issuer', $issuer)->count();
+    }
+
+    /**
+     * 文章发表策略
+     * @param $user
+     * @throws LogicException
+     */
+    public static function articleStrategy($user)
+    {
+        $lastLoginTime = mb_substr($user->last_login_time, 0, 10);
+        $day = date('Y-m-d');
+        $dayArticle = config('config.day_article');
+
+        if($lastLoginTime == $day && $user->day_article == $dayArticle) {
+            //如果当天已发布限制时间抛出错误
+            throw new LogicException(1010002, [["每天限制发表{$dayArticle}篇文章"]]);
+        } else if($lastLoginTime != $day){
+            //如果不是当日发布
+            $user->last_login_time = date('Y-m-d H:i:s');
+            $user->day_article = 1;
+        } else {
+            $user->day_article ++;
+        }
+
+        $user->save();
     }
 
 }

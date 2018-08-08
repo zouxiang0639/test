@@ -33,7 +33,7 @@
                                 <textarea name="contents" ></textarea>
                             </p>
                             <p class="text">
-                                <input name="source" value=" " type="text" placeholder="转载内容请填写原作者与来源，原创内容无需填写" />
+                                <input name="source" value="" type="text" placeholder="转载内容请填写原作者与来源，原创内容无需填写" />
                             </p>
                         </div>
                         <div class="tep4">
