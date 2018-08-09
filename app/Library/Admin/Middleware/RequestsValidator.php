@@ -17,8 +17,8 @@ class RequestsValidator
      */
     public function handle($request, Closure $next)
     {
-        Validator::extend('array_required', function ($attribute, $value, $parameters, $validator) {
-            return true;
+        Validator::extend('mobile', function ($attribute, $value, $parameters) {
+            return preg_match('/^1[0-9]{10}$/', $value);
         });
         return $next($request);
     }
