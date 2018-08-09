@@ -13,7 +13,8 @@
                         @foreach($hot as $value)
                             <li>
                                 <a href="{!! route('f.article.info', ['id' => $value->id]) !!}">
-                                    <i class="i-1"></i>{!! $value->title !!}
+                                    <img class="tag-icon" src="{!!  Forum::Tags()->getTagsIcon2($value->tags) !!}">
+                                    {!! $value->title !!}
                                 </a>
                             </li>
                         @endforeach
