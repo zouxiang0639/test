@@ -24,7 +24,6 @@ class ArticleController extends Controller
         $tags = Forum::Tags()->getTags($request->tag);
 
         $this->isEmpty($tags);
-
         $list = ArticleBls::getArticleLise($request);
 
         return view('forum::article.index', [
@@ -63,8 +62,6 @@ class ArticleController extends Controller
         // 敏感词替换为***为例
         $request->contents = Forum::sensitive($request->contents);
         $request->title = Forum::sensitive($request->title);
-
-
 
         if (ArticleBls::createArticle($request)) {
             return (new JsonResponse())->success('发布成功');

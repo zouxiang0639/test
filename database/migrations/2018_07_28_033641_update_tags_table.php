@@ -15,6 +15,7 @@ class UpdateTagsTable extends Migration
     {
         Schema::table('admin_tags', function (Blueprint $table) {
             $table->string('icon', 255)->default('')->comment('图标');;
+            $table->string('icon2', 255)->default('')->comment('图标2');;
         });
     }
 

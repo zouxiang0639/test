@@ -9,6 +9,7 @@ use App\Forum\Bls\Article\Model\ArticlesRecommendModel;
 use App\Forum\Bls\Article\Model\ArticlesStarModel;
 use App\Forum\Bls\Article\Requests\ArticleCreateRequest;
 use App\Forum\Bls\Article\Traits\ThumbsTraits;
+use App\Forum\Bls\Users\UsersBls;
 use Auth;
 
 /**
@@ -197,6 +198,8 @@ class ArticleBls
         }
 
         if($model->save()) {
+            //推荐一个网站加一分
+            UsersBls::addIntegral(1);
             return ['data' => $data];
         }
         return false;

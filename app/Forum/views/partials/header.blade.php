@@ -31,14 +31,20 @@
     </div>
 </div>
 <?php
-    $tags =  Forum::tags()->getTagsList();
+    $tagsList =  Forum::tags()->getTagsList();
 ?>
 <div class="com-nav">
     <div class="wm-850">
         <div class="nav clearfix">
             <div class="nav-list fl clearfix">
-                @foreach($tags as $value)
-                    <a class="{{ $value['icon'] }}" href="{!! route('f.article.list', ['tag' => $value['id']]) !!}" title="{{ $value['tag_name'] }}" ></a>
+                @foreach($tagsList as $value)
+                    <a href="{!! route('f.article.list', ['tag' => $value['id']]) !!}" title="{{ $value['tag_name'] }}" >
+                        @if(isset($tags) && $value->id == $tags->id)
+                            <img src="{{ uploads_path($value['icon2']) }}">
+                        @else
+                            <img src="{{ uploads_path($value['icon']) }}">
+                        @endif
+                    </a>
                 @endforeach
             </div>
             <a class="post fr" href="{!! route('f.article.create') !!}"><i></i>发帖</a>

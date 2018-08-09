@@ -268,7 +268,6 @@ acronym {
 	margin-right: 7px;
 	width: 29px;
 	height: 28px;
-	background: url(../img/nav-icons.png) no-repeat;
 }
 .nav-list > a.a-1{
 	background-position: 0 0;
@@ -584,4 +583,10 @@ acronym {
 	vertical-align: middle;
 	margin: 0 20px;
 	line-height: 30px;
+}
+
+.tag-icon{
+	border: 1px solid #C6C6C6;
+	border-radius: 11px;
+	width: 29px;
 }

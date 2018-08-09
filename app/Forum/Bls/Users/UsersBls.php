@@ -51,7 +51,6 @@ class UsersBls
     public static function articlesRecommendCount($issuer)
     {
         $user = \Auth::guard('forum')->user();
-        static::loginPolicy($user);
         return UsersModel::find($issuer)->articlesRecommend()->count();
     }
 
@@ -72,5 +71,34 @@ class UsersBls
         $user->login_num ++;
         $user->save();
     }
+
+    /**
+     * 添加积分
+     * @param $integral
+     * @return mixed
+     */
+    public static function addIntegral($integral)
+    {
+        $user = \Auth::guard('forum')->user();
+        $user->integral += $integral;
+        return $user->save();
+
+    }
+
+
+    /**
+     * 签到
+     * @param UsersModel $user
+     * @return mixed
+     */
+    public static function userSignIn(UsersModel $user)
+    {
+        return UsersModel::query()->getQuery()->getConnection()->transaction(function () use($user) {
+            $user->sign_time = date('Y-m-d H:i:s');
+            UsersBls::addIntegral(5);
+            return $user->save();
+        });
+    }
+
 
 }

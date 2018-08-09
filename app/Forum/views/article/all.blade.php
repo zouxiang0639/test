@@ -14,11 +14,11 @@
             <td width="55"> {{ $item->id }}</td>
             <td class="l" width="515">
                 <a href="{!! route('f.article.info', ['id' => $item->id]) !!}">
-                    <i class="i-1"></i>
+                    <img class="tag-icon" src="{!!  Forum::Tags()->getTagsIcon2($item->tags) !!}">
                     {{ $item->title }}
                 </a>
             </td>
-            <td width="95">清歌莫断肠</td>
+            <td width="95">{!! $item->issuers ? $item->issuers->name : '-' !!}</td>
             <td width="95">
                 {{ $item->browse }}
                 <span class="red"> {{ $item->recommend_count }}</span>

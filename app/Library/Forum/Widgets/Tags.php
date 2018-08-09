@@ -13,8 +13,11 @@ class Tags
 
     public function __construct($type = TagsTypeConst::TAG)
     {
-        $this->tags = TagsModel::where('type', $type)->where('status', WhetherConst::YES)
-            ->get()->keyBy('id');
+        if(empty($this->tags)) {
+            $this->tags = TagsModel::where('type', $type)->where('status', WhetherConst::YES)
+                ->get()->keyBy('id');
+        }
+
     }
 
     public function getTagsName($tagId)
@@ -41,5 +44,12 @@ class Tags
     public function getTagsOption()
     {
         return $this->tags->pluck('tag_name', 'id');
+    }
+
+    public function getTagsIcon2($tagId)
+    {
+        if($model = array_get($this->tags, $tagId)) {
+            return uploads_path($model->icon2);
+        }
     }
 }
