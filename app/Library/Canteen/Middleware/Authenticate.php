@@ -38,27 +38,12 @@ class Authenticate
     public function handle($request, Closure $next, $permissionCode = '')
     {
 
-
-//        if (!$this->shouldPassThrough($request)){
-//
-//
-//
-//
-//            if($this->auth->user()->is_block == WhetherConst::YES){
-//                Auth::logout();
-//                return redirect()->route('m.login');
-//            }
-//
-//            if ($permissionCode && !$this->can($this->auth->user(), $permissionCode)) {
-//                return redirect()->route('m.login');
-//            }
-//        }
         if(!empty($permissionCode)) {
             if ($this->auth->guest()) {
                 if ($request->ajax()) {
                     throw new LogicException(1020001);
                 } else {
-                    return redirect()->route('f.home',['']);
+                    return redirect()->route('c.auth.login');
                 }
             }
         }

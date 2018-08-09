@@ -3,9 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{$seo.seo_title}</title>
-    <meta name='keywords' content="{$seo.seo_keywords}" />
-    <meta name='description' content="{$seo.seo_description}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <title>{!! config('config.title', '金尚美食') !!}</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
 

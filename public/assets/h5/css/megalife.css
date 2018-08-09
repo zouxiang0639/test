@@ -291,7 +291,7 @@ background-color:#fffaf0;
 .user-list small{ float:right;color:#999;margin-right:1rem;}
 /*biz*/
 .biz-banner, .banner {background-size:cover; background-repeat:no-repeat;overflow:auto;}
-.banner.bg-login{background-image:url(../img/banner-login.jpg);padding-top:62% ;}
+.banner.bg-login{background-image:url(../img/banner-login.jpg);padding-top:75% ;}
 .biz-banner.bg-filling{background-image:url(../img/banner-biz-filling.jpg);}
 .biz-banner.bg-mobile{background-image:url(../img/banner-biz-mobile.jpg);}
 .biz-banner.bg-shopping{background-image:url(../img/banner-biz-shopping.jpg);}

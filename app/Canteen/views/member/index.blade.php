@@ -25,7 +25,7 @@
             <div class="content" id='page-product'>
                 <!--user center-->
                 <div class="user-head">
-                    <a href="#"><i class="fa fa-credit-card"></i><br/>付款二维码</a>
+                    <a href="javascript:;" id="rqcard"><i class="fa fa-credit-card"></i><br/>付款二维码</a>
                     <div>
                         <span class="icon-avatar"> <i class="fa fa-user"></i></span>
                     </div>
@@ -44,6 +44,7 @@
                 <div class="user-list">
                     <ul>
                         <li>
+
                             <a href="{:Url('member/account')}">
                                 <span class="icon-account"></span>账户明细</a>
                         </li>
@@ -57,6 +58,7 @@
                                 <span class="icon-setting"></span>账户设置</a>
                         </li>
                         <li>
+
                             <a href="{:Url('member/logout')}">
                                 <!--<small>实名认证、密码修改、银行卡绑定</small>-->
                                 <span class="icon-about white"></span>安全退出</a>
@@ -66,4 +68,16 @@
             </div>
         </div>
     </div>
+    <img width="100%" src="{!! route('c.qrcode') !!}">
+@stop
+
+@section('script')
+    <script>
+        $(function() {
+            $('#rqcard').click(function(){
+
+                $.alert(' <img width="100%" src="{!! route('c.qrcode') !!}">', '二维码');
+            })
+        })
+    </script>
 @stop

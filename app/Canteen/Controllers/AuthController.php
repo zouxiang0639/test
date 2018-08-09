@@ -15,15 +15,16 @@ class AuthController extends Controller
         return view('canteen::auth.login');
     }
 
-    public function loginPut(LoginUserRequest $request)
+    public function loginPut()
     {
-        $credentials = $request->only(['email', 'password']);
-
-        if (Auth::guard('forum')->attempt($credentials)) {
-            return (new JsonResponse())->success('登录成功');
-        } else {
-            throw new LogicException(1010002, [['邮箱或密码错误']]);
-        }
+        dd(1);
+//        $credentials = $request->only(['email', 'password']);
+//
+//        if (Auth::guard('forum')->attempt($credentials)) {
+//            return (new JsonResponse())->success('登录成功');
+//        } else {
+//            throw new LogicException(1010002, [['邮箱或密码错误']]);
+//        }
     }
 
     public function logout(Request $request)
