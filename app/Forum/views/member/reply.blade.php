@@ -17,8 +17,8 @@
                     <tr>
                         <td width="55">{!! $item->r_id !!}</td>
                         <td class="l" width="515">
-                            <a href="javascript:void(0)">
-                                <i class="i-1"></i>
+                            <a href="{!! route('f.article.info', ['id' => $item->a_id]) !!}">
+                                <img class="tag-icon" src="{!!  Forum::Tags()->getTagsIcon2($item->a_tags) !!}">
                                 {{ $item->a_title }}
                             </a>
                         </td>

@@ -17,7 +17,7 @@
                             <td width="55"> {{ $item->id }}</td>
                             <td class="l" width="515">
                                 <a href="{!! route('f.article.info', ['id' => $item->id]) !!}">
-                                    <i class="i-1"></i>
+                                    <img class="tag-icon" src="{!!  Forum::Tags()->getTagsIcon2($item->tags) !!}">
                                     {{ $item->title }}
                                 </a>
                             </td>

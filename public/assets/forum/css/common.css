@@ -269,6 +269,10 @@ acronym {
 	width: 29px;
 	height: 28px;
 }
+.nav-list > a img{
+	border-radius: 11px;
+	width: 29px;
+}
 .nav-list > a.a-1{
 	background-position: 0 0;
 }
@@ -587,6 +591,6 @@ acronym {
 
 .tag-icon{
 	border: 1px solid #C6C6C6;
-	border-radius: 11px;
-	width: 29px;
+	border-radius: 9px;
+	width: 23px;
 }
