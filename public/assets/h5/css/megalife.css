@@ -320,6 +320,56 @@ background-color:#fffaf0;
 .login-box dl{margin-bottom:.7rem; border-radius:.25rem; box-shadow:0 0 1px #dabb84; background-color:#fff; line-height:2.6rem;}
 .login-box dt{padding-left:.6rem;color:#bd8f3c;font-size:.7rem;}
 .login-box input{ padding:.5rem 0;border:none;}
+
+
+/*外卖*/
+.item-subtitle p{
+  line-height: 1px;
+}
+.item-subtitle .takeout-describe{
+  line-height: 3px;
+  font-size: 12px;
+  color: #7e7e7e;
+}
+
+.item-subtitle .takeout-click{
+  font-size: 1.5em;
+}
+.item-subtitle .minus{
+  color: #b6b0a7;
+}
+.item-subtitle .plus{
+  color: #e8a952;
+}
+.cart{
+  color: #ffffff;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  border-radius: 50%;
+  text-align: center;
+  background: #ff7d7c;
+  position: absolute;
+  margin-top: 0.25rem;
+}
+.badge {
+  margin-left: 2rem;
+  color:#d83e3d;
+}
+
+/*会员中心*/
+.icon-avatar {
+  color: #4495F0;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  border-radius: 50%;
+  text-align: center;
+  background: #ffffff;
+  font-size: 2.5rem;
+  padding: 0.4rem;
+}
+
 /*user account*/
 .list-box li{background-color:#fff;padding:.5rem .2rem;margin-bottom:1px;box-shadow:0 0 1px #ccc;}
 .list-box.account span{text-align:center;line-height:3rem;font-size:.7rem;color:#999;}

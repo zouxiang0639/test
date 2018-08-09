@@ -1,24 +1,9 @@
 @extends('canteen::layouts.master')
 
-@section('style')
-    <style>
-        .icon-avatar {
-            color: #4495F0;
-            width: 2rem;
-            height: 2rem;
-            line-height: 2rem;
-            border-radius: 50%;
-            text-align: center;
-            background: #ffffff;
-            font-size: 2.5rem;
-            padding: 0.4rem;
-        }
-    </style>
-@stop
 
 @section('content')
 
-    <div class="page-group">
+
         <div class="page" id="page-index" >
 
             @include('canteen::partials.footer')
@@ -66,18 +51,19 @@
                     </ul>
                 </div>
             </div>
+
         </div>
-    </div>
-    <img width="100%" src="{!! route('c.qrcode') !!}">
+
+
 @stop
 
 @section('script')
     <script>
-        $(function() {
-            $('#rqcard').click(function(){
-
-                $.alert(' <img width="100%" src="{!! route('c.qrcode') !!}">', '二维码');
-            })
-        })
+        $(function () {'use strict';
+            $(document).on("click", "#rqcard", function(e) {
+                $.alert('<img style="min-height: 192px" width="100%" src="{!! route('c.qrcode') !!}">', '二维码');
+            });
+            $.init();
+        });
     </script>
 @stop

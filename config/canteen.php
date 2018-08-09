@@ -16,7 +16,7 @@ return [
         'providers' => [
             'canteen' => [
                 'driver' => 'eloquent',
-                'model'  => \App\Admin\Bls\Auth\Model\AdministratorModel::class,
+                'model'  => \App\Canteen\Bls\Users\Model\UsersModel::class,
             ],
         ],
     ],

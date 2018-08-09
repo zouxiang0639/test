@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Forum\Bls\Users\Requests;
+namespace App\Canteen\Bls\Users\Requests;
 
-use App\Library\Forum\Validators\JsonResponseForumValidator;
+use App\Library\Canteen\Validators\JsonResponseCanteenValidator;
+use Validator;
 
-class LoginUserRequest extends JsonResponseForumValidator
+class LoginUserRequest extends JsonResponseCanteenValidator
 {
-
 
     /**
      * Get the validation rules that apply to the request.
@@ -15,8 +15,12 @@ class LoginUserRequest extends JsonResponseForumValidator
      */
     public function rules()
     {
+        Validator::extend('mobile', function ($attribute, $value, $parameters) {
+            return preg_match('/^1[0-9]{10}$/', $value);
+        });
+
         return [
-            'email' => 'required|email',
+            'mobile' => 'required|mobile',
             'password' => 'required|max:255',
         ];
     }
@@ -29,8 +33,8 @@ class LoginUserRequest extends JsonResponseForumValidator
     public function messages()
     {
         return [
-            'email.required' => '邮箱不能为空',
-            'email.email' => '邮箱格式不正确',
+            'mobile.required' => '手机号不能为空',
+            'mobile.mobile' => '手机号格式不正确',
             'password.required' => '密码不能为空',
         ];
     }

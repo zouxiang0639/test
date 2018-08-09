@@ -1,10 +1,9 @@
 <?php
-namespace App\Canteen\Forum\Validators;
+namespace App\Library\Canteen\Validators;
 
 use App\Exceptions\LogicException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Auth;
 
 /**
  * Ajax请求验证器

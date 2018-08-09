@@ -14,19 +14,18 @@
     <link rel="stylesheet" href="{{  assets_path("/lib/font-awesome/css/font-awesome.min.css") }}">
     <script src="{!!  assets_path("/h5/js/zepto.js")  !!}"></script>
     <script src="{!!  assets_path("/h5/js/config.js")  !!}"></script>
-    <script src="{!!  assets_path("/h5/js/ajax.js")  !!}"></script>
     @yield('style')
 </head>
 
 <body >
 
-@yield('content')
+<div class="page-group">
+    @yield('content')
+    <script src="{!!  assets_path("/h5/js/sm.js")  !!}"></script>
+    <script src="{!!  assets_path("/h5/js/swiper.min.js")  !!}"></script>
 
-<script src="{!!  assets_path("/h5/js/sm.js")  !!}"></script>
-<script src="{!!  assets_path("/h5/js/swiper.min.js")  !!}"></script>
-<script src="{!!  assets_path("/h5/js/sm-city-picker.js")  !!}"></script>
-<script src="{!!  assets_path("/h5/js/megalife.js")  !!}"></script>
-@yield('script')
+    @yield('script')
+</div>
 </body>
 </html>
 

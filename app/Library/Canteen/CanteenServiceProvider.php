@@ -23,7 +23,8 @@ class CanteenServiceProvider extends ServiceProvider
      * @var array
      */
     protected $routeMiddleware = [
-        'canteen.auth'       => \App\Library\Canteen\Middleware\Authenticate::class,
+        'canteen.auth' => \App\Library\Canteen\Middleware\Authenticate::class,
+        'canteen.validator' => \App\Library\Admin\Middleware\RequestsValidator::class,
     ];
 
     /**
