@@ -10,11 +10,15 @@ class FormBuilder extends \Collective\Html\FormBuilder
 {
 
     private $resource = [
+        //开关
         'bootstrap-switch.min.css' => '/lib/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css',
         'bootstrap-switch.min.js' => '/lib/bootstrap-switch/dist/js/bootstrap-switch.min.js',
+
+        //上传文件
         'fileinput.min.css' => '/lib/bootstrap-fileinput/css/fileinput.min.css?v=4.3.7',
         'fileinput.min.js' => '/lib/bootstrap-fileinput/js/fileinput.min.js?v=4.3.7',
         'canvas-to-blob.min.js' => '/lib/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js?v=4.3.7',
+
         'jquery.inputmask.bundle.min.js' => '/lib/AdminLTE/plugins/input-mask/jquery.inputmask.bundle.min.js',
         'fontawesome-iconpicker.min.css' => '/lib/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css',
         'fontawesome-iconpicker.min.js' => '/lib/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.min.js',
@@ -22,12 +26,17 @@ class FormBuilder extends \Collective\Html\FormBuilder
         'bootstrap-duallistbox.min.js' => '/lib/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js',
         'select2.full.min.js' => '/lib/AdminLTE/plugins/select2/select2.full.min.js',
         'select2.min.css' => '/lib/AdminLTE/plugins/select2/select2.min.css',
+
+        //编辑器
         'ckeditor.js' => '/lib/ckeditor/ckeditor.js',
 
         //日期
         'bootstrap-datetimepicker.min.css' =>'/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
         'moment-with-locales.min.js' =>'/lib/moment/min/moment-with-locales.min.js',
-        'bootstrap-datetimepicker.min.js' =>'/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
+        'bootstrap-datetimepicker.min.js' =>'/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+
+        //数字输入
+        'bootstrap-number-input.js' =>'/lib/bootstrap-number/bootstrap-number-input.js'
     ];
 
     /**
@@ -421,5 +430,24 @@ EOT;
         Admin::style()->setJs(StyleTypeConst::CODE, $code);
         return self::text($start['name'], $end['value'] , $options).
         self::text($end['name'], $end['value'] , $options);
+    }
+
+    public function number($name, $value = null, $options = [])
+    {
+        if(!isset($options['min'])) {
+            $options['min'] = 0;
+        }
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('bootstrap-number-input.js'));
+        $code = <<<EOT
+            $('input[name={$name}]')
+            .addClass('initialized')
+            .bootstrapNumber({
+                upClass: 'success',
+                downClass: 'primary',
+                center: true
+            });
+EOT;
+        Admin::style()->setJs(StyleTypeConst::CODE, $code);
+        return  self::text($name, $value , $options);
     }
 }
