@@ -25,7 +25,7 @@ class TakeoutBls
             $model->where('id', $request->id);
         }
 
-        return $model->orderByRaw($order)->paginate($limit);
+        return $model->orderByRaw($order)->onlyTrashed()->paginate($limit);
     }
 
     public static function storeTakeout(TakeoutRequest $request)

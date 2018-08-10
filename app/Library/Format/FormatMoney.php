@@ -34,9 +34,4 @@ class FormatMoney
     public static function yuan($yuan, $separator=','){
         return number_format($yuan, 2, '.', $separator);
     }
-
-    public static function fen($yuan, $separator=',')
-    {
-        return static::yuan2fen(str_replace($separator, '', $yuan));
-    }
 }

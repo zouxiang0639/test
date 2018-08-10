@@ -23,6 +23,7 @@ class CreateTakeoutTable extends Migration
             $table->integer('deposit')->comment('定金');
             $table->integer('limit')->comment('限购');
             $table->string('describe', 255)->default('')->comment('描述');
+            $table->timestamp('deleted_at');
             $table->timestamps();
         });
     }

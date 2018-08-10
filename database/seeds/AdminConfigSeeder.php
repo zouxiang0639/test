@@ -51,5 +51,13 @@ class AdminConfigSeeder extends Seeder
                 'value' => '',
             ],
         ]);
+
+        ConfigModel::insert([
+            [
+                'name' => 'takeout_deadline',
+                'description' => '外卖截止时间',
+                'value' => '',
+            ]
+        ]);
     }
 }

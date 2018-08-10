@@ -14,7 +14,10 @@
     <div class="box">
         <div class="box-header">
             <div class="pull-left ">
+                <button type="button" class="btn {!! $takeoutDeadlineCheck ? 'btn-warning': 'btn-primary' !!}" data-toggle="modal" data-target="#takeout_deadline">
+                    {!! $takeoutDeadlineCheck ? '已开启外卖' : '设置开启外卖' !!}
 
+                </button>
             </div>
 
             <div class="pull-right">
@@ -64,15 +67,46 @@
                 @endforeach
             </table>
         </div>
-
         <div class="box-footer clearfix">
             {!! $list->appends(Input::get())->render() !!}
         </div>
         <!-- /.box-body -->
+
+        <div class="modal fade" id="takeout_deadline" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">设置开启外卖</h4>
+                    </div>
+                    <form class="form-horizontal">
+                    <div class="modal-body">
+
+                            <input name="_token" type="hidden" value="{{ csrf_token() }}">
+                            <div class="form-group" style="margin: 0px 8px;">
+                                <label for="recipient-name" class="control-label">外卖截止时间:</label>
+                                {!! Form::datetime('takeout_deadline', config('config.takeout_deadline'), ['class' => 'form-control '], 'YYYY-MM-DD') !!}
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary form-submit">提交</button>
+                    </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
     </div>
 
 @stop
 
 @section('script')
-
+    <script>
+        var initialAjAx = {
+            "url":"{!! route('m.system.config.set.post') !!}",
+            "backUrl":"{!! route('m.canteen.takeout.list') !!}"
+        }
+    </script>
 @stop

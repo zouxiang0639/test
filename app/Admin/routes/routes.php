@@ -125,7 +125,7 @@ Route::group([
     Route::group(['prefix'=>'canteen'], function(){
 
         //外卖
-        Route::group(['prefix'=>'takeout'], function(){
+        Route::group(['prefix'=>'takeout', 'middleware' => 'admin.auth:m_canteen_takeout'], function(){
             Route::get('', ['uses' => "Canteen\\TakeoutController@index", 'as' => 'm.canteen.takeout.list']);
             Route::get('create', ['uses' => "Canteen\\TakeoutController@create", 'as' => 'm.canteen.takeout.create']);
             Route::post('store', ['uses' => "Canteen\\TakeoutController@store", 'as' => 'm.canteen.takeout.store']);

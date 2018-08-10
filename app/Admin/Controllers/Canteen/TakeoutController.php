@@ -28,7 +28,8 @@ class TakeoutController extends Controller
         $this->formatTakeout($list->getCollection());
 
         return View::make('admin::canteen.takeout.index',[
-            'list' => $list
+            'list' => $list,
+            'takeoutDeadlineCheck' => date('Y-m-d') <= config('config.takeout_deadline')
         ]);
     }
 

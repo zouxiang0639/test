@@ -55,6 +55,7 @@ class AdminAuthSeeder extends Seeder
         ]);
         MenuBls::storeMenu($menuRequest);
         $this->admin(); //后台管理
+        $this->canteen(); //食堂管理
         $this->system(); //系统管理
     }
 
@@ -172,5 +173,32 @@ class AdminAuthSeeder extends Seeder
         ]);
         MenuBls::storeMenu($menuRequest);
 
+    }
+
+    /**
+     * 食堂管理
+     */
+    public function canteen()
+    {
+        $menuRequest = new MenuRequest();
+        $menuRequest->merge([
+            'parent_id' => 0,
+            'title' => '食堂管理',
+            'icon' => 'fa-cutlery',
+            'route' => '',
+            'slug' => 'm_canteen',
+            'permissions' => WhetherConst::YES
+        ]);
+        $menu = MenuBls::storeMenu($menuRequest);
+
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '外卖',
+            'icon' => 'fa-truck',
+            'route' => 'm.canteen.takeout.list',
+            'slug' => 'm_canteen_takeout',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);
     }
 }

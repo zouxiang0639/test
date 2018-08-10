@@ -5,14 +5,14 @@
 @stop
 @section('content-header')
     <h1>
-        外卖<small>创建</small>
+        外卖<small>编辑</small>
     </h1>
 @stop
 @section('content')
 
     <div class="row"><div class="col-md-12"><div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">创建</h3>
+                    <h3 class="box-title">编辑</h3>
 
                     <div class="box-tools">
                         <div class="btn-group pull-right" style="margin-right: 10px">

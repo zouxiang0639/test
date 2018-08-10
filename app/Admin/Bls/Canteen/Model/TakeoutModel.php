@@ -2,6 +2,7 @@
 
 namespace App\Admin\Bls\Canteen\Model;
 
+use App\Library\Database\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -11,11 +12,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TakeoutModel extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'takeout';
+
 
 }
