@@ -180,6 +180,11 @@ return [
         App\Library\Admin\AdminServiceProvider::class,
         App\Library\Admin\Form\HtmlServiceProvider::class,
 
+       /*
+        *  验证服务
+        */
+        App\Library\Validators\ValidatorServiceProvider::class
+
     ],
 
     /*

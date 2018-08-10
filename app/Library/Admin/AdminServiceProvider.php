@@ -24,7 +24,6 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected $routeMiddleware = [
         'admin.auth'       => \App\Library\Admin\Middleware\Authenticate::class,
-        'admin.Validator' => \App\Library\Admin\Middleware\RequestsValidator::class,
     ];
 
     /**
@@ -35,7 +34,6 @@ class AdminServiceProvider extends ServiceProvider
     protected $middlewareGroups = [
         'admin' => [
             'admin.auth',
-            'admin.Validator',
         ],
     ];
 

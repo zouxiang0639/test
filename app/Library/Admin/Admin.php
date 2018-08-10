@@ -6,6 +6,7 @@ use App\Admin\Bls\Auth\MenuBls;
 use App\Library\Admin\Consts\StyleTypeConst;
 use App\Library\Admin\Widgets\Forms;
 use App\Library\Admin\Widgets\Navbar;
+use App\Library\Admin\Widgets\Style;
 use App\Library\Admin\Widgets\Tree;
 use App\Library\Admin\Widgets\Upload;
 use Auth;
@@ -16,9 +17,7 @@ class Admin
 {
     public $navbar;
 
-    public $js = [StyleTypeConst::FILE => [], StyleTypeConst::CODE => []];
-
-    public $css = [StyleTypeConst::FILE => [], StyleTypeConst::CODE => []];
+    private $style;
 
     /**
      * Get navbar object.
@@ -41,6 +40,16 @@ class Admin
         return new Upload();
     }
 
+    /**
+     * @return Style
+     */
+    public function style()
+    {
+        if(empty($this->style)) {
+            $this->style = new Style();
+        }
+        return $this->style;
+    }
 
     /**
      * Get current login user.
