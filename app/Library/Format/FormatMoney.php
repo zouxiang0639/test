@@ -9,6 +9,7 @@ namespace App\Library\Format;
 class FormatMoney
 {
     /**
+     * 元转分
      * @param $yuan
      * @return int
      */
@@ -18,6 +19,7 @@ class FormatMoney
     }
 
     /**
+     * 分格式化
      * @param $fen
      * @return string
      */
@@ -27,11 +29,23 @@ class FormatMoney
     }
 
     /**
+     * 元格式化
      * @param $yuan
      * @param string $separator
      * @return string
      */
     public static function yuan($yuan, $separator=','){
         return number_format($yuan, 2, '.', $separator);
+    }
+
+    /**
+     * 字符串钱转分整型
+     * @param $yuan
+     * @param string $separator
+     * @return int
+     */
+    public static function fen($yuan, $separator=',')
+    {
+        return static::yuan2fen(str_replace($separator, '', $yuan));
     }
 }
