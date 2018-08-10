@@ -179,16 +179,13 @@ return [
 
         App\Library\Admin\AdminServiceProvider::class,
         App\Library\Admin\Form\HtmlServiceProvider::class,
-<<<<<<< HEAD
-        \App\Library\Canteen\CanteenServiceProvider::class
-=======
+        App\Library\Canteen\CanteenServiceProvider::class,
 
        /*
         *  验证服务
         */
         App\Library\Validators\ValidatorServiceProvider::class
 
->>>>>>> a1c321787e1c6337a2ea848644329092b68d82d3
     ],
 
     /*

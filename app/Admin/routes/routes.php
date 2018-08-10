@@ -126,8 +126,9 @@ Route::group([
 
         //外卖
         Route::group(['prefix'=>'takeout'], function(){
-            Route::get('', ['uses' => "Canteen\\TakeoutController@index", 'as' => 'm.takeout.takeout.list']);
-            Route::get('create', ['uses' => "Canteen\\TakeoutController@create", 'as' => 'm.takeout.takeout.create']);
+            Route::get('', ['uses' => "Canteen\\TakeoutController@index", 'as' => 'm.canteen.takeout.list']);
+            Route::get('create', ['uses' => "Canteen\\TakeoutController@create", 'as' => 'm.canteen.takeout.create']);
+            Route::post('store', ['uses' => "Canteen\\TakeoutController@store", 'as' => 'm.canteen.takeout.store']);
 
         });
     });

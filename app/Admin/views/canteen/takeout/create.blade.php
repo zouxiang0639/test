@@ -5,7 +5,7 @@
 @stop
 @section('content-header')
     <h1>
-        配置管理<small>创建</small>
+        外卖<small>创建</small>
     </h1>
 @stop
 @section('content')
@@ -37,8 +37,8 @@
 @section('script')
     <script>
         var initialAjAx = {
-            "url":"{!! route('m.system.config.store') !!}",
-            "backUrl":"{!! route('m.system.config.list') !!}"
+            "url":"{!! route('m.canteen.takeout.store') !!}",
+            "backUrl":"{!! route('m.canteen.takeout.list') !!}"
         }
     </script>
 @stop
