@@ -15,11 +15,15 @@ class WidgetsController extends Controller
     {
         $form = Admin::form(function(Forms $item) {
 
+            $item->create('number', function(HtmlFormTpl $h, FormBuilder $form) {
+
+                $h->input = $form->number('number', 0 , $h->options);
+                $h->set('number', true);
+            });
+
             $item->create('datetimeRange', function(HtmlFormTpl $h, FormBuilder $form) {
                 $start = ['name' =>'datetimeRangeStart', 'value' => ''];
                 $end = ['name' =>'datetimeRangeEnd', 'value' => ''];
-                $h->options['class'] .= ' col-md-4';
-
                 $h->input = $form->datetimeRange($start, $end , $h->options, 'YYYY-MM-DD');
                 $h->set('datetimeRange', true);
             });
