@@ -23,6 +23,11 @@ class FormBuilder extends \Collective\Html\FormBuilder
         'select2.full.min.js' => '/lib/AdminLTE/plugins/select2/select2.full.min.js',
         'select2.min.css' => '/lib/AdminLTE/plugins/select2/select2.min.css',
         'ckeditor.js' => '/lib/ckeditor/ckeditor.js',
+
+        //日期
+        'bootstrap-datetimepicker.min.css' =>'/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
+        'moment-with-locales.min.js' =>'/lib/moment/min/moment-with-locales.min.js',
+        'bootstrap-datetimepicker.min.js' =>'/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
     ];
 
     /**
@@ -76,8 +81,8 @@ class FormBuilder extends \Collective\Html\FormBuilder
         array $optgroupsAttributes = []
     ) {
 
-        Admin::setCss(StyleTypeConst::FILE, $this->getResource('select2.min.css'));
-        Admin::setJs(StyleTypeConst::FILE, $this->getResource('select2.full.min.js'));
+        Admin::style()->setCss(StyleTypeConst::FILE, $this->getResource('select2.min.css'));
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('select2.full.min.js'));
 
         $code = <<<EOT
 
@@ -87,7 +92,7 @@ class FormBuilder extends \Collective\Html\FormBuilder
                 separator:true
             });\n
 EOT;
-        Admin::setJs(StyleTypeConst::CODE, $code);
+        Admin::style()->setJs(StyleTypeConst::CODE, $code);
         $selectAttributes = array_merge(["multiple"=>"multiple",'data-placeholder'=>"请输入"], $selectAttributes);
         return self::hidden(str_replace(array("[","]"),"",$name)).
         self::select($name ,$list, $selected, $selectAttributes, $optionsAttributes, $optgroupsAttributes);
@@ -113,8 +118,8 @@ EOT;
         array $optgroupsAttributes = []
     ) {
 
-        Admin::setCss(StyleTypeConst::FILE, $this->getResource('select2.min.css'));
-        Admin::setJs(StyleTypeConst::FILE, $this->getResource('select2.full.min.js'));
+        Admin::style()->setCss(StyleTypeConst::FILE, $this->getResource('select2.min.css'));
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('select2.full.min.js'));
 
         $code = <<<EOT
 
@@ -124,7 +129,7 @@ EOT;
                 separator:true
             });\n
 EOT;
-        Admin::setJs(StyleTypeConst::CODE, $code);
+        Admin::style()->setJs(StyleTypeConst::CODE, $code);
         $selectAttributes = array_merge(['data-placeholder'=>"请输入"], $selectAttributes);
         return self::hidden(str_replace(array("[","]"),"",$name)).
         self::select($name ,$list, $selected, $selectAttributes, $optionsAttributes, $optgroupsAttributes);
@@ -151,8 +156,8 @@ EOT;
         array $optgroupsAttributes = []
     ) {
 
-        Admin::setCss(StyleTypeConst::FILE, $this->getResource('bootstrap-duallistbox.min.css'));
-        Admin::setJs(StyleTypeConst::FILE, $this->getResource('bootstrap-duallistbox.min.js'));
+        Admin::style()->setCss(StyleTypeConst::FILE, $this->getResource('bootstrap-duallistbox.min.css'));
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('bootstrap-duallistbox.min.js'));
 
         $code = <<<EOT
 
@@ -164,7 +169,7 @@ EOT;
                 "infoTextEmpty": "空列表",
             });\n
 EOT;
-        Admin::setJs(StyleTypeConst::CODE, $code);
+        Admin::style()->setJs(StyleTypeConst::CODE, $code);
 
         $selectAttributes = array_merge(["multiple"=>"multiple",'data-placeholder'=>"请输入"], $selectAttributes);
         return self::hidden(str_replace(array("[","]"),"",$name)).
@@ -183,13 +188,13 @@ EOT;
     public function icon($name, $value = null, $options = [])
     {
 
-        Admin::setCss(StyleTypeConst::FILE, $this->getResource('fontawesome-iconpicker.min.css'));
-        Admin::setJs(StyleTypeConst::FILE, $this->getResource('fontawesome-iconpicker.min.js'));
+        Admin::style()->setCss(StyleTypeConst::FILE, $this->getResource('fontawesome-iconpicker.min.css'));
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('fontawesome-iconpicker.min.js'));
 
         $code = <<<EOT
            $("input[name=$name]").iconpicker({placement:'bottomLeft'});\n
 EOT;
-        Admin::setJs(StyleTypeConst::CODE, $code);
+        Admin::style()->setJs(StyleTypeConst::CODE, $code);
         return $this->html->tag('span', '', ['class' => 'input-group-addon'])
                . self::text($name, $value ?:'fa-bars', $options);
     }
@@ -205,7 +210,7 @@ EOT;
      */
     public function currency($name, $value = null, $options = [])
     {
-        Admin::setJs(StyleTypeConst::FILE, $this->getResource('jquery.inputmask.bundle.min.js'));
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('jquery.inputmask.bundle.min.js'));
 
         $code = <<<EOT
            $("input[name=$name]").inputmask({
@@ -217,7 +222,7 @@ EOT;
 
            });\n
 EOT;
-        Admin::setJs(StyleTypeConst::CODE, $code);
+        Admin::style()->setJs(StyleTypeConst::CODE, $code);
         return $this->html->tag('span', '$', ['class' => 'input-group-addon'])
         . self::text($name, $value , $options);
     }
@@ -234,9 +239,9 @@ EOT;
         $path = $value ? uploads_path($value) : $value;
         $options['data-initial-preview'] = $path;
         $options['data-initial-caption'] = $value;
-        Admin::setCss(StyleTypeConst::FILE, $this->getResource('fileinput.min.css'));
-        Admin::setJs(StyleTypeConst::FILE, $this->getResource('fileinput.min.js'));
-        Admin::setJs(StyleTypeConst::FILE, $this->getResource('canvas-to-blob.min.js'));
+        Admin::style()->setCss(StyleTypeConst::FILE, $this->getResource('fileinput.min.css'));
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('fileinput.min.js'));
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('canvas-to-blob.min.js'));
 
         $route = route('m.system.upload.image');
         $code = <<<EOT
@@ -274,12 +279,13 @@ EOT;
                 }
             });\n
 EOT;
-        Admin::setJs(StyleTypeConst::CODE, $code);
+        Admin::style()->setJs(StyleTypeConst::CODE, $code);
 
         return self::hidden($name, $value).self::file($name, $options);
     }
 
     /**
+     * 开关
      * @param $name
      * @param int $value
      * @return string
@@ -287,8 +293,8 @@ EOT;
     public function switchOff($name, $value = WhetherConst::NO)
     {
         $options['id'] = $name;
-        Admin::setCss(StyleTypeConst::FILE, $this->getResource('bootstrap-switch.min.css'));
-        Admin::setJs(StyleTypeConst::FILE, $this->getResource('bootstrap-switch.min.js'));
+        Admin::style()->setCss(StyleTypeConst::FILE, $this->getResource('bootstrap-switch.min.css'));
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('bootstrap-switch.min.js'));
         $code = <<<EOT
            $(".$name .switch").bootstrapSwitch({
                 size:'small',
@@ -301,12 +307,13 @@ EOT;
                 }
             });\n
 EOT;
-        Admin::setJs(StyleTypeConst::CODE, $code);
+        Admin::style()->setJs(StyleTypeConst::CODE, $code);
         $checked = $value == WhetherConst::YES ? 'checked' : '';
         return self::checkbox('', '', '',  ['class' => 'switch la_checkbox', $checked]).self::hidden($name, $value);
     }
 
     /**
+     * 迷你编辑器
      * @param $name
      * @param null $value
      * @param array $options
@@ -315,7 +322,7 @@ EOT;
     public function ckeditorMini($name, $value = null, $options = [])
     {
         $options['id'] = $name;
-        Admin::setJs(StyleTypeConst::FILE, $this->getResource('ckeditor.js'));
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('ckeditor.js'));
         $code = <<<EOT
            CKEDITOR.replace('$name',
             {
@@ -342,11 +349,12 @@ EOT;
         );\n
 EOT;
 
-        Admin::setJs(StyleTypeConst::CODE, $code);
+        Admin::style()->setJs(StyleTypeConst::CODE, $code);
         return self::textarea($name, $value = null, $options = []);
     }
 
     /**
+     * 编辑器
      * @param $name
      * @param null $value
      * @param array $options
@@ -354,12 +362,64 @@ EOT;
      */
     public function ckeditor($name, $value = null, $options = [])
     {
-        Admin::setJs(StyleTypeConst::FILE, $this->getResource('ckeditor.js'));
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('ckeditor.js'));
         $code = <<<EOT
            CKEDITOR.replace('$name');
 EOT;
 
-        Admin::setJs(StyleTypeConst::CODE, $code);
+        Admin::style()->setJs(StyleTypeConst::CODE, $code);
         return self::textarea($name, $value = null, $options = []);
+    }
+
+
+    /**
+     * 日期
+     * @param string $name
+     * @param null $value
+     * @param array $options
+     * @param string $format
+     * @return \Illuminate\Support\HtmlString
+     */
+    public function datetime($name, $value = null, $options = [], $format = 'YYYY-MM-DD HH:mm:ss')
+    {
+        Admin::style()->setCss(StyleTypeConst::FILE, $this->getResource('bootstrap-datetimepicker.min.css'));
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('moment-with-locales.min.js'));
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('bootstrap-datetimepicker.min.js'));
+        $code = <<<EOT
+ $('input[name={$name}]').datetimepicker({"format":"{$format}","locale":"zh-CN","allowInputToggle":true});
+EOT;
+        Admin::style()->setJs(StyleTypeConst::CODE, $code);
+        return self::text($name, $value , $options);
+    }
+
+
+    /**
+     * 日期范围
+     * @param $start
+     * @param $end
+     * @param array $options
+     * @param string $format
+     * @return string
+     */
+    public function datetimeRange($start, $end , $options = [], $format = 'YYYY-MM-DD HH:mm:ss')
+    {
+        $options['style'] = 'width: 50%;';
+        Admin::style()->setCss(StyleTypeConst::FILE, $this->getResource('bootstrap-datetimepicker.min.css'));
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('moment-with-locales.min.js'));
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('bootstrap-datetimepicker.min.js'));
+        $code = <<<EOT
+            $('input[name={$start['name']}]').datetimepicker({"format":"{$format}","locale":"zh-CN"});
+            $('input[name={$end['name']}]').datetimepicker({"format":"{$format}","locale":"zh-CN","useCurrent":false});
+
+            $('input[name={$start['name']}]').on("dp.change", function (e) {
+                $('input[name={$end['name']}]').data("DateTimePicker").minDate(e.date);
+            });
+            $("input[name={$end['name']}]").on("dp.change", function (e) {
+                $('input[name={$start['name']}]').data("DateTimePicker").maxDate(e.date);
+            });
+EOT;
+        Admin::style()->setJs(StyleTypeConst::CODE, $code);
+        return self::text($start['name'], $end['value'] , $options).
+        self::text($end['name'], $end['value'] , $options);
     }
 }

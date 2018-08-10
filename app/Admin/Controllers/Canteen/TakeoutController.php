@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers\Demo;
+namespace App\Admin\Controllers\Canteen;
 
 use App\Http\Controllers\Controller;
 use Admin;
@@ -8,25 +8,24 @@ use App\Library\Admin\Form\FormBuilder;
 use App\Library\Admin\Form\HtmlFormTpl;
 use App\Library\Admin\Widgets\Forms;
 use App\Library\Response\JsonResponse;
+use View;
 
-class WidgetsController extends Controller
+class TakeoutController extends Controller
 {
+    public function index()
+    {
+    }
+
+    public function create()
+    {
+        return View::make('admin::canteen.takeout.create',[
+            'form' =>  $this->form()
+        ]);
+    }
+
     public function form()
     {
         $form = Admin::form(function(Forms $item) {
-
-            $item->create('datetimeRange', function(HtmlFormTpl $h, FormBuilder $form) {
-                $start = ['name' =>'datetimeRangeStart', 'value' => ''];
-                $end = ['name' =>'datetimeRangeEnd', 'value' => ''];
-                $h->options['class'] .= ' col-md-4';
-
-                $h->input = $form->datetimeRange($start, $end , $h->options, 'YYYY-MM-DD');
-                $h->set('datetimeRange', true);
-            });
-            $item->create('datetime', function(HtmlFormTpl $h, FormBuilder $form) {
-                $h->input = $form->datetime('datetime','', $h->options, 'YYYY-MM-DD');
-                $h->set('datetime', true);
-            });
 
             $item->create('switchOff', function(HtmlFormTpl $h, FormBuilder $form) {
                 $h->input = $form->switchOff('switchOff','');

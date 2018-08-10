@@ -7,7 +7,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    {!! Admin::getCss() !!}
+    {!! Admin::style()->getCss() !!}
     @include('admin::partials.style')
     @yield('style')
 
@@ -47,7 +47,7 @@
 </script>
 
 @include('admin::partials.script')
-{!! Admin::getJs() !!}
+{!! Admin::style()->getJs() !!}
 @yield('script')
 
 </body>
