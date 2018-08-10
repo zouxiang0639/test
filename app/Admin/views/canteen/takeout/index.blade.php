@@ -1,7 +1,6 @@
 @extends('admin::layouts.master')
 
 @section('style')
-    <link rel="stylesheet" href="{{  assets_path("/lib/bootstrap3-editable/css/bootstrap-editable.css") }}">
 @stop
 
 @section('content-header')
@@ -34,27 +33,27 @@
             <table class="table table-hover">
                 <tr>
                     <th>编号</th>
-                    <th>热度</th>
-                    <th>标签名称</th>
+                    <th>名称</th>
+                    <th>库存</th>
+                    <th>价格</th>
+                    <th>定金</th>
+                    <th>限购</th>
                     <th>状态</th>
-                    <th>创建时间</th>
-                    <th>更新时间</th>
                     <th>操作</th>
                 </tr>
                 @foreach($list as $item)
                     <tr>
                         <td>{!! $item->id !!}</td>
-                        <td>
-                            <a href="javascript:;" class="hot" data-pk="{!! $item->id !!}">{!! $item->hot !!}</a>
-                        </td>
-                        <td>{{ $item->tag_name }}</td>
-                        <td class="switch_submit" data-href="{!! route('m.system.tags.status', ['id' => $item->id]) !!}">
+                        <td>{{ $item->title }}</td>
+                        <td>{{ $item->stock }}</td>
+                        <td>{{ $item->price }}</td>
+                        <td>{{ $item->deposit }}</td>
+                        <td>{{ $item->limit }}</td>
+                        <td class="switch_submit" data-href="{!! route('m.canteen.takeout.status', ['id' => $item->id]) !!}">
                             {!! Form::switchOff('switch_submit', $item->status) !!}
                         </td>
-                        <td>{!! $item->created_at !!}</td>
-                        <td>{!! $item->updated_at !!}</td>
                         <td>
-                            <a href="{!! route('m.system.tags.edit', ['id' => $item->id]) !!}">
+                            <a href="{!! route('m.canteen.takeout.edit', ['id' => $item->id]) !!}">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <a href="javascript:void(0);" data-url="{!! route('m.system.tags.destroy', ['id' => $item->id]) !!}" class="item-delete">
@@ -75,23 +74,5 @@
 @stop
 
 @section('script')
-    <script src="{{  assets_path("/lib/bootstrap3-editable/js/bootstrap-editable.min.js") }}"></script>
-    <script>
-        $(function(){
-            $('.hot').editable({
-                url: "{!! route('m.system.tags.hot') !!}",
-                type: 'text',
-                params: {
-                    "_method": "PUT",
-                    "_token": $('meta[name="csrf-token"]').attr('content')
-                },
-                pk: $(this).attr('data-pk'),//唯一标示值
-                title: '修改',
-                name: 'hot',
-                success: function(value) {
-                    $(this).text(value);
-                }
-            });
-        })
-    </script>
+
 @stop

@@ -129,6 +129,9 @@ Route::group([
             Route::get('', ['uses' => "Canteen\\TakeoutController@index", 'as' => 'm.canteen.takeout.list']);
             Route::get('create', ['uses' => "Canteen\\TakeoutController@create", 'as' => 'm.canteen.takeout.create']);
             Route::post('store', ['uses' => "Canteen\\TakeoutController@store", 'as' => 'm.canteen.takeout.store']);
+            Route::get('edit/{id}', ['uses' => "Canteen\\TakeoutController@edit", 'as' => 'm.canteen.takeout.edit']);
+            Route::post('update/{id}', ['uses' => "Canteen\\TakeoutController@update", 'as' => 'm.canteen.takeout.update']);
+            Route::put('status/{id}', ['uses' => "Canteen\\TakeoutController@status", 'as' => 'm.canteen.takeout.status']);
 
         });
     });

@@ -19,7 +19,7 @@ class TakeoutRequest extends JsonResponseValidator
             'picture' => 'required',
             'stock' => 'required',
             'deposit' => 'required',
-            'state' => 'required|numeric',
+            'status' => 'required|numeric',
             'limit' => 'required|numeric',
         ];
     }
@@ -32,7 +32,7 @@ class TakeoutRequest extends JsonResponseValidator
     public function messages()
     {
         return [
-            'state.required' => '状态不能为空',
+            'status.required' => '状态不能为空',
             'title.required' => '标题不能为空',
             'picture.required' => '图片不能为空',
             'stock.required' => '库存不能为空',

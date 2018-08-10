@@ -4,6 +4,7 @@ namespace App\Admin\Controllers\Canteen;
 
 use App\Admin\Bls\Canteen\Requests\TakeoutRequest;
 use App\Admin\Bls\Canteen\TakeoutBls;
+use App\Admin\Bls\Canteen\Traits\TakeoutTraits;
 use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Http\Controllers\Controller;
@@ -13,13 +14,18 @@ use App\Library\Admin\Form\HtmlFormTpl;
 use App\Library\Admin\Widgets\Forms;
 use App\Library\Response\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use View;
 
 class TakeoutController extends Controller
 {
+    use TakeoutTraits;
+
     public function index(Request $request)
     {
         $list = TakeoutBls::getTakeoutList($request);
+
+        $this->formatTakeout($list->getCollection());
 
         return View::make('admin::canteen.takeout.index',[
             'list' => $list
@@ -42,11 +48,54 @@ class TakeoutController extends Controller
      */
     public function store(TakeoutRequest $request)
     {
-        dd($request->all());
-        if(TagsBls::storeTags($request)) {
+        if(TakeoutBls::storeTakeout($request)) {
             return (new JsonResponse())->success('操作成功');
         } else {
             throw new LogicException(1010002, '操作失败');
+        }
+    }
+
+    public function edit($id)
+    {
+        $model = TakeoutBls::find($id);
+
+        $this->isEmpty($model);
+        $this->formatTakeout(Collection::make([$model]));
+
+        return View::make('admin::canteen.takeout.edit',[
+            'form' =>  $this->form($model),
+            'info' => $model
+        ]);
+    }
+
+    public function update(TakeoutRequest $request, $id)
+    {
+        $model = TakeoutBls::find($id);
+
+        $this->isEmpty($model);
+
+        if(TakeoutBls::updateTakeout($request, $model)) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010002, '操作失败');
+        }
+    }
+
+    public function status($id, Request $request)
+    {
+
+        $this->isEmpty(WhetherConst::getDesc($request->status));
+
+        $model = TakeoutBls::find($id);
+
+        $this->isEmpty($model);
+
+        $model->status = $request->status;
+
+        if($model->save()) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010001, '操作失败');
         }
     }
 
@@ -56,8 +105,8 @@ class TakeoutController extends Controller
         return Admin::form(function(Forms $item) use($info) {
 
             $item->create('状态', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->switchOff('state', array_get($info, 'state', WhetherConst::NO));
-                $h->set('state', true);
+                $h->input = $form->switchOff('status', array_get($info, 'status', WhetherConst::NO));
+                $h->set('status', true);
             });
 
             $item->create('外卖名称', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
@@ -99,8 +148,4 @@ class TakeoutController extends Controller
 
     }
 
-    public function formPost(\Request $request)
-    {
-        return (new JsonResponse())->success('http://laravel-admin.org//uploads/images/下載 (4).jpg');
-    }
 }
