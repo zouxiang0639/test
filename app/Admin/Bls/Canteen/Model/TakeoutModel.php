@@ -21,5 +21,11 @@ class TakeoutModel extends Model
      */
     protected $table = 'takeout';
 
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
 }

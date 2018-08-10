@@ -200,5 +200,15 @@ class AdminAuthSeeder extends Seeder
             'permissions' => WhetherConst::YES
         ]);
         MenuBls::storeMenu($menuRequest);
+
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '食谱',
+            'icon' => 'fa-spoon',
+            'route' => 'm.canteen.recipes.list',
+            'slug' => 'm_canteen_recipes',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);
     }
 }

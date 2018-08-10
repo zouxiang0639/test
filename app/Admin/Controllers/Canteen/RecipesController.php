@@ -22,12 +22,12 @@ use View;
  * @author: zouxiang
  * @date:
  */
-class TakeoutController extends Controller
+class RecipesController extends Controller
 {
     use TakeoutTraits;
 
     /**
-     * 外卖列表
+     * 菜单列表
      * @param Request $request
      * @return \Illuminate\Contracts\View\View
      */
@@ -37,26 +37,26 @@ class TakeoutController extends Controller
 
         $this->formatTakeout($list->getCollection());
 
-        return View::make('admin::canteen.takeout.index',[
+        return View::make('admin::canteen.recipes.index',[
             'list' => $list,
             'takeoutDeadlineCheck' => date('Y-m-d') <= config('config.takeout_deadline')
         ]);
     }
 
     /**
-     * 创建外卖
+     * 创建菜单
      * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
-        return View::make('admin::canteen.takeout.create',[
+        return View::make('admin::canteen.recipes.create',[
             'form' =>  $this->form([])
         ]);
     }
 
 
     /**
-     * 存储外卖
+     * 存储菜单
      * @param TakeoutRequest $request
      * @return \Illuminate\Http\JsonResponse
      * @throws LogicException
@@ -71,7 +71,7 @@ class TakeoutController extends Controller
     }
 
     /**
-     * 编辑外卖
+     * 编辑菜单
      * @param $id
      * @return \Illuminate\Contracts\View\View
      * @throws LogicException
@@ -90,7 +90,7 @@ class TakeoutController extends Controller
     }
 
     /**
-     * 更新外卖
+     * 更新菜单
      * @param TakeoutRequest $request
      * @param $id
      * @return \Illuminate\Http\JsonResponse
@@ -110,7 +110,7 @@ class TakeoutController extends Controller
     }
 
     /**
-     * 修改外卖状态
+     * 修改菜单状态
      * @param $id
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -135,7 +135,7 @@ class TakeoutController extends Controller
     }
 
     /**
-     * 删除外卖
+     * 删除菜单
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      * @throws LogicException
@@ -156,7 +156,7 @@ class TakeoutController extends Controller
 
 
     /**
-     * 外卖表单
+     * 菜单表单
      * @param $info
      * @return string
      */
@@ -169,7 +169,7 @@ class TakeoutController extends Controller
                 $h->set('status', true);
             });
 
-            $item->create('外卖名称', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+            $item->create('菜单名称', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->text('title', array_get($info, 'title'), $h->options);
                 $h->set('title', true);
             });

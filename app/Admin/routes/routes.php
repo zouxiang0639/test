@@ -132,7 +132,18 @@ Route::group([
             Route::get('edit/{id}', ['uses' => "Canteen\\TakeoutController@edit", 'as' => 'm.canteen.takeout.edit']);
             Route::post('update/{id}', ['uses' => "Canteen\\TakeoutController@update", 'as' => 'm.canteen.takeout.update']);
             Route::put('status/{id}', ['uses' => "Canteen\\TakeoutController@status", 'as' => 'm.canteen.takeout.status']);
+            Route::delete('destroy/{id}', ['uses' => "Canteen\\TakeoutController@destroy", 'as' => 'm.canteen.takeout.destroy']);
+        });
 
+        //食谱
+        Route::group(['prefix'=>'recipes', 'middleware' => 'admin.auth:m_canteen_recipes'], function(){
+            Route::get('', ['uses' => "Canteen\\RecipesController@index", 'as' => 'm.canteen.recipes.list']);
+            Route::get('create', ['uses' => "Canteen\\RecipesController@create", 'as' => 'm.canteen.recipes.create']);
+            Route::post('store', ['uses' => "Canteen\\RecipesController@store", 'as' => 'm.canteen.recipes.store']);
+            Route::get('edit/{id}', ['uses' => "Canteen\\RecipesController@edit", 'as' => 'm.canteen.recipes.edit']);
+            Route::post('update/{id}', ['uses' => "Canteen\\RecipesController@update", 'as' => 'm.canteen.recipes.update']);
+            Route::put('status/{id}', ['uses' => "Canteen\\RecipesController@status", 'as' => 'm.canteen.recipes.status']);
+            Route::delete('destroy/{id}', ['uses' => "Canteen\\RecipesController@destroy", 'as' => 'm.canteen.recipes.destroy']);
         });
     });
 
