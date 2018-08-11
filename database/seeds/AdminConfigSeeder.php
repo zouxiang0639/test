@@ -57,6 +57,21 @@ class AdminConfigSeeder extends Seeder
                 'name' => 'takeout_deadline',
                 'description' => '外卖截止时间',
                 'value' => '',
+            ],
+            [
+                'name' => 'morning_price',
+                'description' => '早餐费',
+                'value' => '',
+            ],
+            [
+                'name' => 'lunch_price',
+                'description' => '午餐费',
+                'value' => '',
+            ],
+            [
+                'name' => 'dinner_price',
+                'description' => '晚餐费',
+                'value' => '',
             ]
         ]);
     }

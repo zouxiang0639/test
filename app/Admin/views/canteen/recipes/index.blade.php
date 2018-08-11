@@ -5,7 +5,7 @@
 
 @section('content-header')
     <h1>
-        外卖<small>列表</small>
+        食谱<small>列表</small>
     </h1>
 @stop
 
@@ -14,14 +14,13 @@
     <div class="box">
         <div class="box-header">
             <div class="pull-left ">
-                <button type="button" class="btn {!! $takeoutDeadlineCheck ? 'btn-warning': 'btn-primary' !!}" data-toggle="modal" data-target="#takeout_deadline">
-                    {!! $takeoutDeadlineCheck ? '已开启外卖' : '设置开启外卖' !!}
-
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#takeout_deadline">
+                    餐费设置
                 </button>
             </div>
 
             <div class="pull-right">
-                <a href="{!! route('m.canteen.takeout.create') !!}" class="btn btn-sm btn-success">
+                <a href="{!! route('m.canteen.recipes.create') !!}" class="btn btn-sm btn-success">
                     <i class="fa fa-save"></i>&nbsp;&nbsp;新增
                 </a>
             </div>
@@ -36,30 +35,25 @@
             <table class="table table-hover">
                 <tr>
                     <th>编号</th>
-                    <th>名称</th>
-                    <th>库存</th>
-                    <th>价格</th>
-                    <th>定金</th>
-                    <th>限购</th>
-                    <th>状态</th>
+                    <th>就餐日期</th>
+                    <th>早餐</th>
+                    <th>午餐</th>
+                    <th>晚餐</th>
+
                     <th>操作</th>
                 </tr>
                 @foreach($list as $item)
                     <tr>
                         <td>{!! $item->id !!}</td>
-                        <td>{{ $item->title }}</td>
-                        <td>{{ $item->stock }}</td>
-                        <td>{{ $item->price }}</td>
-                        <td>{{ $item->deposit }}</td>
-                        <td>{{ $item->limit }}</td>
-                        <td class="switch_submit" data-href="{!! route('m.canteen.takeout.status', ['id' => $item->id]) !!}">
-                            {!! Form::switchOff('switch_submit', $item->status) !!}
-                        </td>
+                        <td>{{ $item->date }}</td>
+                        <td>{{ $item->morning }}</td>
+                        <td>{{ $item->lunch }}</td>
+                        <td>{{ $item->dinner }}</td>
                         <td>
-                            <a href="{!! route('m.canteen.takeout.edit', ['id' => $item->id]) !!}">
+                            <a href="{!! route('m.canteen.recipes.edit', ['id' => $item->id]) !!}">
                                 <i class="fa fa-edit"></i>
                             </a>
-                            <a href="javascript:void(0);" data-url="{!! route('m.canteen.takeout.destroy', ['id' => $item->id]) !!}" class="item-delete">
+                            <a href="javascript:void(0);" data-url="{!! route('m.canteen.recipes.destroy', ['id' => $item->id]) !!}" class="item-delete">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </td>
@@ -79,15 +73,41 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="exampleModalLabel">设置开启外卖</h4>
                     </div>
-                    <form class="form-horizontal">
+                    <form class="form-horizontal box-body fields-group">
                     <div class="modal-body">
+                        <input name="_token" type="hidden" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">
+                                早餐费:
+                            </label>
+                            <div class="col-sm-9">
+                                <div class="input-group">
+                                    {!! Form::currency('morning_price', config('config.morning_price'), ['class' => 'form-control']) !!}
+                                </div>
 
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}">
-                            <div class="form-group" style="margin: 0px 8px;">
-                                <label for="recipient-name" class="control-label">外卖截止时间:</label>
-                                {!! Form::datetime('takeout_deadline', config('config.takeout_deadline'), ['class' => 'form-control '], 'YYYY-MM-DD') !!}
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">
+                                午餐费:
+                            </label>
+                            <div class="col-sm-9">
+                                <div class="input-group">
+                                    {!! Form::currency('lunch_price', config('config.lunch_price'), ['class' => 'form-control']) !!}
+                                </div>
 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">
+                                晚餐费:
+                            </label>
+                            <div class="col-sm-9">
+                                <div class="input-group">
+                                    {!! Form::currency('dinner_price', config('config.dinner_price'), ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -106,7 +126,7 @@
     <script>
         var initialAjAx = {
             "url":"{!! route('m.system.config.set.post') !!}",
-            "backUrl":"{!! route('m.canteen.takeout.list') !!}"
+            "backUrl":"{!! route('m.canteen.recipes.list') !!}"
         }
     </script>
 @stop

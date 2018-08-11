@@ -142,7 +142,6 @@ Route::group([
             Route::post('store', ['uses' => "Canteen\\RecipesController@store", 'as' => 'm.canteen.recipes.store']);
             Route::get('edit/{id}', ['uses' => "Canteen\\RecipesController@edit", 'as' => 'm.canteen.recipes.edit']);
             Route::post('update/{id}', ['uses' => "Canteen\\RecipesController@update", 'as' => 'm.canteen.recipes.update']);
-            Route::put('status/{id}', ['uses' => "Canteen\\RecipesController@status", 'as' => 'm.canteen.recipes.status']);
             Route::delete('destroy/{id}', ['uses' => "Canteen\\RecipesController@destroy", 'as' => 'm.canteen.recipes.destroy']);
         });
     });

@@ -2,8 +2,8 @@
 
 namespace App\Admin\Controllers\Canteen;
 
-use App\Admin\Bls\Canteen\Requests\TakeoutRequest;
-use App\Admin\Bls\Canteen\TakeoutBls;
+use App\Admin\Bls\Canteen\Requests\RecipesRequest;
+use App\Admin\Bls\Canteen\RecipesBls;
 use App\Admin\Bls\Canteen\Traits\TakeoutTraits;
 use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
@@ -27,13 +27,13 @@ class RecipesController extends Controller
     use TakeoutTraits;
 
     /**
-     * 菜单列表
+     * 食谱列表
      * @param Request $request
      * @return \Illuminate\Contracts\View\View
      */
     public function index(Request $request)
     {
-        $list = TakeoutBls::getTakeoutList($request);
+        $list = RecipesBls::getTakeoutList($request);
 
         $this->formatTakeout($list->getCollection());
 
@@ -44,7 +44,7 @@ class RecipesController extends Controller
     }
 
     /**
-     * 创建菜单
+     * 创建食谱
      * @return \Illuminate\Contracts\View\View
      */
     public function create()
@@ -56,14 +56,14 @@ class RecipesController extends Controller
 
 
     /**
-     * 存储菜单
-     * @param TakeoutRequest $request
+     * 存储食谱
+     * @param RecipesRequest $request
      * @return \Illuminate\Http\JsonResponse
      * @throws LogicException
      */
-    public function store(TakeoutRequest $request)
+    public function store(RecipesRequest $request)
     {
-        if(TakeoutBls::storeTakeout($request)) {
+        if(RecipesBls::storeTakeout($request)) {
             return (new JsonResponse())->success('操作成功');
         } else {
             throw new LogicException(1010002, '操作失败');
@@ -71,38 +71,38 @@ class RecipesController extends Controller
     }
 
     /**
-     * 编辑菜单
+     * 编辑食谱
      * @param $id
      * @return \Illuminate\Contracts\View\View
      * @throws LogicException
      */
     public function edit($id)
     {
-        $model = TakeoutBls::find($id);
+        $model = RecipesBls::find($id);
 
         $this->isEmpty($model);
         $this->formatTakeout(Collection::make([$model]));
 
-        return View::make('admin::canteen.takeout.edit',[
+        return View::make('admin::canteen.recipes.edit',[
             'form' =>  $this->form($model),
             'info' => $model
         ]);
     }
 
     /**
-     * 更新菜单
-     * @param TakeoutRequest $request
+     * 更新食谱
+     * @param RecipesRequest $request
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      * @throws LogicException
      */
-    public function update(TakeoutRequest $request, $id)
+    public function update(RecipesRequest $request, $id)
     {
-        $model = TakeoutBls::find($id);
+        $model = RecipesBls::find($id);
 
         $this->isEmpty($model);
 
-        if(TakeoutBls::updateTakeout($request, $model)) {
+        if(RecipesBls::updateTakeout($request, $model)) {
             return (new JsonResponse())->success('操作成功');
         } else {
             throw new LogicException(1010002, '操作失败');
@@ -110,7 +110,7 @@ class RecipesController extends Controller
     }
 
     /**
-     * 修改菜单状态
+     * 修改食谱状态
      * @param $id
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -121,7 +121,7 @@ class RecipesController extends Controller
 
         $this->isEmpty(WhetherConst::getDesc($request->status));
 
-        $model = TakeoutBls::find($id);
+        $model = RecipesBls::find($id);
 
         $this->isEmpty($model);
 
@@ -135,14 +135,14 @@ class RecipesController extends Controller
     }
 
     /**
-     * 删除菜单
+     * 删除食谱
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      * @throws LogicException
      */
     public function destroy($id)
     {
-        $model = TakeoutBls::find($id);
+        $model = RecipesBls::find($id);
 
         $this->isEmpty($model);
 
@@ -156,7 +156,7 @@ class RecipesController extends Controller
 
 
     /**
-     * 菜单表单
+     * 食谱表单
      * @param $info
      * @return string
      */
@@ -164,44 +164,24 @@ class RecipesController extends Controller
     {
         return Admin::form(function(Forms $item) use($info) {
 
-            $item->create('状态', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->switchOff('status', array_get($info, 'status', WhetherConst::NO));
-                $h->set('status', true);
+            $item->create('就餐日期', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->datetime('date', array_get($info, 'date'), $h->options, 'YYYY-MM-DD');
+                $h->set('date', true);
             });
 
-            $item->create('菜单名称', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->text('title', array_get($info, 'title'), $h->options);
-                $h->set('title', true);
+            $item->create('早餐', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->textarea('morning', array_get($info, 'morning'), $h->options);
+                $h->set('morning', true);
             });
 
-            $item->create('库存', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->number('stock', array_get($info, 'stock', 0), $h->options);
-                $h->set('stock', true);
+            $item->create('午餐', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->textarea('lunch', array_get($info, 'lunch'), $h->options);
+                $h->set('lunch', true);
             });
 
-            $item->create('每个人限购', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->number('limit', array_get($info, 'limit', 0), $h->options);
-                $h->set('limit', true);
-            });
-
-            $item->create('价格', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->currency('price', array_get($info, 'price', 0), $h->options);
-                $h->set('price', true);
-            });
-
-            $item->create('定金', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->currency('deposit', array_get($info, 'deposit', 0), $h->options);
-                $h->set('deposit', true);
-            });
-
-            $item->create('图片', function(HtmlFormTpl $h, FormBuilder $form) use($info) {
-                $h->input = $form->imageOne('picture', array_get($info, 'picture'), $h->options);
-                $h->set('picture', true);
-            });
-
-            $item->create('描述', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->textarea('describe', array_get($info, 'describe'), $h->options);
-                $h->set('describe', false);
+            $item->create('晚餐', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->textarea('dinner', array_get($info, 'dinner'), $h->options);
+                $h->set('dinner', true);
             });
 
         })->getFormHtml();
