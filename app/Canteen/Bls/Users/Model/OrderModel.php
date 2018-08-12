@@ -17,4 +17,9 @@ class OrderModel extends Model
      */
     protected $table = 'order';
 
+    public function orderTakeout()
+    {
+        return $this->hasMany(OrderTakeoutModel::class, 'order_id');
+    }
+
 }

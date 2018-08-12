@@ -7,12 +7,16 @@ use App\Consts\Common\AccountFlowTypeConst;
 use App\Http\Controllers\Controller;
 use App\Library\Format\FormatMoney;
 use Endroid\QrCode\QrCode;
+use Auth;
 
 class MemberController extends Controller
 {
     public function index()
     {
-        return view('canteen::member.index');
+        $model = Auth::guard('canteen')->user();
+        return view('canteen::member.index', [
+            'info' => $model
+        ]);
     }
 
     /**

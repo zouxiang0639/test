@@ -15,14 +15,15 @@
                         <span class="icon-avatar"> <i class="fa fa-user"></i></span>
                     </div>
                     <dl>
-                        <dt>张三</dt>
-                        <dd>13816720691</dd></dl>
+                        <dt>{{ $info->name }}</dt>
+                        <dd>{{ $info->mobile }}</dd>
+                    </dl>
                 </div>
 
                 <div class="row no-gutter user-account-info"  >
                     <div class="col-100" style="text-align: center">
                         <strong style="font-size: 1rem;">余额</strong>
-                        <p>￥50.00</p>
+                        <p>￥{!! \App\Library\Format\FormatMoney::fen2yuan($info->money) !!}</p>
                     </div>
                 </div>
 
@@ -33,17 +34,17 @@
                                 <span class="icon-account"></span>账户明细</a>
                         </li>
                         <li>
-                            <a href="{:Url('order/index')}">
+                            <a href="{!! route('c.order.list') !!}">
                                 <span class="icon-bought"></span>订单管理</a>
                         </li>
                         <li>
-                            <a href="{:Url('userSetting/index')}">
+                            <a href="#">
                                 <small>密码修改</small>
                                 <span class="icon-setting"></span>账户设置</a>
                         </li>
                         <li>
 
-                            <a href="{:Url('member/logout')}">
+                            <a href="#">
                                 <!--<small>实名认证、密码修改、银行卡绑定</small>-->
                                 <span class="icon-about white"></span>安全退出</a>
                         </li>

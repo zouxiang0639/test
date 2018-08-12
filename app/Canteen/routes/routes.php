@@ -26,5 +26,10 @@ Route::group([
             Route::get('qrcode', ['uses' => "MemberController@qrCode", 'as' => 'c.qrcode']);
             Route::get('flow', ['uses' => "MemberController@flow", 'as' => 'c.member.flow']);
         });
+
+        //订单
+        Route::group(['prefix'=>'order'], function(){
+            Route::get('', ['uses' => "OrderController@index", 'as' => 'c.order.list']);
+        });
     });
 });

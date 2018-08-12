@@ -7,10 +7,24 @@ use App\Canteen\Bls\Users\Model\OrderModel;
 use App\Canteen\Bls\Users\Model\OrderTakeoutModel;
 use App\Consts\Common\AccountFlowTypeConst;
 use App\Consts\Order\OrderStatusConst;
+use App\Consts\Order\OrderTypeConst;
 use Auth;
 
 class OrderBls
 {
+
+
+    public static function getOrderList($request, $limit = 20)
+    {
+        $model = OrderModel::query();
+
+        if(!empty($request->status)) {
+            $status = explode('_', $request->status);
+            $model->whereIn('status', $status);
+        }
+
+        return $model->where('user_id', Auth::guard('canteen')->id())->orderBy('id','desc')->simplePaginate($limit);
+    }
 
     /**
      * 外面订单创建
@@ -30,14 +44,14 @@ class OrderBls
             $order->amount = $amount;
             $order->deposit = $deposit;
             $order->status = OrderStatusConst::DEPOSIT;
-            $order->title = date('Ymd').'外卖';
+            $order->type = OrderTypeConst::TAKEOUT;
             $order->save();
 
             foreach($data as $item){
                 static::createTakeoutOrderByChild($item, $order->id);
             }
 
-            AccountFlowBls::createAccountFlow($user->id, AccountFlowTypeConst::PAYMENT, $deposit, "支付{$order->title}定金");
+            AccountFlowBls::createAccountFlow($user->id, AccountFlowTypeConst::PAYMENT, $deposit, "订单号:{$order->id}定金");
 
             return $user->save();
         });

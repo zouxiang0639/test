@@ -189,7 +189,7 @@
                             locked = true;
                         } else {
                             $.alert(res.data);
-                            window.location.href = document.location;
+                            window.location.href = '{!! route('c.order.list') !!}';
                         }
                     },
                     error:function () {
