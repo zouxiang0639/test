@@ -24,6 +24,7 @@ Route::group([
         Route::group(['prefix'=>'member'], function(){
             Route::get('', ['uses' => "MemberController@index", 'as' => 'c.member']);
             Route::get('qrcode', ['uses' => "MemberController@qrCode", 'as' => 'c.qrcode']);
+            Route::get('flow', ['uses' => "MemberController@flow", 'as' => 'c.member.flow']);
         });
     });
 });

@@ -7,7 +7,7 @@ namespace App\Consts\Common;
  * @author: zouxiang
  * @date:
  */
-class AccountFlowConst
+class AccountFlowTypeConst
 {
     const PAYMENT = 1;
     const RECHARGE = 2;
@@ -29,5 +29,15 @@ class AccountFlowConst
     public static function getDesc($item)
     {
         return array_get(self::desc(), $item);
+    }
+
+    public static function getIconDesc($item)
+    {
+        $array = [
+            self::PAYMENT => '-',
+            self::RECHARGE => '+',
+            self::HEDGING => '-',
+        ];
+        return array_get($array, $item);
     }
 }

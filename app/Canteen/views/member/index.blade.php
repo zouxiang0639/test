@@ -29,8 +29,7 @@
                 <div class="user-list">
                     <ul>
                         <li>
-
-                            <a href="{:Url('member/account')}">
+                            <a href="{!! route('c.member.flow') !!}">
                                 <span class="icon-account"></span>账户明细</a>
                         </li>
                         <li>

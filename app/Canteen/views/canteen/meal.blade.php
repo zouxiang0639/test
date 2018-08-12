@@ -8,11 +8,8 @@
     <div id="page-comesoon" class="page">
         <header class="bar bar-nav">
             <a class="footer-nav-back back" href="index.html"></a>
-            <button class="button button-link button-nav pull-right">
-                明天菜单
-                <span class="icon icon-right"></span>
-            </button>
-            <h1 class="title">8月7号菜单</h1>
+
+            <h1 class="page-title">8月7号菜单</h1>
         </header>
         <div class="bar footer-nav">
             <div style="float: left"><p>￥ 10.00</p> </div>

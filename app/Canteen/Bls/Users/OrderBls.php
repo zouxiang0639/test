@@ -5,7 +5,7 @@ namespace App\Canteen\Bls\Users;
 use App\Canteen\Bls\Canteen\TakeoutBls;
 use App\Canteen\Bls\Users\Model\OrderModel;
 use App\Canteen\Bls\Users\Model\OrderTakeoutModel;
-use App\Consts\Common\AccountFlowConst;
+use App\Consts\Common\AccountFlowTypeConst;
 use App\Consts\Order\OrderStatusConst;
 use Auth;
 
@@ -37,7 +37,7 @@ class OrderBls
                 static::createTakeoutOrderByChild($item, $order->id);
             }
 
-            AccountFlowBls::createAccountFlow($user->id, AccountFlowConst::PAYMENT, $deposit, "支付{$order->title}定金");
+            AccountFlowBls::createAccountFlow($user->id, AccountFlowTypeConst::PAYMENT, $deposit, "支付{$order->title}定金");
 
             return $user->save();
         });

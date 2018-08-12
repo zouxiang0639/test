@@ -3,9 +3,16 @@
 namespace App\Canteen\Bls\Users;
 
 use App\Canteen\Bls\Users\Model\AccountFlowModel;
+use Auth;
 
 class AccountFlowBls
 {
+
+    public static function gitAccountFlowList($limit = 20)
+    {
+       return AccountFlowModel::where('user_id', Auth::guard('canteen')->id())->orderBy('id','desc')->simplePaginate($limit);
+    }
+
     /**
      * 创建账户流水
      * @param $userId
