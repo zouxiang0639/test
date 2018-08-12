@@ -232,7 +232,7 @@ EOT;
            });\n
 EOT;
         Admin::style()->setJs(StyleTypeConst::CODE, $code);
-        return $this->html->tag('span', '$', ['class' => 'input-group-addon'])
+        return $this->html->tag('span', '￥', ['class' => 'input-group-addon'])
         . self::text($name, $value , $options);
     }
 
