@@ -17,6 +17,7 @@ Route::group([
         Route::group(['prefix'=>'canteen'], function(){
             Route::get('takeout', ['uses' => "CanteenController@takeout", 'as' => 'c.canteen.takeout']);
             Route::get('meal', ['uses' => "CanteenController@meal", 'as' => 'c.canteen.meal']);
+            Route::put('takeout/buy', ['uses' => "CanteenController@takeoutBuy", 'as' => 'c.canteen.takeout.buy']);
         });
 
         //会员
