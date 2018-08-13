@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Bls\Admin\Other\Requests;
+namespace App\Admin\Bls\Other\Requests;
 
 use App\Admin\Bls\Other\FeedbackStrategy\FeedbackStrategy;
 use App\Library\Validators\JsonResponseValidator;
@@ -17,7 +17,7 @@ class FeedbackRequests extends JsonResponseValidator
     {
         $validatorRules = $this->input('type') ? (new FeedbackStrategy($this->input('type')))->validatorRules() : [];
         return array_merge($validatorRules, [
-            'content' => 'required',
+            //'content' => 'required',
 
         ]);
     }

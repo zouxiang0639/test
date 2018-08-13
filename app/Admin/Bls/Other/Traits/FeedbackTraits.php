@@ -16,7 +16,7 @@ trait FeedbackTraits
             {
                 $item->usersName = $users->name;
             }
-            $item->contentMb = mb_substr($item->content, 0 ,50);
+            $item->contentsMb = mb_substr($item->contents, 0 ,50);
         });
     }
 

@@ -3,7 +3,7 @@
 namespace App\Admin\Bls\Other\FeedbackStrategy\Ifc;
 
 use App\Admin\Bls\Other\Model\FeedbackModel;
-use App\Bls\Admin\Other\Requests\FeedbackRequests;
+use App\Admin\Bls\Other\Requests\FeedbackRequests;
 
 interface FeedbackInterface
 {

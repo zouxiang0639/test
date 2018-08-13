@@ -5,7 +5,7 @@ namespace App\Admin\Bls\Other\FeedbackStrategy;
 use App\Admin\Bls\Other\FeedbackStrategy\Ifc\FeedbackInterface;
 use App\Admin\Bls\Other\FeedbackStrategy\Strategy\Feedback;
 use App\Admin\Bls\Other\Model\FeedbackModel;
-use App\Bls\Admin\Other\Requests\FeedbackRequests;
+use App\Admin\Bls\Other\Requests\FeedbackRequests;
 use App\Consts\Admin\Other\FeedbackTypeConst;
 use App\Exceptions\LogicException;
 

@@ -4,7 +4,7 @@ namespace App\Admin\Bls\Other\FeedbackStrategy\Strategy;
 
 use App\Admin\Bls\Other\FeedbackStrategy\Ifc\FeedbackInterface;
 use App\Admin\Bls\Other\Model\FeedbackModel;
-use App\Bls\Admin\Other\Requests\FeedbackRequests;
+use App\Admin\Bls\Other\Requests\FeedbackRequests;
 
 /**
  * 生日汇通兑(含产品册)卡种模版

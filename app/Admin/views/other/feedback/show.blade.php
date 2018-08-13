@@ -5,7 +5,7 @@
 @stop
 @section('content-header')
     <h1>
-        用户反馈<small>展示</small>
+        用户反馈<small>浏览</small>
     </h1>
 @stop
 @section('content')
@@ -14,11 +14,11 @@
         <div class="col-md-12">
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">创建</h3>
+                    <h3 class="box-title">浏览</h3>
 
                     <div class="box-tools">
                         <div class="btn-group pull-right" style="margin-right: 10px">
-                            <a href="{!! route('m.system.tags.list') !!}" class="btn btn-sm btn-default">
+                            <a href="{!! route('m.other.feedback.list') !!}" class="btn btn-sm btn-default">
                                 <i class="fa fa-list"></i>&nbsp;列表
                             </a>
                         </div> <div class="btn-group pull-right" style="margin-right: 10px">
@@ -75,7 +75,7 @@
                         <div class="col-sm-7 ">
                             <div class="input-group" style="width:100%">
                                 <div class="box box-body  box-solid box-default no-margin">
-                                    {!! $info->content !!}
+                                    {!! $info->contents !!}
                                 </div>
                             </div>
                         </div>

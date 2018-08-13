@@ -42,7 +42,7 @@
                         <td>{!! $item->id !!}</td>
                         <td>{!! $item->typeName !!}</td>
                         <td>{{ $item->usersName }}</td>
-                        <td>{{ $item->contentMb }}</td>
+                        <td>{{ $item->contentsMb }}</td>
                         <td>{!! $item->created_at !!}</td>
                         <td>
                             <a href="{!! route('m.other.feedback.show', ['id' => $item->id]) !!}">

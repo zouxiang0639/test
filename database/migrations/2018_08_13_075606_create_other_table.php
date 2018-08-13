@@ -18,7 +18,7 @@ class CreateOtherTable extends Migration
             $table->integer('users_id')->default(0)->comment('用户ID');
             $table->tinyInteger('type')->comment('类型 FeedbackTypeConst');
             $table->text('extend')->comment('扩展属性');
-            $table->text('content')->comment('内容');
+            $table->text('contents')->comment('内容');
             $table->timestamps();
             $table->index(['users_id']);
         });
