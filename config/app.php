@@ -180,7 +180,13 @@ return [
         App\Library\Admin\AdminServiceProvider::class,
         App\Library\Forum\ForumServiceProvider::class,
         App\Library\Admin\Form\HtmlServiceProvider::class,
-        SocialiteProviders\Manager\ServiceProvider::class, // 添加
+        SocialiteProviders\Manager\ServiceProvider::class,
+
+       /*
+        *  验证服务
+        */
+        App\Library\Validators\ValidatorServiceProvider::class
+
     ],
 
     /*

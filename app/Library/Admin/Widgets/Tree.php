@@ -397,7 +397,7 @@ SCRIPT;
      */
     public function render()
     {
-        Admin::setJs(StyleTypeConst::CODE, $this->script());
+        Admin::style()->setJs(StyleTypeConst::CODE, $this->script());
 
         view()->share([
             'path'           => $this->path,

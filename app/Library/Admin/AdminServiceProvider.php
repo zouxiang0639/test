@@ -24,11 +24,6 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected $routeMiddleware = [
         'admin.auth'       => \App\Library\Admin\Middleware\Authenticate::class,
-        'admin.Validator' => \App\Library\Admin\Middleware\RequestsValidator::class,
-       // 'admin.pjax'       => \App\Http\Middleware\Admin\Pjax::class,
-        //'admin.log'        => \App\Http\Middleware\Admin\LogOperation::class,
-        //'admin.permission' => \App\Http\Middleware\Admin\Permission::class,
-        //'admin.bootstrap'  => \App\Http\Middleware\Admin\Bootstrap::class,
     ];
 
     /**
@@ -39,10 +34,6 @@ class AdminServiceProvider extends ServiceProvider
     protected $middlewareGroups = [
         'admin' => [
             'admin.auth',
-            'admin.Validator',
-            //'admin.log',
-            //'admin.bootstrap',
-            //'admin.permission',
         ],
     ];
 
@@ -58,17 +49,6 @@ class AdminServiceProvider extends ServiceProvider
         $this->registerRouteMiddleware();
         $this->loadViewsFrom(app_path('Admin/views'), 'admin');
         $this->loadRoutesFrom(app_path('Admin/routes/routes.php'));
-//        if (file_exists($routes = admin_path('routes.php'))) {
-//
-//        }
-//
-//        if ($this->app->runningInConsole()) {
-//            $this->publishes([__DIR__.'/../config' => config_path()], 'laravel-admin-config');
-//            $this->publishes([__DIR__.'/../resources/lang' => resource_path('lang')], 'laravel-admin-lang');
-////            $this->publishes([__DIR__.'/../resources/views' => resource_path('views/admin')],           'laravel-admin-views');
-//            $this->publishes([__DIR__.'/../database/migrations' => database_path('migrations')], 'laravel-admin-migrations');
-//            $this->publishes([__DIR__.'/../resources/assets' => public_path('vendor/laravel-admin')], 'laravel-admin-assets');
-//        }
     }
 
     /**

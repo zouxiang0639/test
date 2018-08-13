@@ -6,6 +6,7 @@ use App\Admin\Bls\Auth\MenuBls;
 use App\Library\Admin\Consts\StyleTypeConst;
 use App\Library\Admin\Widgets\Forms;
 use App\Library\Admin\Widgets\Navbar;
+use App\Library\Admin\Widgets\Style;
 use App\Library\Admin\Widgets\Tree;
 use App\Library\Admin\Widgets\Upload;
 use Auth;
@@ -16,9 +17,7 @@ class Admin
 {
     public $navbar;
 
-    public $js = [StyleTypeConst::FILE => [], StyleTypeConst::CODE => []];
-
-    public $css = [StyleTypeConst::FILE => [], StyleTypeConst::CODE => []];
+    private $style;
 
     /**
      * Get navbar object.
@@ -41,6 +40,16 @@ class Admin
         return new Upload();
     }
 
+    /**
+     * @return Style
+     */
+    public function style()
+    {
+        if(empty($this->style)) {
+            $this->style = new Style();
+        }
+        return $this->style;
+    }
 
     /**
      * Get current login user.
@@ -86,88 +95,4 @@ class Admin
     {
         return (new Forms())->form($callback);
     }
-
-
-    public function setCss($type, $data)
-    {
-        switch($type) {
-            case StyleTypeConst::FILE:
-
-                $this->css[StyleTypeConst::FILE][] = '<link rel="stylesheet" href="' . assets_path($data) . '">';
-                break;
-
-            case StyleTypeConst::CODE:
-
-                $this->css[StyleTypeConst::CODE][] = $data;
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    public function setJs($type, $data)
-    {
-        switch($type) {
-            case StyleTypeConst::FILE:
-
-                $this->js[StyleTypeConst::FILE][] = '<script src="' . assets_path($data) . '"></script>';
-                break;
-
-            case StyleTypeConst::CODE:
-
-                $this->js[StyleTypeConst::CODE][] = $data;
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    public function getCss()
-    {
-        $file = array_unique($this->css[StyleTypeConst::FILE]);
-        $css = '';
-        $code = '';
-        foreach ($file as $v) {
-            $css .= $v;
-        }
-
-        foreach($this->css[StyleTypeConst::CODE] as $v) {
-            $code .= $v;
-        }
-
-        $css .= <<<EOT
-        <style>
-            $code
-        </style>
-
-EOT;
-        return $css;
-    }
-
-    public function getJs()
-    {
-        $file = array_unique($this->js[StyleTypeConst::FILE]);
-        $js = '';
-        $code = '';
-        foreach ($file as $v) {
-            $js .= $v;
-        }
-
-        foreach($this->js[StyleTypeConst::CODE] as $v) {
-            $code .= $v;
-        }
-
-        $js .= <<<EOT
-
-        <script>
-            $(function () {
-                $code
-            });
-        </script>
-EOT;
-        return $js;
-    }
-
 }

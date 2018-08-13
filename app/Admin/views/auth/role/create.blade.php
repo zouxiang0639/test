@@ -5,7 +5,7 @@
 @stop
 @section('content-header')
     <h1>
-        管理员<small>创建</small>
+        角色<small>创建</small>
     </h1>
 @stop
 @section('content')
