@@ -58,6 +58,16 @@ Route::group([
 
     });
 
+    //其他管理
+    Route::group(['prefix'=>'other'], function(){
+
+        //用户反馈
+        Route::group(['prefix'=>'feedback', 'middleware' => 'admin.auth:m_other_feedback'], function(){
+            Route::get('', ['uses' => "Other\\FeedbackController@index", 'as' => 'm.other.feedback.list']);
+            Route::get('show/{id}', ['uses' => "Other\\FeedbackController@show", 'as' => 'm.other.feedback.show']);
+        });
+    });
+
     //系统管理
     Route::group(['prefix'=>'system'], function(){
 

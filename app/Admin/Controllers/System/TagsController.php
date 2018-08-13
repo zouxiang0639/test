@@ -2,8 +2,6 @@
 
 namespace App\Admin\Controllers\System;
 
-use App\Admin\Bls\System\ConfigBls;
-use App\Admin\Bls\System\Requests\ConfigRequest;
 use App\Admin\Bls\System\Requests\TagsRequest;
 use App\Admin\Bls\System\TagsBls;
 use App\Consts\Admin\Tags\TagsTypeConst;
@@ -16,7 +14,6 @@ use App\Library\Response\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Admin;
-use Illuminate\Support\Facades\Input;
 use View;
 
 /**

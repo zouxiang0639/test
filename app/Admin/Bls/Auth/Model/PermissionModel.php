@@ -18,15 +18,6 @@ class PermissionModel extends Model
     protected $table = 'admin_permissions';
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'http_method' => 'array',
-    ];
-
-    /**
      * Permission belongs to many roles.
      *
      * @return BelongsToMany
