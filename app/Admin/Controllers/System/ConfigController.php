@@ -8,6 +8,7 @@ use App\Exceptions\LogicException;
 use App\Library\Admin\Form\FormBuilder;
 use App\Library\Admin\Form\HtmlFormTpl;
 use App\Library\Admin\Widgets\Forms;
+use App\Library\Format\FormatMoney;
 use App\Library\Response\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -169,9 +170,52 @@ class ConfigController extends Controller
 
 
         })->getFormHtml();
+        $mealForm = Admin::form(function(Forms $item) use ($info)  {
+
+            $item->create('早餐费', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->currency('morning_price', FormatMoney::fen2yuan(config('config.morning_price')), $h->options);
+                $h->set('morning_price', false);
+            });
+
+            $item->create('午餐费', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->currency('lunch_price', FormatMoney::fen2yuan(config('config.lunch_price')), $h->options);
+                $h->set('morning_price', false);
+            });
+
+            $item->create('晚餐费', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->currency('dinner_price', FormatMoney::fen2yuan(config('config.dinner_price')), $h->options);
+                $h->set('dinner_price', false);
+            });
+
+            $item->create('截止订购时间', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->datetime('meal_deadline', config('config.meal_deadline'), $h->options, 'HH:mm');
+                $h->set('meal_deadline', false);
+                $h->helpBlock = '（每天时间到了截止订购时间后将不能购订购第二天的点餐）';
+            });
+
+        })->getFormHtml();
+
+        $takeoutForm = Admin::form(function(Forms $item) use ($info)  {
+
+            $item->create('外卖截止时间', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->datetime('takeout_deadline', config('config.takeout_deadline'), $h->options, 'YYYY-MM-DD');
+                $h->set('takeout_deadline', false);
+                $h->helpBlock = '（外面截止时间到期后将不能购买外面）';
+            });
+
+            $item->create('限制退单', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->number('refund_limit', config('config.refund_limit', 0), $h->options);
+                $h->set('refund_limit', false);
+                $h->helpBlock = '（每个月限制退单次数）';
+            });
+
+
+        })->getFormHtml();
 
         return View::make('admin::system.config.set',[
-            'form' => $form
+            'form' => $form,
+            'mealForm' => $mealForm,
+            'takeoutForm' => $takeoutForm
         ]);
     }
 

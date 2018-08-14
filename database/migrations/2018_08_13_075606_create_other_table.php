@@ -24,7 +24,7 @@ class CreateOtherTable extends Migration
         });
         \DB::statement("ALTER TABLE `admin_feedback` comment '客户反馈'");
 
-        Schema::create('admin_advert', function (Blueprint $table) {
+     /*   Schema::create('admin_advert', function (Blueprint $table) {
             $table->increments('id');
             $table->tinyInteger('type')->comment('类型 AdvertTypeConst');
             $table->tinyInteger('status')->comment('状态 1启用 2禁用 :WhetherConst');
@@ -35,7 +35,7 @@ class CreateOtherTable extends Migration
             $table->string('comment', 255)->default('')->comment('描述');
             $table->timestamps();
         });
-        \DB::statement("ALTER TABLE `admin_advert` comment '广告'");
+        \DB::statement("ALTER TABLE `admin_advert` comment '广告'");*/
     }
 
     /**
@@ -46,6 +46,6 @@ class CreateOtherTable extends Migration
     public function down()
     {
         Schema::dropIfExists('admin_feedback');
-        Schema::dropIfExists('admin_advert');
+        /*Schema::dropIfExists('admin_advert');*/
     }
 }

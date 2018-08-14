@@ -1,7 +1,6 @@
 <?php
 
 Route::group([
-    'prefix' => 'canteen',
     'namespace' => 'App\\Canteen\\Controllers',
     'middleware' => ['web', 'canteen'],
 ], function(){
@@ -20,9 +19,10 @@ Route::group([
             Route::put('takeout/buy', ['uses' => "CanteenController@takeoutBuy", 'as' => 'c.canteen.takeout.buy']);
         });
 
+        Route::get('', ['uses' => "MemberController@index", 'as' => 'c.member']);
+
         //会员
         Route::group(['prefix'=>'member'], function(){
-            Route::get('', ['uses' => "MemberController@index", 'as' => 'c.member']);
             Route::get('qrcode', ['uses' => "MemberController@qrCode", 'as' => 'c.qrcode']);
             Route::get('flow', ['uses' => "MemberController@flow", 'as' => 'c.member.flow']);
         });

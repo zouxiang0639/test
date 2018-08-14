@@ -2,6 +2,7 @@
 
 namespace App\Canteen\Controllers;
 
+use App\Canteen\Bls\Canteen\RecipesBls;
 use App\Canteen\Bls\Canteen\TakeoutBls;
 use App\Canteen\Bls\Users\OrderBls;
 use App\Consts\Common\WhetherConst;
@@ -91,6 +92,12 @@ class CanteenController extends Controller
 
     public function meal()
     {
-        return view('canteen::canteen.meal');
+        $today = RecipesBls::getRecipesByDate(date('Y-m-d'));
+        $tomorrow = RecipesBls::getRecipesByDate(date("Y-m-d",strtotime("+1 day")));
+
+        return view('canteen::canteen.meal', [
+            'today' => $today,
+            'tomorrow' => $tomorrow
+        ]);
     }
 }

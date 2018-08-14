@@ -18,17 +18,17 @@ class AdminConfigSeeder extends Seeder
             [
                 'name' => 'title',
                 'description' => '网站标题',
-                'value' => '',
+                'value' => '食堂管理系统',
             ],
             [
                 'name' => 'description',
                 'description' => '网站描述',
-                'value' => '',
+                'value' => '食堂管理系统',
             ],
             [
                 'name' => 'keywords',
                 'description' => '网站关键字',
-                'value' => '',
+                'value' => '食堂管理系统',
             ],
             [
                 'name' => 'icp',
@@ -59,19 +59,29 @@ class AdminConfigSeeder extends Seeder
                 'value' => '2018-08-20',
             ],
             [
+                'name' => 'refund_limit',
+                'description' => '限制退单',
+                'value' => '2',
+            ],
+            [
                 'name' => 'morning_price',
                 'description' => '早餐费',
-                'value' => '',
+                'value' => '500',
             ],
             [
                 'name' => 'lunch_price',
                 'description' => '午餐费',
-                'value' => '',
+                'value' => '2000',
             ],
             [
                 'name' => 'dinner_price',
                 'description' => '晚餐费',
-                'value' => '',
+                'value' => '2000',
+            ],
+            [
+                'name' => 'meal_deadline',
+                'description' => '截止预定时间',
+                'value' => '17:00',
             ]
         ]);
     }

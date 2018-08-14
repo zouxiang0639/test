@@ -20,6 +20,9 @@ class ConfigBls
      */
     public $format = [
         //title' => [\App\Library\Format\FormatMoney::class, 'yuan2fen']
+        'morning_price' => [\App\Library\Format\FormatMoney::class, 'yuan2fen'],
+        'lunch_price' => [\App\Library\Format\FormatMoney::class, 'yuan2fen'],
+        'dinner_price' => [\App\Library\Format\FormatMoney::class, 'yuan2fen'],
     ];
 
     /**

@@ -8,22 +8,22 @@ return [
     /*
      * Laravel-admin name.
      */
-    'name' => 'Laravel-admin',
+    'name' => '食堂管理系统',
 
     /*
      * Logo in admin panel header.
      */
-    'logo' => '<b>Laravel</b> admin',
+    'logo' => '<b>食堂管理系统</b>',
 
     /*
      * Mini-logo in admin panel header.
      */
-    'logo-mini' => '<b>La</b>',
+    'logo-mini' => '<b>系统</b>',
 
     /*
      * Laravel-admin html title.
      */
-    'title' => 'Admin',
+    'title' => '食堂管理',
 
     /*
      * Use `https`.
