@@ -135,13 +135,22 @@ class AdminAuthSeeder extends Seeder
         ]);
         $menu = MenuBls::storeMenu($menuRequest);
 
-
         $menuRequest->merge([
             'parent_id' => $menu->getKey(),
             'title' => '客户反馈',
             'icon' => 'fa-comments-o',
             'route' => 'm.other.feedback.list',
             'slug' => 'm_other_feedback',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);
+
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '广告',
+            'icon' => 'fa-image',
+            'route' => 'm.other.advert.list',
+            'slug' => 'm_other_advert',
             'permissions' => WhetherConst::YES
         ]);
         MenuBls::storeMenu($menuRequest);

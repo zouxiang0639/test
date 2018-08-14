@@ -12,7 +12,7 @@ use Illuminate\Support\Collection;
 use View;
 
 /**
- * Created by ConfigController.
+ * Created by FeedbackController.
  * @author: zouxiang
  * @date:
  */

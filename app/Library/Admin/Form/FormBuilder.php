@@ -245,9 +245,10 @@ EOT;
      */
     public function imageOne($name, $value = null, $options = [])
     {
-        $path = $value ? uploads_path($value) : $value;
-        $options['data-initial-preview'] = $path;
-        $options['data-initial-caption'] = $value;
+        $path = str_replace(uploads_path(''),'',$value);
+
+        $options['data-initial-preview'] = $value;
+        $options['data-initial-caption'] = $path;
         Admin::style()->setCss(StyleTypeConst::FILE, $this->getResource('fileinput.min.css'));
         Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('fileinput.min.js'));
         Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('canvas-to-blob.min.js'));
@@ -290,7 +291,7 @@ EOT;
 EOT;
         Admin::style()->setJs(StyleTypeConst::CODE, $code);
 
-        return self::hidden($name, $value).self::file($name, $options);
+        return self::hidden($name, $path).self::file($name, $options);
     }
 
     /**

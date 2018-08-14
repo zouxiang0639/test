@@ -5,10 +5,7 @@ namespace App\Admin\Bls\Other\Requests;
 use App\Admin\Bls\Other\FeedbackStrategy\FeedbackStrategy;
 use App\Library\Validators\JsonResponseValidator;
 
-/**
- * 卡种模版存储验证器
- * @author zouxiang
- */
+
 class FeedbackRequests extends JsonResponseValidator
 {
 
@@ -17,7 +14,7 @@ class FeedbackRequests extends JsonResponseValidator
     {
         $validatorRules = $this->input('type') ? (new FeedbackStrategy($this->input('type')))->validatorRules() : [];
         return array_merge($validatorRules, [
-            //'content' => 'required',
+            'content' => 'required',
 
         ]);
     }

@@ -66,6 +66,18 @@ Route::group([
             Route::get('', ['uses' => "Other\\FeedbackController@index", 'as' => 'm.other.feedback.list']);
             Route::get('show/{id}', ['uses' => "Other\\FeedbackController@show", 'as' => 'm.other.feedback.show']);
         });
+
+        //广告
+        Route::group(['prefix'=>'advert', 'middleware' => 'admin.auth:m_other_advert'], function(){
+            Route::get('', ['uses' => "Other\\AdvertController@index", 'as' => 'm.other.advert.list']);
+            Route::get('/create', ['uses' => "Other\\AdvertController@create", 'as' => 'm.other.advert.create']);
+            Route::post('store', ['uses' => "Other\\AdvertController@store", 'as' => 'm.other.advert.store']);
+            Route::get('edit/{id}', ['uses' => "Other\\AdvertController@edit", 'as' => 'm.other.advert.edit']);
+            Route::post('update/{id}', ['uses' => "Other\\AdvertController@update", 'as' => 'm.other.advert.update']);
+            Route::delete('destroy/{id}', ['uses' => "Other\\AdvertController@destroy", 'as' => 'm.other.advert.destroy']);
+            Route::put('status/{id}', ['uses' => "Other\\AdvertController@status", 'as' => 'm.other.advert.status']);
+            Route::put('hot', ['uses' => "Other\\AdvertController@hot", 'as' => 'm.other.advert.hot']);
+        });
     });
 
     //系统管理

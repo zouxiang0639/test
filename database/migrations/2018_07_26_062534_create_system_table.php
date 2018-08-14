@@ -26,7 +26,7 @@ class CreateSystemTable extends Migration
             $table->increments('id');
             $table->string('tag_name')->comment('标签名称');
             $table->tinyInteger('type')->comment('类型 :TagsTypeConst');
-            $table->tinyInteger('status')->comment('状态 :WhetherConst');
+            $table->tinyInteger('status')->comment('状态 1启用 2禁用 :WhetherConst');
             $table->integer('hot')->default(0)->comment('热度');
             $table->timestamps();
             $table->softDeletes();
