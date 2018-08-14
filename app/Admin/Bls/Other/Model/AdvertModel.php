@@ -13,18 +13,4 @@ class AdvertModel extends Model
      */
     protected $table = 'admin_advert';
 
-    /**
-     * 图片
-     * @param string $picture
-     *
-     * @return string
-     */
-    public function getPictureAttribute($picture)
-    {
-        if ($picture) {
-            return uploads_path($picture);
-        }
-
-        return uploads_path(config('config.default_picture'));
-    }
 }

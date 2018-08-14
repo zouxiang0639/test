@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class AdvertBls
 {
+    /**
+     * @param Request $request
+     * @param string $order
+     * @param int $limit
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
     public static function getAdvertList(Request $request, $order = '`id` DESC', $limit = 20)
     {
         $model = AdvertModel::query();
@@ -23,6 +29,10 @@ class AdvertBls
         return $model->orderBy('hot', 'DESC')->orderByRaw($order)->paginate($limit);
     }
 
+    /**
+     * @param AdvertRequests $requests
+     * @return bool
+     */
     public static function storeAdvert(AdvertRequests $requests)
     {
         $model = new AdvertModel();
@@ -36,7 +46,12 @@ class AdvertBls
         return $model->save();
     }
 
-    public static function updateTags(AdvertModel $model, AdvertRequests $requests)
+    /**
+     * @param AdvertModel $model
+     * @param AdvertRequests $requests
+     * @return bool
+     */
+    public static function updateAdvert(AdvertModel $model, AdvertRequests $requests)
     {
         $model->type = $requests->type;
         $model->status = $requests->status;
@@ -48,6 +63,10 @@ class AdvertBls
         return $model->save();
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public static function find($id)
     {
         return  AdvertModel::find($id);

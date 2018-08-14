@@ -5,8 +5,6 @@ namespace App\Admin\Controllers\Other;
 
 use App\Admin\Bls\Other\AdvertBls;
 use App\Admin\Bls\Other\Requests\AdvertRequests;
-use App\Admin\Bls\System\Requests\TagsRequest;
-use App\Admin\Bls\System\TagsBls;
 use App\Consts\Admin\Other\AdvertTypeConst;
 use App\Consts\Admin\Tags\TagsTypeConst;
 use App\Consts\Common\WhetherConst;
@@ -41,6 +39,7 @@ class AdvertController extends Controller
 
         $list->getCollection()->each(function($item) {
             $item->typeName = AdvertTypeConst::getDesc($item->type);
+            $item->picture = uploads_path($item->picture);
         });
 
         return View::make('admin::other.advert.index',[
@@ -116,7 +115,7 @@ class AdvertController extends Controller
 
         $this->isEmpty($model);
 
-        if(AdvertBls::updateTags($model, $request)) {
+        if(AdvertBls::updateAdvert($model, $request)) {
             return (new JsonResponse())->success('操作成功');
         } else {
             throw new LogicException(1010002, '操作失败');
