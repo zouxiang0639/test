@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('content-header')
+@section('style')
     <style>
         .label{line-height: 2;}
     </style>
@@ -8,7 +8,7 @@
 
 @section('content-header')
     <h1>
-        管理员<small>列表</small>
+        角色<small>列表</small>
     </h1>
 @stop
 

@@ -5,7 +5,7 @@
 @stop
 @section('content-header')
     <h1>
-        角色<small>创建</small>
+        广告<small>创建</small>
     </h1>
 @stop
 @section('content')
@@ -16,7 +16,7 @@
 
                     <div class="box-tools">
                         <div class="btn-group pull-right" style="margin-right: 10px">
-                            <a href="{!! route('m.role.list') !!}" class="btn btn-sm btn-default">
+                            <a href="{!! route('m.other.advert.list') !!}" class="btn btn-sm btn-default">
                                 <i class="fa fa-list"></i>&nbsp;列表
                             </a>
                         </div> <div class="btn-group pull-right" style="margin-right: 10px">
@@ -24,8 +24,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.box-header -->
-                <!-- form start -->
               {!! $form !!}
             </div>
 
@@ -37,8 +35,8 @@
 @section('script')
     <script>
         var initialAjAx = {
-            "url":"{!! route('m.role.store') !!}",
-            "backUrl":"{!! route('m.role.list') !!}"
+            "url":"{!! route('m.other.advert.store') !!}",
+            "backUrl":"{!! route('m.other.advert.list', ['type' => Input::get('type')]) !!}"
         }
     </script>
 @stop

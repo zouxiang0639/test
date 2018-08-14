@@ -53,9 +53,11 @@ class AdminAuthSeeder extends Seeder
             'slug' => '',
             'permissions' => WhetherConst::NO
         ]);
+
         MenuBls::storeMenu($menuRequest);
         $this->admin(); //后台管理
         $this->canteen(); //食堂管理
+        $this->other(); //其它管理
         $this->system(); //系统管理
     }
 
@@ -115,6 +117,44 @@ class AdminAuthSeeder extends Seeder
             'permissions' => WhetherConst::YES
         ]);
         MenuBls::storeMenu($menuRequest);
+    }
+
+
+    /**
+     *  其他管理
+     */
+    public function other()
+    {
+        $menuRequest = new MenuRequest();
+        $menuRequest->merge([
+            'parent_id' => 0,
+            'title' => '其它管理',
+            'icon' => 'fa-paperclip',
+            'route' => '',
+            'slug' => 'm_other',
+            'permissions' => WhetherConst::YES
+        ]);
+        $menu = MenuBls::storeMenu($menuRequest);
+
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '客户反馈',
+            'icon' => 'fa-comments-o',
+            'route' => 'm.other.feedback.list',
+            'slug' => 'm_other_feedback',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);
+
+       /* $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '广告',
+            'icon' => 'fa-image',
+            'route' => 'm.other.advert.list',
+            'slug' => 'm_other_advert',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);*/
     }
 
     /**

@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Admin\Controllers\System;
 
-use App\Admin\Bls\System\Requests\TagsRequest;
-use App\Admin\Bls\System\TagsBls;
+namespace App\Admin\Controllers\Other;
+
+use App\Admin\Bls\Other\AdvertBls;
+use App\Admin\Bls\Other\Requests\AdvertRequests;
+use App\Consts\Admin\Other\AdvertTypeConst;
 use App\Consts\Admin\Tags\TagsTypeConst;
 use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
@@ -17,11 +19,11 @@ use Admin;
 use View;
 
 /**
- * Created by ConfigController.
+ * Created by AdvertController.
  * @author: zouxiang
  * @date:
  */
-class TagsController extends Controller
+class AdvertController extends Controller
 {
     /**
      * 列表
@@ -30,15 +32,19 @@ class TagsController extends Controller
      */
     public function index(Request $request)
     {
-        if(empty($request->type)) {
+        if($request->type == null) {
             $request->merge(['type' => TagsTypeConst::TAG]);
         }
+        $list = AdvertBls::getAdvertList($request);
 
-        $list = TagsBls::getTagsList($request);
+        $list->getCollection()->each(function($item) {
+            $item->typeName = AdvertTypeConst::getDesc($item->type);
+            $item->picture = uploads_path($item->picture);
+        });
 
-        return View::make('admin::system.tags.index',[
+        return View::make('admin::other.advert.index',[
             'list' => $list,
-            'tagsType' => TagsTypeConst::desc()
+            'type' => AdvertTypeConst::desc(true)
         ]);
     }
 
@@ -50,7 +56,7 @@ class TagsController extends Controller
      */
     public function create(Request $request)
     {
-        $typeName = TagsTypeConst::getDesc($request->type);
+        $typeName = AdvertTypeConst::getDesc($request->type);
 
         $this->isEmpty($typeName);
 
@@ -58,20 +64,20 @@ class TagsController extends Controller
             'typeName' => $typeName,
             'type' => $request->type
         ];
-        return View::make('admin::system.tags.create',[
+        return View::make('admin::other.advert.create',[
             'form' =>  $this->form($info),
         ]);
     }
 
     /**
      * 存储
-     * @param TagsRequest $request
+     * @param AdvertRequests $request
      * @return \Illuminate\Http\JsonResponse
      * @throws LogicException
      */
-    public function store(TagsRequest $request)
+    public function store(AdvertRequests $request)
     {
-        if(TagsBls::storeTags($request)) {
+        if(AdvertBls::storeAdvert($request)) {
             return (new JsonResponse())->success('操作成功');
         } else {
             throw new LogicException(1010002, '操作失败');
@@ -86,30 +92,30 @@ class TagsController extends Controller
      */
     public function edit($id)
     {
-        $model = TagsBls::find($id);
+        $model = AdvertBls::find($id);
 
         $this->isEmpty($model);
         $model->typeName = TagsTypeConst::getDesc($model->type);
 
-        return View::make('admin::system.tags.edit',[
+        return View::make('admin::other.advert.edit',[
             'form' =>  $this->form($model),
             'info' =>  $model
         ]);
     }
 
     /**
-     * @param TagsRequest $request
+     * @param AdvertRequests $request
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      * @throws LogicException
      */
-    public function update(TagsRequest $request, $id)
+    public function update(AdvertRequests $request, $id)
     {
-        $model = TagsBls::find($id);
+        $model = AdvertBls::find($id);
 
         $this->isEmpty($model);
 
-        if(TagsBls::updateTags($model, $request)) {
+        if(AdvertBls::updateAdvert($model, $request)) {
             return (new JsonResponse())->success('操作成功');
         } else {
             throw new LogicException(1010002, '操作失败');
@@ -124,7 +130,7 @@ class TagsController extends Controller
      */
     public function destroy($id)
     {
-        $model = TagsBls::find($id);
+        $model = AdvertBls::find($id);
 
         $this->isEmpty($model);
 
@@ -147,7 +153,7 @@ class TagsController extends Controller
 
         $this->isEmpty(WhetherConst::getDesc($request->status));
 
-        $model = TagsBls::find($id);
+        $model = AdvertBls::find($id);
 
         $this->isEmpty($model);
 
@@ -169,7 +175,7 @@ class TagsController extends Controller
      */
     public function hot(Request $request)
     {
-        $model = TagsBls::find($request->pk);
+        $model = AdvertBls::find($request->pk);
         $model->hot = intval($request->value);
         if($model->save()) {
             return (new JsonResponse())->success('操作成功');
@@ -188,24 +194,39 @@ class TagsController extends Controller
     {
         return Admin::form(function(Forms $item) use ($info) {
 
-            $item->create('标签类型', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+            $item->create('类型', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->display(array_get($info, 'typeName')). $form->hidden('type', array_get($info, 'type'));
-                $h->set('type', true);
-            });
-
-            $item->create('标签名称', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->text('tag_name', array_get($info, 'tag_name'), $h->options);
-                $h->set('tag_name', true);
-            });
-
-            $item->create('热度', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->text('hot', array_get($info, 'hot'), $h->options);
-                $h->set('hot', true);
+                $h->set('type', false);
             });
 
             $item->create('状态', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->switchOff('status',  array_get($info, 'status', 1));
+                $h->input = $form->switchOff('status',  array_get($info, 'status', WhetherConst::YES));
                 $h->set('status', true);
+            });
+
+            $item->create('标题', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->text('title', array_get($info, 'title'), $h->options);
+                $h->set('title', true);
+            });
+
+            $item->create('图片', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->imageOne('picture', array_get($info, 'picture'), $h->options);
+                $h->set('picture', true);
+            });
+
+            $item->create('链接', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->text('links', array_get($info, 'links'), $h->options);
+                $h->set('links', false);
+            });
+
+            $item->create('热度', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->number('hot', array_get($info, 'hot', 0), $h->options);
+                $h->set('hot', false);
+            });
+
+            $item->create('描述', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->textarea('comment',  array_get($info, 'comment'), $h->options);
+                $h->set('comment', false);
             });
 
             $item->create('创建时间', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
