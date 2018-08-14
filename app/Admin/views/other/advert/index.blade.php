@@ -6,7 +6,7 @@
 
 @section('content-header')
     <h1>
-        标签<small>列表</small>
+        广告<small>列表</small>
     </h1>
 @stop
 
