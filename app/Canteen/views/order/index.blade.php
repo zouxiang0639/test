@@ -53,7 +53,7 @@
                                         <div class="row">
                                             <div class="col-33">{!! $value->name !!}</div>
                                             <div class="col-33">{!! $value->num !!}份</div>
-                                            <div class="col-33">{!! \App\Library\Format\FormatMoney::fen2yuan($value->price) !!}元</div>
+                                            <div class="col-33">{!! \App\Library\Format\FormatMoney::fen2yuan($value->price * $value->num) !!}元</div>
                                         </div>
                                     @endforeach
                                 </div>

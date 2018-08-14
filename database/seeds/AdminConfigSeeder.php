@@ -56,7 +56,7 @@ class AdminConfigSeeder extends Seeder
             [
                 'name' => 'takeout_deadline',
                 'description' => '外卖截止时间',
-                'value' => '',
+                'value' => '2018-08-20',
             ],
             [
                 'name' => 'morning_price',
@@ -75,4 +75,5 @@ class AdminConfigSeeder extends Seeder
             ]
         ]);
     }
+
 }

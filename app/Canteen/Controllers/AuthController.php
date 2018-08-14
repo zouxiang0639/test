@@ -34,11 +34,11 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
 
-        Auth::guard('forum')->logout();
+        Auth::guard('canteen')->logout();
 
         $request->session()->invalidate();
 
-        return redirect()->route('f.home');
+        return redirect()->route('c.auth.login');
     }
 
 

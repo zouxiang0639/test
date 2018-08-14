@@ -44,7 +44,7 @@
                         </li>
                         <li>
 
-                            <a href="#">
+                            <a href="{!! route('c.auth.logout') !!}">
                                 <!--<small>实名认证、密码修改、银行卡绑定</small>-->
                                 <span class="icon-about white"></span>安全退出</a>
                         </li>
@@ -59,11 +59,10 @@
 
 @section('script')
     <script>
-        $(function () {'use strict';
-            $(document).on("click", "#rqcard", function(e) {
+        $(function () {
+            $('#rqcard').click(function(e) {
                 $.alert('<img style="min-height: 192px" width="100%" src="{!! route('c.qrcode') !!}">', '二维码');
             });
-            $.init();
         });
     </script>
 @stop
