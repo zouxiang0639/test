@@ -10,7 +10,7 @@ class Kernel extends ConsoleKernel
 {
     /**
      * The Artisan commands provided by your application.
-     *
+     * php artisan schedule:run >> /dev/null 2>&1
      * @var array
      */
     protected $commands = [
