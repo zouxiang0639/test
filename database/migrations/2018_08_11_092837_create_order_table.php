@@ -14,12 +14,13 @@ class CreateOrderTable extends Migration
     public function up()
     {
         Schema::create('order', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('user_id')->comment('用户ID');
             $table->integer('amount')->comment('总金额 分');
             $table->integer('deposit')->comment('定金 分');
             $table->tinyInteger('status')->comment('状态 1已支付定金 2全额支付 3待评价 4完成 5退单 OrderStatusConst');
             $table->tinyInteger('type')->comment('类型 1点餐 2外面 OrderTypeConst');
-            $table->increments('id');
+            $table->integer('payment')->comment('已支付金额');
             $table->timestamps();
             $table->index(['user_id']);
         });
@@ -47,6 +48,21 @@ class CreateOrderTable extends Migration
             $table->timestamps();
         });
         \DB::statement("ALTER TABLE `account_flow` comment '账户流水'");
+
+
+        Schema::create('order_meal', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('recipes_id')->comment('食谱ID');
+            $table->integer('order_id')->comment('订单ID');
+            $table->integer('price')->comment('价格 分');
+            $table->integer('num')->comment('数量');
+            $table->integer('discount')->comment('折扣');
+            $table->date('date')->comment('就餐日期');
+            $table->tinyInteger('type')->comment('类型 1早餐 2午餐 3晚餐 MealTypeConst');
+            $table->timestamps();
+            $table->index(['order_id', 'recipes_id']);
+        });
+        \DB::statement("ALTER TABLE `order_meal` comment '外卖订单关联'");
     }
 
     /**
@@ -59,5 +75,6 @@ class CreateOrderTable extends Migration
         Schema::dropIfExists('order');
         Schema::dropIfExists('order_takeout');
         Schema::dropIfExists('account_flow');
+        Schema::dropIfExists('order_meal');
     }
 }

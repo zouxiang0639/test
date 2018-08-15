@@ -82,6 +82,21 @@ class AdminConfigSeeder extends Seeder
                 'name' => 'meal_deadline',
                 'description' => '截止预定时间',
                 'value' => '17:00',
+            ],
+            [
+                'name' => 'meal_deposit',
+                'description' => '订购定金',
+                'value' => '100',
+            ],
+            [
+                'name' => 'meal_discount1',
+                'description' => '1-24小时折扣',
+                'value' => '97',
+            ],
+            [
+                'name' => 'meal_discount2',
+                'description' => '24-48小时折扣',
+                'value' => '90',
             ]
         ]);
     }

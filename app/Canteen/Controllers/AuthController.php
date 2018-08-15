@@ -27,7 +27,7 @@ class AuthController extends Controller
         if (Auth::guard('canteen')->attempt($credentials)) {
             return (new JsonResponse())->success('登录成功');
         } else {
-            throw new LogicException(1010002, '邮箱或密码错误');
+            throw new LogicException(1010002, '手机号或密码错误');
         }
     }
 

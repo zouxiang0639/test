@@ -188,9 +188,29 @@ class ConfigController extends Controller
             });
 
             $item->create('截止订购时间', function(HtmlFormTpl $h, FormBuilder $form) {
-                $h->input = $form->datetime('meal_deadline', config('config.meal_deadline'), $h->options, 'HH:mm');
+                $h->input = $form->datetime('meal_deadline', config('config.meal_deadline'), $h->options, 'HH');
                 $h->set('meal_deadline', false);
                 $h->helpBlock = '（每天时间到了截止订购时间后将不能购订购第二天的点餐）';
+            });
+
+            $item->create('定金', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->currency('meal_deposit', FormatMoney::fen2yuan(config('config.meal_deposit')), $h->options);
+                $h->set('meal_deposit', false);
+                $h->helpBlock = '（点餐定金）';
+            });
+
+            $item->create('折扣1', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->options['max'] = 100;
+                $h->input = $form->number('meal_discount1', config('config.meal_discount1', 0), $h->options);
+                $h->set('meal_discount1', false);
+                $h->helpBlock = '（1-24小时折扣）';
+            });
+
+            $item->create('折扣2', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->options['max'] = 100;
+                $h->input = $form->number('meal_discount2', config('config.meal_discount2', 0), $h->options);
+                $h->set('meal_discount2', false);
+                $h->helpBlock = '（24-48小时折扣）';
             });
 
         })->getFormHtml();

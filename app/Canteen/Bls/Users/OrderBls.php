@@ -3,9 +3,11 @@
 namespace App\Canteen\Bls\Users;
 
 use App\Canteen\Bls\Canteen\TakeoutBls;
+use App\Canteen\Bls\Users\Model\OrderMealModel;
 use App\Canteen\Bls\Users\Model\OrderModel;
 use App\Canteen\Bls\Users\Model\OrderTakeoutModel;
 use App\Consts\Common\AccountFlowTypeConst;
+use App\Consts\Common\MealTypeConst;
 use App\Consts\Order\OrderStatusConst;
 use App\Consts\Order\OrderTypeConst;
 use Auth;
@@ -45,13 +47,14 @@ class OrderBls
             $order->deposit = $deposit;
             $order->status = OrderStatusConst::DEPOSIT;
             $order->type = OrderTypeConst::TAKEOUT;
+            $order->payment = $deposit;
             $order->save();
 
             foreach($data as $item){
                 static::createTakeoutOrderByChild($item, $order->id);
             }
 
-            AccountFlowBls::createAccountFlow($user->id, AccountFlowTypeConst::PAYMENT, $deposit, "订单号:{$order->id}定金");
+            AccountFlowBls::createAccountFlow($user->id, AccountFlowTypeConst::PAYMENT, $deposit, "订单号:{$order->id}外面定金");
 
             return $user->save();
         });
@@ -79,6 +82,43 @@ class OrderBls
         $takeout->stock -= $data['num'];
         $takeout->save();
 
+        return $model->save();
+    }
+
+
+    public static function createMealOrder($data, $amount, $deposit)
+    {
+        return OrderModel::query()->getQuery()->getConnection()->transaction(function () use($data, $amount, $deposit) {
+            $user = Auth::guard('canteen')->user();
+            $user->money -= $deposit;
+            $order = new OrderModel();
+            $order->user_id = $user->id;
+            $order->amount = $amount;
+            $order->deposit = $deposit;
+            $order->status = OrderStatusConst::DEPOSIT;
+            $order->type = OrderTypeConst::MEAL;
+            $order->payment = $deposit;
+            $order->save();
+
+            static::createMealOrderByChild($data, $order->id);
+
+            $name = "订单号:{$order->id}订购{$data['date']}" . MealTypeConst::getDesc($data['type']) . '定金';
+            AccountFlowBls::createAccountFlow($user->id, AccountFlowTypeConst::PAYMENT, $deposit, $name);
+
+            return $user->save();
+        });
+    }
+
+    public static function createMealOrderByChild($data, $orderId)
+    {
+        $model = new OrderMealModel();
+        $model->order_id = $orderId;
+        $model->recipes_id = $data['recipes_id'];
+        $model->type = $data['type'];
+        $model->date = $data['date'];
+        $model->num = $data['num'];
+        $model->price = $data['price'];
+        $model->discount = intval($data['discount']);
         return $model->save();
     }
 
