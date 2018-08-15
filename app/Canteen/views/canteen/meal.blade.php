@@ -5,6 +5,7 @@
         .meal-click .minus, .meal-click .plus{
             cursor:pointer;
         }
+        .b1{line-height: 0.40rem;background: #fff;position: relative; margin: 1rem 0rem;padding-left: 1rem;}
     </style>
 @stop
 
@@ -12,24 +13,32 @@
 
     <div id="page-comesoon" class="page">
         <header class="bar bar-nav">
-            <a class="footer-nav-back back" href="index.html"></a>
+            <a class="footer-nav-back " href="{!! route('c.member') !!}"></a>
 
             <h1 class="page-title">{!! $date !!}菜单</h1>
         </header>
 
         <div class="bar footer-nav">
-            <a class="footer-nav-back back" href="index.html"></a>
+            <a class="footer-nav-back" href="{!! route('c.member') !!}"></a>
 
             @if(in_array($date, $checkMenu))
-            <div style="float: left"><p style="padding-left: 2rem;color: red">￥ <span class="amount">0.00</span> </p> </div>
+            <div style="float: left">
+                <p style="padding-left: 2rem;color: red">￥ <span class="amount">0.00</span> </p>
+            </div>
                 <div style="float: right">
-                    <button class="external takeout-buy">订购<span class="meal-type-name">早餐</span></button></div>
+                    <button class="external takeout-buy">订购<span class="meal-type-name">早餐</span>
+                    </button>
+                </div>
             @endif
         </div>
         <div class="content native-scroll takeout">
 
             <div class="content-block">
-
+                <p class="buttons-row"> 预定截止时间
+                <span style="color: red">
+                    {!! config('config.meal_deadline') !!} : 00
+                </span>
+                    点</p>
                 <p class="buttons-row">
                     @foreach($menu as $key => $value)
                         <a href="{!! route('c.canteen.meal', ['date' => $value]) !!}" class="button button-round {!! $value == $date ? 'active' : ''!!}">
@@ -77,7 +86,7 @@
                             <div class="item-inner">
                                 <div class="item-title meal-name">早餐</div>
                                 <div class="item-title"><span class="meal-price" style="color: red"></span>元</div>
-                                <div class="item-after meal-click">
+                                <div class="item-after meal-click item-subtitle">
                                     <span class="minus"><i class="fa fa-minus-circle"></i></span>
                                     <span class="num">1</span>
                                     <span class="plus"><i class="fa fa-plus-circle"></i></span>
@@ -93,6 +102,9 @@
                 </div>
                 <div id="tab1" class="tab active">
                     <div class="item-inner b1" style="">
+                        <p>大于两份将从第二份开始双倍价格</p>
+                        <p>价格：<span  style="color: red" class="amount">0.00</span>元</p>
+                        <p>折扣：<span  style="color: red" class="meal-discount"></span>折</p>
                         <p>定金：<span  style="color: red" class="buy-deposit">{!! $deposit !!}</span>元</p>
                     </div>
                 </div>
@@ -134,6 +146,8 @@
                 data.type = $(this).attr('data-type');
                 data.price = parseInt(meal.price[data.type]);
                 data.discount = parseInt(meal.discount[check]) / 100;
+
+                $('.meal-discount').text(meal.discount[check]);
                 $('.meal-type-name').text(meal.type[data.type]);
                 $('.amount').text(fmoney(data.price / 100));
 

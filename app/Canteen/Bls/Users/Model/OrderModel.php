@@ -17,9 +17,22 @@ class OrderModel extends Model
      */
     protected $table = 'order';
 
+    /**
+     * 外面
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function orderTakeout()
     {
         return $this->hasMany(OrderTakeoutModel::class, 'order_id');
+    }
+
+    /**
+     * 点餐
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orderMeal()
+    {
+        return $this->belongsTo(OrderMealModel::class, 'id', 'order_id');
     }
 
 }

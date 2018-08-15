@@ -14,12 +14,14 @@ class OrderStatusConst
     const ACCESS = 3;
     const FINISH = 4;
     const REFUND = 5;
+    const OVERDUE = 6;
 
     const DEPOSIT_DESC = '已支付定金';
     const PAYMENT_DESC = '全额支付';
     const ACCESS_DESC = '待评价';
     const FINISH_DESC = '完成';
     const REFUND_DESC = '退单';
+    const OVERDUE_DESC = '过期';
 
     public static function desc()
     {
@@ -29,6 +31,7 @@ class OrderStatusConst
             self::ACCESS => self::ACCESS_DESC,
             self::FINISH => self::FINISH_DESC,
             self::REFUND => self::REFUND_DESC,
+            self::OVERDUE => self::OVERDUE_DESC,
         ];
     }
 
