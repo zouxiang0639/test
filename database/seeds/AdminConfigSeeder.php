@@ -97,6 +97,11 @@ class AdminConfigSeeder extends Seeder
                 'name' => 'meal_discount2',
                 'description' => '24-48小时折扣',
                 'value' => '90',
+            ],
+            [
+                'name' => 'meal_overdue_num',
+                'description' => '点餐违约次数',
+                'value' => '2',
             ]
         ]);
     }

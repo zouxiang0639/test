@@ -19,6 +19,7 @@ class OrderController extends Controller
         $list->getCollection()->each(function($item) {
             $item->formatAmount = FormatMoney::fen2yuan($item->amount);
             $item->formatDeposit = FormatMoney::fen2yuan($item->deposit);
+            $item->formatPayment = FormatMoney::fen2yuan($item->payment);
             $item->statusName = OrderStatusConst::getDesc($item->status);
 
             if($item->type == OrderTypeConst::MEAL) {

@@ -80,10 +80,12 @@ use App\Consts\Order\OrderTypeConst;
                                     @endif
                                 </div>
                                 <div class="oi3">
-                                    <span>已付定金 :  {!! $item->formatDeposit !!}元</span><strong>总金额 : {!! $item->formatAmount !!}元</strong>
+                                    <span>总金额 : {!! $item->formatAmount !!}元  </span>
+                                    <span style="padding-left: 10px">定金 :  {!! $item->formatDeposit !!}元 </span>
+                                    <strong>已支付{!! $item->formatPayment !!}元</strong>
                                 </div>
                             </a>
-                            @if($item->status == OrderStatusConst::DEPOSIT && $item->type == OrderTypeConst::TAKEOUT)
+                            @if($item->status == OrderStatusConst::DEPOSIT && $item->type == OrderTypeConst::TAKEOUT && config('config.takeout_deadline') >= date('Y-m-d'))
                             <div class="oi4">
                                 <span style="color: #FF5722; line-height: 2rem;">每个月只能退两单</span>
                                 <a href="" class="org external">退单</a>

@@ -51,7 +51,7 @@ class CanteenController extends Controller
     }
 
     /**
-     * 外面购买
+     * 外卖购买
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      * @throws LogicException
@@ -116,6 +116,11 @@ class CanteenController extends Controller
             throw new LogicException(1010001, $request->date . '没有设置菜单不可以订购');
         }
 
+        $overdue = OrderBls::countOverdueByMeal(Auth::guard('canteen')->id());
+        if($overdue >= 2) {
+            throw new LogicException(1010001, '你已违约超过次数,本周不可以订购');
+        }
+
         $name = MealTypeConst::getDesc($request->type);
         $price = MealTypeConst::getPriceDesc($request->type);
         $this->isEmpty($name);
@@ -168,8 +173,10 @@ class CanteenController extends Controller
             throw new LogicException(1010001);
         }
         //date_default_timezone_set('PRC');
+        //删除今天
         unset($checkMenu[0]);
 
+        //检查是否可以订餐 已经所在那一天
         $key = array_search($request->date, $checkMenu);
         if($key == 2) {
             $check = 2;
@@ -180,6 +187,8 @@ class CanteenController extends Controller
         }
 
         $model = RecipesBls::getRecipesByDate($request->date);
+
+        //json数据
         $data = [
             'type' => MealTypeConst::desc(),
             'price' => MealTypeConst::priceDesc(),
@@ -188,6 +197,10 @@ class CanteenController extends Controller
                 2 => config('config.meal_discount2')
             ]
         ];
+
+        //检查违约几次
+        $overdue = OrderBls::countOverdueByMeal(Auth::guard('canteen')->id());
+
         return view('canteen::canteen.meal', [
             'info' => $model,
             'menu' => $this->menu(),
@@ -196,33 +209,8 @@ class CanteenController extends Controller
             'check' => $check,
             'data' => json_encode($data),
             'deposit' => FormatMoney::fen2yuan(config('config.meal_deposit')),
-        ]);
-    }
-
-    public function mealOrder(Request $request)
-    {
-
-//        $date=new \DateTime();
-//        $date->modify('this week');
-//        $first_day_of_week=$date->format('Y-m-d');
-//        $date->modify('this week +6 days');
-//        $end_day_of_week=$date->format('Y-m-d');
-//        dd($first_day_of_week, $end_day_of_week);
-        $menu = $this->menu();
-
-        $diff = array_values($menu);
-        unset($diff[0]);
-        if(!in_array($request->date, $diff)) {
-            throw new LogicException(1010001);
-        }
-
-        $model = RecipesBls::getRecipesByDate($request->date);
-        $this->isEmpty($model);
-
-        return view('canteen::canteen.meal_tomorrow', [
-            'info' => $model,
-            'menu' => $this->menu(),
-            'date' => $request->date
+            'checkOverdue' => $overdue >= config('config.meal_overdue_num'),
+            'overdue' => $overdue
         ]);
     }
 

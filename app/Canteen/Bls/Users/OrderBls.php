@@ -12,10 +12,20 @@ use App\Consts\Order\OrderStatusConst;
 use App\Consts\Order\OrderTypeConst;
 use Auth;
 
+/**
+ * Created by OrderBls.
+ * @author: zouxiang
+ * @date:
+ */
 class OrderBls
 {
 
 
+    /**
+     * @param $request
+     * @param int $limit
+     * @return \Illuminate\Contracts\Pagination\Paginator
+     */
     public static function getOrderList($request, $limit = 20)
     {
         $model = OrderModel::query();
@@ -86,6 +96,13 @@ class OrderBls
     }
 
 
+    /**
+     * 点餐订购
+     * @param $data
+     * @param $amount
+     * @param $deposit
+     * @return mixed
+     */
     public static function createMealOrder($data, $amount, $deposit)
     {
         return OrderModel::query()->getQuery()->getConnection()->transaction(function () use($data, $amount, $deposit) {
@@ -109,6 +126,12 @@ class OrderBls
         });
     }
 
+    /**
+     * 点餐管理数据
+     * @param $data
+     * @param $orderId
+     * @return bool
+     */
     public static function createMealOrderByChild($data, $orderId)
     {
         $model = new OrderMealModel();
@@ -120,6 +143,29 @@ class OrderBls
         $model->price = $data['price'];
         $model->discount = intval($data['discount']);
         return $model->save();
+    }
+
+    /**
+     *  统计点餐过期量
+     * @param $userId
+     * @return int
+     */
+    public static function countOverdueByMeal($userId)
+    {
+        $date = new \DateTime();
+        $date->modify('this week');
+        $firstDayWeek = $date->format('Y-m-d');
+        $date->modify('this week +6 days');
+        $endDayWeek = $date->format('Y-m-d');
+
+        $model = OrderModel::query();
+        $model->leftJoin('order_meal as meal', 'order.id', '=', 'meal.order_id');
+        $model->where('order.user_id', $userId);
+        $model->where('order.type', OrderTypeConst::MEAL);
+        $model->where('order.status', OrderStatusConst::OVERDUE);
+        $model->where('meal.date', '>=', $firstDayWeek);
+        $model->where('meal.date', '<=', $endDayWeek);
+        return $model->count();
     }
 
 }

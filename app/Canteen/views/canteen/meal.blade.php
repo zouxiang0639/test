@@ -20,13 +20,12 @@
 
         <div class="bar footer-nav">
             <a class="footer-nav-back" href="{!! route('c.member') !!}"></a>
-
             @if(in_array($date, $checkMenu))
             <div style="float: left">
                 <p style="padding-left: 2rem;color: red">￥ <span class="amount">0.00</span> </p>
             </div>
                 <div style="float: right">
-                    <button class="external takeout-buy">订购<span class="meal-type-name">早餐</span>
+                    <button class="external takeout-buy" @if(!$check || $checkOverdue)style="background-color: #848484;" @endif>订购<span class="meal-type-name">早餐</span>
                     </button>
                 </div>
             @endif
@@ -39,6 +38,11 @@
                     {!! config('config.meal_deadline') !!} : 00
                 </span>
                     点</p>
+                <p class="buttons-row"> 每周违约
+                <span style="color: red">
+                    {!! config('config.meal_overdue_num') !!}
+                </span>
+                    次将不能预约, <span style="padding-left: 5px">你已违约{!! $overdue !!}次</span></p>
                 <p class="buttons-row">
                     @foreach($menu as $key => $value)
                         <a href="{!! route('c.canteen.meal', ['date' => $value]) !!}" class="button button-round {!! $value == $date ? 'active' : ''!!}">
@@ -140,6 +144,7 @@
 
             var locked = true;
             var check = '{!! $check !!}';
+            var checkOverdue = '{!! $checkOverdue !!}';
 
             $('.menu a').click(function() {
 
@@ -158,8 +163,14 @@
             //我的购物车
             $('.takeout-buy').click(function() {
 
+                if(checkOverdue == 1) {
+                    $.alert('你已违约超过次数,本周不可以订购');
+                    return false;
+                }
+
                 if(check == 0) {
                     $.alert('订购时间已截止');
+                    return false;
                 }
 
                 $('.meal-name').text(meal.type[data.type]);

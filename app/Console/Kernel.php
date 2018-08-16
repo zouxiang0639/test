@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CanteenMeal;
+use App\Console\Commands\CanteenTakeout;
 use App\Console\Commands\Inspire;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -14,7 +16,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Inspire::class
+        Inspire::class,
+        CanteenTakeout::class,
+        CanteenMeal::class
     ];
 
     /**
@@ -26,6 +30,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('inspire')->hourly();
+
+        //过期外卖
+        $schedule->command('canteen:takeout')->everyMinute()->withoutOverlapping();
+        $schedule->command('canteen:meal')->everyMinute()->withoutOverlapping();
     }
 
     /**

@@ -31,7 +31,7 @@
                 <span class="badge">0</span>
             </div>
             <div style="float: left"><p style="padding-left: 2rem;color: red">￥ <span class="amount">0.00</span> </p> </div>
-            <div style="float: right"><button class="external takeout-buy" >订购</button></div>
+            <div style="float: right"><button class="external takeout-buy" @if(!$takeoutDeadlineCheck)style="background-color: #848484;" @endif>订购</button></div>
 
         </div>
         <div class="content native-scroll takeout">
