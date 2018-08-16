@@ -3,10 +3,11 @@
         <p>
             <span>增设板块建议</span>
             <span>给运营组的建议</span>
+            <span>版主申请</span>
+            <span>申诉区</span>
         </p>
         <p>
-            <span>广告咨询：info@kongdi.com ></span>
-            <span>All rights reserved 陕ICP备17005722号-1.</span>
+            <span>广告咨询：info@kongdi.com</span>
         </p>
     </div>
 </div>
