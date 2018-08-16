@@ -380,7 +380,6 @@ EOT;
         return self::textarea($name, $value = null, $options = []);
     }
 
-
     /**
      * 日期
      * @param string $name
@@ -400,7 +399,6 @@ EOT;
         Admin::style()->setJs(StyleTypeConst::CODE, $code);
         return self::text($name, $value , $options);
     }
-
 
     /**
      * 日期范围

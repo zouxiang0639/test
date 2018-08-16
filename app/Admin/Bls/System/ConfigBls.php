@@ -5,6 +5,7 @@ namespace App\Admin\Bls\System;
 use App\Admin\Bls\System\Model\ConfigModel;
 use App\Admin\Bls\System\Requests\ConfigRequest;
 use Illuminate\Http\Request;
+use DB;
 
 /**
  * Created by ConfigBls.
@@ -13,6 +14,14 @@ use Illuminate\Http\Request;
  */
 class ConfigBls
 {
+    /**
+     * 格式化配置数据
+     * @var array
+     */
+    public $format = [
+        //title' => [\App\Library\Format\FormatMoney::class, 'yuan2fen']
+    ];
+
     /**
      * 获取配置列表
      * @param Request $request
@@ -74,21 +83,48 @@ class ConfigBls
      */
     public static function load()
     {
-        $model = ConfigModel::all(['name', 'value'])->pluck('value', 'name')->toArray();
-        config(['config' => $model]);
+        if (DB::select('SHOW TABLES LIKE "admin_config"')) {
+            $model = ConfigModel::all(['name', 'value'])->pluck('value', 'name')->toArray();
+            config(['config' => $model]);
+        }
     }
 
+    /**
+     * 获取所有的配置并且返回标识和值
+     * @return array
+     */
     public static function configPluck()
     {
         $model = ConfigModel::all(['name', 'value'])->pluck('value', 'name')->toArray();
         return $model;
     }
 
-    public static function configUpdateByArray($array)
+    /**
+     * 获取需要格式的配置
+     * @param $name
+     * @return mixed
+     */
+    public function getFormat($name)
+    {
+        return array_get($this->format, $name);
+    }
+
+    /**
+     * 批量更新配置
+     * @param $array
+     * @return bool
+     */
+    public function configUpdateByArray($array)
     {
         foreach($array as $key => $value) {
             $model = ConfigModel::where('name', $key)->first();
             if($model) {
+
+                //格式配置数据
+                if($obj = $this->getFormat($key)) {
+                    $value = call_user_func($obj, $value);
+                }
+
                 $model->value = $value;
                 $model->save();
             }

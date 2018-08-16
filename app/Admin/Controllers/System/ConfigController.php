@@ -204,7 +204,7 @@ class ConfigController extends Controller
     public function setPost(Request $request)
     {
 
-        if( ConfigBls::configUpdateByArray($request->all())) {
+        if((new ConfigBls())->configUpdateByArray($request->all())) {
             return (new JsonResponse())->success('操作成功');
         } else {
             throw new LogicException(1010002, '操作失败');
