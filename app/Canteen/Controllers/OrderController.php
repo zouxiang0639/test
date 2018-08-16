@@ -6,10 +6,13 @@ use App\Canteen\Bls\Users\OrderBls;
 use App\Consts\Common\MealTypeConst;
 use App\Consts\Order\OrderStatusConst;
 use App\Consts\Order\OrderTypeConst;
+use App\Exceptions\LogicException;
 use App\Http\Controllers\Controller;
 use App\Library\Format\FormatMoney;
+use App\Library\Response\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Auth;
 
 class OrderController extends Controller
 {
@@ -36,6 +39,33 @@ class OrderController extends Controller
         return view('canteen::order.index', [
             'list' => $list
         ]);
+    }
+
+
+
+    public function refund(Request $request)
+    {
+        $count = OrderBls::countOverdueByTakeout(Auth::guard('canteen')->id());
+
+        $refundLimit = config('config.refund_limit');
+        if($count >= $refundLimit) {
+            throw new LogicException(1010001, "这个月你已经退单{$count}次, 每个月限制{$refundLimit}次");
+        }
+
+        $model = OrderBls::find($request->id);
+
+        $this->isEmpty($model);
+
+        if($model->status != OrderStatusConst::DEPOSIT) {
+            throw new LogicException(1010001, "状态参数不对");
+        }
+
+        if(OrderBls::refund($model)) {
+            return (new JsonResponse())->success('退款成功');
+        } else {
+            throw new LogicException(1010002, '退款失败');
+        }
+
     }
 
 

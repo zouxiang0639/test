@@ -146,7 +146,7 @@ class OrderBls
     }
 
     /**
-     *  统计点餐过期量
+     *  统计本周点餐过期量
      * @param $userId
      * @return int
      */
@@ -166,6 +166,57 @@ class OrderBls
         $model->where('meal.date', '>=', $firstDayWeek);
         $model->where('meal.date', '<=', $endDayWeek);
         return $model->count();
+    }
+
+    /**
+     * 统计本月外面退单数量
+     * @param $userId
+     * @return int
+     */
+    public static function countOverdueByTakeout($userId)
+    {
+        $date = new \DateTime();
+        $date->modify('first day of this month');
+        $firstMonthWeek = $date->format('Y-m-d 00:00:00');
+
+        $date->modify('this month +1 month -1 day');
+        $endMonthWeek = $date->format('Y-m-d 23:59:59');
+
+        $model = OrderModel::query();
+        $model->where('user_id', $userId);
+        $model->where('type', OrderTypeConst::TAKEOUT);
+        $model->where('status', OrderStatusConst::REFUND);
+        $model->where('created_at', '>=', $firstMonthWeek);
+        $model->where('created_at', '<=', $endMonthWeek);
+        return $model->count();
+    }
+
+    public static function find($id)
+    {
+        return OrderModel::find($id);
+    }
+
+    public static function refund(OrderModel $model)
+    {
+        return OrderModel::query()->getQuery()->getConnection()->transaction(function () use($model) {
+            $user = Auth::guard('canteen')->user();
+            $user->money += $model->deposit;
+
+            $model->orderTakeout->each(function($item) {
+                $takeout = TakeoutBls::find($item->takeout_id);
+                $takeout->stock += $item->num;
+                $takeout->save();
+            });
+            $model->status = OrderStatusConst::REFUND;
+            $model->save();
+
+            $name = "订单号:{$model->id}外卖退单";
+            AccountFlowBls::createAccountFlow($user->id, AccountFlowTypeConst::REFUND, $model->deposit, $name);
+
+            return $user->save();
+        });
+
+
     }
 
 }

@@ -87,8 +87,8 @@ use App\Consts\Order\OrderTypeConst;
                             </a>
                             @if($item->status == OrderStatusConst::DEPOSIT && $item->type == OrderTypeConst::TAKEOUT && config('config.takeout_deadline') >= date('Y-m-d'))
                             <div class="oi4">
-                                <span style="color: #FF5722; line-height: 2rem;">每个月只能退两单</span>
-                                <a href="" class="org external">退单</a>
+                                <span style="color: #FF5722; line-height: 2rem;">每个月只能退{!! config('config.refund_limit') !!}单</span>
+                                <a href="javascript:;" data-id="{!! $item->id !!}" class="org refund external">退单</a>
                             </div>
                             @endif
                         </div>
@@ -103,5 +103,44 @@ use App\Consts\Order\OrderTypeConst;
 @stop
 
 @section('script')
+    <script>
+        $(function() {
+            var locked = true;
 
+            $('.refund').click(function() {
+                if (! locked) {
+                    return false;
+                }
+
+                locked = false;
+
+                $.ajax({
+                    url: '{!! route('c.order.refund') !!}',
+                    type: 'POST',
+                    data:{
+                        "_method":"PUT",
+                        "_token":$('meta[name="csrf-token"]').attr('content'),
+                        "id":$(this).attr('data-id')
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    success:function(res) {
+
+                        if(res.code != 0) {
+                            $.alert(res.data);
+                            locked = true;
+                        } else {
+                            $.alert(res.data);
+                            window.location.href =  window.location.href;
+                        }
+                    },
+                    error:function () {
+                        locked = true;
+                    }
+
+                });
+
+            })
+        })
+    </script>
 @stop

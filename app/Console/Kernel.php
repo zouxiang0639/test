@@ -32,8 +32,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('inspire')->hourly();
 
         //过期外卖
-        $schedule->command('canteen:takeout')->everyMinute()->withoutOverlapping();
-        $schedule->command('canteen:meal')->everyMinute()->withoutOverlapping();
+        $schedule->command('canteen:takeout')->weekly()->sundays()->at('23:00'); //每周星期日 23点运行任务
+        $schedule->command('canteen:meal')->dailyAt('1:00')->withoutOverlapping(); //每天凌晨1点运行任务
     }
 
     /**

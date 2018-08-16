@@ -31,6 +31,7 @@ Route::group([
         //订单
         Route::group(['prefix'=>'order'], function(){
             Route::get('', ['uses' => "OrderController@index", 'as' => 'c.order.list']);
+            Route::put('refund', ['uses' => "OrderController@refund", 'as' => 'c.order.refund']);
         });
     });
 });

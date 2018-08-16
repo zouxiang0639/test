@@ -213,6 +213,13 @@ class ConfigController extends Controller
                 $h->helpBlock = '（24-48小时折扣）';
             });
 
+            $item->create('订餐违约次数', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->options['max'] = 100;
+                $h->input = $form->number('meal_overdue_num', config('config.meal_overdue_num', 0), $h->options);
+                $h->set('meal_overdue_num', false);
+                $h->helpBlock = '（每周可以违约次数,超过这个次数将不能订购）';
+            });
+
         })->getFormHtml();
 
         $takeoutForm = Admin::form(function(Forms $item) use ($info)  {
