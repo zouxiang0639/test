@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{!! assets_path("/forum/css/login.css") !!}" />
     <link rel="stylesheet" href="{{  assets_path("/lib/sweetalert/dist/sweetalert.css") }}">
     <link rel="stylesheet" href="{{  assets_path("/lib/font-awesome/css/font-awesome.min.css") }}">
+    <link rel="stylesheet" href="{{  assets_path("/lib/icomoon/style.css") }}">
     @yield('style')
 </head>
 <body>

@@ -46,10 +46,10 @@ class Tags
         return $this->tags->pluck('tag_name', 'id');
     }
 
-    public function getTagsIcon2($tagId)
+    public function getTagsIcon($tagId)
     {
         if($model = array_get($this->tags, $tagId)) {
-            return uploads_path($model->icon2);
+            return $model->icon;
         }
     }
 }

@@ -104,7 +104,7 @@ ul {
 }
 
 a {
-	text-decoration: none
+	text-decoration: none !important;
 }
 
 caption,
@@ -261,78 +261,29 @@ acronym {
 .nav-list{
 	margin-left: 10px;
 	width: 750px;
-	overflow: hidden;
 }
 .nav-list > a{
 	float: left;
 	margin-right: 7px;
 	width: 29px;
 	height: 28px;
+
+}
+.nav-list > a i{
+	border-radius: 9px;
+	width: 49px;
+	background-color: white;
+	font-size: 24px;
+	padding: 3px;
+}
+.nav-list > a i:hover{
+	color: #e9711a;
 }
 .nav-list > a img{
 	border-radius: 11px;
 	width: 29px;
 }
-.nav-list > a.a-1{
-	background-position: 0 0;
-}
-.nav-list > a.a-2{
-	background-position: -35px 0;
-}
-.nav-list > a.a-3{
-	background-position: -70px 0;
-}
-.nav-list > a.a-4{
-	background-position: -105px 0;
-}
-.nav-list > a.a-5{
-	background-position: -140px 0;
-}
-.nav-list > a.a-6{
-	background-position: -175px 0;
-}
-.nav-list > a.a-7{
-	background-position: -210px 0;
-}
-.nav-list > a.a-8{
-	background-position: -245px 0;
-}
-.nav-list > a.a-9{
-	background-position: -280px 0;
-}
-.nav-list > a.a-10{
-	background-position: -315px 0;
-}
-.nav-list > a.a-11{
-	background-position: -350px 0;
-}
-.nav-list > a.a-12{
-	background-position: -386px 0;
-}
-.nav-list > a.a-13{
-	background-position: -421px 0;
-}
-.nav-list > a.a-14{
-	background-position: -456px 0;
-}
-.nav-list > a.a-15{
-	background-position: -492px 0;
-}
-.nav-list > a.a-16{
-	background-position: -529px 0;
-}
-.nav-list > a.a-17{
-	background-position: -564px 0;
-}
-.nav-list > a.a-18{
-	background-position: -598px 0;
-}
-.nav-list > a.a-19{
-	background-position: -634px 0;
-}
-.nav-list > a.a-20{
-	background-position: -669px 0;
-}
+
 .nav .post{
 	float: right;
 	margin-right: 15px;
@@ -404,8 +355,7 @@ acronym {
 	vertical-align: middle;
 	width: 18px;
 	height: 18px;
-	margin-right: 5px;
-	background: url(../img/hot-icons.png) no-repeat;
+	margin-right: 1px;
 }
 .hot-list li i.i-1{
 	background-position: 0 0;
@@ -508,10 +458,9 @@ acronym {
 .new-table tbody tr td.l i{
 	display: inline-block;
 	vertical-align: middle;
-	width: 17px;
-	height: 17px;
-	margin: -2px 15px 0 0;
-	background: url(../img/new-icons.png) no-repeat;
+	width: 18px;
+	height: 18px;
+	margin-right: 1px;
 }
 .new-table tbody tr td .red{
 	display: block;
@@ -593,4 +542,7 @@ acronym {
 	border: 1px solid #C6C6C6;
 	border-radius: 9px;
 	width: 23px;
+}
+.icon-default i{
+	color: #e9711a;
 }

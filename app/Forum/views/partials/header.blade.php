@@ -38,12 +38,8 @@
         <div class="nav clearfix">
             <div class="nav-list fl clearfix">
                 @foreach($tagsList as $value)
-                    <a href="{!! route('f.article.list', ['tag' => $value['id']]) !!}" title="{{ $value['tag_name'] }}" >
-                        @if(isset($tags) && $value->id == $tags->id)
-                            <img src="{{ uploads_path($value['icon2']) }}">
-                        @else
-                            <img src="{{ uploads_path($value['icon']) }}">
-                        @endif
+                    <a class="{!! isset($tags) && $value->id == $tags->id ? "icon-default" : "" !!}" href="{!! route('f.article.list', ['tag' => $value['id']]) !!}" title="{{ $value['tag_name'] }}" >
+                        <i class="{!! $value['icon'] !!}"></i>
                     </a>
                 @endforeach
             </div>
