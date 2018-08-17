@@ -28,9 +28,11 @@
             </div>
             <div class="con">
                 <div class="img">
-                    @foreach($item->formatPicture as $value)
-                        <img src="{!! uploads_path($value) !!}">
-                    @endforeach
+                    @if($item->picture)
+                        @foreach($item->formatPicture as $value)
+                            <img src="{!! uploads_path($value) !!}">
+                        @endforeach
+                    @endif
                 </div>
                 <p>
                     @if($item->atName)

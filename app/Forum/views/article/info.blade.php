@@ -171,7 +171,6 @@
             </div>
         </div>
     </div>
-            <div class="upload-img-a"><input type="file" class="upload-img"></div>
     @include('forum::partials.ad')
 @stop
 

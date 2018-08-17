@@ -55,6 +55,7 @@ Route::group([
     Route::group(['prefix'=>'upload', 'middleware' => 'forum.auth:f_member'], function(){
 
         Route::put('img', ['uses' => "UploadController@img", 'as' => 'f.upload.img']);
+        Route::put('img/ckeditor', ['uses' => "UploadController@ckeditorImg", 'as' => 'f.upload.img.ckeditor']);
     });
 
     //登录等功能

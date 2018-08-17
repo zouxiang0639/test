@@ -2,7 +2,8 @@
 
 namespace App\Forum\Controllers;
 
-use App\Forum\Bls\Article\ArticleBls;
+use App\Consts\Common\FileTypeConst;
+use App\Forum\Bls\File\FileBls;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
 use Illuminate\Http\Request;
@@ -12,12 +13,24 @@ class UploadController extends Controller
 {
     public function img(Request $request)
     {
-        //dd($request->all());
+        $file = $request->file('file');
 
-        $file = $request->file($request->name);
-        $data['filePath'] = config('config.default_picture');
-        $data['url'] = uploads_path(config('config.default_picture'));
-        //$data = Admin::upload()->uploadOneImage($file);
+        $data = Admin::upload()->uploadOneImage($file);
+
+        FileBls::createFile($data['filePath'], FileTypeConst::IMG);
         return (new JsonResponse())->success($data);
+    }
+
+    public function ckeditorImg(Request $request)
+    {
+        $file = $request->file('upload');
+
+        $data = Admin::upload()->uploadOneImage($file);
+        $data = [
+            'uploaded' => 1,
+            'fileName' =>$data['url'],
+            'url' => $data['url']
+        ];
+        return json_encode($data);
     }
 }

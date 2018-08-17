@@ -53,7 +53,7 @@
     <script>
 
         var initial = {
-            "CKEditorUploadImage": "{{ route('m.system.upload.ckeditor') }}?_method=PUT&_token=" + $('meta[name="csrf-token"]').attr('content')
+            "CKEditorUploadImage": "{{ route('f.upload.img.ckeditor') }}?_method=PUT&_token=" + $('meta[name="csrf-token"]').attr('content')
         };
 
         $(function(){
