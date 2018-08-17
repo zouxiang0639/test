@@ -2,6 +2,12 @@
 
 @section('style')
     <link rel="stylesheet" href="{!! assets_path("/forum/css/my.css") !!}" />
+    <style>
+    .img img{
+        max-width: 24%;
+        padding: 5px;
+    }
+    </style>
 @stop
 
 @section('content')
@@ -79,8 +85,9 @@
             <div class="new-container new-inner">
                 <div class="new-inner-tit">*超过10赞底色变为浅绿色，超过100赞底色变为绿色，弱数超过赞数10个底色变为浅红色，楼主回复底色为黄色</div>
                 <div class="com-tie">
-                    <ul id="reply-content">
 
+                    <ul id="reply-content">
+                        <p class="abc"></p>
                     </ul>
                 </div>
 
@@ -90,17 +97,23 @@
                     @endif
                 </div>
                 <div class="edit-container">
+                    <div class="img" >
+                    </div>
                     <div class="con" style="margin: 0px 17px;">
                         <form class="reply-form">
                             <input type="hidden" name="article_id" value="{!! $info->id !!}">
                             <input type="hidden" name="at" value="0">
                             <input type="hidden" name="parent_id" value="0">
+                            <input type="hidden" class="picture" name="picture" value="">
                             <input type="hidden" name="_method" value="PUT">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                             <div class="tea">
                                 <textarea name="contents"></textarea>
                             </div>
                             <div class="opt">
+                                <a   class="btn btn-primary img img—submit" data-href="{!! route('f.reply.store') !!}"><i class="fa fa-image"></i></a>
+                                <input style="display: none" class="layui-upload-file" accept="undefined" name="file" type="file">
                                 <button   class="btn btn-primary txt reply—submit" data-href="{!! route('f.reply.store') !!}">回复</button>
                             </div>
                         </form>
@@ -108,18 +121,24 @@
                 </div>
 
                 <div style="display: none">
+
                     <div class="reply">
+                        <div class="img" >
+                        </div>
                         <div class="con">
                             <form class="reply-form">
                                 <input type="hidden" name="article_id" value="{!! $info->id !!}">
                                 <input type="hidden" name="at" value="0">
                                 <input type="hidden" name="parent_id" value="0">
+                                <input type="hidden" class="picture" name="picture" value="">
                                 <input type="hidden" name="_method" value="PUT">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="tea">
                                     <textarea name="contents"></textarea>
                                 </div>
                                 <div class="opt">
+                                    <a   class="btn btn-primary img img—submit" data-href="{!! route('f.reply.store') !!}"><i class="fa fa-image"></i></a>
+                                    <input style="display: none" class="layui-upload-file" accept="undefined" name="file" type="file">
                                     <button   class="btn btn-primary txt reply—submit" data-href="{!! route('f.reply.store') !!}">回复</button>
                                 </div>
                             </form>
@@ -152,16 +171,97 @@
             </div>
         </div>
     </div>
-
+            <div class="upload-img-a"><input type="file" class="upload-img"></div>
     @include('forum::partials.ad')
 @stop
 
 @section('script')
     @parent
+                <script src="{{  assets_path("/lib/layer-v3.1.1/layer.js") }}"></script>
     <script>
 
         $(function(){
             var locked = true;
+            var comTie =  $(".com-tie");
+            var data = {
+                'ext': ['jpg', 'png', 'gif', 'jpeg'],
+                'size': 1,
+                'limit': 4
+            };
+
+            //上传文件
+            comTie.on('click', '.abc', function(){
+                $('.opt .img').click(function(){
+                    $(this).siblings('.layui-upload-file').click();
+                }).siblings('.layui-upload-file').change(function(){
+                    if($(this).val()) {
+
+                        var _this = $(this);
+                        var file =  this.files[0];
+                        var imgPath = $(this).parent('.opt').siblings('.picture').val();
+
+                        if(imgPath == '') {
+
+                            imgPath = new Array();
+                        } else {
+                            imgPath = imgPath.split(",");
+                        }
+                        console.log(imgPath);
+                        if(imgPath.length >= data.limit) {
+                            swal("图片只能上传" + data.limit +'张', '', 'error');
+                            return false;
+                        }
+
+                        var type = file.name.match(/^(.*)(\.)(.{1,8})$/)[3];
+                        if (data.ext.indexOf(type) < 0) {
+                            swal("请上传图片", '', 'error');
+                            return false;
+                        }
+
+                        if(file.size > data.size * 1024 * 1024)
+                        {
+                            swal("上传的图片大小不能超过"+data.size+"M！", '', 'error');
+                            return false;
+                        }
+
+                        var formData = new FormData();
+                        formData.append('file', file);
+                        formData.append('_method', 'PUT');
+                        formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+                        $.ajax({
+                            url: '{!! route('f.upload.img') !!}',
+                            type: 'POST',
+                            cache: false, //上传文件不需要缓存
+                            data: formData,
+                            processData: false, // 告诉jQuery不要去处理发送的数据
+                            contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+                            dataType: 'json',
+                            success: function (res) {
+
+                                if(res.code == 1020001){
+                                    swal({
+                                        title: "",
+                                        text: "<p class='text-danger'>" + res.msg + "</p>",
+                                        html: true
+                                    });
+                                }else if(res.code != 0) {
+
+                                } else {
+                                    _this.parents('.con').siblings('.img').append('<img src="'+res.data.url+'">');
+                                    imgPath.push(res.data.filePath);
+                                    _this.parent('.opt').siblings('.picture').val(imgPath.join());
+                                }
+                            },
+                            error: function (data) {
+
+                            }
+                        });
+                        $(this).val('');
+                    }
+                });
+            });
+            $('.abc').click();
 
             //收藏
             $('.article-star').click(function() {
@@ -316,13 +416,13 @@
                 });
 
                 return false;
+
             });
 
             //异步加载数据
             var  lockedPage = true;
             var page = 0;
             $('#reply-page').click(function() {
-
                 if (! lockedPage) {
                     return false;
                 }
@@ -357,7 +457,7 @@
             }).trigger("click");
 
             //异步加载回复子数据
-            $(".com-tie").on('click', '.reply-show-child', function(){
+            comTie.on('click', '.reply-show-child', function(){
                 var parentId = $(this).attr('data-id');
                 if (! locked) {
                     return false;
@@ -392,7 +492,7 @@
 
             });
 
-            $(".com-tie").on('click', '.reply-one-edit', function(){
+            comTie.on('click', '.reply-one-edit', function(){
                 var id = $(this).attr('data-id');
                 if($(this).attr('data-check') == '1') {
 
@@ -404,15 +504,15 @@
 
                     $(this).attr('data-check', '1');
 
-                    var html ='<li class="edit-container delete-'+ id +'"><div class="con">';
+                    var html ='<li class="edit-container delete-'+ id +'">';
                     html += $(".reply").html();
-                    html += '</div></li>';
+                    html += '</li>';
                     $(this).parents('.reply-' + id).after(html);
+                    $('.abc').click();
                 }
-
             });
 
-            $(".com-tie").on('click', '.reply-two-edit', function(){
+            comTie.on('click', '.reply-two-edit', function(){
                 var id = $(this).attr('data-id');
 
                 if($(this).attr('data-check') == '1') {
@@ -424,16 +524,16 @@
 
                     $(this).attr('data-check', '1');
 
-                    var html ='<li class="share clearfix delete-'+ id +' "><div class="sh-l fl"><i></i></div><div class="sh-r fr edit-container"> <div class="con">';
+                    var html ='<li class="share clearfix delete-'+ id +' "><div class="sh-l fl"><i></i></div><div class="sh-r fr edit-container"> ';
                     html += $(".reply").html();
-                    html += '</div></div></li>';
+                    html += '</div></li>';
                     $(this).parents('.reply-' + id).after(html);
+                    $('.abc').click();
                 }
-
             });
 
             //评论点赞
-            $(".com-tie").on('click', '.thumbs', function(){
+            comTie.on('click', '.thumbs', function(){
                 var numClass = $(this).children(".num");
                 var num = parseInt(numClass.text());
                 var _this = $(this);
@@ -480,10 +580,10 @@
                     }
 
                 });
-            })
+            });
 
             //评论删除
-            $(".com-tie").on('click', '.delete-reply', function(){
+            comTie.on('click', '.delete-reply', function(){
                 var _this = $(this);
                 swal({
                             title: "确认删除?",

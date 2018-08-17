@@ -29,6 +29,7 @@ class ReplyBls
         $model->at = $request->at;
         $model->issuer = Auth::guard('forum')->id();
         $model->contents = $request->contents;
+        $model->picture = $request->picture;
         $model->thumbs_down = [];
         $model->thumbs_up = [];
         return $model->save();

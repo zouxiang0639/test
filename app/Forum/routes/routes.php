@@ -51,6 +51,12 @@ Route::group([
         Route::put('sign/in', ['uses' => "MemberController@signIn", 'as' => 'f.member.sign.in']);
     });
 
+    //上传
+    Route::group(['prefix'=>'upload', 'middleware' => 'forum.auth:f_member'], function(){
+
+        Route::put('img', ['uses' => "UploadController@img", 'as' => 'f.upload.img']);
+    });
+
     //登录等功能
     Route::group(['prefix'=>'auth'], function(){
         Route::get('qq', ['uses' => "AuthController@qq", 'as' => 'f.auth.qq']);

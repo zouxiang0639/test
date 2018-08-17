@@ -20,6 +20,7 @@ class CreateReplyTable extends Migration
             $table->integer('at')->default(0)->comment('@的人');
             $table->integer('issuer')->comment('发布人');
             $table->text('contents')->comment('内容');
+            $table->string('picture')->comment('图片');
             $table->text('thumbs_up')->comment('赞');
             $table->text('thumbs_down')->comment('弱');
             $table->index(['id', 'parent_id', 'article_id']);

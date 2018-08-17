@@ -2,6 +2,7 @@
 
 namespace App\Library\Forum\Widgets;
 
+use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ArticleBls;
 use Auth;
 use Illuminate\Contracts\Support\Renderable;
@@ -114,16 +115,20 @@ class Reply implements Renderable
         return $array;
     }
 
+
     /**
      * 分页
      * @param $page
      * @return $this
+     * @throws LogicException
      */
     public function getPage($page)
     {
         $offset = $page * $this->limit;
         $length = $offset + $this->limit;
-
+        if(is_null($this->tree)) {
+            throw new LogicException(1010001, '没有数据了');
+        }
         $data = array_slice($this->tree, $offset, $length);
 
         foreach($data as $key => $value){
@@ -174,6 +179,7 @@ class Reply implements Renderable
         $model->thumbsDownCount = count($model->thumbs_down); //弱数量
         $model->thumbsDownCheck = in_array($this->userId, $model->thumbs_down); //是否弱过
         $model->isDelete = $this->userId == $model->issuer; //是否有删除的权限
+        $model->formatPicture = explode(',', $model->picture); //图片
         $model->atName = ''; //@的用户名称
         $model->color = $this->getColor($model); //更近需求判断颜色
 

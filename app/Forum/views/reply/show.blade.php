@@ -23,6 +23,11 @@
             </p>
         </div>
         <div class="con">
+            <div class="img">
+                @foreach($item->formatPicture as $value)
+                <img src="{!! uploads_path($value) !!}">
+                @endforeach
+            </div>
             <p>
                 {{ $item->contents }}
             </p>

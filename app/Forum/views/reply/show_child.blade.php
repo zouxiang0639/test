@@ -27,6 +27,11 @@
                 </p>
             </div>
             <div class="con">
+                <div class="img">
+                    @foreach($item->formatPicture as $value)
+                        <img src="{!! uploads_path($value) !!}">
+                    @endforeach
+                </div>
                 <p>
                     @if($item->atName)
                         <span style="color: red"> @ {{ $item->atName }}</span>

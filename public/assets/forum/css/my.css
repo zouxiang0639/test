@@ -509,21 +509,14 @@
 	height: 52px;
 	display: block;
 	text-align: center;
-	width: 52px;
-	line-height: 52px;
+	width: 57px;
 	overflow: hidden;
 	border-bottom:1px solid #1a3148;
+	font-size: 26px;
 }
-.edit-container .con .opt .img i{
-	display: inline-block;
-	vertical-align: middle;
-	width: 24px;
-	height: 25px;
-	background: url(../img/tie-icons.png) no-repeat;
-	background-position: -238px 0;
-}
+
 .edit-container .con .opt .txt{
-	height: 105px;
+	height: 53px;
 	width: 58px;
 }
 .new-list{
