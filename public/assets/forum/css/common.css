@@ -531,11 +531,12 @@ acronym {
 	text-align: center;
 	font-size: 14px;
 }
-.com-footer span{
+.com-footer a{
 	display: inline-block;
 	vertical-align: middle;
 	margin: 0 20px;
 	line-height: 30px;
+	color: white;
 }
 
 .tag-icon{

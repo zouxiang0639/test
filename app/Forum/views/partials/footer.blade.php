@@ -1,10 +1,10 @@
 <div class="com-footer">
     <div class="wm-850">
         <p>
-            <span>增设板块建议</span>
-            <span>给运营组的建议</span>
-            <span>版主申请</span>
-            <span>申诉区</span>
+            <a href="{!! route('f.feedback.feedback') !!}">增设板块建议</a>
+            <a>给运营组的建议</a>
+            <a>版主申请</a>
+            <a>申诉区</a>
         </p>
         <p>
             <span>广告咨询：info@kongdi.com</span>

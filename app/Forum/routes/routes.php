@@ -58,6 +58,13 @@ Route::group([
         Route::put('img/ckeditor', ['uses' => "UploadController@ckeditorImg", 'as' => 'f.upload.img.ckeditor']);
     });
 
+    //反馈
+    Route::group(['prefix'=>'feedback', 'middleware' => 'forum.auth:f_member'], function(){
+
+        Route::get('', ['uses' => "FeedbackController@feedback", 'as' => 'f.feedback.feedback']);
+        Route::put('store', ['uses' => "FeedbackController@store", 'as' => 'f.feedback.store']);
+    });
+
     //登录等功能
     Route::group(['prefix'=>'auth'], function(){
         Route::get('qq', ['uses' => "AuthController@qq", 'as' => 'f.auth.qq']);
