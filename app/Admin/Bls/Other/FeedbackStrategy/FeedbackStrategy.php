@@ -29,9 +29,12 @@ class FeedbackStrategy implements FeedbackInterface
 
         switch ($type) {
             case FeedbackTypeConst::FEEDBACK :  //反馈
+            case FeedbackTypeConst::OPERATE :  //给运营组的建议
+            case FeedbackTypeConst::MODERATOR :  //版主申请
+            case FeedbackTypeConst::APPEALS :  //申诉区
+            case FeedbackTypeConst::REPORT :  //举报
                 $this->_strategy = new Feedback();
                 break;
-
             default:
                 throwException(new LogicException('没有这个反馈类型！'));
                 break;

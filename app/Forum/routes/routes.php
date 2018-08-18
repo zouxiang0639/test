@@ -62,6 +62,9 @@ Route::group([
     Route::group(['prefix'=>'feedback', 'middleware' => 'forum.auth:f_member'], function(){
 
         Route::get('', ['uses' => "FeedbackController@feedback", 'as' => 'f.feedback.feedback']);
+        Route::get('operate', ['uses' => "FeedbackController@operate", 'as' => 'f.feedback.operate']);
+        Route::get('moderator', ['uses' => "FeedbackController@moderator", 'as' => 'f.feedback.moderator']);
+        Route::get('appeals', ['uses' => "FeedbackController@appeals", 'as' => 'f.feedback.appeals']);
         Route::put('store', ['uses' => "FeedbackController@store", 'as' => 'f.feedback.store']);
     });
 
