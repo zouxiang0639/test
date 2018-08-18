@@ -3,10 +3,10 @@
 namespace App\Admin\Bls\Other\Requests;
 
 use App\Admin\Bls\Other\FeedbackStrategy\FeedbackStrategy;
-use App\Library\Validators\JsonResponseValidator;
+use App\Library\Validators\JsonResponseRequests;
 
 
-class FeedbackRequests extends JsonResponseValidator
+class FeedbackRequests extends JsonResponseRequests
 {
 
 
@@ -21,7 +21,7 @@ class FeedbackRequests extends JsonResponseValidator
 
     public function messages()
     {
-        $validatorMessages = $this->input('card_kind_tpl_type') ? (new FeedbackStrategy($this->input('card_kind_tpl_type')))->validatorMessages() : [];
+        $validatorMessages = $this->input('type') ? (new FeedbackStrategy($this->input('type')))->validatorMessages() : [];
         return array_merge($validatorMessages, [
             'content.required' => '内容不能为空',
         ]);
