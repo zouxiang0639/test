@@ -1,13 +1,13 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Admin\Bls\Canteen\Model\TakeoutModel;
 use App\Canteen\Bls\Users\Model\UsersModel;
+use App\Admin\Bls\Canteen\Model\RecipesModel;
 
-class TextSeeder extends Seeder
+class TextSeeder extends \Illuminate\Database\Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the datebase seeds.
      *
      * @return void
      */
@@ -57,6 +57,48 @@ class TextSeeder extends Seeder
                 'describe' => '一份榨菜5包`',
             ],
         ]);
+
+        RecipesModel::truncate();
+        RecipesModel::insert([
+            [
+               'date' => '2018-08-20',
+               'morning' => "小龙虾\r\n 红烧狮子头\r\n 一大碗拉面\r\n 特大号汉堡\r\n 变态辣番茄\r\n",
+               'lunch' => "小番茄\r\n 红烧狮子头\r\n 一大碗水饺\r\n 特大号汉堡\r\n 变态辣番茄\r\n",
+               'dinner' => "变态辣番茄\r\n 红烧狮子头\r\n 一大碗拉面\r\n 特大号汉堡\r\n 小龙虾\r\n"
+            ],
+            [
+               'date' => '2018-08-21',
+               'morning' => "小龙虾\r\n 红烧狮子头\r\n 一大碗拉面\r\n 特大号汉堡\r\n 变态辣番茄\r\n",
+               'lunch' => "小番茄\r\n 红烧狮子头\r\n 一大碗水饺\r\n 特大号汉堡\r\n 变态辣番茄\r\n",
+               'dinner' => "变态辣番茄\r\n 红烧狮子头\r\n 一大碗拉面\r\n 特大号汉堡\r\n 小龙虾\r\n"
+            ],
+            [
+               'date' => '2018-08-22',
+               'morning' => "小龙虾\r\n 红烧狮子头\r\n 一大碗拉面\r\n 特大号汉堡\r\n 变态辣番茄\r\n",
+               'lunch' => "小番茄\r\n 红烧狮子头\r\n 一大碗水饺\r\n 特大号汉堡\r\n 变态辣番茄\r\n",
+               'dinner' => "变态辣番茄\r\n 红烧狮子头\r\n 一大碗拉面\r\n 特大号汉堡\r\n 小龙虾\r\n"
+            ],
+            [
+               'date' => '2018-08-23',
+               'morning' => "小龙虾\r\n 红烧狮子头\r\n 一大碗拉面\r\n 特大号汉堡\r\n 变态辣番茄\r\n",
+               'lunch' => "小番茄\r\n 红烧狮子头\r\n 一大碗水饺\r\n 特大号汉堡\r\n 变态辣番茄\r\n",
+               'dinner' => "变态辣番茄\r\n 红烧狮子头\r\n 一大碗拉面\r\n 特大号汉堡\r\n 小龙虾\r\n"
+            ],
+            [
+               'date' => '2018-08-24',
+               'morning' => "小龙虾\r\n 红烧狮子头\r\n 一大碗拉面\r\n 特大号汉堡\r\n 变态辣番茄\r\n",
+               'lunch' => "小番茄\r\n 红烧狮子头\r\n 一大碗水饺\r\n 特大号汉堡\r\n 变态辣番茄\r\n",
+               'dinner' => "变态辣番茄\r\n 红烧狮子头\r\n 一大碗拉面\r\n 特大号汉堡\r\n 小龙虾\r\n"
+            ],
+            [
+               'date' => '2018-08-25',
+               'morning' => "小龙虾\r\n 红烧狮子头\r\n 一大碗拉面\r\n 特大号汉堡\r\n 变态辣番茄\r\n",
+               'lunch' => "小番茄\r\n 红烧狮子头\r\n 一大碗水饺\r\n 特大号汉堡\r\n 变态辣番茄\r\n",
+               'dinner' => "变态辣番茄\r\n 红烧狮子头\r\n 一大碗拉面\r\n 特大号汉堡\r\n 小龙虾\r\n"
+            ]
+        ]);
+
+
         UsersModel::truncate();
         UsersModel::insert([
             [
@@ -64,6 +106,14 @@ class TextSeeder extends Seeder
                 'password' => '$2y$10$9vbGuAlD6rrpz5ULY7uqreZ0uclH.mh92Vfjvb6sbGTJ.Pk3vvs3W',
                 'mobile' => '13816720691',
                 'money' => '100000',
+                'email' => '542506511@qq.com',
+            ],
+            [
+                'name' => '李四',
+                'password' => '$2y$10$9vbGuAlD6rrpz5ULY7uqreZ0uclH.mh92Vfjvb6sbGTJ.Pk3vvs3W',
+                'mobile' => '12312341234',
+                'money' => '100000',
+                'email' => '542506511@qq.com',
             ]
         ]);
 
