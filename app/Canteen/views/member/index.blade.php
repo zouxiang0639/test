@@ -38,7 +38,7 @@
                                 <span class="icon-bought"></span>订单管理</a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{!! route('c.member.setup') !!}">
                                 <small>密码修改</small>
                                 <span class="icon-setting"></span>账户设置</a>
                         </li>

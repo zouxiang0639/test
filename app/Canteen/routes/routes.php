@@ -26,6 +26,8 @@ Route::group([
         Route::group(['prefix'=>'member'], function(){
             Route::get('qrcode', ['uses' => "MemberController@qrCode", 'as' => 'c.qrcode']);
             Route::get('flow', ['uses' => "MemberController@flow", 'as' => 'c.member.flow']);
+            Route::get('setup', ['uses' => "MemberController@setup", 'as' => 'c.member.setup']);
+            Route::put('setting/password', ['uses' => "MemberController@settingPassword", 'as' => 'c.member.setting.password']);
         });
 
         //订单
