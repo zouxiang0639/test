@@ -4,6 +4,7 @@ namespace App\Library\Admin;
 
 use App\Admin\Bls\Auth\MenuBls;
 use App\Library\Admin\Consts\StyleTypeConst;
+use App\Library\Admin\Widgets\Advert;
 use App\Library\Admin\Widgets\Forms;
 use App\Library\Admin\Widgets\Navbar;
 use App\Library\Admin\Widgets\Style;
@@ -33,11 +34,21 @@ class Admin
     }
 
     /**
+     * 上传文件
      * @return Upload
      */
     public function upload()
     {
         return new Upload();
+    }
+
+    /**
+     * 广告
+     * @return Advert
+     */
+    public function advert()
+    {
+        return new Advert();
     }
 
     /**
@@ -52,6 +63,7 @@ class Admin
     }
 
     /**
+     * 获取用户
      * Get current login user.
      *
      * @return mixed
@@ -88,6 +100,7 @@ class Admin
     }
 
     /**
+     * form表单
      * @param \Closure $callback
      * @return $this
      */
