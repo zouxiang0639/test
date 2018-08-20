@@ -15,7 +15,7 @@ class FeedbackController extends Controller
 {
     public function feedback()
     {
-
+        dd(1);
         $info = [
             'title' => FeedbackTypeConst::FEEDBACK_DESC,
             'type' => FeedbackTypeConst::FEEDBACK

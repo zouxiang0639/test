@@ -36,7 +36,7 @@
     <script>
         var initialAjAx = {
             "url":"{!! route('m.other.advert.update', ['id' => $info->id]) !!}",
-            "backUrl":"{!! route('m.other.advert.list', ['type' => Input::get('type')]) !!}"
+            "backUrl":"{!! route('m.other.advert.list', ['type' => $info->type]) !!}"
         }
     </script>
 @stop

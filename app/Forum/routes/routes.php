@@ -59,13 +59,13 @@ Route::group([
     });
 
     //反馈
-    Route::group(['prefix'=>'feedback', 'middleware' => 'forum.auth:f_member'], function(){
+    Route::group(['prefix'=>'feedback'], function(){
 
         Route::get('', ['uses' => "FeedbackController@feedback", 'as' => 'f.feedback.feedback']);
         Route::get('operate', ['uses' => "FeedbackController@operate", 'as' => 'f.feedback.operate']);
         Route::get('moderator', ['uses' => "FeedbackController@moderator", 'as' => 'f.feedback.moderator']);
         Route::get('appeals', ['uses' => "FeedbackController@appeals", 'as' => 'f.feedback.appeals']);
-        Route::put('store', ['uses' => "FeedbackController@store", 'as' => 'f.feedback.store']);
+        Route::put('store', ['uses' => "FeedbackController@store", 'middleware' => 'forum.auth:f_member', 'as' => 'f.feedback.store']);
     });
 
     //登录等功能

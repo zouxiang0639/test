@@ -6,15 +6,18 @@ class AdvertTypeConst
 {
     const ALL = 0;
     const BANNER = 1;
+    const SQUARE = 2;
 
     const ALL_DESC = '全部';
-    const BANNER_DESC = '幻灯片';
+    const BANNER_DESC = '长条广告';
+    const SQUARE_DESC = '方形广告';
 
     public static function desc($arr = false)
     {
 
         $array =  [
             self::BANNER => self::BANNER_DESC,
+            self::SQUARE => self::SQUARE_DESC,
         ];
 
         if($arr) {
