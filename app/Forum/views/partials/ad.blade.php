@@ -1,7 +1,9 @@
-<div class="com-ad">
-    <div class="wm-850">
-        <a class="ad" href="javascript:void(0)">
-            <img src="{!! assets_path("/forum/img/pic1.jpg") !!}" alt="" title="" /><span>广告</span>
-        </a>
+@if(!empty($ad))
+    <div class="com-ad">
+        <div class="wm-850">
+            <a class="ad" href="{!! $ad->links !!}">
+                <img src="{!! uploads_path($ad->picture) !!}" alt="" title="{!! $ad->title  !!}" /><span>广告</span>
+            </a>
+        </div>
     </div>
-</div>
+@endif
