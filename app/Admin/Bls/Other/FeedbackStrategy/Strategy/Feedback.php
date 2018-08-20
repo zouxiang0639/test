@@ -7,9 +7,7 @@ use App\Admin\Bls\Other\Model\FeedbackModel;
 use App\Admin\Bls\Other\Requests\FeedbackRequests;
 
 /**
- * 生日汇通兑(含产品册)卡种模版
  * @author zouxiang
- * Date 2018年6月7日
  */
 class Feedback implements FeedbackInterface
 {
