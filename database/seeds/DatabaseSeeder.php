@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
              //TestDataSeeder::class,
              AdminAuthSeeder::class,
              AdminConfigSeeder::class,
-             TextSeeder::class
+             TextSeeder::class,
+             AdminTagSeeder::class
          ]);
     }
 }

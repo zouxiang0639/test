@@ -180,7 +180,7 @@ class CanteenController extends Controller
         $key = array_search($request->date, $checkMenu);
         if($key == 2) {
             $check = 2;
-        } else if($key == 1 && intval(date('H'))  > intval(config('config.meal_deadline'))){
+        } else if($key == 1 && intval(date('H')) <= intval(config('config.meal_deadline'))){
             $check = 1;
         } else {
             $check = 0;

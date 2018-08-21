@@ -6,7 +6,7 @@ class TagsTypeConst
 {
     const TAG = 1;
 
-    const TAG_DESC = '标签';
+    const TAG_DESC = '分组';
 
     public static function desc()
     {
