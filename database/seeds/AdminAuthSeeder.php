@@ -59,6 +59,7 @@ class AdminAuthSeeder extends Seeder
         $this->canteen(); //食堂管理
         $this->other(); //其它管理
         $this->system(); //系统管理
+        $this->customer(); //用户管理
     }
 
     /**
@@ -250,5 +251,34 @@ class AdminAuthSeeder extends Seeder
             'permissions' => WhetherConst::YES
         ]);
         MenuBls::storeMenu($menuRequest);
+    }
+
+    /**
+     * 用户管理
+     */
+    public function customer()
+    {
+        $menuRequest = new MenuRequest();
+        $menuRequest->merge([
+            'parent_id' => 0,
+            'title' => '用户管理',
+            'icon' => 'fa-users',
+            'route' => '',
+            'slug' => 'm_customer',
+            'permissions' => WhetherConst::YES
+        ]);
+        $menu = MenuBls::storeMenu($menuRequest);
+
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '外卖',
+            'icon' => 'fa-truck',
+            'route' => 'm.customer.users.list',
+            'slug' => 'm_customer_users',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);
+
+
     }
 }

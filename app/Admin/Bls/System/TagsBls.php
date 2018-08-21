@@ -4,6 +4,7 @@ namespace App\Admin\Bls\System;
 
 use App\Admin\Bls\System\Model\TagsModel;
 use App\Admin\Bls\System\Requests\TagsRequest;
+use App\Consts\Common\WhetherConst;
 use Illuminate\Http\Request;
 
 /**
@@ -70,5 +71,16 @@ class TagsBls
         $model->status = $request->status;
         $model->hot = intval($request->hot);
         return $model->save();
+    }
+
+    /**
+     * 根据类型获取标签
+     * @param $type
+     * @return mixed
+     */
+    public static function getTagsByType($type)
+    {
+        return TagsModel::where('type', $type)->where('status', WhetherConst::YES)
+            ->orderBy('hot', 'DESC')->orderBy('id', 'DESC')->get();
     }
 }
