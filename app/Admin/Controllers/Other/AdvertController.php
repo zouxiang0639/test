@@ -6,7 +6,6 @@ namespace App\Admin\Controllers\Other;
 use App\Admin\Bls\Other\AdvertBls;
 use App\Admin\Bls\Other\Requests\AdvertRequests;
 use App\Consts\Admin\Other\AdvertTypeConst;
-use App\Consts\Admin\Tags\TagsTypeConst;
 use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Library\Admin\Form\FormBuilder;
@@ -33,7 +32,7 @@ class AdvertController extends Controller
     public function index(Request $request)
     {
         if($request->type == null) {
-            $request->merge(['type' => TagsTypeConst::TAG]);
+            $request->merge(['type' => AdvertTypeConst::BANNER]);
         }
         $list = AdvertBls::getAdvertList($request);
 
@@ -95,7 +94,7 @@ class AdvertController extends Controller
         $model = AdvertBls::find($id);
 
         $this->isEmpty($model);
-        $model->typeName = TagsTypeConst::getDesc($model->type);
+        $model->typeName = AdvertTypeConst::getDesc($model->type);
 
         return View::make('admin::other.advert.edit',[
             'form' =>  $this->form($model),

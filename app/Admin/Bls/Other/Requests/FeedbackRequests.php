@@ -14,7 +14,7 @@ class FeedbackRequests extends JsonResponseRequests
     {
         $validatorRules = $this->input('type') ? (new FeedbackStrategy($this->input('type')))->validatorRules() : [];
         return array_merge($validatorRules, [
-            'content' => 'required',
+            'contents' => 'required',
 
         ]);
     }
@@ -23,7 +23,7 @@ class FeedbackRequests extends JsonResponseRequests
     {
         $validatorMessages = $this->input('type') ? (new FeedbackStrategy($this->input('type')))->validatorMessages() : [];
         return array_merge($validatorMessages, [
-            'content.required' => '内容不能为空',
+            'contents.required' => '内容不能为空',
         ]);
     }
 

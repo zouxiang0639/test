@@ -2,3 +2,6 @@
     margin-bottom: -4px; !important;
     font-size: 12px;
 }
+.kv-file-content img{
+    max-width: 100%;
+}
