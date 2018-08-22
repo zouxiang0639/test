@@ -24,15 +24,14 @@ class ApiAes
      */
     public function handle($request, Closure $next, $guard = null)
     {
-
-        $key = '2018082112808102';
+        $date = date('Ymd');
+        $key = $date.strrev($date);
 
         $data = Security::decrypt($request[$guard], $key);
 
         if($data == false) {
             die((new JsonResponse())->error('1050002'));
         }
-
         $request->merge(json_decode($data, true));
         return $next($request);
     }

@@ -178,6 +178,11 @@ Route::group([
             Route::post('update/{id}', ['uses' => "Customer\\UsersController@update", 'as' => 'm.customer.users.update']);
             Route::put('status/{id}', ['uses' => "Customer\\UsersController@status", 'as' => 'm.customer.users.status']);
         });
+
+        //流水
+        Route::group(['prefix'=>'flow', 'middleware' => 'admin.auth:m_customer_flow'], function(){
+            Route::get('', ['uses' => "Customer\\FlowController@index", 'as' => 'm.customer.flow.list']);
+        });
     });
 
 

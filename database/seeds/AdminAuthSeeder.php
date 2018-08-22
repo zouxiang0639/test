@@ -271,10 +271,21 @@ class AdminAuthSeeder extends Seeder
 
         $menuRequest->merge([
             'parent_id' => $menu->getKey(),
-            'title' => '外卖',
-            'icon' => 'fa-truck',
+            'title' => '用户',
+            'icon' => 'fa-user-secret',
             'route' => 'm.customer.users.list',
             'slug' => 'm_customer_users',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);
+
+
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '账户流水',
+            'icon' => 'fa-money',
+            'route' => 'm.customer.flow.list',
+            'slug' => 'm_customer_flow',
             'permissions' => WhetherConst::YES
         ]);
         MenuBls::storeMenu($menuRequest);

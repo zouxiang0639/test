@@ -17,4 +17,14 @@ class AccountFlowModel extends Model
      */
     protected $table = 'account_flow';
 
+
+
+    /**
+     * 点餐
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users()
+    {
+        return $this->belongsTo(UsersModel::class, 'users_id');
+    }
 }

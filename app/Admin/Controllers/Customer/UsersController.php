@@ -2,13 +2,14 @@
 
 namespace App\Admin\Controllers\Customer;
 
-use App\Admin\Bls\System\ConfigBls;
-use App\Admin\Bls\System\Requests\ConfigRequest;
+use App\Admin\Bls\System\TagsBls;
+use App\Canteen\Bls\Users\UsersBls;
+use App\Consts\Admin\Tags\TagsTypeConst;
+use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Library\Admin\Form\FormBuilder;
 use App\Library\Admin\Form\HtmlFormTpl;
 use App\Library\Admin\Widgets\Forms;
-use App\Library\Admin\Widgets\Security;
 use App\Library\Format\FormatMoney;
 use App\Library\Response\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ use Admin;
 use View;
 
 /**
- * Created by ConfigController.
+ * Created by UsersController.
  * @author: zouxiang
  * @date:
  */
@@ -30,41 +31,18 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        $key = '2018082112808102';
-        $content = '{"card_no":"jasdhljSHDLKASHDFKLASDHJFKASHDKKJHWDKQ","mobile":"13816720692","name":"zou"}';
-        $a = Security::encrypt($content, $key);
-        dump($a);
-        $c = Security::decrypt($a, $key);
-        dd($c);
+        $tagList = TagsBls::getTagsByType(TagsTypeConst::TAG)->pluck('tag_name', 'id')->toArray();
+        $model = UsersBls::getUsersList($request);
+
+        $model->getCollection()->each(function($item) use ($tagList) {
+            $item->divisionNmae = array_get($tagList, $item->division, '-');
+            $item->formatMoney = FormatMoney::fen2yuan($item->money);
+        });
+
         return View::make('admin::customer.users.index',[
-
+            'list' => $model,
+            'division' => $tagList
         ]);
-    }
-
-    /**
-     * 创建
-     * @return View
-     */
-    public function create()
-    {
-        return View::make('admin::system.config.create',[
-            'form' =>  $this->form([]),
-        ]);
-    }
-
-    /**
-     * 存储
-     * @param ConfigRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     * @throws LogicException
-     */
-    public function store(ConfigRequest $request)
-    {
-        if(ConfigBls::storeConfig($request)) {
-            return (new JsonResponse())->success('操作成功');
-        } else {
-            throw new LogicException(1010002, '操作失败');
-        }
     }
 
 
@@ -75,53 +53,60 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $model = ConfigBls::find($id);
+        $model = UsersBls::find($id);
 
         $this->isEmpty($model);
 
-        return View::make('admin::system.config.edit',[
+        return View::make('admin::customer.users.edit',[
             'form' =>  $this->form($model),
             'info' =>  $model
         ]);
     }
 
     /**
-     * @param configRequest $request
+     * 修改外卖状态
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
+    public function status($id, Request $request)
+    {
+
+        $this->isEmpty(WhetherConst::getDesc($request->status));
+
+        $model = UsersBls::find($id);
+
+        $this->isEmpty($model);
+
+        $model->status = $request->status;
+
+        if($model->save()) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010001, '操作失败');
+        }
+    }
+
+    /**
+     * @param Request $request
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      * @throws LogicException
      */
-    public function update(configRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $model = ConfigBls::find($id);
+        $model = UsersBls::find($id);
 
         $this->isEmpty($model);
 
-        if(ConfigBls::updateConfig($model, $request)) {
+        if(UsersBls::updateUsers($model, $request)) {
             return (new JsonResponse())->success('操作成功');
         } else {
             throw new LogicException(1010002, '操作失败');
         }
     }
 
-    /**
-     * 删除
-     * @param $id
-     * @return \Illuminate\Http\JsonResponse
-     * @throws LogicException
-     */
-    public function destroy($id)
-    {
-        $model = ConfigBls::find($id);
-
-        $this->isEmpty($model);
-
-        if($model->delete()) {
-            return (new JsonResponse())->success('操作成功');
-        } else {
-            throw new LogicException(1010001, '操作失败');
-        }
-    }
 
 
     /**
@@ -135,31 +120,35 @@ class UsersController extends Controller
     {
         return Admin::form(function(Forms $item) use ($info)  {
 
-            $item->create('编号', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+            $item->create('用户编号', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->display(array_get($info, 'id'));
             });
 
-            $item->create('配置名称', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->text('name', array_get($info, 'name'), $h->options);
-                $h->set('name', true);
+            $item->create('姓名', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->display(array_get($info, 'name'));
             });
 
-            $item->create('配置值', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->textarea('value', array_get($info, 'value'), $h->options);
-                $h->set('value', true);
+            $item->create('手机号', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->display(array_get($info, 'mobile'));
             });
 
-            $item->create('描述', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->textarea('description', array_get($info, 'description'), $h->options);
-                $h->set('description', true);
+            $item->create('余额', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->display(FormatMoney::fen2yuan(array_get($info, 'money')));
+            });
+
+            $item->create('分组', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $list = TagsBls::getTagsByType(TagsTypeConst::TAG)->pluck('tag_name', 'id')->toArray();
+                $h->input = $form->select2('division',$list , array_get($info, 'division'), $h->options);
+                $h->set('division', true);
+            });
+
+            $item->create('状态', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->switchOff('status', array_get($info, 'status'));
+                $h->set('status', true);
             });
 
             $item->create('创建时间', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->display(array_get($info, 'created_at'));
-            });
-
-            $item->create('更新时间', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->display(array_get($info, 'updated_at'));
             });
         })->getFormHtml();
     }

@@ -16,8 +16,8 @@ class UpdateUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->char('mobile', 11)->unique()->comment('手机号');
             $table->integer('money')->default(0)->comment('余额');
-            $table->char('card_no', 12)->comment('卡号');
-            $table->integer('division')->default(0)->comment('部门');
+            $table->integer('division')->default(0)->comment('分组');
+            $table->tinyInteger('status')->comment('状态 1启用 2禁用 :WhetherConst');
 
         });
     }

@@ -3,6 +3,7 @@
 use App\Admin\Bls\Canteen\Model\TakeoutModel;
 use App\Canteen\Bls\Users\Model\UsersModel;
 use App\Admin\Bls\Canteen\Model\RecipesModel;
+use App\Consts\Common\WhetherConst;
 
 class TextSeeder extends \Illuminate\Database\Seeder
 {
@@ -107,6 +108,7 @@ class TextSeeder extends \Illuminate\Database\Seeder
                 'mobile' => '13816720691',
                 'money' => '100000',
                 'email' => '542506511@qq.com',
+                'status' => WhetherConst::YES,
             ],
             [
                 'name' => '李四',
@@ -114,6 +116,7 @@ class TextSeeder extends \Illuminate\Database\Seeder
                 'mobile' => '12312341234',
                 'money' => '100000',
                 'email' => '542506511@qq.com',
+                'status' => WhetherConst::YES,
             ]
         ]);
 

@@ -11,7 +11,6 @@ class UsersController extends ApiController
 {
     public function register(UsersRegisterRequests $request)
     {
-
         if(UsersBls::storeUsers($request)) {
             return $this->success('创建成功');
         } else {
