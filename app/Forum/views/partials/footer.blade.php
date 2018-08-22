@@ -7,7 +7,7 @@
             <a href="{!! route('f.feedback.appeals') !!}">申诉区</a>
         </p>
         <p>
-            <span>广告咨询：info@kongdi.com</span>
+            <span>广告咨询：info@kongdi.com 2018 kongdi All Rights Reserved</span>
         </p>
     </div>
 </div>

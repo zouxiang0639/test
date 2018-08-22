@@ -36,7 +36,7 @@
                 }
             }
         }
-        CKEDITOR.replace('a');
+
         var initialAjAx = {
             "url":"{!! route('m.role.store') !!}",
             "backUrl":"{!! route('m.role.list') !!}"

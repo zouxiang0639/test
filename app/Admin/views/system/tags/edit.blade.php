@@ -1,7 +1,7 @@
 @extends('admin::layouts.master')
 
 @section('style')
-
+    <link rel="stylesheet" href="{{  assets_path("/lib/icomoon/style.css") }}">
 @stop
 @section('content-header')
     <h1>

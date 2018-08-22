@@ -14,7 +14,7 @@ html {
 	width: 100%;
 	-webkit-text-size-adjust: none;
 	font-size: 12px;
-	font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
+	font-family:"宋体";
 	background: #1a3148; !important
 }
 
@@ -50,7 +50,10 @@ td {
 	padding: 0;
 	border: 0;
 	outline: none;
-	font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
+	font-family: "宋体";
+}
+th{
+	font-size: 14px;
 }
 
 table {
@@ -385,7 +388,7 @@ acronym {
 	background-position: -176px 0;
 }
 .com-ad{
-	margin: 10px 0 8px 0px;
+	margin: 5px 0 -5px 0px;
 }
 .com-ad .ad{
 	display: block;
@@ -450,7 +453,7 @@ acronym {
 .new-table tbody tr td.l{
 	text-align: left;
 	color: #38393e;
-	font-size: 14px;
+	font-size: 12px;
 }
 .new-table tbody tr td.l a{
 	color: #38393e;

@@ -198,6 +198,12 @@ class TagsController extends Controller
                 $h->set('tag_name', true);
             });
 
+            $item->create('标签', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = '<span class="input-group-addon"><i class="'.array_get($info, 'icon').'"></i></span>'.
+                    $form->text('icon', array_get($info, 'icon'), $h->options);
+                $h->set('icon', true);
+            });
+
             $item->create('热度', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->text('hot', array_get($info, 'hot'), $h->options);
                 $h->set('hot', true);

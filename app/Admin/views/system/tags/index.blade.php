@@ -2,6 +2,7 @@
 
 @section('style')
     <link rel="stylesheet" href="{{  assets_path("/lib/bootstrap3-editable/css/bootstrap-editable.css") }}">
+    <link rel="stylesheet" href="{{  assets_path("/lib/icomoon/style.css") }}">
 @stop
 
 @section('content-header')
