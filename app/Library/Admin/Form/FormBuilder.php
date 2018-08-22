@@ -36,7 +36,11 @@ class FormBuilder extends \Collective\Html\FormBuilder
         'bootstrap-datetimepicker.min.js' =>'/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
 
         //数字输入
-        'bootstrap-number-input.js' =>'/lib/bootstrap-number/bootstrap-number-input.js'
+        'bootstrap-number-input.js' =>'/lib/bootstrap-number/bootstrap-number-input.js',
+
+        //颜色
+        'bootstrap-colorpicker.min.css' =>'/lib/AdminLTE/plugins/colorpicker/bootstrap-colorpicker.min.css',
+        'bootstrap-colorpicker.min.js' =>'/lib/AdminLTE/plugins/colorpicker/bootstrap-colorpicker.min.js'
     ];
 
     /**
@@ -430,6 +434,13 @@ EOT;
         self::text($end['name'], $end['value'] , $options);
     }
 
+    /**
+     * 数字
+     * @param string $name
+     * @param null $value
+     * @param array $options
+     * @return \Illuminate\Support\HtmlString
+     */
     public function number($name, $value = null, $options = [])
     {
         if(!isset($options['min'])) {
@@ -447,5 +458,21 @@ EOT;
 EOT;
         Admin::style()->setJs(StyleTypeConst::CODE, $code);
         return  self::text($name, $value , $options);
+    }
+
+    public function color($name, $value = null, $options = [])
+    {
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('bootstrap-colorpicker.min.js'));
+        Admin::style()->setCss(StyleTypeConst::FILE, $this->getResource('bootstrap-colorpicker.min.css'));
+        $code = <<<EOT
+
+            $('input[name={$name}]').parent().colorpicker({
+            'format' :'hex'
+            });
+EOT;
+        Admin::style()->setJs(StyleTypeConst::CODE, $code);
+
+
+          return  '<span class="input-group-addon"><i></i></span>'.self::text($name, $value , $options);
     }
 }

@@ -21,12 +21,19 @@ class WidgetsController extends Controller
                 $h->set('number', true);
             });
 
+            $item->create('color', function(HtmlFormTpl $h, FormBuilder $form) {
+
+                $h->input = $form->color('color', '' , $h->options);
+                $h->set('color', true);
+            });
+
             $item->create('datetimeRange', function(HtmlFormTpl $h, FormBuilder $form) {
                 $start = ['name' =>'datetimeRangeStart', 'value' => ''];
                 $end = ['name' =>'datetimeRangeEnd', 'value' => ''];
                 $h->input = $form->datetimeRange($start, $end , $h->options, 'YYYY-MM-DD');
                 $h->set('datetimeRange', true);
             });
+
             $item->create('datetime', function(HtmlFormTpl $h, FormBuilder $form) {
                 $h->input = $form->datetime('datetime','', $h->options, 'YYYY-MM-DD');
                 $h->set('datetime', true);

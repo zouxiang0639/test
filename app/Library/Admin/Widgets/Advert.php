@@ -55,6 +55,11 @@ class Advert
     public function random($num)
     {
         $item = $this->getItem();
+
+        if(empty($item)) {
+            return [];
+        }
+
         shuffle($item);
         return array_slice($item, 0, $num);
     }
@@ -67,6 +72,11 @@ class Advert
     public function intercept($num)
     {
         $item = $this->getItem();
+
+        if(empty($item)) {
+            return [];
+        }
+
         return array_slice($item, 0, $num);
     }
 
