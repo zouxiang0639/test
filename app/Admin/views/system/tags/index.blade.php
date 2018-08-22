@@ -42,6 +42,7 @@
                     <th>编号</th>
                     <th>热度</th>
                     <th>标签名称</th>
+                    <th>图标</th>
                     <th>状态</th>
                     <th>创建时间</th>
                     <th>更新时间</th>
@@ -54,6 +55,7 @@
                             <a href="javascript:;" class="hot" data-pk="{!! $item->id !!}">{!! $item->hot !!}</a>
                         </td>
                         <td>{{ $item->tag_name }}</td>
+                        <td><i style="color:{{ $item->color }} " class="{{ $item->icon }}"></i></td>
                         <td class="switch_submit" data-href="{!! route('m.system.tags.status', ['id' => $item->id]) !!}">
                             {!! Form::switchOff('switch_submit', $item->status) !!}
                         </td>

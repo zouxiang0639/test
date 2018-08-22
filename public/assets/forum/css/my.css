@@ -3,6 +3,11 @@
 	color: #e15844; !important;
 }
 
+.article-star{
+	font-size: 14px;
+	padding-top: 3px;
+}
+
 .new-container {
     padding-top: 0;
 }
@@ -262,6 +267,7 @@
 }
 .inner-info p{
 	line-height:20px;
+	margin: 0; !important;
 }
 .inner-info p span{
 	padding-right: 20px;
@@ -357,7 +363,7 @@
 	background-position: -226px -66px;
 }
 .fabulous-con{
-	height: 140px;
+	height: 108px;
 	text-align: center;
 	position: relative;
 }
@@ -384,6 +390,9 @@
 
 }
 
+.com-tie{
+	margin-bottom: -10px;
+}
 .com-tie .color-green{
 	background: #59bab6;
 }
@@ -404,6 +413,7 @@
 }
 
 .new-inner-tit{
+	margin-bottom: -10px;
 	height: 36px;
 	line-height: 36px;
 	text-align: center;
@@ -456,8 +466,8 @@
 	background-position: -206px 0;
 }
 .new-inner .com-tie li .sh-r{
-	width: 754px;
-	padding: 6px 20px 12px 20px;
+	width: 790px;
+	padding: 6px 20px 12px 30px;
 }
 
 
@@ -497,10 +507,11 @@
 	resize: none;
 	padding: 10px;
 }
+
 .edit-container .con .opt{
 	position: absolute;
 	right: 0;
-	width: 59px;
+	width: 52px;
 	height: 105px;
 	background: #479fed;
 	border-left: 1px solid #1a3148;
@@ -509,16 +520,26 @@
 	height: 52px;
 	display: block;
 	text-align: center;
-	width: 57px;
+	width: 52px;
+	line-height: 52px;
 	overflow: hidden;
 	border-bottom:1px solid #1a3148;
-	font-size: 26px;
+}
+.edit-container .con .opt .img i{
+	display: inline-block;
+	vertical-align: middle;
+	font-size:16px;
+	color: white;
+	background-position: -238px 0;
+}
+.edit-container .con .opt .txt{
+	height: 52px;
+	line-height: 52px;
+	text-align: center;
+	color: #ffffff;
+	display: block;
 }
 
-.edit-container .con .opt .txt{
-	height: 53px;
-	width: 58px;
-}
 .new-list{
 	background: #fff;
 	padding: 12px 0;

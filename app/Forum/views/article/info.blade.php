@@ -112,9 +112,9 @@
                                 <textarea name="contents"></textarea>
                             </div>
                             <div class="opt">
-                                <a   class="btn btn-primary img img—submit" data-href="{!! route('f.reply.store') !!}"><i class="fa fa-image"></i></a>
+                                <a   href="javascript:;"   class=" img img—submit" data-href="{!! route('f.reply.store') !!}"><i class="fa fa-image"></i></a>
                                 <input style="display: none" class="layui-upload-file" accept="undefined" name="file" type="file">
-                                <button   class="btn btn-primary txt reply—submit" data-href="{!! route('f.reply.store') !!}">回复</button>
+                                <a  href="javascript:;"  class="txt reply—submit" data-href="{!! route('f.reply.store') !!}">回复</a>
                             </div>
                         </form>
                     <div>
@@ -137,9 +137,10 @@
                                     <textarea name="contents"></textarea>
                                 </div>
                                 <div class="opt">
-                                    <a   class="btn btn-primary img img—submit" data-href="{!! route('f.reply.store') !!}"><i class="fa fa-image"></i></a>
+
+                                    <a   href="javascript:;"   class=" img img—submit" data-href="{!! route('f.reply.store') !!}"><i class="fa fa-image"></i></a>
                                     <input style="display: none" class="layui-upload-file" accept="undefined" name="file" type="file">
-                                    <button   class="btn btn-primary txt reply—submit" data-href="{!! route('f.reply.store') !!}">回复</button>
+                                    <a  href="javascript:;"  class="txt reply—submit" data-href="{!! route('f.reply.store') !!}">回复</a>
                                 </div>
                             </form>
 

@@ -5,6 +5,7 @@
 @stop
 
 @section('content')
+    @include('forum::partials.ad')
     <div class="list-container">
         <div class="wm-850">
             <div class="list">

@@ -204,6 +204,12 @@ class TagsController extends Controller
                 $h->set('icon', true);
             });
 
+            $item->create('颜色', function(HtmlFormTpl $h, FormBuilder $form) use($info) {
+
+                $h->input = $form->color('color', array_get($info, 'color') , $h->options);
+                $h->set('color', true);
+            });
+
             $item->create('热度', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->text('hot', array_get($info, 'hot'), $h->options);
                 $h->set('hot', true);

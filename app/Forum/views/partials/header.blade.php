@@ -37,9 +37,10 @@
     <div class="wm-850">
         <div class="nav clearfix">
             <div class="nav-list fl clearfix">
-                @foreach($tagsList as $value)
-                    <a class="{!! isset($tags) && $value->id == $tags->id ? "icon-default" : "" !!}" href="{!! route('f.article.list', ['tag' => $value['id']]) !!}" title="{{ $value['tag_name'] }}" >
-                        <i class="{!! $value['icon'] !!}"></i>
+                @foreach($tagsList as $key =>$value)
+                    <a class="{!! isset($tags) && $value->id == $tags->id ? "icon-default" : "" !!} "
+                       href="{!! route('f.article.list', ['tag' => $value['id']]) !!}" title="{{ $value['tag_name'] }}" >
+                        <i  @if($key == 1)  style="background-color: #e9711a; color: white;" @endif class="{!! $value['icon'] !!}"></i>
                     </a>
                 @endforeach
             </div>

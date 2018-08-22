@@ -53,6 +53,8 @@ class TagsBls
         $model->type = $request->type;
         $model->tag_name = $request->tag_name;
         $model->status = $request->status;
+        $model->color = $request->color;
+        $model->icon = $request->icon;
         $model->hot = intval($request->hot);
         return $model->save();
     }
@@ -68,6 +70,8 @@ class TagsBls
         $model->type = $request->type;
         $model->tag_name = $request->tag_name;
         $model->status = $request->status;
+        $model->color = $request->color;
+        $model->icon = $request->icon;
         $model->hot = intval($request->hot);
         return $model->save();
     }

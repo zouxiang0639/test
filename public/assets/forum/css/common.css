@@ -255,7 +255,7 @@ acronym {
 	line-height: 26px;
 }
 .nav{
-	padding: 10px 0;
+	padding-top: 11px;
 	min-height: 48px;
 	background: #2c56a5;
 	border-bottom-left-radius: 5px;
@@ -550,3 +550,4 @@ acronym {
 .icon-default i{
 	color: #e9711a;
 }
+

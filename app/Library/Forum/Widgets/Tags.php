@@ -52,4 +52,11 @@ class Tags
             return $model->icon;
         }
     }
+
+    public function getTagsColor($tagId)
+    {
+        if($model = array_get($this->tags, $tagId)) {
+            return $model->color;
+        }
+    }
 }
