@@ -35,4 +35,13 @@ class OrderModel extends Model
         return $this->belongsTo(OrderMealModel::class, 'id', 'order_id');
     }
 
+    /**
+     * 用户关联
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users()
+    {
+        return $this->belongsTo(UsersModel::class, 'user_id');
+    }
+
 }

@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Canteen\Bls\Users;
+use App\Api\Bls\Users\Requests\SitePaymentRequests;
 use App\Api\Bls\Users\Requests\UsersRegisterRequests;
 use App\Canteen\Bls\Users\Model\UsersModel;
+use App\Consts\Common\AccountFlowTypeConst;
+use App\Consts\Common\MealTypeConst;
 use App\Consts\Common\WhetherConst;
 use Illuminate\Http\Request;
 
@@ -80,5 +83,42 @@ class UsersBls
     public static function usersAll()
     {
         return UsersModel::all();
+    }
+
+    /**
+     * 根据手机号获取一条用户信息
+     * @param $mobile
+     * @return mixed
+     */
+    public static function getUsersByMobile($mobile)
+    {
+        $model = UsersModel::query();
+        $model->where('mobile', $mobile);
+        $model->where('status', WhetherConst::YES);
+        $model->select('id', 'mobile', 'money', 'division', 'name', 'remember_token');
+        return $model->first();
+    }
+
+    /**
+     * 现场支付
+     * @param $model
+     * @param SitePaymentRequests $request
+     * @return mixed
+     */
+    public static function payment($model, SitePaymentRequests $request)
+    {
+        return UsersModel::query()->getQuery()->getConnection()->transaction(function () use($model, $request) {
+
+            $typeName = MealTypeConst::getDesc($request->type);
+            if($request->type == MealTypeConst::STORE) {
+                $describe = $typeName . '付款';
+            } else {
+                $describe = date('Y-m-d') . $typeName . ':'  . $request->num . '份';
+            }
+
+            AccountFlowBls::createAccountFlow($model->id, AccountFlowTypeConst::PAYMENT, $request->amount, $describe);
+
+            return $model->save();
+        });
     }
 }

@@ -26,13 +26,21 @@ class ApiAes
     {
         $date = date('Ymd');
         $key = $date.strrev($date);
+        $key = '2018082222808102';
 
         $data = Security::decrypt($request[$guard], $key);
 
         if($data == false) {
             die((new JsonResponse())->error('1050002'));
         }
-        $request->merge(json_decode($data, true));
+
+        $data = json_decode($data, true);
+
+        if(!is_array($data)) {
+            die((new JsonResponse())->error('1050001'));
+        }
+
+        $request->merge($data);
         return $next($request);
     }
 }

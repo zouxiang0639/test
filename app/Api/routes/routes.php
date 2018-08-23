@@ -1,15 +1,23 @@
 <?php
 
-Route::group([], function(){
+Route::group(['middleware' => 'api.aes:contents'], function(){
 
     //用户
     Route::group(['prefix'=>'user'], function(){
-        Route::post('register', ['uses' => "UsersController@register", 'middleware' => 'api.aes:contents']);
+        Route::post('register', ['uses' => "UsersController@register"]);
+        Route::post('show', ['uses' => "UsersController@show"]);
     });
 
     //订单
     Route::group(['prefix'=>'order'], function(){
-        Route::get('', 'OrderController@register');
+        Route::post('meal', 'OrderController@meal');
+        Route::post('takeout', 'OrderController@takeout');
+        Route::post('payment', 'OrderController@payment');
+    });
+
+    //现场支付
+    Route::group(['prefix'=>'site'], function(){
+        Route::post('payment', 'SiteController@payment');
     });
 
     //标签

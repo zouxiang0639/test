@@ -196,6 +196,11 @@ class OrderBls
         return OrderModel::find($id);
     }
 
+    /**
+     * 外面退单
+     * @param OrderModel $model
+     * @return mixed
+     */
     public static function refund(OrderModel $model)
     {
         return OrderModel::query()->getQuery()->getConnection()->transaction(function () use($model) {
@@ -216,7 +221,61 @@ class OrderBls
             return $user->save();
         });
 
-
     }
 
+    /**
+     * 支付定金的就餐订单
+     * @param $time
+     * @param $type
+     * @param $userId
+     * @return \Illuminate\Database\Eloquent\Model|null|object|static
+     */
+    public static function getOrderByMeal($time, $type, $userId)
+    {
+        $model = OrderModel::query();
+        $model->where('user_id', $userId);
+        $model->where('type', OrderTypeConst::MEAL);
+        $model->where('status', OrderStatusConst::DEPOSIT);
+        $model->with(['orderMeal']);
+        $model->whereHas('orderMeal', function ($query)  use($time, $type) {
+            $time = mb_substr($time,0,10);
+            $query->where('type', $type)->where('date', $time);
+        });
+
+        return $model->first();
+    }
+
+    public static function getOrderTakeout($userId)
+    {
+        $model = OrderModel::query();
+        $model->where('user_id', $userId);
+        $model->where('type', OrderTypeConst::TAKEOUT);
+        $model->where('status', OrderStatusConst::DEPOSIT);
+        $model->with(['orderTakeout']);
+        return $model->get();
+    }
+
+    public static function payment($order, $users)
+    {
+        return OrderModel::query()->getQuery()->getConnection()->transaction(function () use($order, $users) {
+
+            $order->status = OrderStatusConst::PAYMENT;
+            $order->save();
+
+
+            if($order->type == OrderTypeConst::TAKEOUT) {
+                $typeName = OrderTypeConst::getDesc($order->type);
+                $name = "订单号:{$order->id}{$typeName}支付尾款";
+            } else {
+                $meal = $order->orderMeal;
+                $typeName = MealTypeConst::getDesc($meal->type);
+                $name = "订单号:{$order->id} ($meal->date{$typeName})支付尾款";
+            }
+
+            $amount = $order->amount - $order->payment;
+            AccountFlowBls::createAccountFlow($users->id, AccountFlowTypeConst::REFUND, $amount, $name);
+
+            return $users->save();
+        });
+    }
 }
