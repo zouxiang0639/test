@@ -7,6 +7,7 @@ use App\Canteen\Bls\Users\Requests\SetupRequest;
 use App\Consts\Common\AccountFlowTypeConst;
 use App\Exceptions\LogicException;
 use App\Http\Controllers\Controller;
+use App\Library\Admin\Widgets\Security;
 use App\Library\Format\FormatMoney;
 use App\Library\Response\JsonResponse;
 use Endroid\QrCode\QrCode;
@@ -28,7 +29,14 @@ class MemberController extends Controller
      */
     public function qrCode()
     {
-        $qrCode = new QrCode('Life is too short to be generating QR codes');
+        $model = Auth::guard('canteen')->user();
+        $data = json_encode([
+            'mobile' => $model->mobile,
+            'time' => date("Y-m-d H:i:s")
+        ]);
+        $key = Security::key();
+        $string = Security::encrypt($data, $key);
+        $qrCode = new QrCode($string);
         header('Content-Type: '.$qrCode->getContentType());
         echo $qrCode->writeString();
     }

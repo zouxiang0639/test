@@ -24,9 +24,9 @@ class ApiAes
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        $date = date('Ymd');
-        $key = $date.strrev($date);
-        $key = '2018082222808102';
+
+
+        $key = Security::key();
 
         $data = Security::decrypt($request[$guard], $key);
 

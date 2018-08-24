@@ -5,10 +5,12 @@ namespace App\Library\Admin\Widgets;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
 
-/**
- * Class NavBar.
- */
 
+/**
+ * 加密解密工具.
+ * @author: zouxiang
+ * @date:
+ */
 class Security
 {
     /**
@@ -56,5 +58,12 @@ class Security
         $padding = ord($decrypted[$dec_s - 1]);
         $decrypted = substr($decrypted, 0, -$padding);
         return $decrypted;
+    }
+
+    public static function key()
+    {
+        //$key = '2018082222808102';
+        $date = date('Ymd');
+        return $date.strrev($date);
     }
 }
