@@ -46,21 +46,30 @@ class AuthController extends Controller
      */
     public function postLogin(Request $request)
     {
-        $credentials = $request->only(['username', 'password']);
-
         /** @var \Illuminate\Validation\Validator $validator */
-        $validator = Validator::make($credentials, [
+        $rules = [
             'username' => 'required',
             'password' => 'required',
-        ],[
+            'captcha' => 'required|captcha',
+        ];
+
+        //开发环境去除验证码
+        if(config('app.env') == 'local') {
+            unset($rules['captcha']);
+        }
+
+        $validator = Validator::make($request->all(), $rules,[
             'username.required' => '用户名不能为空',
-            'password.required' => '密码不能为空'
+            'password.required' => '密码不能为空',
+            'captcha.required' => '验证码不能为空',
+            'captcha.captcha' => '验证码错误'
         ]);
 
         if ($validator->fails()) {
             return back()->withInput()->withErrors($validator);
         }
 
+        $credentials = $request->only(['username', 'password']);
         if (Auth::guard('admin')->attempt($credentials)) {
             return $this->sendLoginResponse($request);
         }

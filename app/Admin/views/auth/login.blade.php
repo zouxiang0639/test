@@ -55,6 +55,23 @@
                 <input type="password" class="form-control" placeholder="请输入密码" name="password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
+            <div class="form-group has-feedback {!! !$errors->has('captcha') ?: 'has-error' !!}">
+
+
+                    @if($errors->has('captcha'))
+                        @foreach($errors->get('captcha') as $message)
+                            <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i>{{$message}}</label></br>
+                        @endforeach
+                    @endif
+
+
+                <div class="col-md-12 input-group ">
+                    <input name="captcha" value="" class="form-control pull-right" placeholder="请输入验证码" type="text">
+                    <div class="input-group-btn">
+                        <img src="{{captcha_src()}}" style="cursor: pointer;border: 1px solid #ccc;" onclick="this.src='{{captcha_src()}}'+Math.random()">
+                    </div>
+                </div>
+            </div>
             <div class="row">
 
                 <!-- /.col -->

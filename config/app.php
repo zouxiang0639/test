@@ -179,6 +179,7 @@ return [
 
         App\Library\Admin\AdminServiceProvider::class,
         App\Library\Admin\Form\HtmlServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
 
        /*
         *  验证服务
