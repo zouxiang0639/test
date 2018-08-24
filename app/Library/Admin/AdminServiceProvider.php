@@ -33,7 +33,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected $middlewareGroups = [
         'admin' => [
-            'admin.auth',
+            //'admin.auth',
         ],
     ];
 

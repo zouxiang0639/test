@@ -14,7 +14,9 @@
         "laravelcollective/html": "^5.5",
         "lustre/php-dfa-sensitive": "^1.1",
         "socialiteproviders/qq": "^3.0",
-        "socialiteproviders/weibo": "^3.0"
+        "socialiteproviders/weibo": "^3.0",
+        "mews/captcha": "^2.2"
+
     },
     "require-dev": {
         "filp/whoops": "~2.0",

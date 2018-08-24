@@ -181,6 +181,7 @@ return [
         App\Library\Forum\ForumServiceProvider::class,
         App\Library\Admin\Form\HtmlServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
 
        /*
         *  验证服务
