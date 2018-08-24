@@ -144,6 +144,18 @@ Route::group([
         Route::post('formPost', ['uses' => "Demo\\WidgetsController@formPost", 'as' => 'm.demo.widgets.formPost']);
     });
 
+    //用户管理
+    Route::group(['prefix'=>'customer'], function(){
+
+        //用户
+        Route::group(['prefix'=>'users', 'middleware' => 'admin.auth:m_customer_users'], function(){
+            Route::get('', ['uses' => "Customer\\UsersController@index", 'as' => 'm.customer.users.list']);
+            Route::get('edit/{id}', ['uses' => "Customer\\UsersController@edit", 'as' => 'm.customer.users.edit']);
+            Route::post('update/{id}', ['uses' => "Customer\\UsersController@update", 'as' => 'm.customer.users.update']);
+            Route::put('status/{id}', ['uses' => "Customer\\UsersController@status", 'as' => 'm.customer.users.status']);
+        });
+
+    });
 
 });
 
