@@ -8,6 +8,7 @@ use App\Api\Bls\Users\Requests\OrderTakeoutRequests;
 use App\Canteen\Bls\Users\OrderBls;
 use App\Canteen\Bls\Users\UsersBls;
 use App\Consts\Order\OrderStatusConst;
+use App\Consts\Order\OrderTypeConst;
 use App\Http\Controllers\ApiController;
 
 class OrderController extends ApiController
@@ -82,6 +83,9 @@ class OrderController extends ApiController
 
         //减去用户金额
         $users->money -= $order->amount - $order->payment;
+        if($order->type == OrderTypeConst::TAKEOUT && !empty(intval($requests->price))) {
+            $users->money -= $requests->price;
+        }
         if($users->money < 0) {
             return $this->error(1050007);
         }

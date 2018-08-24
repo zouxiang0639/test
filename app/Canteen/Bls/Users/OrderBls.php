@@ -272,8 +272,9 @@ class OrderBls
                 $name = "订单号:{$order->id} ($meal->date{$typeName})支付尾款";
             }
 
-            $amount = $order->amount - $order->payment;
-            AccountFlowBls::createAccountFlow($users->id, AccountFlowTypeConst::REFUND, $amount, $name);
+            $amount = $users->getOriginal('money') - $users->money;
+
+            AccountFlowBls::createAccountFlow($users->id, AccountFlowTypeConst::PAYMENT, $amount, $name);
 
             return $users->save();
         });

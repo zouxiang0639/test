@@ -62,7 +62,7 @@ class Security
 
     public static function key()
     {
-        //$key = '2018082222808102';
+        //return '2018082222808102';
         $date = date('Ymd');
         return $date.strrev($date);
     }
