@@ -58,7 +58,7 @@ class ReplyBls
      */
     public static function showReply($articleId, $page)
     {
-        $model = ReplyModel::where('article_id', $articleId)->get();
+        $model = ReplyModel::withTrashed()->where('article_id', $articleId)->get();
         return (new Reply($model, $articleId))->setTree()->getPage($page)->render();
     }
 
@@ -70,7 +70,7 @@ class ReplyBls
      */
     public static function showChildReply($parentId, $articleId)
     {
-        $model = ReplyModel::where('parent_id', $parentId)->get();
+        $model = ReplyModel::withTrashed()->where('parent_id', $parentId)->get();
 
         return (new Reply($model, $articleId))->setDate()->setView('forum::reply.show_child')->render(['parentId' => $parentId]);
     }
@@ -87,6 +87,7 @@ class ReplyBls
     /**
      * 赞
      * @param ReplyModel $model
+     * @throws LogicException
      * @return array|bool
      */
     public static function thumbsUp(ReplyModel $model)
@@ -97,6 +98,11 @@ class ReplyBls
             $user->thumbs_up --;
             $data = false;
         } else {
+
+            if(static::checkThumbs($model->thumbs_down, $model->thumbs_up, $user->id)) {
+                throw new LogicException(1010002, '只能选一个赞或者弱');
+            }
+
             $model->thumbs_up = static::thumbsPlus($model->thumbs_up, $user->id);
             $user->thumbs_up ++;
             $data = true;
@@ -112,6 +118,7 @@ class ReplyBls
     /**
      * 弱
      * @param ReplyModel $model
+     * @throws LogicException
      * @return array|bool
      */
     public static function thumbsDown(ReplyModel $model)
@@ -121,6 +128,11 @@ class ReplyBls
             $model->thumbs_down = static::thumbsMinus($model->thumbs_down, $user->id);
             $data = false;
         } else {
+
+            if(static::checkThumbs($model->thumbs_down, $model->thumbs_up, $user->id)) {
+                throw new LogicException(1010002, '只能选一个赞或者弱');
+            }
+
             $model->thumbs_down = static::thumbsPlus($model->thumbs_down, $user->id);
             $data = true;
         }

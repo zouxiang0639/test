@@ -60,7 +60,8 @@ class Reply implements Renderable
            'lightGreen' => 'color-light-green',
            'white' => 'color-white',
            'lightRed' => 'color-light-red',
-           'yellow' => 'color-yellow'
+           'yellow' => 'color-yellow',
+           'gray' => 'color-gray'
     ];
 
     /**
@@ -183,6 +184,13 @@ class Reply implements Renderable
         $model->atName = ''; //@的用户名称
         $model->color = $this->getColor($model); //更近需求判断颜色
 
+        //信息删除
+        if(!is_null($model->deleted_at)) {
+            $model->contents = '该回复已被删除';
+            $model->formatPicture = [];
+            $model->isDelete = false;
+        }
+
         if($issuer = $model->issuers) {
             $model->issuerName = $issuer->name;
         }
@@ -207,6 +215,10 @@ class Reply implements Renderable
 
     protected function getColor($model)
     {
+        if(!is_null($model->deleted_at)) {
+            return $this->color['gray'];
+        }
+
         if($model->issuer == $this->articlesIssuer) {
             return $this->color['yellow'];
         } else if($model->thumbsDownCount > 9) {

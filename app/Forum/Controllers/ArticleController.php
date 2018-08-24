@@ -25,7 +25,9 @@ class ArticleController extends Controller
 
         $this->isEmpty($tags);
         $list = ArticleBls::getArticleLise($request);
-
+        $list->getCollection()->each(function($item) {
+            $item->replyCount = $item->reply()->count();
+        });
         return view('forum::article.index', [
             'list' => $list,
             'tags' => $tags
@@ -63,8 +65,8 @@ class ArticleController extends Controller
         $request->contents = Forum::sensitive($request->contents);
         $request->title = Forum::sensitive($request->title);
 
-        if (ArticleBls::createArticle($request)) {
-            return (new JsonResponse())->success('发布成功');
+        if ($model = ArticleBls::createArticle($request)) {
+            return (new JsonResponse())->success(route('f.article.info', ['id' => $model->id]));
         } else {
             throw new LogicException(1010002, '发布失败');
         }

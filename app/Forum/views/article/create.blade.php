@@ -141,8 +141,8 @@
                         _this.attr('disabled',false);
                         locked = true;
                     } else {
-                        swal(res.data, '', 'success');
-                        window.location.href = window.location.href;
+                        swal('发布成功', '', 'success');
+                        window.location.href = res.data;
                     }
                 },
                 error:function () {

@@ -4,15 +4,20 @@ namespace App\Forum\Bls\Article\Model;
 
 use App\Forum\Bls\Users\Model\UsersModel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ReplyModel extends Model
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'reply';
+
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that should be cast to native types.
@@ -23,6 +28,7 @@ class ReplyModel extends Model
         'thumbs_up' => 'array',
         'thumbs_down' => 'array',
     ];
+
 
     /**
      * 发布人

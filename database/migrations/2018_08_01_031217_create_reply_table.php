@@ -25,6 +25,7 @@ class CreateReplyTable extends Migration
             $table->text('thumbs_down')->comment('弱');
             $table->index(['id', 'parent_id', 'article_id']);
             $table->timestamps();
+            $table->softDeletes();
         });
         \DB::statement("ALTER TABLE `reply` comment '回复表'");
     }

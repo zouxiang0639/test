@@ -18,4 +18,9 @@ trait ThumbsTraits
     {
         return array_merge($array, [$userId]);
     }
+
+    protected static function checkThumbs($minus, $plus, $userId)
+    {
+        return in_array($userId, $minus) ||  in_array($userId, $plus);
+    }
 }

@@ -39,6 +39,9 @@ class ArticleBls
         //排序
         if(!empty($request->order) && $request->order == 'hot') {
             $order = '`browse` DESC';
+            $model->where(function($query) {
+                return $query->where('browse','>=', config('config.browse'))->orWhere('recommend_count','>=', config('config.recommend'));
+            });
         }
 
         //热门条件
@@ -83,7 +86,10 @@ class ArticleBls
             $model->star =  [];
             $model->recommend =  [];
 
-            return $model->save();
+            if($model->save()) {
+                return $model;
+            }
+            return false;
         });
     }
 
@@ -96,9 +102,11 @@ class ArticleBls
         return ArticleModel::find($id);
     }
 
+
     /**
      * 弱
      * @param ArticleModel $model
+     * @throws LogicException
      * @return array|bool
      */
     public static function thumbsUp(ArticleModel $model)
@@ -109,6 +117,10 @@ class ArticleBls
             $user->thumbs_up --;
             $data = false;
         } else {
+
+            if(static::checkThumbs($model->thumbs_down, $model->thumbs_up, $user->id)) {
+                throw new LogicException(1010002, '只能选一个赞或者弱');
+            }
             $model->thumbs_up = static::thumbsPlus($model->thumbs_up, $user->id);
             $user->thumbs_up ++;
             $data = true;
@@ -124,6 +136,7 @@ class ArticleBls
     /**
      * 赞
      * @param ArticleModel $model
+     * @throws LogicException
      * @return array|bool
      */
     public static function thumbsDown(ArticleModel $model)
@@ -133,6 +146,11 @@ class ArticleBls
             $model->thumbs_down = static::thumbsMinus($model->thumbs_down, $user->id);
             $data = false;
         } else {
+
+            if(static::checkThumbs($model->thumbs_down, $model->thumbs_up, $user->id)) {
+                throw new LogicException(1010002, '只能选一个赞或者弱');
+            }
+
             $model->thumbs_down = static::thumbsPlus($model->thumbs_down, $user->id);
             $data = true;
         }

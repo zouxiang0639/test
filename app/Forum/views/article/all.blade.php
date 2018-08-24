@@ -15,7 +15,7 @@
             <td class="l" width="515">
                 <a href="{!! route('f.article.info', ['id' => $item->id]) !!}">
                     <i style="color:{!!  Forum::Tags()->getTagsColor($item->tags) !!} " class="{!!  Forum::Tags()->getTagsIcon($item->tags) !!}"></i>
-                    {{ $item->title }}
+                    {{ $item->title }} <span style="color: #00a7d0">[{!! $item->replyCount !!}]</span>
                 </a>
             </td>
             <td width="95">{!! $item->issuers ? $item->issuers->name : '-' !!}</td>

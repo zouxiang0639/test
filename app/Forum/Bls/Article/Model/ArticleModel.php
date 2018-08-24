@@ -47,5 +47,15 @@ class ArticleModel extends Model
         return $this->belongsToMany(UsersModel::class, 'articles_star', 'articles_id', 'user_id');
     }
 
+    /**
+     * 收藏
+     *
+     * @return BelongsToMany
+     */
+    public function reply()
+    {
+        return $this->hasMany(ReplyModel::class, 'article_id', 'id')->withTrashed();
+    }
+
 
 }

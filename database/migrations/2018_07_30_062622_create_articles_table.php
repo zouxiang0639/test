@@ -31,6 +31,7 @@ class CreateArticlesTable extends Migration
             $table->text('star')->comment('收藏');
             $table->index(['id', 'tags', 'issuer']);
             $table->timestamps();
+            $table->softDeletes();
         });
         \DB::statement("ALTER TABLE `articles` comment '文章表'");
     }
