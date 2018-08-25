@@ -38,7 +38,7 @@
                         </div>
                         <div class="tep4">
                             <a class="post-btn" id="article-submit" data-action="{!! route('f.article.create.put') !!}" href="javascript:void(0)">发表</a>
-                            <a class="cancel-btn" href="javascript:void(0)">取消</a>
+                            <a class="cancel-btn" href="JavaScript:history.go(-1)">返回</a>
                         </div>
                     </div>
                 </form>

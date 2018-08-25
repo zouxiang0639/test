@@ -2,6 +2,11 @@
 
 @section('style')
     <link rel="stylesheet" href="{!! assets_path("/forum/css/list.css") !!}" />
+    <style>
+        .list-txt {
+            color: #cccccc;line-height:20px;
+        }
+    </style>
 @stop
 
 @section('content')
@@ -10,9 +15,8 @@
         <div class="wm-850">
             <div class="list">
                 <div class="list-txt">
-                    <p style="color: #cccccc;line-height:20px;">这里是幽默板块</p>
-                    <p style="color: #cccccc;line-height:20px;">您可以在这里发幽默搞笑类图片、文字，还可以发您觉得有意思的内容</p>
-                    <p style="color: #cccccc;line-height:20px;">其他类型内容请发到相应的板块，否则将删除或自动转移到相应板块</p>
+
+                    {!! str_replace("\r\n",'<br>', $tags->contents) !!}
                 </div>
                 <div class="list-other">
                     点击查看{!! $tags->tag_name !!}板块→

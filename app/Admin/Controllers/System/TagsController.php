@@ -220,6 +220,11 @@ class TagsController extends Controller
                 $h->set('status', true);
             });
 
+            $item->create('内容', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->textarea('contents',  array_get($info, 'contents'), $h->options);
+                $h->set('contents', true);
+            });
+
             $item->create('创建时间', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->display(array_get($info, 'created_at'));
             });

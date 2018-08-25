@@ -59,4 +59,11 @@ class Tags
             return $model->color;
         }
     }
+
+    public function getTagsContents($tagId)
+    {
+        if($model = array_get($this->tags, $tagId)) {
+            return $model->contents;
+        }
+    }
 }

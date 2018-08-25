@@ -219,6 +219,7 @@ class Reply implements Renderable
             return $this->color['gray'];
         }
 
+
         if($model->issuer == $this->articlesIssuer) {
             return $this->color['yellow'];
         } else if($model->thumbsDownCount > 9) {

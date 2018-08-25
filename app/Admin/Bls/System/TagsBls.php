@@ -56,6 +56,7 @@ class TagsBls
         $model->color = $request->color;
         $model->icon = $request->icon;
         $model->hot = intval($request->hot);
+        $model->contents = $request->contents;
         return $model->save();
     }
 
@@ -73,6 +74,7 @@ class TagsBls
         $model->color = $request->color;
         $model->icon = $request->icon;
         $model->hot = intval($request->hot);
+        $model->contents = $request->contents;
         return $model->save();
     }
 }

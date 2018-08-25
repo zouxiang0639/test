@@ -37,7 +37,9 @@ class ArticleController extends Controller
     public function gather(Request $request)
     {
         $list = ArticleBls::getArticleLise($request);
-
+        $list->getCollection()->each(function($item) {
+            $item->replyCount = $item->reply()->count();
+        });
         return view('forum::article.gather', [
             'list' => $list,
         ]);
@@ -144,6 +146,9 @@ class ArticleController extends Controller
     public function all(Request $request)
     {
         $list = ArticleBls::getArticleLise($request,$order = '`id` DESC', $limit = 1);
+        $list->getCollection()->each(function($item) {
+            $item->replyCount = $item->reply()->count();
+        });
         $html = view('forum::article.all', ['list' => $list])->render();
 
         if($html) {

@@ -14,8 +14,9 @@ class UpdateTagsTable extends Migration
     public function up()
     {
         Schema::table('admin_tags', function (Blueprint $table) {
-            $table->string('icon', 255)->default('')->comment('图标');;
-            $table->string('color', 50)->default('')->comment('图标颜色');;
+            $table->string('icon', 255)->default('')->comment('图标');
+            $table->string('color', 50)->default('')->comment('图标颜色');
+            $table->string('contents', 600)->default('')->comment('内容');
         });
     }
 
@@ -27,7 +28,7 @@ class UpdateTagsTable extends Migration
     public function down()
     {
         Schema::table('admin_tags', function (Blueprint $table) {
-            $table->dropColumn(['icon','color']);
+            $table->dropColumn(['icon','color','contents']);
         });
     }
 }

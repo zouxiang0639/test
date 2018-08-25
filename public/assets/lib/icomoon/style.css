@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?76we3i');
-  src:  url('fonts/icomoon.eot?76we3i#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?76we3i') format('truetype'),
-    url('fonts/icomoon.woff?76we3i') format('woff'),
-    url('fonts/icomoon.svg?76we3i#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?85hrp8');
+  src:  url('fonts/icomoon.eot?85hrp8#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?85hrp8') format('truetype'),
+    url('fonts/icomoon.woff?85hrp8') format('woff'),
+    url('fonts/icomoon.svg?85hrp8#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -12,6 +12,7 @@
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
+  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -23,41 +24,41 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-yingshi:before {
-  content: "\e90b";
-}
 .icon-xianliao:before {
-  content: "\e900";
-}
-.icon-meishi:before {
-  content: "\e901";
-}
-.icon-youxidongman:before {
-  content: "\e902";
-}
-.icon-yinyue:before {
   content: "\e903";
 }
-.icon-sheyinglvyou:before {
+.icon-meishi:before {
   content: "\e904";
 }
-.icon-qinggan:before {
+.icon-youxidongman:before {
   content: "\e905";
 }
-.icon-tiyujianshen:before {
+.icon-yinyue:before {
   content: "\e906";
 }
-.icon-zhuanban:before {
+.icon-sheyinglvyou:before {
   content: "\e907";
 }
-.icon-chongwu:before {
+.icon-qinggan:before {
   content: "\e908";
 }
-.icon-mingxingyule:before {
+.icon-tiyujianshen:before {
   content: "\e909";
 }
-.icon-xinwen:before {
+.icon-zhuanban:before {
   content: "\e90a";
+}
+.icon-chongwu:before {
+  content: "\e90d";
+}
+.icon-mingxingyule:before {
+  content: "\e90e";
+}
+.icon-xinwen:before {
+  content: "\e90f";
+}
+.icon-yingshi:before {
+  content: "\e910";
 }
 .icon-fannao:before {
   content: "\e9e5";
@@ -67,4 +68,22 @@
 }
 .icon-xuanyao:before {
   content: "\e9eb";
+}
+.icon-search:before {
+  content: "\e900";
+}
+.icon-copy:before {
+  content: "\e901";
+}
+.icon-alarm:before {
+  content: "\e902";
+}
+.icon-new:before {
+  content: "\e90b";
+}
+.icon-hot:before {
+  content: "\e90c";
+}
+.icon-post:before {
+  content: "\e922";
 }
