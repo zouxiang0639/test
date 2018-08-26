@@ -21,7 +21,7 @@
                     </div>
                     <div class="input-group input-group-sm " style="width: 150px;">
                         {!! Form::select('type', \App\Consts\Common\AccountFlowTypeConst::desc(),
-                       Input::get('type'), ['class' => 'form-control', 'placeholder'=>'请选择类型']) !!}
+                       Input::get('type'), ['class' => 'form-control', 'placeholder'=>'全部类型']) !!}
                         <div class="input-group-btn">
                             <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                         </div>
