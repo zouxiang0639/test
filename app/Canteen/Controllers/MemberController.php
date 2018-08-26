@@ -49,7 +49,7 @@ class MemberController extends Controller
      */
     public function flow(Request $request)
     {
-        $list = AccountFlowBls::gitAccountFlowList(2);
+        $list = AccountFlowBls::gitAccountFlowList();
 
         $list->getCollection()->each(function($item) {
             $typeIconName = AccountFlowTypeConst::geticonDesc($item->type);

@@ -36,6 +36,12 @@ class OrderController extends Controller
 
 
         });
+
+        if($request->ajax()) {
+            $view = view('canteen::order.index_ajax',['list' => $list])->render();
+            return (new JsonResponse())->success($view);
+        }
+
         return view('canteen::order.index', [
             'list' => $list
         ]);

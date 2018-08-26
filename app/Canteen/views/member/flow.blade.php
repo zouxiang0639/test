@@ -37,6 +37,12 @@
     <script>
         $(function () {'use strict';
 
+            var lastIndex = $('.list-container li').length;
+
+            if(lastIndex < 20) {
+                $('.infinite-scroll-preloader').hide();
+            }
+
             // 加载flag
             var locked = true;
 

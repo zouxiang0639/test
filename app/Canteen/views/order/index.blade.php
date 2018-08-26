@@ -7,8 +7,6 @@ use App\Consts\Order\OrderTypeConst;
 
 
 @section('content')
-
-
     <div id="page-normal" class="page ground-gray" >
 
         <header class="bar bar-nav" style=" height: 2.72rem;padding-right: 0rem;padding-left: 0rem; ">
@@ -32,9 +30,10 @@ use App\Consts\Order\OrderTypeConst;
         <div class="bar footer-nav">
             <a class="footer-nav-back" href="{!! route('c.member') !!}"></a>
         </div>
-        <div class="content " >
+        <div class="content infinite-scroll infinite-scroll-bottom" >
             <div class="tabs">
                 <div id="tab1" class="tab active" style="    font-size: .6rem;    padding-top: 2.5rem;">
+                    <div class="list-container">
                     @foreach($list as $item)
                     <div class="bought-item disable">
                         <a href="javascript:;">
@@ -91,26 +90,36 @@ use App\Consts\Order\OrderTypeConst;
                         </div>
                         @endif
                     </div>
-
                     @endforeach
-
+                    </div>
+                    <!-- 加载提示符 -->
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <input type="hidden" name="page" value="2">
 @stop
 
 @section('script')
     <script>
-        $(function() {
-            var locked = true;
 
+
+        $(function () {'use strict';
+            var lastIndex = $('.list-container .bought-item').length;
+            if(lastIndex < 20) {
+                $('.infinite-scroll-preloader').hide();
+            }
+
+            var lockede = true;
             $('.refund').click(function() {
-                if (! locked) {
+                if (! lockede) {
                     return false;
                 }
 
-                locked = false;
+                lockede = false;
 
                 $.ajax({
                     url: '{!! route('c.order.refund') !!}',
@@ -126,10 +135,52 @@ use App\Consts\Order\OrderTypeConst;
 
                         if(res.code != 0) {
                             $.alert(res.data);
-                            locked = true;
+                            lockede = true;
                         } else {
                             $.alert(res.data);
                             window.location.href =  window.location.href;
+                        }
+                    },
+                    error:function () {
+                        lockede = true;
+                    }
+
+                });
+            });
+
+            // 加载flag
+            var locked = true;
+
+            // 注册'infinite'事件处理函数
+            $(document).on('infinite', '.infinite-scroll-bottom',function() {
+                var page = parseInt($("input[name=page]").val());
+
+                // 如果正在加载，则退出
+                if (! locked) {
+                    return false;
+                }
+
+                locked = false;
+
+                $.ajax({
+                    type: 'GET',
+                    data:{
+                        "page":page
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    success:function(res) {
+
+                        if(res.code != 0) {
+                            $.alert(res.data);
+                        }  if(res.data == ''){
+                            $.detachInfiniteScroll($('.infinite-scroll'));
+                            // 删除加载提示符
+                            $('.infinite-scroll-preloader').remove();
+                        } else {
+                            $("input[name=page]").val(page + 1 );
+                            $('.infinite-scroll-bottom .list-container').append(res.data);
+                            locked = true;
                         }
                     },
                     error:function () {
@@ -138,7 +189,13 @@ use App\Consts\Order\OrderTypeConst;
 
                 });
 
-            })
-        })
+
+            });
+
+
+            $.init();
+        });
+
+
     </script>
 @stop
