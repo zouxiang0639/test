@@ -14,9 +14,9 @@
     <div class="box">
         <div class="box-header">
             <div class="pull-left ">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#takeout_deadline">
-                    餐费设置
-                </button>
+                {{--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#takeout_deadline">--}}
+                    {{--餐费设置--}}
+                {{--</button>--}}
             </div>
 
             <div class="pull-right">

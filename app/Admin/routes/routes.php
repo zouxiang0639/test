@@ -183,6 +183,12 @@ Route::group([
         Route::group(['prefix'=>'flow', 'middleware' => 'admin.auth:m_customer_flow'], function(){
             Route::get('', ['uses' => "Customer\\FlowController@index", 'as' => 'm.customer.flow.list']);
         });
+
+        //订单
+        Route::group(['prefix'=>'order', 'middleware' => 'admin.auth:m_customer_order'], function(){
+            Route::get('', ['uses' => "Customer\\OrderController@index", 'as' => 'm.customer.order.list']);
+            Route::get('show/{id}', ['uses' => "Customer\\OrderController@show", 'as' => 'm.customer.order.show']);
+        });
     });
 
 

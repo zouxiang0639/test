@@ -62,7 +62,9 @@ class Security
 
     public static function key()
     {
-        //return '2018082222808102';
+        if(config('app.env') == 'local') {
+            return '2018082222808102';
+        }
         $date = date('Ymd');
         return $date.strrev($date);
     }

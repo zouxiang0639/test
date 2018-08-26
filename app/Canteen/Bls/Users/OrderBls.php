@@ -35,7 +35,23 @@ class OrderBls
             $model->whereIn('status', $status);
         }
 
-        return $model->where('user_id', Auth::guard('canteen')->id())->orderBy('id','desc')->simplePaginate($limit);
+        if(!empty($request->type)) {
+            $model->where('type', $request->type);
+        }
+
+        if(!empty($request->status)) {
+            $model->where('status', $request->status);
+        }
+
+        if(!empty($request->id)) {
+            $model->where('id', $request->id);
+        }
+
+        if(!empty($request->user_id)) {
+            $model->where('user_id', $request->user_id);
+        }
+
+        return $model->orderBy('id','desc')->simplePaginate($limit);
     }
 
     /**
@@ -261,7 +277,7 @@ class OrderBls
 
             $amount = $users->getOriginal('money') - $users->money;
 
-            $order->status = OrderStatusConst::PAYMENT;
+            $order->payment_at = date('Y-m-d H:i:s');
             $order->payment += $amount;
             $order->save();
 

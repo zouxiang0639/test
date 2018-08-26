@@ -290,6 +290,16 @@ class AdminAuthSeeder extends Seeder
         ]);
         MenuBls::storeMenu($menuRequest);
 
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '用户订单',
+            'icon' => 'fa-reorder',
+            'route' => 'm.customer.order.list',
+            'slug' => 'm_customer_order',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);
+
 
     }
 }

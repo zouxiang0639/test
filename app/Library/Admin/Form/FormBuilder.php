@@ -144,8 +144,7 @@ EOT;
 EOT;
         Admin::style()->setJs(StyleTypeConst::CODE, $code);
         $selectAttributes = array_merge(['data-placeholder'=>"请输入"], $selectAttributes);
-        return self::hidden(str_replace(array("[","]"),"",$name)).
-        self::select($name ,$list, $selected, $selectAttributes, $optionsAttributes, $optgroupsAttributes);
+        return self::select($name ,$list, $selected, $selectAttributes, $optionsAttributes, $optgroupsAttributes);
     }
 
     /**

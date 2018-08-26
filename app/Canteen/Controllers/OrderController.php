@@ -18,6 +18,8 @@ class OrderController extends Controller
 {
     public function index(Request $request)
     {
+        $request->merge(['user_id' => Auth::guard('canteen')->id()]);
+
         $list = OrderBls::getOrderList($request);
         $list->getCollection()->each(function($item) {
             $item->formatAmount = FormatMoney::fen2yuan($item->amount);
