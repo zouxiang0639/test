@@ -13,6 +13,7 @@ use App\Library\Response\JsonResponse;
 use Endroid\QrCode\QrCode;
 use Auth;
 use Hash;
+use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
@@ -46,9 +47,9 @@ class MemberController extends Controller
      * liu流水
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function flow()
+    public function flow(Request $request)
     {
-        $list = AccountFlowBls::gitAccountFlowList();
+        $list = AccountFlowBls::gitAccountFlowList(2);
 
         $list->getCollection()->each(function($item) {
             $typeIconName = AccountFlowTypeConst::geticonDesc($item->type);
@@ -57,6 +58,11 @@ class MemberController extends Controller
             $item->typeName = AccountFlowTypeConst::getDesc($item->type);
 
         });
+
+        if($request->ajax()) {
+            $view = view('canteen::member.flow_ajax',['list' => $list])->render();
+            return (new JsonResponse())->success($view);
+        }
 
         return view('canteen::member.flow', [
             'list' => $list

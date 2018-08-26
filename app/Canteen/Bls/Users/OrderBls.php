@@ -259,7 +259,10 @@ class OrderBls
     {
         return OrderModel::query()->getQuery()->getConnection()->transaction(function () use($order, $users) {
 
+            $amount = $users->getOriginal('money') - $users->money;
+
             $order->status = OrderStatusConst::PAYMENT;
+            $order->payment += $amount;
             $order->save();
 
 
@@ -271,8 +274,6 @@ class OrderBls
                 $typeName = MealTypeConst::getDesc($meal->type);
                 $name = "订单号:{$order->id} ($meal->date{$typeName})支付尾款";
             }
-
-            $amount = $users->getOriginal('money') - $users->money;
 
             AccountFlowBls::createAccountFlow($users->id, AccountFlowTypeConst::PAYMENT, $amount, $name);
 
