@@ -180,6 +180,7 @@ return [
         App\Library\Admin\AdminServiceProvider::class,
         App\Library\Admin\Form\HtmlServiceProvider::class,
         App\Library\Canteen\CanteenServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
 
        /*
         *  验证服务
