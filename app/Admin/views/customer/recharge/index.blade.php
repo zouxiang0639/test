@@ -44,6 +44,7 @@
                     <th>金额</th>
                     <th>描述</th>
                     <th>日期</th>
+                    <th>操作</th>
                 </tr>
                 @foreach($list as $item)
                     <tr>
@@ -53,6 +54,14 @@
                         <td>{{ $item->formatAmount }}</td>
                         <td>{{ $item->describe }}</td>
                         <td>{{ $item->created_at }}</td>
+                        <td>
+                            @if($item->type == \App\Consts\Common\AccountFlowTypeConst::RECHARGE && $item->hedging_id == 0)
+                            <div class="btn-group">
+                                <button class="btn btn-default hedging" data-title="用户:{!! $item->userName  !!},对冲金额:{!! str_replace('+', '-', $item->formatAmount ) !!}"
+                                        data-href="{!! route('m.customer.recharge.hedging', ['id' => $item->id]) !!}">对冲</button>
+                            </div>
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </table>
@@ -68,7 +77,56 @@
 
 @section('script')
     <script>
+        $(function() {
+            var locked = true;
+            $('.hedging').click(function() {
+                var _this = $(this);
 
+                swal({
+                            title: $(this).attr('data-title'),
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "确定",
+                            closeOnConfirm: false,
+                            cancelButtonText: "取消"
+                        },
+                        function(){
+
+                            if (! locked) {
+                                return false;
+                            }
+
+                            locked = false;
+                            $.ajax({
+                                url: _this.attr('data-href'),
+                                type: 'POST',
+                                data: {
+                                    "_method":"PUT",
+                                    "_token":$('meta[name="csrf-token"]').attr('content')
+                                },
+                                cache: false,
+                                dataType: 'json',
+                                success:function(res) {
+
+                                    if(res.code != 0) {
+                                        swal(res.data, '', 'error');
+                                        locked = true;
+                                    } else {
+                                        swal(res.data, '', 'success');
+                                        window.location.href = document.location;
+                                    }
+                                },
+                                error:function () {
+                                    locked = true;
+                                }
+
+                            });
+
+                        }
+                );
+            })
+        })
     </script>
 
 @stop

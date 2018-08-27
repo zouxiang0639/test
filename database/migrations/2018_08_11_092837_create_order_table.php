@@ -46,6 +46,7 @@ class CreateOrderTable extends Migration
             $table->tinyInteger('type')->comment('状态 1支付 2充值 3对冲 AccountFlowType');
             $table->integer('amount')->comment('金额');
             $table->string('describe', 255)->default('')->comment('描述');
+            $table->integer('hedging_id')->default(0)->comment('对冲ID');
             $table->timestamps();
         });
         \DB::statement("ALTER TABLE `account_flow` comment '账户流水'");

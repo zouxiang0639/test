@@ -196,6 +196,7 @@ Route::group([
             Route::get('', ['uses' => "Customer\\RechargeController@index", 'as' => 'm.customer.recharge.list']);
             Route::get('money', ['uses' => "Customer\\RechargeController@money", 'as' => 'm.customer.recharge.money']);
             Route::post('money', ['uses' => "Customer\\RechargeController@moneyPost", 'as' => 'm.customer.recharge.money.post']);
+            Route::put('hedging/{id}', ['uses' => "Customer\\RechargeController@hedging", 'as' => 'm.customer.recharge.hedging']);
         });
     });
 

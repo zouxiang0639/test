@@ -20,11 +20,11 @@ class AccountFlowModel extends Model
 
 
     /**
-     * 点餐
+     * 用户
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function users()
     {
-        return $this->belongsTo(UsersModel::class, 'users_id');
+        return $this->belongsTo(UsersModel::class, 'user_id');
     }
 }

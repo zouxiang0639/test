@@ -37,7 +37,7 @@ class RechargeController extends Controller
      */
     public function index(Request $request)
     {
-        $request->merge(['type' => AccountFlowTypeConst::RECHARGE]);
+        $request->merge(['types' => [AccountFlowTypeConst::RECHARGE,AccountFlowTypeConst::HEDGING]]);
         $usersList = UsersBls::usersAll()->pluck('name', 'id')->toArray();
         $model = AccountFlowBls::gitAccountFlow($request);
         $model->getCollection()->each(function($item) use ($usersList) {
@@ -81,6 +81,23 @@ class RechargeController extends Controller
         $money = FormatMoney::fen($request->money);
 
         if(UsersBls::recharge($item, $money, $request->describe)) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010002, '操作失败');
+        }
+    }
+
+    public function hedging($id)
+    {
+        $model = AccountFlowBls::find($id);
+
+        $this->isEmpty($model);
+
+        if($model->hedging_id != 0) {
+            throw new LogicException(1010003, '已经对冲');
+        }
+
+        if(AccountFlowBls::hedging($model)) {
             return (new JsonResponse())->success('操作成功');
         } else {
             throw new LogicException(1010002, '操作失败');
