@@ -63,9 +63,12 @@
                             {!! Form::switchOff('switch_submit', $item->status) !!}
                         </td>
                         <td>
-                            <a href="{!! route('m.customer.users.edit', ['id' => $item->id]) !!}">
+                            <div class="btn-group">
+                            <a class="btn btn-default" href="{!! route('m.customer.users.edit', ['id' => $item->id]) !!}">
                                 <i class="fa fa-edit"></i>
                             </a>
+                                <button class="btn btn-default reset" data-href="{!! route('m.customer.users.reset', ['id' => $item->id]) !!}">初始化密码</button>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -81,5 +84,56 @@
 @stop
 
 @section('script')
+<script>
+    $(function() {
+        var locked = true;
+        $('.reset').click(function() {
+            var _this = $(this);
 
+            swal({
+                        title: '你确定初始化密码吗?密码将会是{!! config('admin.user_password') !!}',
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                        closeOnConfirm: false,
+                        cancelButtonText: "取消"
+                    },
+                    function(){
+
+                        if (! locked) {
+                            return false;
+                        }
+
+                        locked = false;
+                        $.ajax({
+                            url: _this.attr('data-href'),
+                            type: 'POST',
+                            data: {
+                                "_method":"PUT",
+                                "_token":$('meta[name="csrf-token"]').attr('content')
+                            },
+                            cache: false,
+                            dataType: 'json',
+                            success:function(res) {
+
+                                if(res.code != 0) {
+                                    swal(res.data, '', 'error');
+                                    locked = true;
+                                } else {
+                                    swal(res.data, '', 'success');
+                                    window.location.href = document.location;
+                                }
+                            },
+                            error:function () {
+                                locked = true;
+                            }
+
+                        });
+
+                    }
+            );
+        })
+    })
+</script>
 @stop

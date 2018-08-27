@@ -80,4 +80,7 @@ return [
     'data_backup_compress_level' => 9,
     'data_backup_import' => env('ADMIN_DATA_BACKUP_IMPORT', false), //是否开启导入数据库功能
 
+    //用户初始密码
+    'user_password' => '123456'
+
 ];

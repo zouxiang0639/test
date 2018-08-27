@@ -107,6 +107,18 @@ class UsersController extends Controller
     }
 
 
+    public function reset($id)
+    {
+        $model = UsersBls::find($id);
+        $this->isEmpty($model);
+
+        $model->password =  bcrypt(config('admin.user_password'));
+        if($model->save()) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010002, '操作失败');
+        }
+    }
 
     /**
      * 设置配置

@@ -1,14 +1,7 @@
 @extends('canteen::layouts.master')
 
 @section('style')
-    <style>
-        .comment-star li{
-            display: inline;
-        }
-        .comment-star .red{
-            color: red;
-        }
-    </style>
+
 @stop
 @section('content')
 
@@ -21,6 +14,14 @@
             <a class="footer-nav-back back" href="index.html"></a>
         </div>
         <div class="content" id=''>
+            <style>
+                .comment-star li{
+                    display: inline;
+                }
+                .comment-star .red{
+                    color: red;
+                }
+            </style>
             <form action="" method="post" class="form-horizontal">
                 <div class="content" id=''>
                     <form method='post' class="form-horizontal">

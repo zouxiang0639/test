@@ -59,7 +59,7 @@ class UsersBls
         $model->division = $requests->tag;
         $model->name = $requests->name;
         $model->mobile = $requests->mobile;
-        $model->password = bcrypt('123456');
+        $model->password = bcrypt(config('admin.user_password'));
         $model->status = WhetherConst::YES;
         return $model->save();
     }
