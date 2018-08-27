@@ -143,7 +143,7 @@ EOT;
             });\n
 EOT;
         Admin::style()->setJs(StyleTypeConst::CODE, $code);
-        $selectAttributes = array_merge(['data-placeholder'=>"请输入"], $selectAttributes);
+        $selectAttributes = array_merge(['data-placeholder'=>"请输入", 'placeholder'=>'请输入'], $selectAttributes);
         return self::select($name ,$list, $selected, $selectAttributes, $optionsAttributes, $optgroupsAttributes);
     }
 
@@ -184,6 +184,7 @@ EOT;
         Admin::style()->setJs(StyleTypeConst::CODE, $code);
 
         $selectAttributes = array_merge(["multiple"=>"multiple",'data-placeholder'=>"请输入"], $selectAttributes);
+
         return self::hidden(str_replace(array("[","]"),"",$name)).
         self::select($name ,$list, $selected, $selectAttributes, $optionsAttributes, $optgroupsAttributes);
     }

@@ -58,9 +58,11 @@ class Forms
         if($item->input) {
             $required = $this->getRequired($item->required);
             $getHelpBlock = $this->getHelpBlock($item->helpBlock);
+            $id = $this->getId($item->id);
+
             return <<<EOT
 
-            <div class="form-group">
+            <div class="form-group" $id>
                 <label for="username" class="col-sm-2 control-label">
                     $required
                     $item->title:
@@ -139,6 +141,15 @@ EOT;
            <span class="text-danger">*</span>
 EOT;
 
+    }
+
+    public function getId($id)
+    {
+        if(empty($id)) {
+            return '';
+        }
+
+        return "id='$id'";
     }
 
 }

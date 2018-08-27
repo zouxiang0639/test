@@ -300,6 +300,16 @@ class AdminAuthSeeder extends Seeder
         ]);
         MenuBls::storeMenu($menuRequest);
 
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '充值',
+            'icon' => 'fa-credit-card',
+            'route' => 'm.customer.recharge.list',
+            'slug' => 'm_customer_recharge',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);
+
 
     }
 }

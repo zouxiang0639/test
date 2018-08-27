@@ -45,7 +45,6 @@ class UsersController extends Controller
         ]);
     }
 
-
     /**
      * 编辑
      * @param $id

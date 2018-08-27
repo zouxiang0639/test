@@ -190,6 +190,13 @@ Route::group([
             Route::get('', ['uses' => "Customer\\OrderController@index", 'as' => 'm.customer.order.list']);
             Route::get('show/{id}', ['uses' => "Customer\\OrderController@show", 'as' => 'm.customer.order.show']);
         });
+
+        //充值
+        Route::group(['prefix'=>'recharge', 'middleware' => 'admin.auth:m_customer_recharge'], function(){
+            Route::get('', ['uses' => "Customer\\RechargeController@index", 'as' => 'm.customer.recharge.list']);
+            Route::get('money', ['uses' => "Customer\\RechargeController@money", 'as' => 'm.customer.recharge.money']);
+            Route::post('money', ['uses' => "Customer\\RechargeController@moneyPost", 'as' => 'm.customer.recharge.money.post']);
+        });
     });
 
 

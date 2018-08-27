@@ -5,7 +5,7 @@
 
 @section('content-header')
     <h1>
-        账户流水<small>列表</small>
+        充值<small>列表</small>
     </h1>
 @stop
 
@@ -19,20 +19,18 @@
                         {!! Form::select2('user_id', $usersList,
                         Input::get('user_id'), ['class' => 'form-control', 'placeholder'=>'全部用户']) !!}
                     </div>
-                    <div class="input-group input-group-sm" style="min-width: 100px">
-                        {!! Form::select('type', \App\Consts\Common\AccountFlowTypeConst::desc(),
-Input::get('type'), ['class' => 'form-control', 'placeholder'=>'全部类型']) !!}
-                    </div>
                     <div class="input-group input-group-sm" >
                         {!! Form::datetimeRange(['name' =>'start_time', 'value' => ''], ['name' =>'end_time', 'value' => ''] ,['class' => 'form-control', 'placeholder'=>'时间筛选'], 'YYYY-MM-DD')!!}
                         <div class="input-group-btn">
                             <button id="flow-search"  type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                         </div>
-                        <div class="input-group-btn">
-                            <button id="excel-export"  type="submit" class="btn btn-default">导出excel</button>
-                        </div>
                     </div>
                 </form>
+            </div>
+            <div class="pull-right">
+                <a href="{!! route('m.customer.recharge.money') !!}" class="btn btn-sm btn-success">
+                    <i class="fa fa-save"></i>&nbsp;&nbsp;充值
+                </a>
             </div>
         </div>
 
@@ -70,17 +68,7 @@ Input::get('type'), ['class' => 'form-control', 'placeholder'=>'全部类型']) 
 
 @section('script')
     <script>
-        $(function(){
-            $('#excel-export').click(function(){
-                document.search.action = '{!! route('m.customer.flow.export') !!}';
-                document.search.submit();
-            });
 
-            $('#flow-search').click(function(){
-                document.search.action = '';
-                document.search.submit();
-            });
-        })
     </script>
 
 @stop

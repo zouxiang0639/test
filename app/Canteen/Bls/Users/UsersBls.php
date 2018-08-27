@@ -7,6 +7,8 @@ use App\Canteen\Bls\Users\Model\UsersModel;
 use App\Consts\Common\AccountFlowTypeConst;
 use App\Consts\Common\MealTypeConst;
 use App\Consts\Common\WhetherConst;
+use App\Exceptions\LogicException;
+use App\Library\Format\FormatMoney;
 use Illuminate\Http\Request;
 
 /**
@@ -79,6 +81,10 @@ class UsersBls
     {
         return UsersModel::find($id);
     }
+    public static function getUserByDivision($division)
+    {
+        return UsersModel::where('division', $division)->get();
+    }
 
     public static function usersAll()
     {
@@ -119,6 +125,34 @@ class UsersBls
             AccountFlowBls::createAccountFlow($model->id, AccountFlowTypeConst::PAYMENT, $request->amount, $describe);
 
             return $model->save();
+        });
+    }
+
+    /**
+     * 充值
+     * @param $items
+     * @param $money
+     * @param $describe
+     * @return mixed
+     */
+    public static function recharge($items, $money, $describe)
+    {
+
+        return UsersModel::query()->getQuery()->getConnection()->transaction(function () use($items, $money, $describe) {
+
+            $describe = $describe ?: '系统充值';
+
+            foreach($items as $value) {
+                $value->money += $money;
+                if(!$value->save()){
+                    throw new LogicException(1010002, '充值错误');
+                }
+                $price = FormatMoney::fen2yuan($value->money);
+                $describes = $describe . "(余额:{$price})";
+                AccountFlowBls::createAccountFlow($value->id, AccountFlowTypeConst::RECHARGE, $money, $describes);
+            }
+
+            return true;
         });
     }
 }
