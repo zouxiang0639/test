@@ -181,11 +181,13 @@ return [
         App\Library\Admin\Form\HtmlServiceProvider::class,
         App\Library\Canteen\CanteenServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
        /*
         *  验证服务
         */
         App\Library\Validators\ValidatorServiceProvider::class
+
 
     ],
 
@@ -238,7 +240,8 @@ return [
         'Admin' => App\Library\Admin\Facades\Admin::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'Form' => Collective\Html\FormFacade::class,
-        'Canteen' => \App\Library\Canteen\Facades\Canteen::class
+        'Canteen' => \App\Library\Canteen\Facades\Canteen::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

@@ -182,6 +182,7 @@ Route::group([
         //流水
         Route::group(['prefix'=>'flow', 'middleware' => 'admin.auth:m_customer_flow'], function(){
             Route::get('', ['uses' => "Customer\\FlowController@index", 'as' => 'm.customer.flow.list']);
+            Route::get('export', ['uses' => "Customer\\FlowController@export", 'as' => 'm.customer.flow.export']);
         });
 
         //订单

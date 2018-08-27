@@ -52,6 +52,7 @@
                     <th>定金</th>
                     <th>已支付金额</th>
                     <th>状态</th>
+                    <th>日期</th>
                     <th>操作</th>
                 </tr>
                 @foreach($list as $item)
@@ -70,6 +71,7 @@
                         <td>{{ $item->depositFormat }}</td>
                         <td>{{ $item->paymentFormat }}</td>
                         <td>{{ $item->statusName }}</td>
+                        <td>{{ $item->created_at }}</td>
                         <td>
                             <a href="{!! route('m.customer.order.show', ['id' => $item->id]) !!}">
                                 <i class="fa fa-eye"></i>
