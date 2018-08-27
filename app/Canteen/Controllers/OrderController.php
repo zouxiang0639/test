@@ -2,7 +2,10 @@
 
 namespace App\Canteen\Controllers;
 
+use App\Admin\Bls\Other\FeedbackStrategy\FeedbackStrategy;
+use App\Admin\Bls\Other\Requests\FeedbackRequests;
 use App\Canteen\Bls\Users\OrderBls;
+use App\Canteen\Bls\Users\Requests\OrderCommentRequest;
 use App\Consts\Common\MealTypeConst;
 use App\Consts\Order\OrderStatusConst;
 use App\Consts\Order\OrderTypeConst;
@@ -76,5 +79,42 @@ class OrderController extends Controller
 
     }
 
+
+    public function comment($id)
+    {
+        $model = OrderBls::find($id);
+
+        $this->isEmpty($model);
+
+        if($model->status != OrderStatusConst::PAYMENT) {
+            throw new LogicException(1010001, '参数错误');
+        }
+
+        return view('canteen::order.comment', [
+            'info' => $model
+        ]);
+    }
+
+    public function commentPut(FeedbackRequests $request)
+    {
+        $model = OrderBls::find($request->order_id);
+
+        $this->isEmpty($model);
+
+        if($model->status != OrderStatusConst::PAYMENT) {
+            throw new LogicException(1010002, '参数错误');
+        }
+        $extend = (new FeedbackStrategy($request->type))->store($request);
+        $extend['users_id'] = Auth::guard('canteen')->id();
+        $request->merge($extend);
+
+        if(OrderBls::comment($model, $request)) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010002, '操作失败');
+        }
+
+
+    }
 
 }

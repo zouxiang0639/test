@@ -19,10 +19,10 @@ use App\Consts\Order\OrderTypeConst;
                     <a href="{!! route('c.order.list') !!}"  class="{!! !$type ? 'active' : ''!!} button">
                         全部订单
                     </a>
-                    <a href="{!! route('c.order.list', [ 'status'=> '1_2']) !!}"  class="{!! $type == '1_2' ? 'active' : '' !!} button">
+                    <a href="{!! route('c.order.list', [ 'status'=> '1']) !!}"  class="{!! $type == '1_2' ? 'active' : '' !!} button">
                         待交易
                     </a>
-                    <a href="{!! route('c.order.list', [ 'status'=> '3']) !!}"  class="{!! $type == '3' ? 'active' : '' !!} button">待评价</a>
+                    <a href="{!! route('c.order.list', [ 'status'=> '2']) !!}"  class="{!! $type == '3' ? 'active' : '' !!} button">待评价</a>
                     <a href="{!! route('c.order.list', [ 'status'=> '5']) !!}" class="{!! $type == '5' ? 'active' : '' !!} button">退单</a>
                 </div>
             </div>
@@ -88,6 +88,12 @@ use App\Consts\Order\OrderTypeConst;
                             <span style="color: #FF5722; line-height: 2rem;">每个月只能退{!! config('config.refund_limit') !!}单</span>
                             <a href="javascript:;" data-id="{!! $item->id !!}" class="org refund external">退单</a>
                         </div>
+                        @endif
+
+                        @if($item->status == OrderStatusConst::PAYMENT )
+                            <div class="oi4">
+                                <a href="{!! route('c.order.comment',['id' => $item->id]) !!}" class="org comment external">评论</a>
+                            </div>
                         @endif
                     </div>
                     @endforeach

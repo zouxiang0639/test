@@ -117,6 +117,7 @@ class TextSeeder extends \Illuminate\Database\Seeder
                 'mobile' => '12312341234',
                 'money' => '100000',
                 'email' => '542506511@qq.com',
+                'status' => WhetherConst::YES,
                 'division' => 1,
             ]
         ]);

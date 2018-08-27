@@ -18,7 +18,7 @@ class CreateOrderTable extends Migration
             $table->integer('user_id')->comment('用户ID');
             $table->integer('amount')->comment('总金额 分');
             $table->integer('deposit')->comment('定金 分');
-            $table->tinyInteger('status')->comment('状态 1已支付定金 2全额支付 3待评价 4完成 5退单 OrderStatusConst');
+            $table->tinyInteger('status')->comment('状态 1已支付定金 2全额支付  4完成 5退单 OrderStatusConst');
             $table->tinyInteger('type')->comment('类型 1点餐 2外面 OrderTypeConst');
             $table->integer('payment')->comment('已支付金额');
             $table->timestamp('payment_at')->nullable()->comment('已支付时间');

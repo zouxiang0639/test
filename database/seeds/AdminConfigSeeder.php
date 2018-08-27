@@ -56,7 +56,7 @@ class AdminConfigSeeder extends Seeder
             [
                 'name' => 'takeout_deadline',
                 'description' => '外卖截止时间',
-                'value' => '2018-08-20',
+                'value' => '2018-09-20',
             ],
             [
                 'name' => 'refund_limit',

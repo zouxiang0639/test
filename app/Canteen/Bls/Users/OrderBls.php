@@ -2,6 +2,8 @@
 
 namespace App\Canteen\Bls\Users;
 
+use App\Admin\Bls\Other\FeedbackBls;
+use App\Admin\Bls\Other\Requests\FeedbackRequests;
 use App\Canteen\Bls\Canteen\TakeoutBls;
 use App\Canteen\Bls\Users\Model\OrderMealModel;
 use App\Canteen\Bls\Users\Model\OrderModel;
@@ -294,6 +296,17 @@ class OrderBls
             AccountFlowBls::createAccountFlow($users->id, AccountFlowTypeConst::PAYMENT, $amount, $name);
 
             return $users->save();
+        });
+    }
+
+    public static function comment($model, FeedbackRequests $request)
+    {
+        return OrderModel::query()->getQuery()->getConnection()->transaction(function () use($model, $request) {
+
+
+            FeedbackBls::storeFeedback($request);
+            $model->status = OrderStatusConst::FINISH;
+            return $model->save();
         });
     }
 }

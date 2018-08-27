@@ -34,6 +34,8 @@ Route::group([
         Route::group(['prefix'=>'order'], function(){
             Route::get('', ['uses' => "OrderController@index", 'as' => 'c.order.list']);
             Route::put('refund', ['uses' => "OrderController@refund", 'as' => 'c.order.refund']);
+            Route::get('comment/{id}', ['uses' => "OrderController@comment", 'as' => 'c.order.comment']);
+            Route::put('comment', ['uses' => "OrderController@commentPut", 'as' => 'c.order.comment.put']);
         });
     });
 });

@@ -8,7 +8,7 @@ class FeedbackTypeConst
     const FEEDBACK = 1;
 
     const ALL_DESC = '全部';
-    const FEEDBACK_DESC = '反馈';
+    const FEEDBACK_DESC = '评论';
 
     public static function desc()
     {

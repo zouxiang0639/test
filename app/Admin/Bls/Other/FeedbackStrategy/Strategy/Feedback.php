@@ -12,16 +12,14 @@ use App\Admin\Bls\Other\Requests\FeedbackRequests;
 class Feedback implements FeedbackInterface
 {
     private $extend = [
-        'text1' => '字段1',
-        'text2' => '字段2'
+        'num' => '评分',
     ];
 
     public function store(FeedbackRequests $request)
     {
         return [
             'extend' => [
-                'text1' => '测试1',
-                'text2' => '测试2',
+                'num' => $request->num,
             ],
         ];
     }
@@ -41,14 +39,16 @@ class Feedback implements FeedbackInterface
     public function validatorRules()
     {
         return [
-            //'channel' => 'required',
+            'num' => 'required',
+            'order_id' => 'required',
         ];
     }
 
     public function validatorMessages()
     {
         return [
-            //'channel.required' => '请选择频道',
+            'num.required' => '评分不能为空',
+            'order_id.required' => '订单ID不能为空',
         ];
     }
 }
