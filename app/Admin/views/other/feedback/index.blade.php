@@ -33,6 +33,7 @@
                     <th>编号</th>
                     <th>类型</th>
                     <th>用户名</th>
+                    <th>订单</th>
                     <th>反馈内容</th>
                     <th>创建时间</th>
                     <th>操作</th>
@@ -42,6 +43,7 @@
                         <td>{!! $item->id !!}</td>
                         <td>{!! $item->typeName !!}</td>
                         <td>{{ $item->usersName }}</td>
+                        <td><a href="{!! route('m.customer.order.show', ['id' => $item->extend['order_id']]) !!}">{{ $item->extend['title'] }}</a></td>
                         <td>{{ $item->contentsMb }}</td>
                         <td>{!! $item->created_at !!}</td>
                         <td>

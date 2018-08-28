@@ -59,7 +59,7 @@
                             </ul>
                         </div>
                         <div class="content-block">
-                            <button type="button" class="button-orange setup-post">确认修改</button>
+                            <button type="button" class="button-orange setup-post">提交</button>
                         </div>
                     </form>
                 </div>
