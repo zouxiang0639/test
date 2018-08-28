@@ -29,7 +29,7 @@ class FeedbackBls
         $model->type = $requests->type;
         $model->extend = $requests->extend;
         $model->users_id = $requests->users_id ?: 0;
-        $model->contents = $requests->contents;
+        $model->contents = $requests->contents ?: '';
         return $model->save();
     }
 

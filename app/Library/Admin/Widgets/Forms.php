@@ -23,7 +23,6 @@ class Forms
 
     public $formHtml = '';
     public $helpBlock = '';
-    public $id = '';
 
     public function __construct()
     {

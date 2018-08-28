@@ -1,6 +1,7 @@
 <?php
 namespace App\Library\Validators;
 
+use App\Library\Format\FormatMoney;
 use Illuminate\Support\ServiceProvider;
 use Validator;
 
@@ -18,6 +19,12 @@ class ValidatorServiceProvider extends ServiceProvider
     {
         Validator::extend('mobile', function ($attribute, $value, $parameters) {
             return preg_match('/^1[0-9]{10}$/', $value);
+        });
+
+        Validator::extend('money', function ($attribute, $value, $parameters) {
+            $value = FormatMoney::fen($value);
+            $min = reset($parameters);
+            return $value >= $min;
         });
     }
 
