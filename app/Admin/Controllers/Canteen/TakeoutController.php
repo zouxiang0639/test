@@ -169,6 +169,11 @@ class TakeoutController extends Controller
                 $h->set('status', true);
             });
 
+            $item->create('是否称重', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $h->input = $form->switchOff('is_weigh', array_get($info, 'is_weigh', WhetherConst::NO));
+                $h->set('is_weigh', true);
+            });
+
             $item->create('外卖名称', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->text('title', array_get($info, 'title'), $h->options);
                 $h->set('title', true);

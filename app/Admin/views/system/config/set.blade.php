@@ -13,7 +13,7 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#settings" data-toggle="tab">网址配置</a></li>
                 <li><a href="#meal" data-toggle="tab">点餐配置</a></li>
-                <li><a href="#takeout" data-toggle="tab">外面配置</a></li>
+                <li><a href="#takeout" data-toggle="tab">外卖配置</a></li>
                 <li class="btn-primary" style="float: right;"><a style="color: white" href="{!! route('m.system.config.list') !!}" >配置列表</a></li>
             </ul>
             <div class="tab-content">

@@ -32,6 +32,7 @@ class TakeoutBls
         $model = new TakeoutModel();
         $model->title = $request->title;
         $model->status = $request->status;
+        $model->is_weigh = $request->is_weigh;
         $model->picture = $request->picture;
         $model->stock = $request->stock;
         $model->price = FormatMoney::fen($request->price);
@@ -45,6 +46,7 @@ class TakeoutBls
     {
         $model->title = $request->title;
         $model->status = $request->status;
+        $model->is_weigh = $request->is_weigh;
         $model->picture = $request->picture;
         $model->stock = $request->stock;
         $model->price = FormatMoney::fen($request->price);

@@ -57,7 +57,7 @@ class OrderBls
     }
 
     /**
-     * 外面订单创建
+     * 外卖订单创建
      * @param $data
      * @param $amount
      * @param $deposit
@@ -82,7 +82,7 @@ class OrderBls
                 static::createTakeoutOrderByChild($item, $order->id);
             }
 
-            AccountFlowBls::createAccountFlow($user->id, AccountFlowTypeConst::PAYMENT, $deposit, "订单号:{$order->id}外面定金");
+            AccountFlowBls::createAccountFlow($user->id, AccountFlowTypeConst::PAYMENT, $deposit, "订单号:{$order->id}外卖定金");
 
             return $user->save();
         });
@@ -90,7 +90,7 @@ class OrderBls
 
     /**
      *
-     * 外面订单关联创建
+     * 外卖订单关联创建
      * @param $data
      * @param $orderID
      * @return bool
@@ -105,6 +105,7 @@ class OrderBls
         $model->price = $data['price'];
         $model->deposit = $data['deposit'];
         $model->num = $data['num'];
+        $model->is_weigh = $data['is_weigh'];
 
         $takeout = TakeoutBls::find($data['id']);
         $takeout->stock -= $data['num'];
@@ -187,7 +188,7 @@ class OrderBls
     }
 
     /**
-     * 统计本月外面退单数量
+     * 统计本月外卖退单数量
      * @param $userId
      * @return int
      */
@@ -215,7 +216,7 @@ class OrderBls
     }
 
     /**
-     * 外面退单
+     * 外卖退单
      * @param OrderModel $model
      * @return mixed
      */

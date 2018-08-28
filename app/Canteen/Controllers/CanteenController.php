@@ -17,7 +17,7 @@ use Auth;
 class CanteenController extends Controller
 {
     /**
-     * 外面展示
+     * 外卖展示
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function takeout()
@@ -35,6 +35,7 @@ class CanteenController extends Controller
                 'limit' => $item->limit,
                 'id' => $item->id,
                 'num' => 0,
+                'is_weigh' => $item->is_weigh,
             ];
         });
 

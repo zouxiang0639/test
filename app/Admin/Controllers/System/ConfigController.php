@@ -227,7 +227,7 @@ class ConfigController extends Controller
             $item->create('外卖截止时间', function(HtmlFormTpl $h, FormBuilder $form) {
                 $h->input = $form->datetime('takeout_deadline', config('config.takeout_deadline'), $h->options, 'YYYY-MM-DD');
                 $h->set('takeout_deadline', false);
-                $h->helpBlock = '（外面截止时间到期后将不能购买外面）';
+                $h->helpBlock = '（外卖截止时间到期后将不能购买外卖）';
             });
 
             $item->create('限制退单', function(HtmlFormTpl $h, FormBuilder $form) {

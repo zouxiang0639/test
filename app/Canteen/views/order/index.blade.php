@@ -19,10 +19,10 @@ use App\Consts\Order\OrderTypeConst;
                     <a href="{!! route('c.order.list') !!}"  class="{!! !$type ? 'active' : ''!!} button">
                         全部订单
                     </a>
-                    <a href="{!! route('c.order.list', [ 'status'=> '1']) !!}"  class="{!! $type == '1_2' ? 'active' : '' !!} button">
+                    <a href="{!! route('c.order.list', [ 'status'=> '1']) !!}"  class="{!! $type == '1' ? 'active' : '' !!} button">
                         待交易
                     </a>
-                    <a href="{!! route('c.order.list', [ 'status'=> '2']) !!}"  class="{!! $type == '3' ? 'active' : '' !!} button">待评价</a>
+                    <a href="{!! route('c.order.list', [ 'status'=> '2']) !!}"  class="{!! $type == '2' ? 'active' : '' !!} button">待评价</a>
                     <a href="{!! route('c.order.list', [ 'status'=> '5']) !!}" class="{!! $type == '5' ? 'active' : '' !!} button">退单</a>
                 </div>
             </div>

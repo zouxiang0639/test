@@ -18,7 +18,7 @@ class OrderModel extends Model
     protected $table = 'order';
 
     /**
-     * 外面
+     * 外卖
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function orderTakeout()

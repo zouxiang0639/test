@@ -36,7 +36,7 @@
         </div>
         <div class="content native-scroll takeout">
             <div class="content-block-title">
-                外面截止日期
+                外卖截止日期
                 <span style="color: red">
                     {!! config('config.takeout_deadline') !!}
                 </span>
@@ -131,7 +131,7 @@
                 var html = '';
                 console.log(takeoutDeadlineCheck);
                 if(takeoutDeadlineCheck == 0) {
-                    $.alert('外面订购已结束');
+                    $.alert('外卖订购已结束');
                     return false;
                 }
 
