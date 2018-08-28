@@ -69,6 +69,12 @@ class CanteenController extends Controller
             throw new LogicException(1010001, '请选择外卖');
         }
 
+        //检查是否已预订过
+        $order = OrderBls::getOrderTakeout(Auth::guard('canteen')->id());
+        if($order) {
+            throw new LogicException(1010001, '你可以先退掉外卖,在预订');
+        }
+
         foreach($request->data as $value) {
             $model = TakeoutBls::find($value['id']);
             if($model->status != WhetherConst::YES) {
@@ -117,10 +123,17 @@ class CanteenController extends Controller
             throw new LogicException(1010001, $request->date . '没有设置菜单不可以订购');
         }
 
-        $overdue = OrderBls::countOverdueByMeal(Auth::guard('canteen')->id());
-        if($overdue >= 2) {
-            throw new LogicException(1010001, '你已违约超过次数,本周不可以订购');
+        //检查是否已预订过
+        $order = OrderBls::getOrderByMeal($request->date, $request->type, Auth::guard('canteen')->id());
+        if($order) {
+            $title = $request->date.MealTypeConst::getDesc($request->type);
+            throw new LogicException(1010001, $title.'只能定一次');
         }
+
+//        $overdue = OrderBls::countOverdueByMeal(Auth::guard('canteen')->id());
+//        if($overdue >= 2) {
+//            throw new LogicException(1010001, '你已违约超过次数,本周不可以订购');
+//        }
 
         $name = MealTypeConst::getDesc($request->type);
         $price = MealTypeConst::getPriceDesc($request->type);
@@ -199,8 +212,8 @@ class CanteenController extends Controller
             ]
         ];
 
-        //检查违约几次
-        $overdue = OrderBls::countOverdueByMeal(Auth::guard('canteen')->id());
+//        //检查违约几次
+//        $overdue = OrderBls::countOverdueByMeal(Auth::guard('canteen')->id());
 
         return view('canteen::canteen.meal', [
             'info' => $model,
@@ -210,8 +223,9 @@ class CanteenController extends Controller
             'check' => $check,
             'data' => json_encode($data),
             'deposit' => FormatMoney::fen2yuan(config('config.meal_deposit')),
-            'checkOverdue' => $overdue >= config('config.meal_overdue_num'),
-            'overdue' => $overdue
+            'checkOverdue' => false,
+            //'checkOverdue' => $overdue >= config('config.meal_overdue_num'),
+            //'overdue' => $overdue
         ]);
     }
 

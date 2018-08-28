@@ -47,7 +47,7 @@ class OrderController extends ApiController
         }
 
         $model = OrderBls::getOrderTakeout($model->id);
-        if($model->isEmpty()) {
+        if(!$model) {
             return $this->error(1050003);
         }
         

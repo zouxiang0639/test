@@ -264,6 +264,11 @@ class OrderBls
         return $model->first();
     }
 
+    /**
+     * 获取外面订单
+     * @param $userId
+     * @return \Illuminate\Database\Eloquent\Model|null|object|static
+     */
     public static function getOrderTakeout($userId)
     {
         $model = OrderModel::query();
@@ -271,9 +276,15 @@ class OrderBls
         $model->where('type', OrderTypeConst::TAKEOUT);
         $model->where('status', OrderStatusConst::DEPOSIT);
         $model->with(['orderTakeout']);
-        return $model->get();
+        return $model->first();
     }
 
+    /**
+     * 订单支付
+     * @param $order
+     * @param $users
+     * @return mixed
+     */
     public static function payment($order, $users)
     {
         return OrderModel::query()->getQuery()->getConnection()->transaction(function () use($order, $users) {
@@ -300,6 +311,12 @@ class OrderBls
         });
     }
 
+    /**
+     * 评论
+     * @param $model
+     * @param FeedbackRequests $request
+     * @return mixed
+     */
     public static function comment($model, FeedbackRequests $request)
     {
         return OrderModel::query()->getQuery()->getConnection()->transaction(function () use($model, $request) {

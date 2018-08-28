@@ -2,13 +2,7 @@
 
 @section('style')
     <style>
-        .meal-click .minus, .meal-click .plus{
-            cursor:pointer;
-        }
-        .meal-click span{
-            font-size: 1.1rem; !important; padding: 0 3px;
-        }
-        .b1{line-height: 0.40rem;background: #fff;position: relative; margin: 1rem 0rem;padding-left: 1rem;}
+
     </style>
 @stop
 
@@ -41,11 +35,8 @@
                     {!! config('config.meal_deadline') !!} : 00
                 </span>
                     点</p>
-                <p class="buttons-row"> 每周违约
-                <span style="color: red">
-                    {!! config('config.meal_overdue_num') !!}
-                </span>
-                    次将不能预约, <span style="padding-left: 5px">你已违约{!! $overdue !!}次</span></p>
+                {{--<p class="buttons-row"> 每周违约 <span style="color: red"> {!! config('config.meal_overdue_num') !!} </span>--}}
+                    {{--次将不能预约, <span style="padding-left: 5px">你已违约{!! $overdue !!}次</span></p>--}}
                 <p class="buttons-row">
                     @foreach($menu as $key => $value)
                         <a href="{!! route('c.canteen.meal', ['date' => $value]) !!}" class="button button-round {!! $value == $date ? 'active' : ''!!}">

@@ -85,7 +85,7 @@ use App\Consts\Order\OrderTypeConst;
                         </a>
                         @if($item->status == OrderStatusConst::DEPOSIT && $item->type == OrderTypeConst::TAKEOUT && config('config.takeout_deadline') >= date('Y-m-d'))
                         <div class="oi4">
-                            <span style="color: #FF5722; line-height: 2rem;">每个月只能退{!! config('config.refund_limit') !!}单</span>
+                            {{--<span style="color: #FF5722; line-height: 2rem;">每个月只能退{!! config('config.refund_limit') !!}单</span>--}}
                             <a href="javascript:;" data-id="{!! $item->id !!}" class="org refund external">退单</a>
                         </div>
                         @endif

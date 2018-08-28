@@ -463,3 +463,11 @@ background-color:#fffaf0;
 .user-contract .item-text{height: 1rem;}
 .banner.contract-banner{background-image:url(../images/contract_banner.jpg);padding-top:40% ;}
 
+.meal-click .minus, .meal-click .plus{
+  cursor:pointer;
+}
+.meal-click span{
+  font-size: 1.1rem; !important; padding: 0 3px;
+}
+.b1{line-height: 0.40rem;background: #fff;position: relative; margin: 1rem 0rem;padding-left: 1rem;}
+

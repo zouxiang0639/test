@@ -5,7 +5,6 @@ namespace App\Canteen\Controllers;
 use App\Admin\Bls\Other\FeedbackStrategy\FeedbackStrategy;
 use App\Admin\Bls\Other\Requests\FeedbackRequests;
 use App\Canteen\Bls\Users\OrderBls;
-use App\Canteen\Bls\Users\Requests\OrderCommentRequest;
 use App\Consts\Common\MealTypeConst;
 use App\Consts\Order\OrderStatusConst;
 use App\Consts\Order\OrderTypeConst;
@@ -19,6 +18,13 @@ use Auth;
 
 class OrderController extends Controller
 {
+    /**
+     * 订单列表
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
+     * @throws \Exception
+     * @throws \Throwable
+     */
     public function index(Request $request)
     {
         $request->merge(['user_id' => Auth::guard('canteen')->id()]);
@@ -53,15 +59,22 @@ class OrderController extends Controller
     }
 
 
-
+    /**
+     * 退单
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
     public function refund(Request $request)
     {
-        $count = OrderBls::countOverdueByTakeout(Auth::guard('canteen')->id());
 
-        $refundLimit = config('config.refund_limit');
-        if($count >= $refundLimit) {
-            throw new LogicException(1010001, "这个月你已经退单{$count}次, 每个月限制{$refundLimit}次");
-        }
+//现在退单次数
+//        $count = OrderBls::countOverdueByTakeout(Auth::guard('canteen')->id());
+//
+//        $refundLimit = config('config.refund_limit');
+//        if($count >= $refundLimit) {
+//            throw new LogicException(1010001, "这个月你已经退单{$count}次, 每个月限制{$refundLimit}次");
+//        }
 
         $model = OrderBls::find($request->id);
 
@@ -80,6 +93,12 @@ class OrderController extends Controller
     }
 
 
+    /**
+     * 评论
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws LogicException
+     */
     public function comment($id)
     {
         $model = OrderBls::find($id);
@@ -95,6 +114,12 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * 评论提交
+     * @param FeedbackRequests $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
     public function commentPut(FeedbackRequests $request)
     {
         $model = OrderBls::find($request->order_id);
