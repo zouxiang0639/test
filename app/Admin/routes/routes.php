@@ -204,7 +204,9 @@ Route::group([
     //报表
     Route::group(['prefix'=>'report', 'middleware' => 'admin.auth:m_report'], function() {
         Route::get('meal', ['uses' => "Report\\ReportController@meal", 'as' => 'm.report.meal']);
+        Route::get('meal/export', ['uses' => "Report\\ReportController@mealExport", 'as' => 'm.report.meal.export']);
         Route::get('takeout', ['uses' => "Report\\ReportController@takeout", 'as' => 'm.report.takeout']);
+        Route::get('takeout/export', ['uses' => "Report\\ReportController@takeoutExport", 'as' => 'm.report.takeout.export']);
     });
 
 });

@@ -330,7 +330,7 @@ class AdminAuthSeeder extends Seeder
 
         $menuRequest->merge([
             'parent_id' => $menu->getKey(),
-            'title' => '就餐统计统计',
+            'title' => '就餐预约统计',
             'icon' => 'fa-list-alt',
             'route' => 'm.report.meal',
             'slug' => 'm_report',
