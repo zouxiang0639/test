@@ -30,7 +30,7 @@ class UpdateUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['mobile', 'money', 'division', 'card_no']);
+            $table->dropColumn(['mobile', 'money', 'division']);
         });
     }
 }

@@ -5,6 +5,9 @@
         .meal-click .minus, .meal-click .plus{
             cursor:pointer;
         }
+        .meal-click span{
+            font-size: 1.1rem; !important; padding: 0 3px;
+        }
         .b1{line-height: 0.40rem;background: #fff;position: relative; margin: 1rem 0rem;padding-left: 1rem;}
     </style>
 @stop

@@ -60,6 +60,7 @@ class AdminAuthSeeder extends Seeder
         $this->other(); //其它管理
         $this->system(); //系统管理
         $this->customer(); //用户管理
+        $this->report(); //数据报表
     }
 
     /**
@@ -309,7 +310,43 @@ class AdminAuthSeeder extends Seeder
             'permissions' => WhetherConst::YES
         ]);
         MenuBls::storeMenu($menuRequest);
-
-
     }
+
+    /**
+     * 数据报表
+     */
+    public function report()
+    {
+        $menuRequest = new MenuRequest();
+        $menuRequest->merge([
+            'parent_id' => 0,
+            'title' => '数据报表',
+            'icon' => 'fa-database',
+            'route' => '',
+            'slug' => 'm_report',
+            'permissions' => WhetherConst::YES
+        ]);
+        $menu = MenuBls::storeMenu($menuRequest);
+
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '就餐统计统计',
+            'icon' => 'fa-list-alt',
+            'route' => 'm.report.meal',
+            'slug' => 'm_report',
+            'permissions' => WhetherConst::NO
+        ]);
+        MenuBls::storeMenu($menuRequest);
+
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '本周外卖统计',
+            'icon' => 'fa-list-alt',
+            'route' => 'm.report.takeout',
+            'slug' => 'm_report',
+            'permissions' => WhetherConst::NO
+        ]);
+        MenuBls::storeMenu($menuRequest);
+    }
+
 }

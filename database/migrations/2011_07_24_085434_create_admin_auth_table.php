@@ -48,7 +48,7 @@ class CreateAdminAuthTable extends Migration
             $table->string('title', 50)->comment('标题');
             $table->string('icon', 50)->comment('图标');
             $table->string('route', 50)->default('')->comment('路由');
-            $table->string('slug', 50)->unique()->default('')->comment('标签');
+            $table->string('slug', 50)->default('')->comment('标签');
             $table->string('url', 50)->default('')->comment('网站地址');
 
             $table->timestamps();

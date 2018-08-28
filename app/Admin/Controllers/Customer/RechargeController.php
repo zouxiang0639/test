@@ -87,6 +87,12 @@ class RechargeController extends Controller
         }
     }
 
+    /**
+     * 对冲
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
     public function hedging($id)
     {
         $model = AccountFlowBls::find($id);

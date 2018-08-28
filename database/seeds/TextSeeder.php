@@ -26,6 +26,7 @@ class TextSeeder extends \Illuminate\Database\Seeder
                 'deposit' => 100,
                 'limit' => 5,
                 'describe' => '一份包子一个',
+                'is_weigh' => 2,
             ],
             [
                 'status' => 1,
@@ -36,6 +37,7 @@ class TextSeeder extends \Illuminate\Database\Seeder
                 'deposit' => 50,
                 'limit' => 3,
                 'describe' => '一份馒头3个',
+                'is_weigh' => 2,
             ],
             [
                 'status' => 1,
@@ -46,6 +48,7 @@ class TextSeeder extends \Illuminate\Database\Seeder
                 'deposit' => 500,
                 'limit' => 1,
                 'describe' => '一份牛肉半斤',
+                'is_weigh' => 1,
             ],
             [
                 'status' => 1,
@@ -56,6 +59,7 @@ class TextSeeder extends \Illuminate\Database\Seeder
                 'deposit' => 200,
                 'limit' => 2,
                 'describe' => '一份榨菜5包`',
+                'is_weigh' => 2,
             ],
         ]);
 

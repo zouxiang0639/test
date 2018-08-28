@@ -35,6 +35,7 @@ class CreateOrderTable extends Migration
             $table->integer('price')->comment('价格 分');
             $table->integer('deposit')->comment('定金 分');
             $table->integer('num')->comment('数量');
+            $table->tinyInteger('is_weigh')->comment('是否称重 1是 2否 WhetherConst');
             $table->timestamps();
             $table->index(['order_id', 'takeout_id']);
         });
