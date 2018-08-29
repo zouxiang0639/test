@@ -41,18 +41,4 @@ class AuthController extends Controller
         return redirect()->route('c.auth.login');
     }
 
-
-    public function registerPut(RegisterUserRequest $request)
-    {
-        if(UsersBls::createUser($request)) {
-
-            $credentials = $request->only(['email', 'password']);
-            Auth::guard('forum')->attempt($credentials);
-
-            return (new JsonResponse())->success('注册成功');
-        } else {
-            throw new LogicException(1010002, [['注册失败']]);
-        }
-
-    }
 }

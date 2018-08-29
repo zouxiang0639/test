@@ -10,6 +10,7 @@ use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Library\Format\FormatMoney;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 /**
  * Created by UsersBls.
@@ -61,6 +62,7 @@ class UsersBls
         $model->mobile = $requests->mobile;
         $model->password = bcrypt(config('admin.user_password'));
         $model->status = WhetherConst::YES;
+        $model->remember_token = Str::random(60);
         return $model->save();
     }
 
