@@ -48,7 +48,13 @@
                 <p class="source">来源：{!! $info->source !!}</p>
                 @endif
                 <div class="link clearfix">
-                    <div class="address fl">复制本帖地址<a href="javascript:void(0)"><i></i> http://kongdi.com/humor_1215</a></div>
+                    <div class="address fl">
+                        <span value="{!! config('app.url').Request::getRequestUri() !!}" class="copyVideo" onclick="copyVideoUrl(event)">
+                            复制本帖地址
+                        <i class="icon-copy"></i>
+                        </span>
+                        <a> {!! config('app.url').Request::getRequestUri() !!}</a>
+                    </div>
                     <div class="share fr">
                         <div style="float: inherit; margin-top: 4px;">
                             <a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=e2f4016d-a184-49b4-832b-65b5519a06ec&style=2&textcolor=#000000&bgcolor=none&bp=weixin,qzone,sinaminiblog,qqim&text=分享"></script>
@@ -157,7 +163,7 @@
         <div class="wm-850">
             <div class="new-container">
                 @include('forum::partials.advert')
-                <div class="new-tit"><i></i></div>
+                <div class="new-tit"><i class="icon-new"></i></div>
                 @include('forum::partials.all_article')
             </div>
         </div>
@@ -621,5 +627,25 @@
             })
 
         });
+
+        function copyVideoUrl(event){
+
+            var value = $(event.target).closest("span").attr('value');
+            var success;
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val(value).select();
+            try{
+                success = document.execCommand("copy");
+            }catch (e){
+                succeed = false;
+            }
+
+            if(success){
+                swal('拷贝成功', '', 'success');
+            }
+
+            $temp.remove();
+        }
     </script>
 @stop

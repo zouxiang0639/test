@@ -7,7 +7,7 @@
             <div class="login-state">
                 <!--登陆后的状态-->
                 @if(Auth::guard('forum')->check())
-                    <span class="news"><i></i>2</span>
+                    <span class="news"><i class="icon-alarm"></i>2</span>
                     <a  href="{!! route('f.member.index') !!}">{!! Auth::guard('forum')->user()->name !!}</a>
                     <a  href="{!! route('f.auth.logout') !!}">退出</a>
                 @else
@@ -18,7 +18,7 @@
             </div>
             <div class="search clearfix">
                 <input class="s-txt" type="text" placeholder="" />
-                <a class="s-btn" href="javascript:void(0)"></a>
+                <a class="s-btn icon-search" href="javascript:void(0)"></a>
             </div>
         </div>
     </div>
@@ -44,7 +44,7 @@
                     </a>
                 @endforeach
             </div>
-            <a class="post fr" href="{!! route('f.article.create') !!}"><i></i>发帖</a>
+            <a class="post fr" href="{!! route('f.article.create') !!}"><i class="icon-post"></i>发帖</a>
         </div>
     </div>
 </div>

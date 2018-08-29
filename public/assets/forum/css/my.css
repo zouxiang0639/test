@@ -303,14 +303,13 @@
 .art-con .link .address a{
 	color: #999999;
 }
-.art-con .link .address a i{
-	display: inline-block;
-	vertical-align: middle;
+.art-con .link .address span{
+	cursor: pointer;
+}
+.art-con .link .address span i{
 	margin: -2px 5px 0 0;
-	width: 13px;
-	height: 15px;
-	background: url(../img/tie-icons.png) no-repeat;
-	background-position: -271px 0;
+	color: #000;
+	font-size: 14px;
 }
 .art-con .link .share{
 	width: 420px;

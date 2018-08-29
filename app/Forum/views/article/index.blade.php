@@ -31,10 +31,10 @@
             <div class="new-container" style="min-height: 400px;">
                 @if(Input::get('order') == 'hot')
                     <div class="hot-tit clearfix" style="width: 827px;margin: 0 auto;">
-                        <span class="icon fl" style="margin: 2px 0 0 8px;"></span>
+                        <span class="icon fl icon-hot" style="margin: 0px 0 0 8px;"></span>
                     </div>
                 @else
-                    <div class="new-tit"><i></i></div>
+                    <div class="new-tit"><i class="icon-new"></i></div>
                 @endif
 
                 @include('forum::article.all')

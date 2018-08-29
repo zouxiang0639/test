@@ -5,7 +5,7 @@
         <div class="wm-850">
             <div class="hot">
                 <div class="hot-tit clearfix">
-                    <span class="icon fl"></span>
+                    <span class="icon fl icon-hot" style="margin: 0px 0 0 8px;"></span>
                     <a class="more fr" href="{!! route('f.article.gather', ['type' => 'hot']) !!}">+ more</a>
                 </div>
                 <div class="hot-list">
@@ -30,7 +30,7 @@
     <div class="com-new">
         <div class="wm-850">
             <div class="new-container">
-                <div class="new-tit"><i></i></div>
+                <div class="new-tit"><i class="icon-new"></i></div>
                 @include('forum::partials.all_article')
             </div>
         </div>

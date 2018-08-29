@@ -10,10 +10,10 @@
         <div class="wm-850">
             <div class="new-container" style="min-height: 400px;">
                 @if(Input::get('type') == 'new')
-                    <div class="new-tit"><i></i></div>
+                    <div class="new-tit"><i class="icon-new"></i></div>
                 @elseif(Input::get('type') == 'hot')
                     <div class="hot-tit clearfix" style="width: 827px;margin: 0 auto;">
-                        <span class="icon fl" style="margin: 2px 0 0 8px;"></span>
+                        <span class="icon fl icon-hot" style="margin: 0px 0 0 8px;"></span>
                     </div>
                 @endif
 
