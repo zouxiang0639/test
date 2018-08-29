@@ -83,7 +83,7 @@ class UsersBls
     }
     public static function getUserByDivision($division)
     {
-        return UsersModel::where('division', $division)->get();
+        return UsersModel::whereIn('division', $division)->get();
     }
 
     public static function usersAll()

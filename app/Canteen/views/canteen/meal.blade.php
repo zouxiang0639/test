@@ -39,7 +39,7 @@
                     {{--次将不能预约, <span style="padding-left: 5px">你已违约{!! $overdue !!}次</span></p>--}}
                 <p class="buttons-row">
                     @foreach($menu as $key => $value)
-                        <a href="{!! route('c.canteen.meal', ['date' => $value]) !!}" class="button button-round {!! $value == $date ? 'active' : ''!!}">
+                        <a href="{!! route('c.canteen.meal', ['date' => $value]) !!}" class="button external button-round {!! $value == $date ? 'active' : ''!!}">
                             {!! $key !!}
                         </a>
                     @endforeach

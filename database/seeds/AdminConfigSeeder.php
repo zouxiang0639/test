@@ -81,7 +81,7 @@ class AdminConfigSeeder extends Seeder
             [
                 'name' => 'meal_deadline',
                 'description' => '截止预定时间',
-                'value' => '17:00',
+                'value' => '17',
             ],
             [
                 'name' => 'meal_deposit',

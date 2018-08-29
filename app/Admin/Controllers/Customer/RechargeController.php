@@ -135,7 +135,7 @@ class RechargeController extends Controller
 
             $item->create('分组', function(HtmlFormTpl $h, FormBuilder $form) {
                 $list = TagsBls::getTagsByType(TagsTypeConst::TAG)->pluck('tag_name', 'id')->toArray();
-                $h->input = $form->select2('division',$list , '', $h->options);
+                $h->input = $form->dualListBox('division[]',$list , '', $h->options);
                 $h->id = 'division';
                 $h->set('division', true);
             });
