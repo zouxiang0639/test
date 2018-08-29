@@ -140,8 +140,6 @@ class CanteenController extends Controller
         $this->isEmpty($name);
 
         $amount = ((($request->num - 1) * ($price * 2)) + $price) * $request->discount;
-        $deposit = config('config.meal_deposit');
-
         $data = [
             'type' => $request->type,
             'date' => $request->date,
@@ -157,7 +155,7 @@ class CanteenController extends Controller
             throw new LogicException(1010001, '你的账户金额不足');
         }
 
-        if(OrderBls::createMealOrder($data, $amount, $deposit)){
+        if(OrderBls::createMealOrder($data, $amount, $request->deposit)){
             return (new JsonResponse())->success('支付成功');
         } else {
             throw new LogicException(1010001, '支付失败');
@@ -209,7 +207,8 @@ class CanteenController extends Controller
             'discount' => [
                 1 => config('config.meal_discount1'),
                 2 => config('config.meal_discount2')
-            ]
+            ],
+            'deposit' => config('config.meal_deposit'),
         ];
 
 //        //检查违约几次
@@ -222,7 +221,6 @@ class CanteenController extends Controller
             'date' => $request->date,
             'check' => $check,
             'data' => json_encode($data),
-            'deposit' => FormatMoney::fen2yuan(config('config.meal_deposit')),
             'checkOverdue' => false,
             //'checkOverdue' => $overdue >= config('config.meal_overdue_num'),
             //'overdue' => $overdue

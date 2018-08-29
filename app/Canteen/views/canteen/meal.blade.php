@@ -103,7 +103,7 @@
                         <p>大于两份将从第二份开始双倍价格</p>
                         <p>价格：<span  style="color: red" class="amount">0.00</span>元</p>
                         <p>折扣：<span  style="color: red" class="meal-discount"></span>折</p>
-                        <p>定金：<span  style="color: red" class="buy-deposit">{!! $deposit !!}</span>元</p>
+                        <p>定金：<span  style="color: red" class="buy-deposit">1.00</span>元</p>
                     </div>
                 </div>
             </div>
@@ -122,6 +122,8 @@
     <script>
         $(function(){
             var meal = JSON.parse($('input[name=data]').val());
+            meal.deposit = parseInt(meal.deposit);
+
             var data = {
                 "type" : 0,
                 "num" : 1,
@@ -145,10 +147,11 @@
                 data.type = $(this).attr('data-type');
                 data.price = parseInt(meal.price[data.type]);
                 data.discount = parseInt(meal.discount[check]) / 100;
-
+                data.deposit = parseInt(meal.deposit * data.num);
                 $('.meal-discount').text(meal.discount[check]);
                 $('.meal-type-name').text(meal.type[data.type]);
                 $('.amount').text(fmoney(data.price / 100));
+                $('.buy-deposit').text(fmoney(data.deposit / 100));
 
             });
 
@@ -229,14 +232,14 @@
                 } else {
                     data.amount += (data.price * 2)  * data.discount;
                 }
-
+                data.deposit += meal.deposit;
 
                 if(data.num > 0) {
                     $(this).siblings('.minus').show();
                     $(this).siblings('.num').show();
                 }
 
-
+                $('.buy-deposit').text(fmoney(data.deposit / 100));
                 $('.meal-price').text(fmoney(data.amount / 100));
                 $('.num').text(data.num);
             });
@@ -251,12 +254,14 @@
                 } else {
                     data.amount -= (data.price * 2) * data.discount;
                 }
+                data.deposit -= meal.deposit;
 
                 if(data.num == 0) {
                     $(this).hide();
                     $(this).siblings('.num').hide();
                 }
 
+                $('.buy-deposit').text(fmoney(data.deposit / 100));
                 $('.meal-price').text(fmoney(data.amount / 100));
                 $('.num').text(data.num);
             });
