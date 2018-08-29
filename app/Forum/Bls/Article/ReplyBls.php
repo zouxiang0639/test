@@ -94,9 +94,10 @@ class ReplyBls
     {
         $user = Auth::guard('forum')->user();
         if(in_array($user->id, $model->thumbs_up)) {
-            $model->thumbs_up = static::thumbsMinus($model->thumbs_up, $user->id);
-            $user->thumbs_up --;
-            $data = false;
+//            $model->thumbs_up = static::thumbsMinus($model->thumbs_up, $user->id);
+//            $user->thumbs_up --;
+//            $data = false;
+            throw new LogicException(1010002, '只能点一次哦!');
         } else {
 
             if(static::checkThumbs($model->thumbs_down, $model->thumbs_up, $user->id)) {
@@ -125,8 +126,9 @@ class ReplyBls
     {
         $user = Auth::guard('forum')->user();
         if(in_array($user->id, $model->thumbs_down)) {
-            $model->thumbs_down = static::thumbsMinus($model->thumbs_down, $user->id);
-            $data = false;
+//            $model->thumbs_down = static::thumbsMinus($model->thumbs_down, $user->id);
+//            $data = false;
+            throw new LogicException(1010002, '只能点一次哦!');
         } else {
 
             if(static::checkThumbs($model->thumbs_down, $model->thumbs_up, $user->id)) {

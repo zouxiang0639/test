@@ -21,7 +21,8 @@
                 </p>
                 <p>
                     <span>
-                        <a class="article-recommend {!! in_array($userId, $info->recommend) ? "default" : "" !!}">推荐  : <span class="num">{{ $info->recommend_count }}</span></a>
+                        {{--<a class="article-recommend {!! in_array($userId, $info->recommend) ? "default" : "" !!}">推荐  : <span class="num">{{ $info->recommend_count }}</span></a>--}}
+                        推荐  : <span class="num">{{ $info->recommend_count }}</span>
 
                     </span>
                     <span>浏览 : {{ $info->browse }}</span>
@@ -29,7 +30,7 @@
                 </p>
                 <p>
                     <span>发帖时间 : {{ $info->created_at }}</span>
-                    <span>IP : {{ $info->ip }}</span>
+                    {{--<span>IP : {{ $info->ip }}</span>--}}
                 </p>
             </div>
         </div>
@@ -69,7 +70,7 @@
 
                 <p class="thumbs-up thumbs" data-href="{!! route('f.article.thumbsUp',['id' => $info->id]) !!}" href="javascript:void(0)">
                     <i class="fa fa-thumbs-o-up {!! in_array($userId, $info->thumbs_up) ? "default" : "" !!}"></i>
-                    <span class="num">{!! count($info->thumbs_up) !!}</span>
+                    <span class="num">{!! $info->recommend_count !!}</span>
                 </p>
 
                 <p class=" thumbs-down thumbs" data-href="{!! route('f.article.thumbsDown',['id' => $info->id]) !!}" href="javascript:void(0)">

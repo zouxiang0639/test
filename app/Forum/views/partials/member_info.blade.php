@@ -21,7 +21,6 @@
                         </span>
                     </div>
                 </div>
-
             </div>
             <div class="step4">
                 <ul class="clearfix">
@@ -39,13 +38,13 @@
                             {!! $current == 2 ? '<i></i>' : '' !!}
                         </a>
                     </li>
-                    <li>
-                        <a href="{!! route('f.member.recommend') !!}">
-                            <span class="tit">推荐</span>
-                            <span class="num">{!! $articlesRecommendCount !!}</span>
-                            {!! $current == 3 ? '<i></i>' : '' !!}
-                        </a>
-                    </li>
+                    {{--<li>--}}
+                        {{--<a href="{!! route('f.member.recommend') !!}">--}}
+                            {{--<span class="tit">推荐</span>--}}
+                            {{--<span class="num">{!! $articlesRecommendCount !!}</span>--}}
+                            {{--{!! $current == 3 ? '<i></i>' : '' !!}--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
                     <li>
                         <a href="{!! route('f.member.star') !!}">
                             <span class="tit">收藏</span>

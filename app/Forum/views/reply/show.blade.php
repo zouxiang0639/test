@@ -1,7 +1,9 @@
 @foreach($list as $item)
     <li class="{!! $item->color !!} reply-{!! $item->id !!}">
         <div class="top">
-            <p class="left"><b>{{ $item->issuerName }}</b>({!! mb_substr($item->created_at, 0, 16) !!}) 211.38.***.118 </p>
+            <p class="left"><b>{{ $item->issuerName }}</b>({!! mb_substr($item->created_at, 0, 16) !!})
+                {{--211.38.***.118--}}
+            </p>
             <p class="right">
                 @if($item->isDelete)
                     <a class="delete-reply" data-href="{!! route('f.reply.destroy',['id' => $item->id]) !!}" href="javascript:void(0)">
