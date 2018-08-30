@@ -16,7 +16,7 @@
             <div class="inner-info">
                 <p>帖子ID : {!! $info->id !!}</p>
                 <p>
-                    发帖人 : {{ $info->issuers->name  }}
+                    发帖人 :<a href="{!! route('f.space.index', ['user_id' => $info->issuer]) !!}">{{ $info->issuers->name  }}</a>
                     (注册时间:{{ mb_substr($info->issuers->created_at, 0, 10) }} 登陆次数:{{ $info->issuers->login_num }})
                 </p>
                 <p>

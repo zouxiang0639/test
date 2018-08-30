@@ -51,6 +51,16 @@ Route::group([
         Route::put('sign/in', ['uses' => "MemberController@signIn", 'as' => 'f.member.sign.in']);
     });
 
+    //会员
+    Route::group(['prefix'=>'space'], function(){
+        Route::get('index/{user_id}', ['uses' => "SpaceController@index", 'as' => 'f.space.index']);
+        Route::get('reply/{user_id}', ['uses' => "SpaceController@reply", 'as' => 'f.space.reply']);
+        Route::get('recommend', ['uses' => "SpaceController@recommend", 'as' => 'f.space.recommend']);
+        Route::get('star', ['uses' => "SpaceController@star", 'as' => 'f.space.star']);
+        Route::get('info', ['uses' => "SpaceController@info", 'as' => 'f.space.info']);
+        Route::put('sign/in', ['uses' => "SpaceController@signIn", 'as' => 'f.space.sign.in']);
+    });
+
     //上传
     Route::group(['prefix'=>'upload', 'middleware' => 'forum.auth:f_member'], function(){
 

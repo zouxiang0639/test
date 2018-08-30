@@ -100,5 +100,10 @@ class UsersBls
         });
     }
 
+    public static function find($id)
+    {
+        return UsersModel::find($id);
+    }
+
 
 }

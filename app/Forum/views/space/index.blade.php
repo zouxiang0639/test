@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-    @include('forum::partials.member_info')
+    @include('forum::partials.space_info')
 
     <div class="com-new">
         <div class="wm-850">
