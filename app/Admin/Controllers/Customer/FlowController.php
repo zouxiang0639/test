@@ -51,6 +51,7 @@ class FlowController extends Controller
         foreach($model as $item) {
             $formatData[] = [
                 $item->id,
+                $item->users ? $item->users->name : '-',
                 AccountFlowTypeConst::getDesc($item->type),
                 AccountFlowTypeConst::getIconDesc($item->type).FormatMoney::fen2yuan($item->amount),
                 $item->describe,
