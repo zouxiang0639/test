@@ -116,9 +116,16 @@ class CanteenController extends Controller
      */
     public function mealBuy(Request $request)
     {
+        //检查是否超过预购时间
+        $tomorrow = date("Y-m-d",strtotime("+1 day"));
+        if($tomorrow == $request->date && intval(date('H')) >= intval(config('config.meal_deadline'))) {
+            throw new LogicException(1010001, '明天的就餐预约已结束');
+        }
+
         if(empty($request->num)) {
             throw new LogicException(1010001, '请选择数量');
         }
+
         if(empty($request->recipes_id)) {
             throw new LogicException(1010001, $request->date . '没有设置菜单不可以订购');
         }
