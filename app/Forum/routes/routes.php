@@ -89,6 +89,8 @@ Route::group([
         Route::get('logout', ['uses' => "AuthController@logout", 'as' => 'f.auth.logout']);
         Route::get('register', ['uses' => "AuthController@register", 'as' => 'f.auth.register']);
         Route::put('register/put', ['uses' => "AuthController@registerPut", 'as' => 'f.auth.register.put']);
+        Route::put('email/auth', ['uses' => "AuthController@emailAuth", 'as' => 'f.auth.email.auth']);
+        Route::put('check/name', ['uses' => "AuthController@checkName", 'as' => 'f.auth.check.name']);
 
     });
 

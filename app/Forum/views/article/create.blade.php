@@ -48,7 +48,7 @@
 @stop
 
 @section('script')
-
+    @parent
     <script src="{{ assets_path("/lib/ckeditor/ckeditor.js") }}"></script>
     <script>
 

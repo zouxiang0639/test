@@ -75,15 +75,12 @@
 .txt-input > .spel .jc{
 	position: absolute;
 	right: 0;
-	bottom: 5px;
-	width: 66px;
-	height: 18px;
-	color: #fff;
-	line-height: 18px;
+	padding-top: 8px;
 	border-radius: 4px;
 	background: #459fed;
 	text-align: center;
 	font-size: 14px;
+	opacity: 0.9;
 }
 .txt-opt{
 	margin: 5px 0 0 0;
