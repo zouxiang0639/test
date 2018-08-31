@@ -28,7 +28,6 @@
                 <!-- /.box-header -->
                 <!-- form start -->
               {!! $form !!}
-                <button id="abc">abc</button>
             </div>
 
         </div>
@@ -82,7 +81,11 @@
 
             $('[name="division[]"]').change(function() {
                 countMoney()
-            })
+            });
+
+            $('input[name=money]').change(function() {
+                countMoney()
+            }).trigger("change");
         });
 
         //格式化金额千分位

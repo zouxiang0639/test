@@ -228,8 +228,10 @@ class OrderBls
 
             $model->orderTakeout->each(function($item) {
                 $takeout = TakeoutBls::find($item->takeout_id);
-                $takeout->stock += $item->num;
-                $takeout->save();
+                if($takeout) {
+                    $takeout->stock += $item->num;
+                    $takeout->save();
+                }
             });
             $model->status = OrderStatusConst::REFUND;
             $model->save();
@@ -293,6 +295,7 @@ class OrderBls
 
             $order->payment_at = date('Y-m-d H:i:s');
             $order->payment += $amount;
+            $order->status = OrderStatusConst::PAYMENT;
             $order->save();
 
 
