@@ -28,10 +28,13 @@
                 <!-- /.box-header -->
                 <!-- form start -->
               {!! $form !!}
+                <button id="abc">abc</button>
             </div>
 
         </div>
     </div>
+
+    <input type="hidden" id="division-json" value='{!! $division !!}'>
 
 @stop
 
@@ -41,23 +44,64 @@
             "url":"{!! route('m.customer.recharge.money.post') !!}",
             "backUrl":"{!! route('m.customer.recharge.list') !!}"
         };
-
+        var division = JSON.parse($("#division-json").val());
         $(function() {
-            $('select[name=type]').change(function() {
 
+            var countMoney = function() {
+                var arr = $('[name="division[]"]').val();
+                var num = 0;
+                var money = rmoney($('input[name=money]').val());
+
+                if(arr) {
+                    arr.forEach(function( val ) {
+                        if(division[val]) {
+                            num += division[val];
+                        }
+                    });
+                }
+
+                $('#count-money .no-margin').text('用户'+ num +' 充值总金额' + fmoney(money * num))
+            };
+
+            $('select[name=type]').change(function() {
                 var group = '{!! \App\Consts\Admin\Customer\RechargeTypeConst::GROUP !!}';
                 var one = '{!! \App\Consts\Admin\Customer\RechargeTypeConst::ONE !!}';
                 var type = $(this).val();
 
                 $('#division').hide();
                 $('#user').hide();
+                $('#count-money').hide();
 
                 if(type == group) {
                     $('#division').show();
+                    $('#count-money').show();
                 } else if(type == one) {
                     $('#user').show();
                 }
             }).trigger("change");
-        })
+
+            $('[name="division[]"]').change(function() {
+                countMoney()
+            })
+        });
+
+        //格式化金额千分位
+        function fmoney(s, n) {
+            n = n > 0 && n <= 20 ? n : 2;
+            s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+            var l = s.split(".")[0].split("").reverse(),
+                    r = s.split(".")[1];
+            t = "";
+            for(i = 0; i < l.length; i ++ )
+            {
+                t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+            }
+            return t.split("").reverse().join("") + "." + r;
+        }
+
+        //还原千分位
+        function rmoney(s) {
+            return parseFloat(s.replace(/[^\d\.-]/g, ""));
+        }
     </script>
 @stop

@@ -59,8 +59,11 @@ class RechargeController extends Controller
      */
     public function money()
     {
+        $division = UsersBls::groupUserDivision();
+
         return View::make('admin::customer.recharge.money',[
-            'form' => $this->form([])
+            'form' => $this->form([]),
+            'division' => json_encode($division),
         ]);
     }
 
@@ -132,7 +135,11 @@ class RechargeController extends Controller
                 $h->input = $form->select('type',RechargeTypeConst::desc() , '', $h->options);
                 $h->set('type', true);
             });
-
+            $item->create('充值总金额', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->display('用户0 充值总金额0.00');
+                $h->id = 'count-money';
+                $h->set('divisions', false);
+            });
             $item->create('分组', function(HtmlFormTpl $h, FormBuilder $form) {
                 $list = TagsBls::getTagsByType(TagsTypeConst::TAG)->pluck('tag_name', 'id')->toArray();
                 $h->input = $form->dualListBox('division[]',$list , '', $h->options);

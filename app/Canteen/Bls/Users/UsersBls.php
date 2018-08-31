@@ -157,4 +157,13 @@ class UsersBls
             return true;
         });
     }
+
+    public static function groupUserDivision()
+    {
+        return UsersModel::groupBy('division')->get(array(
+           'division',
+            \DB::raw('COUNT(*) as "count"')
+        ))->pluck('count', 'division');
+
+    }
 }
