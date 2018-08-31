@@ -5,9 +5,11 @@ namespace App\Forum\Bls\Article\Model;
 use App\Forum\Bls\Users\Model\UsersModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ArticleModel extends Model
 {
+    use SoftDeletes;
     /**
      * The table associated with the model.
      *
@@ -26,6 +28,9 @@ class ArticleModel extends Model
         'star' => 'array',
         'recommend' => 'array',
     ];
+
+
+    protected $dates = ['deleted_at'];
 
     /**
      * 发布人

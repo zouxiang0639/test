@@ -14,7 +14,16 @@
     <div class="tie-inner">
         <div class="wm-850">
             <div class="inner-info">
-                <p>帖子ID : {!! $info->id !!}</p>
+                <p>帖子ID : {!! $info->id !!}
+                    @if($checkAuth && is_null($info->deleted_at))
+                        <a style="margin-left: 40px;" title="编辑" class="btn btn-primary btn-sm" href="{!! route('f.article.edit', ['id' => $info->id]) !!}">
+                            <i class="fa fa-edit"></i>编辑
+                        </a>
+                        <a title="删除" class="btn btn-primary btn-sm article—delete" href="javascript:;" data-url="{!! route('f.article.delete', ['id' => $info->id]) !!}">
+                            <i class="fa fa-trash"></i>删除
+                        </a>
+                    @endif
+                </p>
                 <p>
                     发帖人 :<a href="{!! route('f.space.index', ['user_id' => $info->issuer]) !!}">{{ $info->issuers->name  }}</a>
                     (注册时间:{{ mb_substr($info->issuers->created_at, 0, 10) }} 登陆次数:{{ $info->issuers->login_num }})
@@ -41,8 +50,11 @@
             <div class="art-con">
                 <p class="tit">{{ $info->title }}</p>
                 <div class="con-in">
-                   {!! $info->contents !!}
-
+                    @if(is_null($info->deleted_at))
+                        {!! $info->contents !!}
+                    @else
+                        文章已被删除
+                    @endif
                 </div>
                 @if($info->source)
                 <p class="source">来源：{!! $info->source !!}</p>
@@ -173,7 +185,6 @@
 
 @section('script')
     @parent
-                <script src="{{  assets_path("/lib/layer-v3.1.1/layer.js") }}"></script>
     <script>
 
         $(function(){
@@ -624,7 +635,54 @@
 
                         }
                 );
-            })
+            });
+
+            $('.article—delete').click(function() {
+                var _this = $(this);
+                swal({
+                            title: "确认删除?",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "确定",
+                            closeOnConfirm: false,
+                            cancelButtonText: "取消"
+                        },
+                        function(){
+
+                            if (! locked) {
+                                return false;
+                            }
+
+                            locked = false;
+                            $.ajax({
+                                url: _this.attr('data-url'),
+                                type: 'POST',
+                                data: {
+                                    "_method":"DELETE",
+                                    "_token":$('meta[name="csrf-token"]').attr('content')
+                                },
+                                cache: false,
+                                dataType: 'json',
+                                success:function(res) {
+                                    if(res.code != 0) {
+                                        swal(res.data, '', 'error');
+
+                                    } else {
+                                        swal(res.data, '', 'success');
+                                        _this.parents('li').remove();
+                                    }
+                                    locked = true;
+                                },
+                                error:function () {
+                                    locked = true;
+                                }
+
+                            });
+
+                        }
+                );
+            });
 
         });
 

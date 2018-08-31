@@ -74,6 +74,26 @@ class ArticleController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $model = ArticleBls::getArticleByIssuer(Auth::guard('forum')->id(), $id);
+        $this->isEmpty($model);
+        return view('forum::article.edit', [
+            'info' => $model
+        ]);
+    }
+
+    public function editPut($id, ArticleCreateRequest $request) {
+        $model = ArticleBls::getArticleByIssuer(Auth::guard('forum')->id(), $id);
+
+        $this->isEmpty($model);
+        if (ArticleBls::editArticle($request, $model)) {
+            return (new JsonResponse())->success(route('f.article.info', ['id' => $model->id]));
+        } else {
+            throw new LogicException(1010002, '操作失败');
+        }
+    }
+
     /**
      *  详情
      * @param $id
@@ -82,17 +102,20 @@ class ArticleController extends Controller
      */
     public function info($id)
     {
-        $model = ArticleBls::find($id);
+        $model = ArticleBls::findByWithTrashed($id);
 
         $this->isEmpty($model);
         $this->isEmpty($model->issuers);
         $model->browse ++;
         $model->save();
 
+        $userId = Auth::guard('forum')->id();
+
         return view('forum::article.info', [
             'info' => $model,
-            'userId' => Auth::guard('forum')->id(),
+            'userId' => $userId,
             'replyCount' => ReplyBls::countReply($id),
+            'checkAuth' => $model->issuer == $userId,
         ]);
     }
 
@@ -194,5 +217,16 @@ class ArticleController extends Controller
         }
     }
 
+    public function delete($id)
+    {
+        $model = ArticleBls::getArticleByIssuer(Auth::guard('forum')->id(), $id);
+        $this->isEmpty($model);
+
+        if($model->delete()) {
+            return (new JsonResponse())->success('删除成功');
+        } else {
+            throw new LogicException(1010002);
+        }
+    }
 
 }

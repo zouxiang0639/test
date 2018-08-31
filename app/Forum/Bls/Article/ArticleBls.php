@@ -70,6 +70,8 @@ class ArticleBls
         return ArticleModel::query()->getQuery()->getConnection()->transaction(function () use($request) {
 
             $user = Auth::guard('forum')->user();
+
+            //文章发表策略
             static::articleStrategy($user);
 
             $model = new ArticleModel();
@@ -77,7 +79,7 @@ class ArticleBls
             $model->source = $request->source ?: '';
             $model->tags = $request->tags;
             $model->status = WhetherConst::NO;
-            $model->is_hide = $request->is_hide ? WhetherConst::YES : WhetherConst::NO;
+            $model->is_hide = $model->tags == 4 ? ($request->is_hide ? WhetherConst::YES : WhetherConst::NO) : WhetherConst::NO;
             $model->contents = $request->contents;
             $model->issuer = $user->id;
             $model->ip =  $request->getClientIp();
@@ -93,6 +95,17 @@ class ArticleBls
         });
     }
 
+    public static function editArticle(ArticleCreateRequest $request, ArticleModel $model)
+    {
+        $model->title = $request->title;
+        $model->source = $request->source ?: '';
+        $model->tags = $request->tags;
+        $model->status = WhetherConst::NO;
+        $model->is_hide = $model->tags == 4 ? ($request->is_hide ? WhetherConst::YES : WhetherConst::NO) : WhetherConst::NO;
+        $model->contents = $request->contents;
+        return $model->save();
+    }
+
     /**
      * @param $id
      * @return mixed
@@ -101,6 +114,12 @@ class ArticleBls
     {
         return ArticleModel::find($id);
     }
+
+    public static function findByWithTrashed($id)
+    {
+        return ArticleModel::withTrashed()->find($id);
+    }
+
 
 
     /**
@@ -260,6 +279,12 @@ class ArticleBls
 
         $user->save();
     }
+
+    public static function getArticleByIssuer($issuer, $id)
+    {
+        return ArticleModel::where('issuer', $issuer)->where('id', $id)->first();
+    }
+
 
 }
 

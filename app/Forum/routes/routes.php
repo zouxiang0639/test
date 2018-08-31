@@ -15,7 +15,7 @@ Route::group([
         Route::get('gather', ['uses' => "ArticleController@gather", 'as' => 'f.article.gather']);
         Route::get('create', ['uses' => "ArticleController@create", 'as' => 'f.article.create']);
         Route::get('info/{id}', ['uses' => "ArticleController@info", 'as' => 'f.article.info']);
-
+        Route::get('edit/{id}', ['uses' => "ArticleController@edit", 'as' => 'f.article.edit']);
         Route::put('all', ['uses' => "ArticleController@all", 'as' => 'f.article.all']);
 
         Route::group(['middleware' => 'forum.auth:f_member'], function(){
@@ -23,8 +23,10 @@ Route::group([
             Route::put('thumbsdown/{id}', ['uses' => "ArticleController@thumbsDown", 'as' => 'f.article.thumbsDown']);
 
             Route::put('create/put', ['uses' => "ArticleController@createPut", 'as' => 'f.article.create.put']);
+            Route::put('edit/put/{id}', ['uses' => "ArticleController@editPut", 'as' => 'f.article.edit.put']);
             Route::put('star/{id}', ['uses' => "ArticleController@star", 'as' => 'f.article.star']);
             Route::put('recommend/{id}', ['uses' => "ArticleController@recommend", 'as' => 'f.article.recommend']);
+            Route::delete('delete/{id}', ['uses' => "ArticleController@delete", 'as' => 'f.article.delete']);
         });
     });
 
@@ -51,14 +53,10 @@ Route::group([
         Route::put('sign/in', ['uses' => "MemberController@signIn", 'as' => 'f.member.sign.in']);
     });
 
-    //会员
+    //空间
     Route::group(['prefix'=>'space'], function(){
         Route::get('index/{user_id}', ['uses' => "SpaceController@index", 'as' => 'f.space.index']);
         Route::get('reply/{user_id}', ['uses' => "SpaceController@reply", 'as' => 'f.space.reply']);
-        Route::get('recommend', ['uses' => "SpaceController@recommend", 'as' => 'f.space.recommend']);
-        Route::get('star', ['uses' => "SpaceController@star", 'as' => 'f.space.star']);
-        Route::get('info', ['uses' => "SpaceController@info", 'as' => 'f.space.info']);
-        Route::put('sign/in', ['uses' => "SpaceController@signIn", 'as' => 'f.space.sign.in']);
     });
 
     //上传
