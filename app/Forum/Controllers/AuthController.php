@@ -153,4 +153,14 @@ class AuthController extends Controller
 
         return (new JsonResponse())->success('昵称可以使用');
     }
+
+
+    public function info()
+    {
+        $info = config('config.protocol');
+        return view('forum::auth.info', [
+            'info' => $info
+        ]);
+
+    }
 }

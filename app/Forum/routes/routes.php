@@ -79,6 +79,7 @@ Route::group([
 
     //登录等功能
     Route::group(['prefix'=>'auth'], function(){
+        Route::get('info', ['uses' => "AuthController@info", 'as' => 'f.auth.info']);
         Route::get('qq', ['uses' => "AuthController@qq", 'as' => 'f.auth.qq']);
         Route::get('qq/login', ['uses' => "AuthController@qqLogin", 'as' => 'f.auth.qq.login']);
         Route::get('weibo', ['uses' => "AuthController@weibo", 'as' => 'f.auth.weibo']);
@@ -90,7 +91,6 @@ Route::group([
         Route::put('register/put', ['uses' => "AuthController@registerPut", 'as' => 'f.auth.register.put']);
         Route::put('email/auth', ['uses' => "AuthController@emailAuth", 'as' => 'f.auth.email.auth']);
         Route::put('check/name', ['uses' => "AuthController@checkName", 'as' => 'f.auth.check.name']);
-
     });
 
 });

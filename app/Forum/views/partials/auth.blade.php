@@ -28,7 +28,7 @@
                         </div>
                         <div class="agree">
                             <p class="ck"><input type="checkbox" id="check1" value="123" name="is_read" class="check"><label for="check1">我已阅读并同意</label></p>
-                            <a class="agree-link" href="javascript:void(0)">空地社区用户注册协议</a>
+                            <a class="agree-link" target="_blank" href="{!! route('f.auth.info') !!}">空地社区用户注册协议</a>
                         </div>
                         <div class=" res-con">
 
@@ -66,7 +66,7 @@
                     </div>
                     <div class="txt-opt clearfix">
                         <p class="lt fl">
-                            <a href="javascript:void(0)">注册</a>/
+                            <a class="modal-register" href="javascript:void(0)">注册</a>/
                             <a href="javascript:void(0)">忘记密码</a>
                         </p>
                         <p class="rt fr">
@@ -180,6 +180,15 @@
                    }
                });
            });
+
+           $('.login-link').click(function() {
+               $('.close').click();
+               $('.login').click();
+           });
+           $('.modal-register').click(function() {
+               $('.close').click();
+               $('.register').click();
+           })
        })
     </script>
 @stop
