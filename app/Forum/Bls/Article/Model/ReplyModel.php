@@ -50,4 +50,9 @@ class ReplyModel extends Model
         return $this->belongsTo(UsersModel::class, 'at');
     }
 
+    public function article()
+    {
+        return $this->belongsTo(ArticleModel::class, 'article_id')->withTrashed();
+    }
+
 }

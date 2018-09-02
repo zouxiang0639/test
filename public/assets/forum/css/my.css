@@ -173,13 +173,13 @@
 	position: absolute;
 }
 .tab-con li span.time{
-	width: 70px;
+	width: 72px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 .tab-con li span.type{
-	left: 72px;
+	left: 84px;
 	width: 95px;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -504,7 +504,7 @@
 	overflow: hidden;
 }
 .edit-container .con .tea textarea{
-	width: 100%;
+	width: 94%;
 	height: 100%;
 	resize: none;
 	padding: 10px;

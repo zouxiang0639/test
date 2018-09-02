@@ -4,6 +4,7 @@ namespace App\Forum\Controllers;
 
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ArticleBls;
+use App\Forum\Bls\Article\InfoBls;
 use App\Forum\Bls\Article\ReplyBls;
 use App\Forum\Bls\Users\UsersBls;
 use App\Http\Controllers\Controller;
@@ -86,12 +87,30 @@ class MemberController extends Controller
      * 消息
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function info()
+    public function info(Request $request)
     {
+        $request->merge(['user_id' => Auth::guard('forum')->id()]);
+        $model = InfoBls::getInfoList($request);
+        $model->getCollection()->each(function($item) {
+            $item->operatorName = '-';
 
+            if($operator = $item->operator) {
+                $item->operatorName = $operator->name;
+            }
+        });
         return view('forum::member.info', [
-            'current' => 5
+            'current' => 5,
+            'list' => $model
         ]);
+    }
+
+    public function infoSign()
+    {
+        if (InfoBls::signByYes(Auth::guard('forum')->id())) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010002,'已经全部已读');
+        }
     }
 
     /**

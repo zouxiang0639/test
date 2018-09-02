@@ -71,7 +71,7 @@ class Reply implements Renderable
      */
     public function __construct($data, $articlesId)
     {
-        $model = ArticleBls::find($articlesId);
+        $model = ArticleBls::findByWithTrashed($articlesId);
         $this->articlesIssuer = $model->issuer;
         $this->item = $data;
         $this->userId = Auth::guard('forum')->id();

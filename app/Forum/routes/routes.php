@@ -50,6 +50,7 @@ Route::group([
         Route::get('recommend', ['uses' => "MemberController@recommend", 'as' => 'f.member.recommend']);
         Route::get('star', ['uses' => "MemberController@star", 'as' => 'f.member.star']);
         Route::get('info', ['uses' => "MemberController@info", 'as' => 'f.member.info']);
+        Route::put('info/sign', ['uses' => "MemberController@infoSign", 'as' => 'f.member.info.sign']);
         Route::put('sign/in', ['uses' => "MemberController@signIn", 'as' => 'f.member.sign.in']);
     });
 

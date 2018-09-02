@@ -7,7 +7,13 @@
             <div class="login-state">
                 <!--登陆后的状态-->
                 @if(Auth::guard('forum')->check())
-                    <span class="news"><i class="icon-alarm"></i>2</span>
+
+                    <span class="news">
+                         <a style=" color: #e15844;" href="{!! route('f.member.info') !!}" >
+                        <i class="icon-alarm"></i>{!! \App\Forum\Bls\Article\InfoBls::countInfo(\Auth::guard('forum')->id(), \App\Consts\Common\WhetherConst::NO) !!}
+                         </a>
+                    </span>
+
                     <a  href="{!! route('f.member.index') !!}">{!! Auth::guard('forum')->user()->name !!}</a>
                     <a  href="{!! route('f.auth.logout') !!}">退出</a>
                 @else

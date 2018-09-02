@@ -2,6 +2,7 @@
 
 namespace App\Forum\Bls\Article;
 
+use App\Consts\Admin\User\InfoTypeConst;
 use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\Model\ArticleModel;
@@ -123,7 +124,7 @@ class ArticleBls
 
 
     /**
-     * 弱
+     * 赞
      * @param ArticleModel $model
      * @throws LogicException
      * @return array|bool
@@ -148,6 +149,11 @@ class ArticleBls
         }
         $model->save();
 
+        //信息创建
+        $operatorId = Auth::guard('forum')->id();
+        $content = '推荐了<a href="'. route('f.article.info', ['id' => $model->id], false) .'">' . $model->title . '</a>,被推荐'. $model->recommend_count.'次';
+        InfoBls::createInfo($model->issuer, $operatorId, InfoTypeConst::RECOMMEND, $content);
+
         if($user->save()) {
             return ['data' => $data];
         }
@@ -155,7 +161,7 @@ class ArticleBls
     }
 
     /**
-     * 赞
+     * 弱
      * @param ArticleModel $model
      * @throws LogicException
      * @return array|bool

@@ -12,93 +12,69 @@
         <div class="wm-850">
             <div class="info-tab">
                 <div class="tab-tit">
-                    <ul class="clearfix">
-                        <li class="on">回复<span>3</span></li>
-                        <li>帖子<span>5</span></li>
-                        <li>管理员<span>1</span></li>
-                    </ul>
-                    <a class="read" href="javascript:void(0)">全部设为已读</a>
+                    {{--<ul class="clearfix">--}}
+                        {{--<li class="on">回复<span>3</span></li>--}}
+                        {{--<li>帖子<span>5</span></li>--}}
+                        {{--<li>管理员<span>1</span></li>--}}
+                    {{--</ul>--}}
+                    <a class="read info-sign" href="javascript:void(0)">全部设为已读</a>
                 </div>
                 <div class="tab-con">
                     <ul>
-                        <li class="new">
-                            <span class="time">16:50</span>
-                            <span class="type">新增回复</span>
-                            <span class="con">你的帖子‘婆婆真的没有义务带孩子吗’有2个新回复</span>
-                        </li>
-                        <li class="new">
-                            <span class="time">16:50</span>
-                            <span class="type">新增回复</span>
-                            <span class="con">你的帖子‘婆婆真的没有义务带孩子吗’有2个新回复</span>
-                        </li>
-                        <li class="new">
-                            <span class="time">16:50</span>
-                            <span class="type">新增回复</span>
-                            <span class="con">你的帖子‘婆婆真的没有义务带孩子吗’有2个新回复</span>
-                        </li>
-                        <li>
-                            <span class="time">08/07/01</span>
-                            <span class="type">被点赞10次</span>
-                            <span class="con">你的帖子‘婆婆真的没有义务带孩子吗’有2个新回复</span>
-                        </li>
-                        <li>
-                            <span class="time">08/07/01</span>
-                            <span class="type">被点赞10次</span>
-                            <span class="con">你的帖子‘婆婆真的没有义务带孩子吗’有2个新回复</span>
-                        </li>
-                        <li>
-                            <span class="time">08/07/01</span>
-                            <span class="type">被点赞10次</span>
-                            <span class="con">你的帖子‘婆婆真的没有义务带孩子吗’有2个新回复</span>
-                        </li>
-                        <li>
-                            <span class="time">08/07/01</span>
-                            <span class="type">被点赞10次</span>
-                            <span class="con">你的帖子‘婆婆真的没有义务带孩子吗’有2个新回复</span>
-                        </li>
-                        <li>
-                            <span class="time">08/07/01</span>
-                            <span class="type">被点赞10次</span>
-                            <span class="con">你的帖子‘婆婆真的没有义务带孩子吗’有2个新回复</span>
-                        </li>
-                        <li>
-                            <span class="time">08/07/01</span>
-                            <span class="type">被点赞10次</span>
-                            <span class="con">你的帖子‘婆婆真的没有义务带孩子吗’有2个新回复</span>
-                        </li>
-                        <li>
-                            <span class="time">08/07/01</span>
-                            <span class="type">被点赞10次</span>
-                            <span class="con">你的帖子‘婆婆真的没有义务带孩子吗’有2个新回复</span>
-                        </li>
-                        <li>
-                            <span class="time">08/07/01</span>
-                            <span class="type">被点赞10次</span>
-                            <span class="con">你的帖子‘婆婆真的没有义务带孩子吗’有2个新回复</span>
-                        </li>
-                        <li>
-                            <span class="time">08/07/01</span>
-                            <span class="type">被点赞10次</span>
-                            <span class="con">你的帖子‘婆婆真的没有义务带孩子吗’有2个新回复</span>
-                        </li>
-                        <li>
-                            <span class="time">08/07/01</span>
-                            <span class="type">被点赞10次</span>
-                            <span class="con">你的帖子‘婆婆真的没有义务带孩子吗’有2个新回复</span>
-                        </li>
-                        <li>
-                            <span class="time">08/07/01</span>
-                            <span class="type">被点赞10次</span>
-                            <span class="con">你的帖子‘婆婆真的没有义务带孩子吗’有2个新回复</span>
-                        </li>
-                        <li>
-                            <span class="time">08/07/01</span>
-                            <span class="type">被点赞10次</span>
-                            <span class="con">你的帖子‘婆婆真的没有义务带孩子吗’有2个新回复</span>
-                        </li>
+                        @foreach($list as $item)
+                            <li  {!! $item->sign == 2 ? 'class="new"' : ''!!}>
+                                <span class="time">{!! mb_substr($item->created_at, 0, 10) !!}</span>
+                                <span class="type">{{ $item->operatorName }}</span>
+                                <span class="con">{!! $item->content  !!}</span>
+                            </li>
+                        @endforeach
                     </ul>
+                    <div class="com-page">
+                        {!! $list->render() !!}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+@stop
+
+@section('script')
+    @parent
+    <script>
+        $(function(){
+            var locked = true;
+            $('.info-sign').click(function() {
+                if (! locked) {
+                    return false;
+                }
+
+                locked = false;
+
+                $.ajax({
+                    url: "{!! route('f.member.info.sign') !!}",
+                    type: 'POST',
+                    data: {
+                        "_method": "PUT",
+                        "_token": $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    success:function(res) {
+                        if(res.code != 0) {
+                            swal(res.data, '', 'error');
+                            locked = true;
+                        } else {
+                            swal(res.data, '', 'success');
+                            window.location.href = document.location;
+                        }
+                    },
+                    error:function () {
+                        locked = true;
+                    }
+
+                });
+            })
+        })
+    </script>
 @stop

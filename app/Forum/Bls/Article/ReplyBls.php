@@ -2,6 +2,7 @@
 
 namespace App\Forum\Bls\Article;
 
+use App\Consts\Admin\User\InfoTypeConst;
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\Model\ReplyModel;
 use App\Forum\Bls\Article\Requests\ReplyCreateRequest;
@@ -32,6 +33,22 @@ class ReplyBls
         $model->picture = $request->picture ?: '';
         $model->thumbs_down = [];
         $model->thumbs_up = [];
+        $article =  $model->article;
+
+
+        if(empty($article) || !is_null($article->deleted_at)) {
+            throw new LogicException(1010002, [['文章已被删除,不能评论']]);
+        }
+
+        //信息创建
+        if($article->issuer != $model->issuer) {
+            $operatorId = Auth::guard('forum')->id();
+            $content = '对<a href="'. route('f.article.info', ['id' => $model->id], false) .'">' .
+                $article->title . '</a>,给予评论: '. e($request->contents);
+            InfoBls::createInfo($article->issuer, $operatorId, InfoTypeConst::REPLY, $content);
+        }
+
+
         return $model->save();
     }
 
@@ -109,6 +126,10 @@ class ReplyBls
             $data = true;
         }
         $model->save();
+
+        $operatorId = Auth::guard('forum')->id();
+        $content = '你的回复:  ('. mb_substr(e($model->contents), 0, 26) .')  得到了'.count($model->thumbs_up).'个赞';
+        InfoBls::createInfo($model->issuer, $operatorId, InfoTypeConst::THUMBS_UP, $content);
 
         if($user->save()) {
             return ['data' => $data];

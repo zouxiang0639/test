@@ -55,7 +55,7 @@
                     <li>
                         <a href="{!! route('f.member.info') !!}">
                             <span class="tit">消息</span>
-                            <span class="num">20</span>
+                            <span class="num">{!! $infoCount !!}</span>
                             {!! $current == 5 ? '<i></i>' : '' !!}
                         </a>
                     </li>
