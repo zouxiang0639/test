@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use Mail;
 use Illuminate\Support\Facades\Validator;
@@ -161,6 +162,117 @@ class AuthController extends Controller
         return view('forum::auth.info', [
             'info' => $info
         ]);
+
+    }
+
+    public function retrievePut(Request $request)
+    {
+        $model = UsersBls::getUserByEmail($request->email);
+
+        Validator::extend('emailIsNull', function ($attribute, $value, $parameters) use($model) {
+            return !is_null($model);
+        });
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|email_is_null',
+            'captcha' => 'required|captcha',
+        ],[
+            'email.required' => '邮箱不能为空',
+            'email.email' => '邮箱格式不正确',
+            'email.email_is_null' => '请检查是否邮箱输入错误',
+            'captcha.required' => '验证码不能为空',
+            'captcha.captcha' => '验证码错误'
+        ]);
+
+        if ($validator->fails()) {
+            throw new LogicException(1010002, $validator->getMessageBag());
+        }
+
+
+        $model->remember_token = Str::random(60);
+        $model->save();
+
+        try{
+            $route = route('f.auth.retrieve', ['token'=>$model->remember_token]);
+            $content = <<<EOT
+您好，{$model->name} ： <br>
+
+请点击下面的链接来重置您的密码。<br>
+
+<a href="{$route}">{$route}</a><br>
+
+如果您的邮箱不支持链接点击，请将以上链接地址拷贝到你的浏览器地址栏中。<br>
+
+该验证邮件有效期为30分钟，超时请重新发送邮件。
+EOT;
+
+            Mail::send('forum::email.content', ['content' => $content], function ($m)  use ($request) {
+                $m->from(config("mail.from.address"), config("mail.from.name"));
+                $m->to($request->email);
+                $m->subject('密码找回');
+            });
+
+            Session::put('retrieve_password_time', time() + 1800);
+            Session::put('retrieve_password_email', $request->email);
+            //创建备份文件
+            Session::save();
+            return (new JsonResponse())->success("重置密码邮件已经发送到{$request->email} ，请登录邮箱重置！");
+        }catch (\Exception $e){
+            throw new LogicException(1010002, [['发送失败']]);
+        }
+    }
+
+    public function retrieve($token)
+    {
+        $model = UsersBls::getUserByToken($token);
+
+        $this->isEmpty($model);
+
+        if(Session::get('retrieve_password_email') != $model->email && Session::get('retrieve_password_time') < time()) {
+            throw new LogicException(1010001);
+        }
+
+        return view('forum::auth.retrieve', [
+            'info' => $model
+        ]);
+    }
+
+    public function retrieveUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|confirmed|max:255',
+        ],[
+            'password.required' => '新密码不能为空',
+            'password.confirmed' => '两次密码输入不一致',
+        ]);
+
+        $model = UsersBls::getUserByToken($request->token);
+
+        $this->isEmpty($model);
+
+        if(Session::get('retrieve_password_email') != $model->email && Session::get('retrieve_password_time') < time()) {
+            throw new LogicException(1010001);
+        }
+
+
+        if ($validator->fails()) {
+            throw new LogicException(1010001, $validator->getMessageBag());
+        }
+
+        $model->password = bcrypt($request->password);
+
+        if($model->save()) {
+
+            Session::put('retrieve_password_time', 0);
+            Session::put('retrieve_password_email', null);
+            //创建备份文件
+            Session::save();
+
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010001, [['操作失败']]);
+        }
+
 
     }
 }

@@ -91,6 +91,9 @@ Route::group([
         Route::put('register/put', ['uses' => "AuthController@registerPut", 'as' => 'f.auth.register.put']);
         Route::put('email/auth', ['uses' => "AuthController@emailAuth", 'as' => 'f.auth.email.auth']);
         Route::put('check/name', ['uses' => "AuthController@checkName", 'as' => 'f.auth.check.name']);
+        Route::get('retrieve/{token}', ['uses' => "AuthController@retrieve", 'as' => 'f.auth.retrieve']);
+        Route::put('retrieve/put', ['uses' => "AuthController@retrievePut", 'as' => 'f.auth.retrieve.put']);
+        Route::put('retrieve/update', ['uses' => "AuthController@retrieveUpdate", 'as' => 'f.auth.retrieve.update']);
     });
 
 });

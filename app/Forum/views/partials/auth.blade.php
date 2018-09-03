@@ -44,6 +44,45 @@
     </div>
 </div>
 
+<div class="modal fade" id="retrieveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" style="width: 420px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close blue" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title blue">找回密码</h4>
+            </div>
+            <div class="modal-body">
+                <div class="center">
+                    <form class="retrieve-form" action="">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="_method" value="PUT">
+                        <div class="txt-input">
+                            <div class="spel">
+                                <input name="email" type="text" placeholder="邮箱" />
+                            </div>
+                        </div>
+                        <div class="txt-input">
+                            <div class="spel">
+                                <input name="captcha" type="text" placeholder="验证码" />
+                                <img src="{{captcha_src()}}" style="cursor: pointer;position: absolute;
+right: 0;" onclick="this.src='{{captcha_src()}}'+Math.random()">
+                            </div>
+                        </div>
+
+                        <div class="res-con" style="text-align: center;">
+
+                            <button data-action="{!! route('f.auth.retrieve.put') !!}" id="retrieve-submit" type="button" style="background: #219d98; color: beige;width: 122px;" class="btn">找回密码</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" style="width: 420px;" role="document">
@@ -67,7 +106,7 @@
                     <div class="txt-opt clearfix">
                         <p class="lt fl">
                             <a class="modal-register" href="javascript:void(0)">注册</a>/
-                            <a href="javascript:void(0)">忘记密码</a>
+                            <a class="modal-retrieve" href="javascript:void(0)">忘记密码</a>
                         </p>
                         <p class="rt fr">
                             <input type="checkbox" id="check1" value="123" name="name" class="check"><label for="check1">自动登录</label>
@@ -88,7 +127,7 @@
         </div>
     </div>
 </div>
-
+<a class="retrieve" style="display: none" data-toggle="modal" data-target="#retrieveModal" href="javascript:void(0)">注册</a>
 @section('script')
     @parent
     <script>
@@ -102,7 +141,7 @@
                    data :{
                        "_method": "PUT",
                        "_token": $('meta[name="csrf-token"]').attr('content'),
-                       'email':$('.register-form input[name=email]').val()
+                       'email': $(this).siblings('input[name=email]').val()
                    } ,
                    dataType:  'json',
                    success: function(json) {
@@ -119,7 +158,7 @@
                            });
                            btn.removeAttr("style");
                        }else{
-                           var  b = 5;
+                           var  b = 60;
                            var	a = setInterval(function() {
                                if( 0 <= b){
                                    btn.html(b + "秒后重发");
@@ -181,13 +220,67 @@
                });
            });
 
+           var locked = true;
+
+           //找回密码
+           $('#retrieve-submit').click(function() {
+               if (! locked) {
+                   return false;
+               }
+
+               locked = false;
+               var _this = $(this);
+               var data  = $(".retrieve-form").serialize();
+
+               _this.attr('disabled',true);
+               $.ajax({
+                   url: _this.attr('data-action'),
+                   type: 'POST',
+                   data: data,
+                   cache: false,
+                   dataType: 'json',
+                   success:function(res) {
+                       if(res.code != 0){
+                           var errorHtml = '';
+                           var error = res.data;
+                           for ( var i in error ) {
+                               errorHtml += "<p class='text-danger'>" + error[i][0] + "</p>"
+                           }
+                           swal({
+                               title: "",
+                               text: errorHtml,
+                               html: true
+                           });
+                           _this.attr('disabled',false);
+                           locked = true;
+                       } else {
+                           swal(res.data, '', 'success');
+                           $('.close').click();
+                       }
+                   },
+                   error:function () {
+                       locked = true;
+                       _this.attr('disabled',false);
+                   }
+
+               });
+               return false;
+           });
+
+
            $('.login-link').click(function() {
                $('.close').click();
                $('.login').click();
            });
+
            $('.modal-register').click(function() {
                $('.close').click();
                $('.register').click();
+           });
+
+           $('.modal-retrieve').click(function() {
+               $('.close').click();
+               $('.retrieve').click();
            })
        })
     </script>

@@ -23,7 +23,7 @@ class UsersBls
         $model = new UsersModel();
         $model->name = $request->name;
         $model->email = $request->email;
-        $model->password = bcrypt($request->password);;
+        $model->password = bcrypt($request->password);
 
         if($model->save()) {
             return $model;
@@ -103,6 +103,16 @@ class UsersBls
     public static function find($id)
     {
         return UsersModel::find($id);
+    }
+
+    public static function getUserByEmail($email)
+    {
+        return UsersModel::where('email', $email)->first();
+    }
+
+    public static function getUserByToken($token)
+    {
+        return UsersModel::where('remember_token', $token)->first();
     }
 
 
