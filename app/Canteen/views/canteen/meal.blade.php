@@ -188,34 +188,36 @@
                     return false;
                 }
 
-                if (! locked) {
-                    return false;
-                }
-
-                locked = false;
-
-                $.ajax({
-                    url: '{!! route('c.canteen.meal.buy') !!}',
-                    type: 'POST',
-                    data:data,
-                    cache: false,
-                    dataType: 'json',
-                    success:function(res) {
-
-                        if(res.code != 0) {
-                            $.alert(res.data);
-                            locked = true;
-                        } else {
-                            $.alert(res.data);
-                            window.location.href = '{!! route('c.order.list') !!}';
-                        }
-                    },
-                    error:function () {
-                        locked = true;
+                $.confirm('总金额' + fmoney(data.amount / 100) + '元', '支付定金' + fmoney(data.deposit / 100) + '元', function () {
+                    
+                    if (! locked) {
+                        return false;
                     }
 
-                });
+                    locked = false;
 
+                    $.ajax({
+                        url: '{!! route('c.canteen.meal.buy') !!}',
+                        type: 'POST',
+                        data:data,
+                        cache: false,
+                        dataType: 'json',
+                        success:function(res) {
+
+                            if(res.code != 0) {
+                                $.alert(res.data);
+                                locked = true;
+                            } else {
+                                $.alert(res.data);
+                                window.location.href = '{!! route('c.order.list') !!}';
+                            }
+                        },
+                        error:function () {
+                            locked = true;
+                        }
+
+                    });
+                });
             });
 
             //加

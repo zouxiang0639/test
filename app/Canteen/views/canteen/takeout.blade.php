@@ -166,38 +166,40 @@
 
             //订购
             $('.takeout-buy-submit').click(function(){
-                if (! locked) {
-                    return false;
-                }
 
-                locked = false;
-
-                $.ajax({
-                    url: '{!! route('c.canteen.takeout.buy') !!}',
-                    type: 'POST',
-                    data: {
-                        "_method":"PUT",
-                        "_token":$('meta[name="csrf-token"]').attr('content'),
-                        "data": data
-                    },
-                    cache: false,
-                    dataType: 'json',
-                    success:function(res) {
-
-                        if(res.code != 0) {
-                            $.alert(res.data);
-                            locked = true;
-                        } else {
-                            $.alert(res.data);
-                            window.location.href = '{!! route('c.order.list') !!}';
-                        }
-                    },
-                    error:function () {
-                        locked = true;
+                $.confirm('总金额' + fmoney(amount) + '元', '支付定金' + fmoney(deposit) + '元', function () {
+                    if (! locked) {
+                        return false;
                     }
 
-                });
+                    locked = false;
 
+                    $.ajax({
+                        url: '{!! route('c.canteen.takeout.buy') !!}',
+                        type: 'POST',
+                        data: {
+                            "_method":"PUT",
+                            "_token":$('meta[name="csrf-token"]').attr('content'),
+                            "data": data
+                        },
+                        cache: false,
+                        dataType: 'json',
+                        success:function(res) {
+
+                            if(res.code != 0) {
+                                $.alert(res.data);
+                                locked = true;
+                            } else {
+                                $.alert(res.data);
+                                window.location.href = '{!! route('c.order.list') !!}';
+                            }
+                        },
+                        error:function () {
+                            locked = true;
+                        }
+
+                    });
+                });
             });
 
             //加
