@@ -54,7 +54,7 @@
                 if(arr) {
                     arr.forEach(function( val ) {
                         if(division[val]) {
-                            num += division[val];
+                            num += parseInt(division[val]);
                         }
                     });
                 }

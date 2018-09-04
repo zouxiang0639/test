@@ -213,12 +213,12 @@ class ConfigController extends Controller
                 $h->helpBlock = '（24-48小时折扣）';
             });
 
-            $item->create('订餐违约次数', function(HtmlFormTpl $h, FormBuilder $form) {
-                $h->options['max'] = 100;
-                $h->input = $form->number('meal_overdue_num', config('config.meal_overdue_num', 0), $h->options);
-                $h->set('meal_overdue_num', false);
-                $h->helpBlock = '（每周可以违约次数,超过这个次数将不能订购）';
-            });
+//            $item->create('订餐违约次数', function(HtmlFormTpl $h, FormBuilder $form) {
+//                $h->options['max'] = 100;
+//                $h->input = $form->number('meal_overdue_num', config('config.meal_overdue_num', 0), $h->options);
+//                $h->set('meal_overdue_num', false);
+//                $h->helpBlock = '（每周可以违约次数,超过这个次数将不能订购）';
+//            });
 
         })->getFormHtml();
 
@@ -230,11 +230,11 @@ class ConfigController extends Controller
                 $h->helpBlock = '（外卖截止时间到期后将不能购买外卖）';
             });
 
-            $item->create('限制退单', function(HtmlFormTpl $h, FormBuilder $form) {
-                $h->input = $form->number('refund_limit', config('config.refund_limit', 0), $h->options);
-                $h->set('refund_limit', false);
-                $h->helpBlock = '（每个月限制退单次数）';
-            });
+//            $item->create('限制退单', function(HtmlFormTpl $h, FormBuilder $form) {
+//                $h->input = $form->number('refund_limit', config('config.refund_limit', 0), $h->options);
+//                $h->set('refund_limit', false);
+//                $h->helpBlock = '（每个月限制退单次数）';
+//            });
 
 
         })->getFormHtml();

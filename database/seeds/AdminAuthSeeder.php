@@ -187,7 +187,7 @@ class AdminAuthSeeder extends Seeder
 
         $menuRequest->merge([
             'parent_id' => $menu->getKey(),
-            'title' => '标签',
+            'title' => '分组',
             'icon' => 'fa-tags',
             'route' => 'm.system.tags.list',
             'slug' => 'm_system_tags',
