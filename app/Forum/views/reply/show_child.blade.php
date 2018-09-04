@@ -38,7 +38,7 @@
                     @if($item->atName)
                         <span style="color: red"> @ {{ $item->atName }}</span>
                     @endif
-                    {{ $item->contents }}
+                    {!!  str_replace("\r\n", '<br>', e($item->contents)) !!}
                 </p>
             </div>
         </div>

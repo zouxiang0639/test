@@ -15,13 +15,13 @@
                         <div class="txt-input">
                             <div class="spel">
                                 <input name="email" type="text" placeholder="邮箱" />
-                                <a class="jc btn btn-primary post-verify" href="javascript:void(0)">获取验证码</a>
+                                <a class="jc post-verify" href="javascript:void(0)">获取验证码</a>
                             </div>
                             <div class="spel email-verify" style="display: none">
                                 <input name="email_verify" type="text" placeholder="邮箱验证码" />
                             </div>
                             <div class="spel"><input name="name" type="text" placeholder="昵称" />
-                                <a class="jc btn btn-primary check-name" href="javascript:void(0)">重复检测</a>
+                                <a class="jc check-name" href="javascript:void(0)">重复检测</a>
                             </div>
                             <div class="spel"><input name="password" type="password" placeholder="密码" /></div>
                             <div class="spel"><input name="password_confirmation" type="password" placeholder="确认密码" /></div>

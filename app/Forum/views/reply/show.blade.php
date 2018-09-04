@@ -33,7 +33,7 @@
                 @endif
             </div>
             <p>
-                {{ $item->contents }}
+                {!!  str_replace("\r\n", '<br>', e($item->contents)) !!}
             </p>
         </div>
         @if($item->childrenCount > 0)
