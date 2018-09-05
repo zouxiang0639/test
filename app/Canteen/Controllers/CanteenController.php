@@ -117,9 +117,18 @@ class CanteenController extends Controller
     public function mealBuy(Request $request)
     {
         //检查是否超过预购时间
-        $tomorrow = date("Y-m-d",strtotime("+1 day"));
-        if($tomorrow == $request->date && intval(date('H')) >= intval(config('config.meal_deadline'))) {
-            throw new LogicException(1010001, '明天的就餐预约已结束');
+        $endTime = $this->endTime($request->date);
+        $time = time();
+        if($endTime[$request->type] < $time) {
+            throw new LogicException(1010001, '预定时间已结束');
+        }
+
+        //设置折扣
+        $hour = ($endTime[$request->type] - $time)/60/60;
+        if($hour < 24) {
+            $request->discount =  config('config.meal_discount1') / 100;
+        } else {
+            $request->discount =  config('config.meal_discount2') / 100;
         }
 
         if(empty($request->num)) {
@@ -145,6 +154,7 @@ class CanteenController extends Controller
         $name = MealTypeConst::getDesc($request->type);
         $price = MealTypeConst::getPriceDesc($request->type);
         $this->isEmpty($name);
+
 
         $amount = ((($request->num - 1) * ($price * 2)) + $price) * $request->discount;
         $data = [
@@ -191,8 +201,6 @@ class CanteenController extends Controller
         if(!in_array($request->date, $checkMenu)) {
             throw new LogicException(1010001);
         }
-        //date_default_timezone_set('PRC');
-        //删除今天
         unset($checkMenu[0]);
 
         //检查是否可以订餐 已经所在那一天
@@ -216,10 +224,15 @@ class CanteenController extends Controller
                 2 => config('config.meal_discount2')
             ],
             'deposit' => config('config.meal_deposit'),
-        ];
+            'time' => [
+                MealTypeConst::MORNING => config('config.morning_time'),
+                MealTypeConst::LUNCH => config('config.lunch_time'),
+                MealTypeConst::DINNER => config('config.dinner_time'),
+            ],
+            'endTime' => $this->endTime($request->date),
+            'currentTime' => time()
 
-//        //检查违约几次
-//        $overdue = OrderBls::countOverdueByMeal(Auth::guard('canteen')->id());
+        ];
 
         return view('canteen::canteen.meal', [
             'info' => $model,
@@ -228,9 +241,6 @@ class CanteenController extends Controller
             'date' => $request->date,
             'check' => $check,
             'data' => json_encode($data),
-            'checkOverdue' => false,
-            //'checkOverdue' => $overdue >= config('config.meal_overdue_num'),
-            //'overdue' => $overdue
         ]);
     }
 
@@ -244,6 +254,15 @@ class CanteenController extends Controller
             '今天' => date('Y-m-d'),
             '明天订购' => date("Y-m-d",strtotime("+1 day")),
             '后天订购' => date("Y-m-d",strtotime("+2 day"))
+        ];
+    }
+
+    protected function endTime($date)
+    {
+        return [
+            MealTypeConst::MORNING => strtotime($date . ' ' . config('config.morning_time')),
+            MealTypeConst::LUNCH =>  strtotime($date . ' ' . config('config.lunch_time')),
+            MealTypeConst::DINNER =>  strtotime($date . ' ' . config('config.dinner_time')),
         ];
     }
 }

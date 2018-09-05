@@ -79,6 +79,21 @@ class AdminConfigSeeder extends Seeder
                 'value' => '2000',
             ],
             [
+                'name' => 'morning_time',
+                'description' => '早餐截止时间',
+                'value' => '7:30',
+            ],
+            [
+                'name' => 'lunch_time',
+                'description' => '午餐截止时间',
+                'value' => '11:40',
+            ],
+            [
+                'name' => 'dinner_time',
+                'description' => '晚餐截止时间',
+                'value' => '17:30',
+            ],
+            [
                 'name' => 'meal_deadline',
                 'description' => '截止预定时间',
                 'value' => '17',
@@ -102,7 +117,8 @@ class AdminConfigSeeder extends Seeder
                 'name' => 'meal_overdue_num',
                 'description' => '点餐违约次数',
                 'value' => '2',
-            ]
+            ],
+
         ]);
     }
 

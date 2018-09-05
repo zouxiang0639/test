@@ -179,7 +179,7 @@ class ConfigController extends Controller
 
             $item->create('午餐费', function(HtmlFormTpl $h, FormBuilder $form) {
                 $h->input = $form->currency('lunch_price', FormatMoney::fen2yuan(config('config.lunch_price')), $h->options);
-                $h->set('morning_price', false);
+                $h->set('lunch_price', false);
             });
 
             $item->create('晚餐费', function(HtmlFormTpl $h, FormBuilder $form) {
@@ -187,10 +187,19 @@ class ConfigController extends Controller
                 $h->set('dinner_price', false);
             });
 
-            $item->create('截止订购时间', function(HtmlFormTpl $h, FormBuilder $form) {
-                $h->input = $form->datetime('meal_deadline', config('config.meal_deadline'), $h->options, 'HH');
-                $h->set('meal_deadline', false);
-                $h->helpBlock = '（每天时间到了截止订购时间后将不能购订购第二天的点餐）';
+            $item->create('早餐截止时间', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->datetime('morning_time', config('config.morning_time'), $h->options, 'HH:mm');
+                $h->set('morning_time', false);
+            });
+
+            $item->create('午餐截止时间', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->datetime('lunch_time', config('config.lunch_time'), $h->options, 'HH:mm');
+                $h->set('lunch_time', false);
+            });
+
+            $item->create('晚餐截止时间', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->datetime('dinner_time', config('config.dinner_time'), $h->options, 'HH:mm');
+                $h->set('dinner_time', false);
             });
 
             $item->create('定金', function(HtmlFormTpl $h, FormBuilder $form) {
@@ -203,7 +212,7 @@ class ConfigController extends Controller
                 $h->options['max'] = 100;
                 $h->input = $form->number('meal_discount1', config('config.meal_discount1', 0), $h->options);
                 $h->set('meal_discount1', false);
-                $h->helpBlock = '（1-24小时折扣）';
+                $h->helpBlock = '（0-24小时折扣）';
             });
 
             $item->create('折扣2', function(HtmlFormTpl $h, FormBuilder $form) {
@@ -212,13 +221,6 @@ class ConfigController extends Controller
                 $h->set('meal_discount2', false);
                 $h->helpBlock = '（24-48小时折扣）';
             });
-
-//            $item->create('订餐违约次数', function(HtmlFormTpl $h, FormBuilder $form) {
-//                $h->options['max'] = 100;
-//                $h->input = $form->number('meal_overdue_num', config('config.meal_overdue_num', 0), $h->options);
-//                $h->set('meal_overdue_num', false);
-//                $h->helpBlock = '（每周可以违约次数,超过这个次数将不能订购）';
-//            });
 
         })->getFormHtml();
 
@@ -229,13 +231,6 @@ class ConfigController extends Controller
                 $h->set('takeout_deadline', false);
                 $h->helpBlock = '（外卖截止时间到期后将不能购买外卖）';
             });
-
-//            $item->create('限制退单', function(HtmlFormTpl $h, FormBuilder $form) {
-//                $h->input = $form->number('refund_limit', config('config.refund_limit', 0), $h->options);
-//                $h->set('refund_limit', false);
-//                $h->helpBlock = '（每个月限制退单次数）';
-//            });
-
 
         })->getFormHtml();
 

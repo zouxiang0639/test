@@ -17,21 +17,22 @@
 
         <div class="bar footer-nav">
             <a class="footer-nav-back" href="{!! route('c.member') !!}"></a>
-            @if(in_array($date, $checkMenu))
+
             <div style="float: left">
                 <p style="padding-left: 2rem;color: red">￥ <span class="amount">0.00</span> </p>
             </div>
-                <div style="float: right">
-                    <button class="external takeout-buy" @if(!$check || $checkOverdue)style="background-color: #848484;" @endif>订购<span class="meal-type-name">早餐</span>
-                    </button>
-                </div>
-            @endif
+
+            <div style="float: right">
+                <button class="external takeout-buy">订购<span class="meal-type-name">早餐</span>
+                </button>
+            </div>
+
         </div>
         <div class="content native-scroll takeout">
 
             <div class="content-block">
                 <p class="buttons-row"> 预定截止时间
-                <span style="color: red">
+                <span style="color: red" class="deadline">
                     {!! config('config.meal_deadline') !!} : 00
                 </span>
                     点</p>
@@ -137,22 +138,35 @@
                 "_token":$('meta[name="csrf-token"]').attr('content')
             };
             var price = 0;
-
             var locked = true;
-            var check = '{!! $check !!}';
-            var checkOverdue = '{!! $checkOverdue !!}';
+            var check = false;
 
             $('.menu a').click(function() {
 
                 data.type = $(this).attr('data-type');
                 data.price = parseInt(meal.price[data.type]);
-                data.discount = parseInt(meal.discount[check]) / 100;
+
                 data.deposit = parseInt(meal.deposit * data.num);
-                $('.meal-discount').text(meal.discount[check]);
+
                 $('.meal-type-name').text(meal.type[data.type]);
                 $('.amount').text(fmoney(data.price / 100));
                 $('.buy-deposit').text(fmoney(data.deposit / 100));
+                $('.deadline').text(meal.time[data.type]);
+                check = meal.currentTime > meal.endTime[data.type];
+                $('.takeout-buy').attr("style", "");
+                if(check) {
+                    $('.takeout-buy').css({ "background-color":"#848484"})
+                }
+                var hour = (meal.endTime[data.type] - meal.currentTime)/60/60;
+                hour = hour.toFixed(2);
 
+                if(hour < 24) {
+                    data.discount = parseInt(meal.discount[1]) / 100;
+                } else {
+                    data.discount = parseInt(meal.discount[2]) / 100;
+                }
+
+                $('.meal-discount').text(data.discount * 100);
             });
 
             $('.menu a').eq(0).trigger('click');
@@ -160,12 +174,7 @@
             //我的购物车
             $('.takeout-buy').click(function() {
 
-                if(checkOverdue == 1) {
-                    $.alert('你已违约超过次数,本周不可以订购');
-                    return false;
-                }
-
-                if(check == 0) {
+                if(check) {
                     $.alert('订购时间已截止');
                     return false;
                 }
