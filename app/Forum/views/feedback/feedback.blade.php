@@ -21,7 +21,7 @@
                         <div class="tep3">
 
                             <p class="area">
-                                <textarea style="border: 0px solid #1a3148; width: 788px;" name="contents" ></textarea>
+                                <textarea style="border: 0px solid #1a3148; width: 787px;" name="contents" ></textarea>
                             </p>
                         </div>
                         <div class="tep4">

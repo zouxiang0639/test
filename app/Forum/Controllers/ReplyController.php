@@ -3,15 +3,25 @@
 namespace App\Forum\Controllers;
 
 use App\Exceptions\LogicException;
+use App\Forum\Bls\Article\ArticleBls;
 use App\Forum\Bls\Article\ReplyBls;
 use App\Forum\Bls\Article\Requests\ReplyCreateRequest;
+use App\Forum\Bls\Article\Traits\ArticleColorTraits;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
 use Illuminate\Http\Request;
 use Forum;
+use Illuminate\Support\Collection;
 
 class ReplyController extends Controller
 {
+    use ArticleColorTraits;
+
+    /**
+     * 文章发布人
+     * @var
+     */
+    protected $articlesIssuer;
 
     public function store(ReplyCreateRequest $request)
     {
@@ -27,7 +37,21 @@ class ReplyController extends Controller
 
     public function show($article_id, Request $request)
     {
-        $html = ReplyBls::showReply($article_id, $request->page);
+        //$html = ReplyBls::showReply($article_id, $request->page);
+        $request->merge([
+            'article_id' => $article_id,
+            'parent_id' => 0
+        ]);
+        $model = ArticleBls::findByWithTrashed($article_id);
+        $this->isEmpty($model);
+        $this->articlesIssuer = $model->issuer;
+
+        $html = ReplyBls::getReplyList($request, '`id` DESC', 50);
+        $this->formatDate($html->getCollection());
+
+        $html =  view('forum::reply.show_page', [
+            'list' => $html,
+        ])->render();
 
         if($html){
             return (new JsonResponse())->success($html);
@@ -39,8 +63,17 @@ class ReplyController extends Controller
 
     public function showChild(Request $request)
     {
+        $model = ArticleBls::findByWithTrashed($request->article_id);
+        $this->isEmpty($model);
+        $this->articlesIssuer = $model->issuer;
 
-        $html = ReplyBls::showChildReply($request->parent_id, $request->article_id);
+        //$html = ReplyBls::showChildReply($request->parent_id, $request->article_id);
+        $model = ReplyBls::getReplyList($request, '`id` DESC', 1000);
+        $this->formatDate($model->getCollection());
+
+        $html =  view('forum::reply.show_child', [
+            'list' => $model,
+        ])->render();
         if($html){
             return (new JsonResponse())->success($html);
         } else {
@@ -87,6 +120,40 @@ class ReplyController extends Controller
         } else {
             throw new LogicException(1010002);
         }
+    }
+
+    public function formatDate(Collection $items)
+    {
+        $userId = \Auth::guard('forum')->id();
+        $items->each(function($item) use ($userId) {
+            $item->issuerName = '-';  //发布人
+            $item->thumbsUpCount = count($item->thumbs_up); //赞数量
+            $item->thumbsUpCheck = in_array($userId, $item->thumbs_up); //是否赞过
+            $item->thumbsDownCount = count($item->thumbs_down); //弱数量
+            $item->thumbsDownCheck = in_array($userId, $item->thumbs_down); //是否弱过
+            $item->isDelete = $userId == $item->issuer; //是否有删除的权限
+            $item->formatPicture = explode(',', $item->picture); //图片
+            $item->atName = ''; //@的用户名称
+            $item->color = $this->getColor($item); //更近需求判断颜色
+            $item->childrenCount = $item->child()->count(); //更近需求判断颜色
+
+
+            //信息删除
+            if(!is_null($item->deleted_at)) {
+                $item->contents = '该回复已被删除';
+                $item->formatPicture = [];
+                $item->isDelete = false;
+            }
+
+            if($issuer = $item->issuers) {
+                $item->issuerName = $issuer->name;
+            }
+
+            if(!empty($item->at) && $at = $item->ats) {
+                $item->atName = $at->name;
+            }
+        });
+
     }
 
 }

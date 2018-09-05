@@ -4,11 +4,14 @@ namespace App\Library\Forum\Widgets;
 
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ArticleBls;
+use App\Forum\Bls\Article\Traits\ArticleColorTraits;
 use Auth;
 use Illuminate\Contracts\Support\Renderable;
 
 class Reply implements Renderable
 {
+    use ArticleColorTraits;
+
     /**
      * 初始化数据
      * @var
@@ -51,18 +54,7 @@ class Reply implements Renderable
      */
     protected $view = 'forum::reply.show';
 
-    /**
-     * 回复颜色
-     * @var array
-     */
-    protected $color = [
-           'green' => 'color-green',
-           'lightGreen' => 'color-light-green',
-           'white' => 'color-white',
-           'lightRed' => 'color-light-red',
-           'yellow' => 'color-yellow',
-           'gray' => 'color-gray'
-    ];
+
 
     /**
      *
@@ -213,25 +205,6 @@ class Reply implements Renderable
         return $this;
     }
 
-    protected function getColor($model)
-    {
-        if(!is_null($model->deleted_at)) {
-            return $this->color['gray'];
-        }
-
-
-        if($model->issuer == $this->articlesIssuer) {
-            return $this->color['yellow'];
-        } else if($model->thumbsDownCount > 9) {
-            return $this->color['lightRed'];
-        } else if($model->thumbsUpCount > 99) {
-            return $this->color['green'];
-        } else if($model->thumbsUpCount > 9) {
-            return $this->color['lightGreen'];
-        } else {
-            return $this->color['white'];
-        }
-    }
 
 
     /**

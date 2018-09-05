@@ -55,4 +55,9 @@ class ReplyModel extends Model
         return $this->belongsTo(ArticleModel::class, 'article_id')->withTrashed();
     }
 
+    public function child()
+    {
+        return $this->hasMany(static::class, 'parent_id', 'id');
+    }
+
 }

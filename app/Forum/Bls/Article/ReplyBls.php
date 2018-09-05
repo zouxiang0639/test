@@ -17,10 +17,27 @@ class ReplyBls
 {
     use ThumbsTraits;
 
+    public static function getReplyList($request, $order = '`id` DESC', $limit = 20)
+    {
+        $model = ReplyModel::query();
+
+        if(!empty($request->article_id)) {
+            $model->where('article_id', $request->article_id);
+        }
+
+        if(!is_null($request->parent_id)) {
+            $model->where('parent_id', $request->parent_id);
+        }
+
+        return $model->orderByRaw($order)->paginate($limit);
+    }
+
+
     /**
      * 存储回复
      * @param ReplyCreateRequest $request
      * @return bool
+     * @throws LogicException
      */
     public static function storeReply(ReplyCreateRequest $request)
     {
