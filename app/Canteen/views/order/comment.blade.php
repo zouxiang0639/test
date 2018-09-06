@@ -37,11 +37,11 @@
                                             <div class="item-title label">评分</div>
                                             <div class="item-input">
                                                 <ul class="comment-star">
-                                                    <li data-num="1"><i class="icon icon-star"></i></li>
-                                                    <li data-num="2"><i class="icon icon-star"></i></li>
-                                                    <li data-num="3"><i class="icon icon-star"></i></li>
-                                                    <li data-num="4"><i class="icon icon-star"></i></li>
-                                                    <li data-num="5"><i class="icon icon-star"></i></li>
+                                                    <li data-num="1"><i class="fa fa-star"></i></li>
+                                                    <li data-num="2"><i class="fa fa-star"></i></li>
+                                                    <li data-num="3"><i class="fa fa-star"></i></li>
+                                                    <li data-num="4"><i class="fa fa-star"></i></li>
+                                                    <li data-num="5"><i class="fa fa-star"></i></li>
                                                 </ul>
                                                 <input type="hidden" name="num" value="">
                                             </div>
