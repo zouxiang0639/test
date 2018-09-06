@@ -16,6 +16,11 @@ class AdminConfigSeeder extends Seeder
         ConfigModel::truncate();
         ConfigModel::insert([
             [
+                'name' => 'notice',
+                'description' => '公告',
+                'value' => '这里是公告信息',
+            ],
+            [
                 'name' => 'title',
                 'description' => '网站标题',
                 'value' => '食堂管理系统',

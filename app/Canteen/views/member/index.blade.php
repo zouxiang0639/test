@@ -49,6 +49,13 @@
                                 <span class="icon-about white"></span>安全退出</a>
                         </li>
                     </ul>
+
+                </div>
+                <div class="card">
+                    <div class="card-header">公告</div>
+                    <div class="card-content">
+                        <div class="card-content-inner">{!! config('config.notice') !!}</div>
+                    </div>
                 </div>
             </div>
 

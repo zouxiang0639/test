@@ -125,6 +125,12 @@ class ConfigController extends Controller
     {
         $form = Admin::form(function(Forms $item) {
 
+            $item->create('公告', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->textarea('notice',  config('config.notice'), $h->options);
+                $h->set('notice', false);
+                $h->helpBlock = '（会员中心底部公告模块）';
+            });
+
             $item->create('网站标题', function(HtmlFormTpl $h, FormBuilder $form) {
                 $h->input = $form->text('title', config('config.title'), $h->options);
                 $h->set('title', false);
@@ -169,7 +175,7 @@ class ConfigController extends Controller
 
 
         })->getFormHtml();
-        $mealForm = Admin::form(function(Forms $item) use ($info)  {
+        $mealForm = Admin::form(function(Forms $item) {
 
             $item->create('早餐费', function(HtmlFormTpl $h, FormBuilder $form) {
                 $h->input = $form->currency('morning_price', FormatMoney::fen2yuan(config('config.morning_price')), $h->options);
@@ -223,7 +229,7 @@ class ConfigController extends Controller
 
         })->getFormHtml();
 
-        $takeoutForm = Admin::form(function(Forms $item) use ($info)  {
+        $takeoutForm = Admin::form(function(Forms $item) {
 
             $item->create('外卖截止时间', function(HtmlFormTpl $h, FormBuilder $form) {
                 $h->input = $form->datetime('takeout_deadline', config('config.takeout_deadline'), $h->options, 'YYYY-MM-DD');
