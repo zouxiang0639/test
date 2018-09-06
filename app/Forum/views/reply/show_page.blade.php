@@ -1,6 +1,11 @@
 <div class="com-tie">
     <ul>
-        @foreach($list as $item)
+        @foreach($list as $key => $item)
+
+            @if($key == 3)
+                @include('forum::partials.reply_ad')
+            @endif
+
             <li class="{!! $item->color !!} reply-{!! $item->id !!}">
                 <div class="top">
                     <p class="left"><b>{{ $item->issuerName }}</b>({!! mb_substr($item->created_at, 0, 16) !!})
@@ -42,9 +47,8 @@
                     <a class="other reply-show-child" data-check="0" data-id="{!! $item->id !!}" href="javascript:void(0)">回复 {!! $item->childrenCount !!}<i></i></a>
                 @endif
             </li>
-
-
         @endforeach
+
     </ul>
 </div>
 

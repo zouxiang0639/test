@@ -28,6 +28,13 @@ class TestSeeder extends Seeder
                 'links' => 'https://www.baidu.com/',
             ],
             [
+                'type' => AdvertTypeConst::REPLY_AD,
+                'status' => WhetherConst::YES,
+                'title' => '广告二',
+                'picture' => 'image/201809/06/4194bb36c1959c4c5eeb761a2e87e888.jpg',
+                'links' => 'https://www.baidu.com/',
+            ],
+            [
                 'type' => AdvertTypeConst::SQUARE,
                 'status' => WhetherConst::YES,
                 'title' => '广告2',

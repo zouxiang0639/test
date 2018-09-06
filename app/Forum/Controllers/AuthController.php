@@ -38,13 +38,24 @@ class AuthController extends Controller
         $credentials = $request->only(['email', 'password']);
 
         if (Auth::guard('forum')->attempt($credentials)) {
+
             $user = Auth::guard('forum')->user();
             UsersBls::loginPolicy($user);
 
+            Session::put('login_num', 0);
+            Session::save();
 
             return (new JsonResponse())->success('登录成功');
+
         } else {
-            throw new LogicException(1010002, [['邮箱或密码错误']]);
+            $loginNum = intval(Session::get('login_num'));
+            Session::put('login_num', $loginNum+1);
+            Session::save();
+
+            if($loginNum >= 5) {
+                throw new LogicException(1020002, '邮箱或密码错误');
+            }
+            throw new LogicException(1010002, [['邮箱或密码错误'],[$loginNum]]);
         }
     }
 

@@ -66,7 +66,14 @@ $(function(){
             cache: false,
             dataType: 'json',
             success:function(res) {
-                if(res.code != 0){
+                if(res.code == 1020002) {
+                    $('.login-captcha').show();
+                    swal({
+                        title: "",
+                        text: "<p class='text-danger'>" + res.data + "</p>",
+                        html: true
+                    });
+                } else if(res.code != 0){
                     var errorHtml = '';
                     var error = res.data;
                     for ( var i in error ) {
@@ -80,6 +87,7 @@ $(function(){
                     _this.attr('disabled',false);
                     locked = true;
                 } else {
+
                     swal(res.data, '', 'success');
                     window.location.href =  window.location.href;
                 }
@@ -148,3 +156,7 @@ $(function(){
 
 
 });
+
+function deleteAb(obj) {
+    $(obj).parents('li').remove();
+}

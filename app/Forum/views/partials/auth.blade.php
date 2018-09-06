@@ -101,6 +101,14 @@ right: 0;" onclick="this.src='{{captcha_src()}}'+Math.random()">
                             <input type="hidden" name="_method" value="PUT">
                             <div class="spel"><input name="email" type="text" placeholder="邮箱" /></div>
                             <div class="spel"><input name="password" type="password" placeholder="密码" /></div>
+
+                            <div class="txt-input login-captcha" style="@if(intval(Session::get('login_num')) <   5) display: none; @endif margin: 15px 0 0 2px;">
+                                <div class="spel">
+                                    <input name="captcha" type="text" placeholder="验证码" />
+                                    <img src="{{captcha_src()}}" style="cursor: pointer;position: absolute;
+right: 0;" onclick="this.src='{{captcha_src()}}'+Math.random()">
+                                </div>
+                            </div>
                         </form>
                     </div>
                     <div class="txt-opt clearfix">
