@@ -28,5 +28,10 @@
     <script src="{{  assets_path("/forum/js/common.js") }}"></script>
     <script src="{{  assets_path("/lib/sweetalert/dist/sweetalert.min.js") }}"></script>
     @yield('script')
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 </body>
 </html>

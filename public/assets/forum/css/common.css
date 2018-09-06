@@ -14,7 +14,7 @@ html {
 	width: 100%;
 	-webkit-text-size-adjust: none;
 	font-size: 12px;
-	font-family:"宋体";
+	font-family:""Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif";
 	background: #1a3148; !important
 }
 
@@ -50,7 +50,7 @@ td {
 	padding: 0;
 	border: 0;
 	outline: none;
-	font-family: "宋体";
+	font-family: ""Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif";
 }
 th{
 	font-size: 14px;
@@ -556,4 +556,3 @@ acronym {
 .icon-default i{
 	color: #e9711a;
 }
-

@@ -29,6 +29,7 @@
         </div>
     </div>
 </div>
+
 <div class="com-header">
     <div class="wm-850 clearfix">
         <a href="{!! route('f.article.gather', ['type' => 'hot']) !!}">热门</a>
@@ -45,7 +46,7 @@
             <div class="nav-list fl clearfix">
                 @foreach($tagsList as $key =>$value)
                     <a class="{!! isset($tags) && $value->id == $tags->id ? "icon-default" : "" !!} "
-                       href="{!! route('f.article.list', ['tag' => $value['id']]) !!}" title="{{ $value['tag_name'] }}" >
+                       href="{!! route('f.article.list', ['tag' => $value['id']]) !!}" data-toggle="tooltip"  title="{{ $value['tag_name'] }}" >
                         <i  @if($key == 1)  style="background-color: #e9711a; color: white;" @endif class="{!! $value['icon'] !!}"></i>
                     </a>
                 @endforeach
