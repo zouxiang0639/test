@@ -15,8 +15,8 @@
         "lustre/php-dfa-sensitive": "^1.1",
         "socialiteproviders/qq": "^3.0",
         "socialiteproviders/weibo": "^3.0",
-        "mews/captcha": "^2.2"
-
+        "mews/captcha": "^2.2",
+        "spatie/db-dumper": "^2.10"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

@@ -123,47 +123,46 @@ class ConfigController extends Controller
      */
     public function set()
     {
-        $info = ConfigBls::configPluck();
-        $form = Admin::form(function(Forms $item) use ($info)  {
+        $form = Admin::form(function(Forms $item) {
 
-            $item->create('网站标题', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->text('title', array_get($info, 'title'), $h->options);
+            $item->create('网站标题', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->text('title', config('config.title'), $h->options);
                 $h->set('title', false);
                 $h->helpBlock = '（网站显示标题）';
             });
 
-            $item->create('网站描述', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->textarea('description', array_get($info, 'description'), $h->options);
+            $item->create('网站描述', function(HtmlFormTpl $h, FormBuilder $form){
+                $h->input = $form->textarea('description', config('config.description'), $h->options);
                 $h->set('description', false);
                 $h->helpBlock = '（网站搜索引擎描述）';
             });
 
-            $item->create('网站关键字', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->textarea('keywords', array_get($info, 'keywords'), $h->options);
+            $item->create('网站关键字', function(HtmlFormTpl $h, FormBuilder $form){
+                $h->input = $form->textarea('keywords', config('config.keywords'), $h->options);
                 $h->set('keywords', false);
                 $h->helpBlock = '（网站搜索引擎关键字） 多个用 ( , )隔开';
             });
 
-            $item->create('网站备案号', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->text('icp', array_get($info, 'icp'), $h->options);
+            $item->create('网站备案号', function(HtmlFormTpl $h, FormBuilder $form){
+                $h->input = $form->text('icp', config('config.icp'), $h->options);
                 $h->set('icp', false);
                 $h->helpBlock = '（设置在网站底部显示的备案号，如“沪ICP备12007941号-2）';
             });
 
-            $item->create('默认图片', function(HtmlFormTpl $h, FormBuilder $form) use($info) {
-                $h->input = $form->imageOne('default_picture', array_get($info, 'default_picture'), $h->options);
+            $item->create('默认图片', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->imageOne('default_picture', config('config.default_picture'), $h->options);
                 $h->set('default_picture', false);
                 $h->helpBlock = '（图片损坏或者默认显示图片）';
             });
 
-            $item->create('浏览器上ico logo', function(HtmlFormTpl $h, FormBuilder $form) use($info) {
-                $h->input = $form->imageOne('ico', array_get($info, 'ico'), $h->options);
+            $item->create('浏览器上ico logo', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->imageOne('ico', config('config.ico'), $h->options);
                 $h->set('ico', false);
                 $h->helpBlock = '（ 后缀为.ico）';
             });
 
-            $item->create('logo', function(HtmlFormTpl $h, FormBuilder $form) use($info) {
-                $h->input = $form->imageOne('logo', array_get($info, 'logo'), $h->options);
+            $item->create('logo', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->imageOne('logo', config('config.logo'), $h->options);
                 $h->set('logo', false);
                 $h->helpBlock = '（ 网址logo）';
             });

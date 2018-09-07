@@ -13,10 +13,9 @@ class FeedbackRequests extends JsonResponseRequests
     public function rules()
     {
         $validatorRules = $this->input('type') ? (new FeedbackStrategy($this->input('type')))->validatorRules() : [];
-        return array_merge($validatorRules, [
+        return array_merge([
             'contents' => 'required',
-
-        ]);
+        ], $validatorRules);
     }
 
     public function messages()

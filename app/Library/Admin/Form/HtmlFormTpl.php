@@ -32,6 +32,7 @@ class HtmlFormTpl
      */
     public $input = '';
     public $helpBlock = '';
+    public $id = '';
 
     /**
      * @param string $name

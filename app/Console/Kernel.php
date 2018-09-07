@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\BackupCommand;
 use App\Console\Commands\Inspire;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -14,7 +15,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Inspire::class
+        Inspire::class,
+        BackupCommand::class
+
     ];
 
     /**
@@ -26,6 +29,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('inspire')->hourly();
+
+        //开启每天凌晨一点备份
+        if(config('admin.data_backup_mysql_dump')) {
+            $schedule->command('backup:run')->dailyAt('1:00')->withoutOverlapping(); //每天凌晨1点运行任务
+        }
+
     }
 
     /**
