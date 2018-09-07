@@ -33,7 +33,7 @@ class BackupCommand extends Command
                 $message->to($email)->subject('数据库备份文件'.$name);
 
                 //在邮件中上传附件
-                $message->attach($path);
+                $message->attach($path.'/'.$name);
             });
         }
 
