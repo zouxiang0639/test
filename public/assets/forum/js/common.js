@@ -153,7 +153,7 @@ $(function(){
 
         });
     });
-    
+
     $('.clearfix .post').click(function() {
         if($('meta[name="auth—num"]').attr('content')) {
             return true;
