@@ -13,7 +13,8 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.5",
         "mews/captcha": "^2.2",
-        "maatwebsite/excel": "2.1.28"
+        "maatwebsite/excel": "2.1.28",
+        "spatie/db-dumper": "^2.10"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
