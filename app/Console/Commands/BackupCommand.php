@@ -16,11 +16,12 @@ class BackupCommand extends Command
 
     public function handle()
     {
+        $this->line('开始备份mysql数据');
         $path = config('filesystems.disks.backup.root');
         $name = date('Ymd-His', time()).'-1.sql.gz';
         $mysqlConfig = config('database.connections.mysql');
         MySql::create()
-            ->setDumpBinaryPath('/usr/local/mysql/bin')
+            ->setDumpBinaryPath(config('admin.data_backup_dump_binary_path'))
             ->setDbName($mysqlConfig['database'])
             ->setUserName($mysqlConfig['username'])
             ->setPassword($mysqlConfig['password'])
@@ -36,6 +37,8 @@ class BackupCommand extends Command
                 $message->attach($path.'/'.$name);
             });
         }
+
+        $this->line('完成');
 
     }
 
