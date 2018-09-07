@@ -79,5 +79,7 @@ return [
     'data_backup_compress' => 1,
     'data_backup_compress_level' => 9,
     'data_backup_import' => env('ADMIN_DATA_BACKUP_IMPORT', false), //是否开启导入数据库功能
-
+    'data_backup_dump_binary_path' => env('ADMIN_DATA_BACKUP_DIMP_BINARY_PATH', '/usr/local/mysql/bin'), //mysqldump路由
+    'data_backup_mysql_dump' => env('ADMIN_DATA_BACKUP_MYSQL_DUMP', false), //开启自动备份
+    'data_backup_seed_email' => env('ADMIN_DATA_BACKUP_SEED_EMAIL', false), //开启自动备份文件发送到邮箱
 ];
