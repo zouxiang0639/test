@@ -185,7 +185,7 @@ class ReplyBls
 
     public static function countReply($articleId)
     {
-        return ReplyModel::where('article_id', $articleId)->count();
+        return ReplyModel::where('article_id', $articleId)->withTrashed()->count();
     }
 
     /**

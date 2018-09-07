@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="auth—num" content="{{ Auth::guard('forum')->id() }}" />
     <title>{!! config('config.title', '空地社区') !!}</title>
     <meta name='keywords' content="{!! config('config.keywords', '空地社区') !!}" />
     <meta name='description' content="{!! config('config.description', '空地社区') !!}" />
