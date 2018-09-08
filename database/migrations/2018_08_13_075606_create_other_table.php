@@ -36,6 +36,16 @@ class CreateOtherTable extends Migration
             $table->timestamps();
         });
         \DB::statement("ALTER TABLE `admin_advert` comment '广告'");
+
+        Schema::create('admin_fragment', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title', 100)->comment('标题');
+            $table->string('links', 200)->default('')->comment('链接');
+            $table->string('picture', 200)->default('')->comment('缩率图');
+            $table->text('contents')->default('')->comment('内容');
+            $table->timestamps();
+        });
+        \DB::statement("ALTER TABLE `admin_fragment` comment '碎片'");
     }
 
     /**

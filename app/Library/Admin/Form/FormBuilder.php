@@ -381,7 +381,7 @@ EOT;
 EOT;
 
         Admin::style()->setJs(StyleTypeConst::CODE, $code);
-        return self::textarea($name, $value = null, $options = []);
+        return self::textarea($name, $value, $options = []);
     }
 
     /**
