@@ -78,6 +78,18 @@ Route::group([
             Route::put('status/{id}', ['uses' => "Other\\AdvertController@status", 'as' => 'm.other.advert.status']);
             Route::put('hot', ['uses' => "Other\\AdvertController@hot", 'as' => 'm.other.advert.hot']);
         });
+
+        //碎片
+        Route::group(['prefix'=>'fragment', 'middleware' => 'admin.auth:m_other_fragment'], function(){
+            Route::get('', ['uses' => "Other\\FragmentController@index", 'as' => 'm.other.fragment.list']);
+            Route::get('/create', ['uses' => "Other\\FragmentController@create", 'as' => 'm.other.fragment.create']);
+            Route::post('store', ['uses' => "Other\\FragmentController@store", 'as' => 'm.other.fragment.store']);
+            Route::get('edit/{id}', ['uses' => "Other\\FragmentController@edit", 'as' => 'm.other.fragment.edit']);
+            Route::post('update/{id}', ['uses' => "Other\\FragmentController@update", 'as' => 'm.other.fragment.update']);
+            Route::delete('destroy/{id}', ['uses' => "Other\\FragmentController@destroy", 'as' => 'm.other.fragment.destroy']);
+            Route::put('status/{id}', ['uses' => "Other\\FragmentController@status", 'as' => 'm.other.fragment.status']);
+            Route::put('hot', ['uses' => "Other\\FragmentController@hot", 'as' => 'm.other.advert.hot']);
+        });
     });
 
     //系统管理
