@@ -17,7 +17,7 @@ class CreateFileTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->comment('用户ID');
             $table->string('path')->comment('文件路径');
-            $table->string('type')->comment('类型 1图片 2视屏 FileTypeConst');
+            $table->tinyInteger('type')->comment('类型 1图片 2视屏 FileTypeConst');
             $table->timestamps();
         });
     }
