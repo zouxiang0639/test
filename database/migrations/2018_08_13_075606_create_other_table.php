@@ -57,5 +57,6 @@ class CreateOtherTable extends Migration
     {
         Schema::dropIfExists('admin_feedback');
         Schema::dropIfExists('admin_advert');
+        Schema::dropIfExists('admin_fragment');
     }
 }
