@@ -17,6 +17,8 @@ class ReplyBls
 {
     use ThumbsTraits;
 
+    const SEND_INFO_BY_NUMBER = [5, 20, 50, 200, 500, 1000, 10000]; //按编号发送信息
+
     public static function getReplyList($request, $order = '`id` DESC', $limit = 20)
     {
         $model = ReplyModel::query();
@@ -51,22 +53,45 @@ class ReplyBls
         $model->thumbs_down = [];
         $model->thumbs_up = [];
         $article =  $model->article;
-
-
         if(empty($article) || !is_null($article->deleted_at)) {
             throw new LogicException(1010002, [['文章已被删除,不能评论']]);
         }
 
-        //信息创建
-        if($article->issuer != $model->issuer) {
-            $operatorId = Auth::guard('forum')->id();
-            $content = '对<a href="'. route('f.article.info', ['id' => $model->id], false) .'">' .
-                $article->title . '</a>,给予评论: '. e($request->contents);
-            InfoBls::createInfo($article->issuer, $operatorId, InfoTypeConst::REPLY, $content);
-        }
+        if($model->save()) {
+            $count = static::countReply($model->article_id);
 
 
-        return $model->save();
+            //回复帖子
+            if(in_array($count, static::SEND_INFO_BY_NUMBER)) {
+                //信息创建
+                $operatorId = Auth::guard('forum')->id();
+                $content = '你的帖子';
+                $content .= '<a href="'. route('f.article.info', ['id' => $model->id], false) .'"> ‘' . e($article->title) . '’ </a>';
+                $content .= '有'. $count .'个新回复';
+                InfoBls::createInfo($article->issuer, $operatorId, InfoTypeConst::REPLY, $content);
+            }
+
+            //子回复
+            if($model->at != 0) {
+                $count = static::countReplyParent($model->article_id, $model->parent_id, $model->at);
+                dd($count);
+                $count = 5;
+                //信息创建
+                if(in_array($count, static::SEND_INFO_BY_NUMBER)) {
+                    $operatorId = Auth::guard('forum')->id();
+                    $content = '你的回复';
+                    $content .= '<a href="'. route('f.article.info', ['id' => $model->id], false) .'"> ‘' . e(mb_substr($model->parent->contents,0,20)) . '’ </a>';
+                    $content .= '有'. $count .'个新回复';
+                    InfoBls::createInfo($article->issuer, $operatorId, InfoTypeConst::REPLY, $content);
+                }
+            }
+
+            return $model;
+        };
+
+        return false;
+
+
     }
 
     /**
@@ -190,6 +215,12 @@ class ReplyBls
         return ReplyModel::where('article_id', $articleId)->withTrashed()->count();
     }
 
+    public static function countReplyParent($articleId, $parentId, $at)
+    {
+        return ReplyModel::where('article_id', $articleId)->where('at', $at)->where('parent_id', $parentId)->withTrashed()->count();
+    }
+
+
     /**
      * 根据用户去统计回复
      * @param $issuer
@@ -197,7 +228,7 @@ class ReplyBls
      */
     public static function countReplyByUser($issuer)
     {
-        return ReplyModel::where('issuer', $issuer)->count();
+        return ReplyModel::where('issuer', $issuer)->withTrashed()->count();
     }
 
     public static function replyJoinArticle($userId, $limit = 10)

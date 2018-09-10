@@ -60,4 +60,9 @@ class ReplyModel extends Model
         return $this->hasMany(static::class, 'parent_id', 'id');
     }
 
+    public function parent()
+    {
+        return $this->hasOne(static::class,  'id', 'parent_id');
+    }
+
 }
