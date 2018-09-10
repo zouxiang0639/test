@@ -43,6 +43,7 @@ class CreateOtherTable extends Migration
             $table->string('links', 200)->default('')->comment('链接');
             $table->string('picture', 200)->default('')->comment('缩率图');
             $table->text('contents')->default('')->comment('内容');
+            $table->tinyInteger('is_lock')->default(2)->comment('状态 1锁住 2解锁 :WhetherConst');
             $table->timestamps();
         });
         \DB::statement("ALTER TABLE `admin_fragment` comment '碎片'");
@@ -57,5 +58,6 @@ class CreateOtherTable extends Migration
     {
         Schema::dropIfExists('admin_feedback');
         Schema::dropIfExists('admin_advert');
+        Schema::dropIfExists('admin_fragment');
     }
 }

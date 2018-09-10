@@ -5,6 +5,7 @@ namespace App\Admin\Controllers\Other;
 
 use App\Admin\Bls\Other\FragmentBls;
 use App\Admin\Bls\Other\Requests\FragmentRequests;
+use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Library\Admin\Form\FormBuilder;
 use App\Library\Admin\Form\HtmlFormTpl;
@@ -116,6 +117,10 @@ class FragmentController extends Controller
         $model = FragmentBls::find($id);
 
         $this->isEmpty($model);
+
+        if($model->is_lock == WhetherConst::YES) {
+            throw new LogicException(1010001, '数据已被锁住不可删除');
+        }
 
         if($model->delete()) {
             return (new JsonResponse())->success('操作成功');
