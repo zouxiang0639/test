@@ -172,6 +172,8 @@ class ReplyBls
             if(static::checkThumbs($model->thumbs_down, $model->thumbs_up, $user->id)) {
                 throw new LogicException(1010002, '只能选一个赞或者弱');
             }
+            $user->thumbs_down ++;
+            $user->save();
 
             $model->thumbs_down = static::thumbsPlus($model->thumbs_down, $user->id);
             $data = true;

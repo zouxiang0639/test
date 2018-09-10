@@ -13,7 +13,8 @@
             <div class="step3">
                 <div>
                     <div>
-                        <span>收到赞数：{!! $info->thumbs_up ?: 0 !!}</span><br />
+                        <span>收到赞数：{!! $info->thumbs_up ?: 0 !!}  </span>
+                        <span style="padding-left: 16px;">-{!! $info->thumbs_down !!}</span><br />
                         <span>登录次数：{!! $info->login_num !!}</span><br />
                         <span>注册时间：{!! mb_substr($info->created_at, 0, 10) !!}</span><br />
                         <span><i>？</i>积分 ：

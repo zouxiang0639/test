@@ -1,5 +1,5 @@
 
-.thumbs .default, #reply-content .default, .article-star .default, .inner-info .default{
+.thumbs .default, #reply_ajax .default, .article-star .default, .inner-info .default{
 	color: #e15844; !important;
 }
 
