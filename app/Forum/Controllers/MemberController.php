@@ -2,6 +2,7 @@
 
 namespace App\Forum\Controllers;
 
+use App\Consts\Admin\User\InfoTypeConst;
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ArticleBls;
 use App\Forum\Bls\Article\InfoBls;
@@ -92,11 +93,7 @@ class MemberController extends Controller
         $request->merge(['user_id' => Auth::guard('forum')->id()]);
         $model = InfoBls::getInfoList($request);
         $model->getCollection()->each(function($item) {
-            $item->operatorName = '-';
-
-            if($operator = $item->operator) {
-                $item->operatorName = $operator->name;
-            }
+            $item->typeName = InfoTypeConst::getDesc($item->type);
         });
         return view('forum::member.info', [
             'current' => 5,

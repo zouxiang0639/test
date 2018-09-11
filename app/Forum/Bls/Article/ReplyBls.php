@@ -17,7 +17,18 @@ class ReplyBls
 {
     use ThumbsTraits;
 
-    const SEND_INFO_BY_NUMBER = [5, 20, 50, 200, 500, 1000, 10000]; //按编号发送信息
+    const SEND_INFO_BY_NUMBER = [5, 10, 20, 50, 100, 200, 500, 1000, 10000]; //按编号发送信息
+
+    //点赞提示内容
+    const THUMBS_UP_COLOR = [
+        10 => InfoTypeConst::GREEN, //萌萌新绿
+        100 => InfoTypeConst::FOREST_GREEN //森森满绿
+    ];
+
+    //点弱提示内容
+    const THUMBS_DOWN_COLOR = [
+        10 => InfoTypeConst::RED //反对浅红
+    ];
 
     public static function getReplyList($request, $order = '`id` DESC', $limit = 20)
     {
@@ -74,8 +85,6 @@ class ReplyBls
             //子回复
             if($model->at != 0) {
                 $count = static::countReplyParent($model->article_id, $model->parent_id, $model->at);
-                dd($count);
-                $count = 5;
                 //信息创建
                 if(in_array($count, static::SEND_INFO_BY_NUMBER)) {
                     $operatorId = Auth::guard('forum')->id();
@@ -151,6 +160,7 @@ class ReplyBls
      */
     public static function thumbsUp(ReplyModel $model)
     {
+
         $user = Auth::guard('forum')->user();
         if(in_array($user->id, $model->thumbs_up)) {
 //            $model->thumbs_up = static::thumbsMinus($model->thumbs_up, $user->id);
@@ -167,11 +177,19 @@ class ReplyBls
             $user->thumbs_up ++;
             $data = true;
         }
+
         $model->save();
 
-        $operatorId = Auth::guard('forum')->id();
-        $content = '你的回复:  ('. mb_substr(e($model->contents), 0, 26) .')  得到了'.count($model->thumbs_up).'个赞';
-        InfoBls::createInfo($model->issuer, $operatorId, InfoTypeConst::THUMBS_UP, $content);
+        //信息创建
+        $count = count($model->thumbs_up);
+        if(in_array($count, static::SEND_INFO_BY_NUMBER)) {
+            $operatorId = Auth::guard('forum')->id();
+            $content = '你的回复';
+            $content .= '<a href="'. route('f.article.info', ['id' => $model->article_id], false) .'"> ‘' . e(mb_substr($model->contents,0,20)) . '’ </a>';
+            $content .= '得了'. $count .'个赞';
+            $content .= in_array($count, array_keys(static::THUMBS_UP_COLOR)) ? '变色了': '';
+            InfoBls::createInfo($model->issuer, $operatorId, array_get(static::THUMBS_UP_COLOR, $count, InfoTypeConst::THUMBS_UP), $content);
+        }
 
         if($user->save()) {
             return ['data' => $data];
@@ -204,6 +222,18 @@ class ReplyBls
             $data = true;
         }
 
+        //信息创建
+        $count = static::countReplyById($model->id);
+        $count =10;
+        if(in_array($count, static::SEND_INFO_BY_NUMBER)) {
+            $operatorId = Auth::guard('forum')->id();
+            $content = '你的回复';
+            $content .= '<a href="'. route('f.article.info', ['id' => $model->article_id], false) .'"> ‘' . e(mb_substr($model->contents,0,20)) . '’ </a>';
+            $content .= '得了'. $count .'个赞';
+            $content .= in_array($count, array_keys(static::THUMBS_UP_COLOR)) ? '变色了': '';
+            InfoBls::createInfo($model->issuer, $operatorId, array_get(static::THUMBS_DOWN_COLOR, $count, InfoTypeConst::THUMBS_UP), $content);
+        }
+
         if($model->save()) {
             return ['data' => $data];
         }
@@ -213,6 +243,11 @@ class ReplyBls
     public static function countReply($articleId)
     {
         return ReplyModel::where('article_id', $articleId)->withTrashed()->count();
+    }
+
+    public static function countReplyById($id)
+    {
+        return ReplyModel::where('id', $id)->withTrashed()->count();
     }
 
     public static function countReplyParent($articleId, $parentId, $at)

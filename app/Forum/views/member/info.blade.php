@@ -24,7 +24,7 @@
                         @foreach($list as $item)
                             <li  {!! $item->sign == 2 ? 'class="new"' : ''!!}>
                                 <span class="time">{!! mb_substr($item->created_at, 0, 10) !!}</span>
-                                <span class="type">{{ $item->operatorName }}</span>
+                                <span class="type">{{ $item->typeName }}</span>
                                 <span class="con">{!! $item->content  !!}</span>
                             </li>
                         @endforeach
