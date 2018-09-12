@@ -59,6 +59,7 @@ class AdminAuthSeeder extends Seeder
         $this->other(); //其它管理
         $this->system(); //系统管理
         $this->customer(); //用户管理
+        $this->contents(); //内容管理
     }
 
     /**
@@ -247,6 +248,43 @@ class AdminAuthSeeder extends Seeder
             'icon' => 'fa-user-secret',
             'route' => 'm.customer.users.list',
             'slug' => 'm_customer_users',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);
+    }
+
+    /**
+     * 内容管理
+     */
+    public function contents()
+    {
+        $menuRequest = new MenuRequest();
+        $menuRequest->merge([
+            'parent_id' => 0,
+            'title' => '内容管理',
+            'icon' => 'fa-align-justify',
+            'route' => '',
+            'slug' => 'm_contents',
+            'permissions' => WhetherConst::YES
+        ]);
+        $menu = MenuBls::storeMenu($menuRequest);
+
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '文章',
+            'icon' => 'fa-align-justify',
+            'route' => 'm.contents.article.list',
+            'slug' => 'm_contents_article',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);
+
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '公告',
+            'icon' => 'fa-align-justify',
+            'route' => 'm.contents.notice.list',
+            'slug' => 'm_contents_notice',
             'permissions' => WhetherConst::YES
         ]);
         MenuBls::storeMenu($menuRequest);

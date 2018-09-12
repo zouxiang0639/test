@@ -169,6 +169,32 @@ Route::group([
 
     });
 
+    //内容管理
+    Route::group(['prefix'=>'contents'], function(){
+        //文章
+        Route::group(['prefix'=>'article', 'middleware' => 'admin.auth:m_contents_article'], function(){
+            Route::get('', ['uses' => "Contents\\ArticleController@index", 'as' => 'm.contents.article.list']);
+            Route::get('/create', ['uses' => "Contents\\ArticleController@create", 'as' => 'm.contents.article.create']);
+            Route::post('store', ['uses' => "Contents\\ArticleController@store", 'as' => 'm.contents.article.store']);
+            Route::get('edit/{id}', ['uses' => "Contents\\ArticleController@edit", 'as' => 'm.contents.article.edit']);
+            Route::post('update/{id}', ['uses' => "Contents\\ArticleController@update", 'as' => 'm.contents.article.update']);
+            Route::put('status/{id}', ['uses' => "Contents\\ArticleController@status", 'as' => 'm.contents.article.status']);
+            Route::delete('destroy/{id}', ['uses' => "Contents\\ArticleController@destroy", 'as' => 'm.contents.article.destroy']);
+        });
+
+        //公告
+        Route::group(['prefix'=>'notice', 'middleware' => 'admin.auth:m_contents_notice'], function(){
+            Route::get('', ['uses' => "Contents\\NoticeController@index", 'as' => 'm.contents.notice.list']);
+            Route::get('/create', ['uses' => "Contents\\NoticeController@create", 'as' => 'm.contents.notice.create']);
+            Route::post('store', ['uses' => "Contents\\NoticeController@store", 'as' => 'm.contents.notice.store']);
+            Route::get('edit/{id}', ['uses' => "Contents\\NoticeController@edit", 'as' => 'm.contents.notice.edit']);
+            Route::post('update/{id}', ['uses' => "Contents\\NoticeController@update", 'as' => 'm.contents.notice.update']);
+            Route::put('status/{id}', ['uses' => "Contents\\NoticeController@status", 'as' => 'm.contents.notice.status']);
+            Route::delete('destroy/{id}', ['uses' => "Contents\\NoticeController@destroy", 'as' => 'm.contents.notice.destroy']);
+        });
+
+    });
+
 });
 
 
