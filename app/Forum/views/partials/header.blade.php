@@ -34,7 +34,7 @@
     <div class="wm-850 clearfix">
         <a href="{!! route('f.article.gather', ['type' => 'hot']) !!}">热门</a>
         <a href="{!! route('f.article.gather', ['type' => 'new']) !!}">最新</a>
-        <a href="javascript:void(0)">公告</a>
+        <a href="{!! route('f.notice.list') !!}">公告</a>
     </div>
 </div>
 <?php

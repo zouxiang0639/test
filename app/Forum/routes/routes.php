@@ -77,6 +77,13 @@ Route::group([
         Route::put('store', ['uses' => "FeedbackController@store", 'middleware' => 'forum.auth:f_member', 'as' => 'f.feedback.store']);
     });
 
+    //公告
+    Route::group(['prefix'=>'notice'], function(){
+
+        Route::get('', ['uses' => "NoticeController@index", 'as' => 'f.notice.list']);
+        Route::get('show/{id}', ['uses' => "NoticeController@show", 'as' => 'f.notice.show']);
+    });
+
     //登录等功能
     Route::group(['prefix'=>'auth'], function(){
         Route::get('info', ['uses' => "AuthController@info", 'as' => 'f.auth.info']);

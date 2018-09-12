@@ -175,7 +175,6 @@
 @section('script')
 @parent
 <script>
-
     $(function(){
         var locked = true;
         var comTie =  $(".com-tie");
