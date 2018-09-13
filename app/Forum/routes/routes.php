@@ -12,6 +12,7 @@ Route::group([
     //文章
     Route::group(['prefix'=>'article'], function(){
         Route::get('list/{tag}', ['uses' => "ArticleController@index", 'as' => 'f.article.list']);
+        Route::get('search', ['uses' => "ArticleController@search", 'as' => 'f.article.search']);
         Route::get('gather', ['uses' => "ArticleController@gather", 'as' => 'f.article.gather']);
         Route::get('create', ['uses' => "ArticleController@create", 'as' => 'f.article.create']);
         Route::get('info/{id}', ['uses' => "ArticleController@info", 'as' => 'f.article.info']);
@@ -21,7 +22,6 @@ Route::group([
         Route::group(['middleware' => 'forum.auth:f_member'], function(){
             Route::put('thumbsup/{id}', ['uses' => "ArticleController@thumbsUp", 'as' => 'f.article.thumbsUp']);
             Route::put('thumbsdown/{id}', ['uses' => "ArticleController@thumbsDown", 'as' => 'f.article.thumbsDown']);
-
             Route::put('create/put', ['uses' => "ArticleController@createPut", 'as' => 'f.article.create.put']);
             Route::put('edit/put/{id}', ['uses' => "ArticleController@editPut", 'as' => 'f.article.edit.put']);
             Route::put('star/{id}', ['uses' => "ArticleController@star", 'as' => 'f.article.star']);

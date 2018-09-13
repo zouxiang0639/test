@@ -11,6 +11,7 @@ use App\Library\Response\JsonResponse;
 use Auth;
 use Forum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class ArticleController extends Controller
 {
@@ -25,9 +26,8 @@ class ArticleController extends Controller
 
         $this->isEmpty($tags);
         $list = ArticleBls::getArticleLise($request);
-        $list->getCollection()->each(function($item) {
-            $item->replyCount = $item->reply()->count();
-        });
+        $this->formatData($list->getCollection());
+
         return view('forum::article.index', [
             'list' => $list,
             'tags' => $tags
@@ -37,9 +37,8 @@ class ArticleController extends Controller
     public function gather(Request $request)
     {
         $list = ArticleBls::getArticleLise($request);
-        $list->getCollection()->each(function($item) {
-            $item->replyCount = $item->reply()->count();
-        });
+        $this->formatData($list->getCollection());
+
         return view('forum::article.gather', [
             'list' => $list,
         ]);
@@ -227,6 +226,25 @@ class ArticleController extends Controller
         } else {
             throw new LogicException(1010002);
         }
+    }
+
+
+    protected function formatData(Collection $item)
+    {
+        $item->each(function($item) {
+            $item->replyCount = $item->reply()->count();
+        });
+    }
+
+    public function search(Request $request)
+    {
+        $request->merge(['title' => $request->key]);
+        $list = ArticleBls::getArticleLise($request);
+        $this->formatData($list->getCollection());
+
+        return view('forum::article.search', [
+            'list' => $list,
+        ]);
     }
 
 }

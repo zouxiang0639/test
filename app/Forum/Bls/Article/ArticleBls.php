@@ -37,6 +37,11 @@ class ArticleBls
             $model->where('tags', $request->tag);
         }
 
+        //标题
+        if(!empty($request->title)) {
+            $model->where('title', 'like', '%'.$request->title.'%');
+        }
+
         //排序
         if(!empty($request->order) && $request->order == 'hot') {
             $order = '`browse` DESC';

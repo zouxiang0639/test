@@ -9,7 +9,7 @@
                 @if(Auth::guard('forum')->check())
 
                     <span class="news">
-                         <a style=" color: #e15844;" href="{!! route('f.member.info') !!}" >
+                         <a style="color: #e15844;" href="{!! route('f.member.info') !!}" >
                         <i class="icon-alarm"></i>{!! \App\Forum\Bls\Article\InfoBls::countInfo(\Auth::guard('forum')->id(), \App\Consts\Common\WhetherConst::NO) !!}
                          </a>
                     </span>
@@ -23,8 +23,11 @@
 
             </div>
             <div class="search clearfix">
-                <input class="s-txt" type="text" placeholder="" />
-                <a class="s-btn icon-search" href="javascript:void(0)"></a>
+               <form id="search-form" action="{!! route('f.article.search') !!}">
+                   <input class="s-txt" type="text" name="key" placeholder="" />
+                   <a class="s-btn icon-search" id="search-submit" href="javascript:void(0)"></a>
+
+               </form>
             </div>
         </div>
     </div>
@@ -55,3 +58,18 @@
         </div>
     </div>
 </div>
+
+@section('script')
+    @parent
+    <script>
+        $(function() {
+            $('#search-submit').click(function() {
+                var key = $('.search input[name=key]').val();
+                if(key == '') {
+                    swal("请输入关键字", '', 'error');
+                }
+                document.getElementById("search-form").submit();
+            })
+        })
+    </script>
+@stop
