@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
              AdminAuthSeeder::class,
              ForumTagsSeeder::class,
              AdminConfigSeeder::class,
-             TestSeeder::class
+             TestSeeder::class,
+             FragmentSeeder::class
          ]);
     }
 }

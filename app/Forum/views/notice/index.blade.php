@@ -15,11 +15,13 @@
         <div class="wm-850">
             <div class="list">
                 <div class="list-txt">
-
+                {{--公告描述--}}
+                {!! Forum::fragment()->get(3, 'contents') !!}
                 </div>
             </div>
         </div>
     </div>
+
     <div class="com-new">
         <div class="wm-850">
             <div class="new-container" style="min-height: 400px;">

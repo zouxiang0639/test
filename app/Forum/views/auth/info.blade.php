@@ -13,9 +13,7 @@
                     <div class="post-txt">
 
                         <div class="tep3">
-
-                            {!! $info !!}
-
+                          {!!  Forum::fragment()->get(4, 'contents') !!}
                         </div>
 
                     </div>

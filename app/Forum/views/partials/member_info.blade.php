@@ -17,7 +17,7 @@
                         <span style="padding-left: 16px;">-{!! $info->thumbs_down !!}</span><br />
                         <span>登录次数：{!! $info->login_num !!}</span><br />
                         <span>注册时间：{!! mb_substr($info->created_at, 0, 10) !!}</span><br />
-                        <span><i>？</i>积分 ：
+                        <span><i  data-toggle="modal" data-target="#integral-modal" >？</i>积分 ：
                             <span id="integral" data-num='{!! $info->integral !!}'>{!! $info->integral ?: 0 !!}</span>
                         </span>
                     </div>
@@ -62,6 +62,25 @@
                     </li>
                 </ul>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-lg" id="integral-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close blue" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title blue">积分描述</h4>
+            </div>
+            <div class="modal-body">
+                <div class="center">
+                    {!!  Forum::fragment()->get(5, 'contents') !!}
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

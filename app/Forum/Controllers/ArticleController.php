@@ -36,11 +36,19 @@ class ArticleController extends Controller
 
     public function gather(Request $request)
     {
+
         $list = ArticleBls::getArticleLise($request);
         $this->formatData($list->getCollection());
 
+        if($request->type == 'hot') {
+            $contents = Forum::fragment()->get(1, 'contents'); //热门描述
+        } else {
+            $contents = Forum::fragment()->get(2, 'contents'); //最新描述
+        }
+
         return view('forum::article.gather', [
             'list' => $list,
+            'contents' => $contents
         ]);
     }
 
