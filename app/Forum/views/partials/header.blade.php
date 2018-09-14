@@ -67,6 +67,7 @@
                 var key = $('.search input[name=key]').val();
                 if(key == '') {
                     swal("请输入关键字", '', 'error');
+                    return false;
                 }
                 document.getElementById("search-form").submit();
             })
