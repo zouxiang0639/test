@@ -21,13 +21,13 @@ class ReplyBls
 
     //点赞提示内容
     const THUMBS_UP_COLOR = [
-        10 => InfoTypeConst::GREEN, //萌萌新绿
-        100 => InfoTypeConst::FOREST_GREEN //森森满绿
+        10 => '萌萌新绿', //萌萌新绿
+        100 => '森森满绿' //森森满绿
     ];
 
     //点弱提示内容
     const THUMBS_DOWN_COLOR = [
-        10 => InfoTypeConst::RED //反对浅红
+        10 => '反对浅红' //反对浅红
     ];
 
     public static function getReplyList($request, $order = '`id` DESC', $limit = 20)
@@ -69,30 +69,26 @@ class ReplyBls
         }
 
         if($model->save()) {
-            $count = static::countReply($model->article_id);
 
+            if($model->at== 0) { //文章回复
+                $article->count_new_reply ++;
+                $article->save();
 
-            //回复帖子
-            if(in_array($count, static::SEND_INFO_BY_NUMBER)) {
                 //信息创建
                 $operatorId = Auth::guard('forum')->id();
                 $content = '你的帖子';
                 $content .= '<a href="'. route('f.article.info', ['id' => $model->id], false) .'"> ‘' . e($article->title) . '’ </a>';
-                $content .= '有'. $count .'个新回复';
-                InfoBls::createInfo($article->issuer, $operatorId, InfoTypeConst::REPLY, $content);
-            }
+                $content .= '有'. $article->count_new_reply .'个新回复';
+                InfoBls::createInfo($article->issuer, $operatorId, InfoTypeConst::ARTICLE_REPLY, $content, $article->id);
 
-            //子回复
-            if($model->at != 0) {
-                $count = static::countReplyParent($model->article_id, $model->parent_id, $model->at);
+            } else if($model->at != 0) { //子回复
                 //信息创建
-                if(in_array($count, static::SEND_INFO_BY_NUMBER)) {
-                    $operatorId = Auth::guard('forum')->id();
-                    $content = '你的回复';
-                    $content .= '<a href="'. route('f.article.info', ['id' => $model->id], false) .'"> ‘' . e(mb_substr($model->parent->contents,0,20)) . '’ </a>';
-                    $content .= '有'. $count .'个新回复';
-                    InfoBls::createInfo($article->issuer, $operatorId, InfoTypeConst::REPLY, $content);
-                }
+                $operatorId = Auth::guard('forum')->id();
+                $content = '你的回复';
+                $content .= '<a href="'. route('f.article.info', ['id' => $model->id], false) .'"> ‘' . e(mb_substr($model->parent->contents,0,20)) . '’ </a>';
+                $content .= '有个新回复';
+                InfoBls::createInfo($article->issuer, $operatorId, InfoTypeConst::AT, $content);
+
             }
 
             return $model;

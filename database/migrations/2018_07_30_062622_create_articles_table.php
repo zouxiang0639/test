@@ -29,6 +29,7 @@ class CreateArticlesTable extends Migration
             $table->text('thumbs_up')->comment('赞');
             $table->text('thumbs_down')->comment('弱');
             $table->text('star')->comment('收藏');
+            $table->integer('count_new_reply')->default(0)->comment('新文章发表统计');
             $table->index(['id', 'tags', 'issuer']);
             $table->timestamps();
             $table->softDeletes();

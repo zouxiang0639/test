@@ -97,7 +97,8 @@ class MemberController extends Controller
         });
         return view('forum::member.info', [
             'current' => 5,
-            'list' => $model
+            'list' => $model,
+            'type' => InfoTypeConst::desc()
         ]);
     }
 

@@ -15,9 +15,10 @@ class InfoBls
      * @param $operatorId
      * @param $type
      * @param $content
+     * @param $articlesId
      * @return bool
      */
-    public static function createInfo($userId, $operatorId, $type, $content)
+    public static function createInfo($userId, $operatorId, $type, $content, $articlesId = 0)
     {
         $model = new InfoModel();
         $model->user_id = $userId;
@@ -25,6 +26,7 @@ class InfoBls
         $model->type = $type;
         $model->content = $content;
         $model->sign = WhetherConst::NO;
+        $model->articles_id = $articlesId;
         return $model->save();
     }
 
@@ -43,6 +45,11 @@ class InfoBls
         //发布人
         if(!empty($request->user_id)) {
             $model->where('user_id', $request->user_id);
+        }
+
+        //类型
+        if(!empty($request->type)) {
+            $model->where('type', $request->type);
         }
 
         return $model->orderByRaw($order)->paginate($limit);
@@ -72,7 +79,19 @@ class InfoBls
      */
     public static function signByYes($userId)
     {
-        return InfoModel::where('user_id', $userId)->where('sign', WhetherConst::NO)->update(['sign' => WhetherConst::YES]);
+         $model = InfoModel::where('user_id', $userId)->where('sign', WhetherConst::NO)->get();
+         foreach($model as $item) {
+             $item->sign = WhetherConst::YES;
+
+             //新文章发表统计 清除
+             if($item->articles_id) {
+                 $item->articles->count_new_reply = 0;
+                 $item->articles->save();
+             }
+
+             $item->save();
+         }
+         return $model->count();
     }
 }
 

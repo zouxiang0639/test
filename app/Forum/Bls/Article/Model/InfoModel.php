@@ -33,6 +33,10 @@ class InfoModel extends Model
     {
         return $this->belongsTo(UsersModel::class, 'operator_id');
     }
+    public function articles()
+    {
+        return $this->belongsTo(ArticleModel::class, 'articles_id');
+    }
 
 
 }

@@ -17,11 +17,13 @@ class CreateInfoTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->comment('用户ID');
             $table->integer('operator_id')->comment('操作人');
+            $table->integer('articles_id')->default(0)->comment('文章ID');
             $table->tinyInteger('type')->comment('类型 InfoTypeConst');
             $table->tinyInteger('sign')->default(0)->comment('是否已读 1是 2否 WhetherConst');
             $table->string('content', 255)->comment('内容');
             $table->timestamps();
         });
+        \DB::statement("ALTER TABLE `articles` comment '信息表'");
     }
 
     /**

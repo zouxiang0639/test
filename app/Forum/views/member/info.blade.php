@@ -12,11 +12,14 @@
         <div class="wm-850">
             <div class="info-tab">
                 <div class="tab-tit">
-                    {{--<ul class="clearfix">--}}
-                        {{--<li class="on">回复<span>3</span></li>--}}
-                        {{--<li>帖子<span>5</span></li>--}}
-                        {{--<li>管理员<span>1</span></li>--}}
-                    {{--</ul>--}}
+                    <ul class="clearfix">
+                        @foreach($type as $key => $value)
+                        <li @if(Input::get('type') == $key) class="on" @endif onclick="window.location.href='{!! route('f.member.info',['type' => $key]) !!}'">
+                            {!! $value !!}
+                        </li>
+                        @endforeach
+
+                    </ul>
                     <a class="read info-sign" href="javascript:void(0)">全部设为已读</a>
                 </div>
                 <div class="tab-con">
