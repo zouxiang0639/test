@@ -183,8 +183,8 @@ class ReplyBls
             $content = '你的回复';
             $content .= '<a href="'. route('f.article.info', ['id' => $model->article_id], false) .'"> ‘' . e(mb_substr($model->contents,0,20)) . '’ </a>';
             $content .= '得了'. $count .'个赞';
-            $content .= in_array($count, array_keys(static::THUMBS_UP_COLOR)) ? '变色了': '';
-            InfoBls::createInfo($model->issuer, $operatorId, array_get(static::THUMBS_UP_COLOR, $count, InfoTypeConst::THUMBS_UP), $content);
+            $content .= in_array($count, array_keys(static::THUMBS_UP_COLOR)) ? '变色了['.array_get(static::THUMBS_UP_COLOR, $count).']': '';
+            InfoBls::createInfo($model->issuer, $operatorId, InfoTypeConst::THUMBS_UP, $content);
         }
 
         if($user->save()) {
@@ -220,14 +220,13 @@ class ReplyBls
 
         //信息创建
         $count = static::countReplyById($model->id);
-        $count =10;
         if(in_array($count, static::SEND_INFO_BY_NUMBER)) {
             $operatorId = Auth::guard('forum')->id();
             $content = '你的回复';
             $content .= '<a href="'. route('f.article.info', ['id' => $model->article_id], false) .'"> ‘' . e(mb_substr($model->contents,0,20)) . '’ </a>';
             $content .= '得了'. $count .'个赞';
-            $content .= in_array($count, array_keys(static::THUMBS_UP_COLOR)) ? '变色了': '';
-            InfoBls::createInfo($model->issuer, $operatorId, array_get(static::THUMBS_DOWN_COLOR, $count, InfoTypeConst::THUMBS_UP), $content);
+            $content .= in_array($count, array_keys(static::THUMBS_UP_COLOR)) ? '变色了['.array_get(static::THUMBS_DOWN_COLOR, $count).']': '';
+            InfoBls::createInfo($model->issuer, $operatorId, InfoTypeConst::THUMBS_UP, $content);
         }
 
         if($model->save()) {

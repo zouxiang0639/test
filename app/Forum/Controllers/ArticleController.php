@@ -43,7 +43,7 @@ class ArticleController extends Controller
         if($request->type == 'hot') {
             $contents = Forum::fragment()->get(1, 'contents'); //热门描述
         } else {
-            $contents = Forum::fragment()->get(2, 'contents'); //最新描述
+            $contents = Forum::fragment()->get(2, 'contents'); //
         }
 
         return view('forum::article.gather', [

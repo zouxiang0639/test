@@ -156,8 +156,8 @@ class ArticleBls
 
         //信息创建
         $operatorId = Auth::guard('forum')->id();
-        $content = '推荐了<a href="'. route('f.article.info', ['id' => $model->id], false) .'">' . $model->title . '</a>,被推荐'. $model->recommend_count.'次';
-        InfoBls::createInfo($model->issuer, $operatorId, InfoTypeConst::RECOMMEND, $content);
+        $content = '你的帖子<a href="'. route('f.article.info', ['id' => $model->id], false) .'">' . $model->title . '</a>,被推荐了';
+        InfoBls::createInfo($model->issuer, $operatorId, InfoTypeConst::THUMBS_UP, $content);
 
         if($user->save()) {
             return ['data' => $data];
