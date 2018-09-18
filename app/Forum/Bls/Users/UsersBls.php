@@ -4,6 +4,7 @@ namespace App\Forum\Bls\Users;
 
 use App\Forum\Bls\Users\Model\UsersModel;
 use App\Forum\Bls\Users\Requests\RegisterUserRequest;
+use Illuminate\Http\Request;
 
 /**
  * Created by UsersBls.
@@ -113,6 +114,17 @@ class UsersBls
     public static function getUserByToken($token)
     {
         return UsersModel::where('remember_token', $token)->first();
+    }
+
+    public static function getUsersList(Request $request, $order = '`id` DESC', $limit = 20)
+    {
+        $model = UsersModel::query();
+
+        if(!empty($request->id)) {
+            $model->where('id', $request->id);
+        }
+
+        return $model->orderByRaw($order)->paginate($limit);
     }
 
 

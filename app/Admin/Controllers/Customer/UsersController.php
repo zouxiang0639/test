@@ -5,10 +5,10 @@ namespace App\Admin\Controllers\Customer;
 use App\Admin\Bls\Auth\PermissionsBls;
 use App\Admin\Bls\Auth\Requests\UserRequest;
 use App\Admin\Bls\Auth\AdminUserBls;
-use App\Admin\Bls\Auth\Model\Permission;
-use App\Admin\Bls\Auth\Model\Role;
 use App\Admin\Bls\Auth\RoleBls;
+use App\Consts\Admin\User\InfoTypeConst;
 use App\Exceptions\LogicException;
+use App\Forum\Bls\Article\InfoBls;
 use App\Forum\Bls\Users\UsersBls;
 use App\Http\Controllers\Controller;
 use App\Library\Admin\Form\FormBuilder;
@@ -17,6 +17,7 @@ use App\Library\Response\JsonResponse;
 use Illuminate\Http\Request;
 use Admin;
 use View;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -96,6 +97,26 @@ class UsersController extends Controller
         }
     }
 
+    public function excuse(Request $request, $id)
+    {
+        $model = UsersBls::find($id);
+        $this->isEmpty($model);
+
+        $model->excuse_time = $request->date;
+        if($model->save()) {
+            if($model->excuse_time < date("Y-m-d")) {
+                $content = '管理员释放了你禁言, 好好珍惜你的发言权限';
+            } else {
+                $content = '违法社区规则, 被禁言' . $model->excuse_time . '号';
+            }
+
+            InfoBls::createInfo($model->id,Auth::guard('admin')->id(), InfoTypeConst::SYSTEM, $content);
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010002, '操作失败');
+        }
+
+    }
 
     /**
      * Make a form builder.
@@ -147,22 +168,6 @@ class UsersController extends Controller
         })->getFormHtml();
     }
 
-    /**
-     * 删除
-     * @param $id
-     * @return \Illuminate\Http\JsonResponse
-     * @throws LogicException
-     */
-    public function destroy($id)
-    {
-        if($id == 1) {
-            throw new LogicException(1010002, 'ID为1的不能删除');
-        }
 
-        if(AdminUserBls::destroyAdmin($id)) {
-            return (new JsonResponse())->success('操作成功');
-        } else {
-            throw new LogicException(1010002, '操作失败');
-        }
-    }
+
 }

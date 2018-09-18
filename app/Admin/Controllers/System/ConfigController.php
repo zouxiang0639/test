@@ -169,16 +169,16 @@ class ConfigController extends Controller
 
 
         })->getFormHtml();
-        $forum = Admin::form(function(Forms $item) use ($info)  {
+        $forum = Admin::form(function(Forms $item) {
 
-            $item->create('浏览量', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->text('browse', array_get($info, 'browse'), $h->options);
+            $item->create('浏览量', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->text('browse', config('config.browse'), $h->options);
                 $h->set('browse', false);
                 $h->helpBlock = '（设置上热门浏览量）';
             });
 
-            $item->create('推荐量', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->text('recommend', array_get($info, 'recommend'), $h->options);
+            $item->create('推荐量', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->text('recommend', config('config.recommend'), $h->options);
                 $h->set('recommend', false);
                 $h->helpBlock = '（设置上热门推荐量）';
             });

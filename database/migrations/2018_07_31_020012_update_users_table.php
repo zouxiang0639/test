@@ -22,7 +22,7 @@ class UpdateUsersTable extends Migration
             $table->timestamp('last_login_time')->default(0)->comment('最后登录时间');
             $table->timestamp('sign_time')->default(0)->comment('签到时间');
             $table->tinyInteger('status')->default(0)->comment('状态  1启用 2禁用 :WhetherConst');
-            $table->date('date')->default(0)->comment('禁言日期');
+            $table->date('excuse_time')->default(0)->comment('禁言日期');
         });
     }
 
@@ -34,7 +34,8 @@ class UpdateUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['login_num', 'integral', 'thumbs_up','day_article', 'last_login_time', 'sign_time']);
+            $table->dropColumn(['login_num', 'integral', 'thumbs_up', 'thumbs_down', 'day_article', 'last_login_time',
+                'sign_time', 'status','excuse_time']);
         });
     }
 }

@@ -12,6 +12,7 @@ use App\Library\Response\JsonResponse;
 use Illuminate\Http\Request;
 use Forum;
 use Illuminate\Support\Collection;
+use Auth;
 
 class ReplyController extends Controller
 {
@@ -25,6 +26,13 @@ class ReplyController extends Controller
 
     public function store(ReplyCreateRequest $request)
     {
+        $user = Auth::guard('forum')->user();
+
+        //判断是否被禁言
+        if($user->excuse_time >= date('Y-m-d')) {
+            throw new LogicException(1010002, [['你被禁言到' . $user->excuse_time]]);
+        }
+
         // 敏感词替换为***为例
         $request->contents = Forum::sensitive($request->contents);
         if (ReplyBls::storeReply($request)) {
