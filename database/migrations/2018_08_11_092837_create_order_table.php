@@ -45,6 +45,7 @@ class CreateOrderTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->comment('用户ID');
             $table->tinyInteger('type')->comment('状态 1支付 2充值 3对冲 AccountFlowType');
+            $table->tinyInteger('use_type')->comment('消费类型 1早餐 2午餐 3晚餐 4超市 5外卖 MealTypeConst');
             $table->integer('amount')->comment('金额');
             $table->string('describe', 255)->default('')->comment('描述');
             $table->integer('hedging_id')->default(0)->comment('对冲ID');

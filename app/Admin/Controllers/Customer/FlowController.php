@@ -5,6 +5,7 @@ namespace App\Admin\Controllers\Customer;
 use App\Canteen\Bls\Users\AccountFlowBls;
 use App\Canteen\Bls\Users\UsersBls;
 use App\Consts\Common\AccountFlowTypeConst;
+use App\Consts\Common\MealTypeConst;
 use App\Library\Format\FormatMoney;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,6 +32,7 @@ class FlowController extends Controller
             $item->userName = array_get($usersList, $item->user_id);
             $item->formatAmount = AccountFlowTypeConst::getIconDesc($item->type).FormatMoney::fen2yuan($item->amount);
             $item->typeName = AccountFlowTypeConst::getDesc($item->type);
+            $item->useTypeName = MealTypeConst::getDesc($item->use_type) ?: '-';
         });
 
         return View::make('admin::customer.flow.index',[
@@ -51,8 +53,10 @@ class FlowController extends Controller
         foreach($model as $item) {
             $formatData[] = [
                 $item->id,
+                $item->users->divisions->tag_name,
                 $item->users ? $item->users->name : '-',
                 AccountFlowTypeConst::getDesc($item->type),
+                MealTypeConst::getDesc($item->use_type) ?: '-',
                 AccountFlowTypeConst::getIconDesc($item->type).FormatMoney::fen2yuan($item->amount),
                 $item->describe,
                 $item->created_at

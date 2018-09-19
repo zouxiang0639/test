@@ -14,7 +14,7 @@
     <div class="box">
         <div class="box-header">
             <div class="pull-left ">
-                <form class="form-inline">
+                <form class="form-inline" name="search" action="">
                     <div class="input-group input-group-sm">
                         {!! Form::select('division', $division,
                         Input::get('mobile'), ['class' => 'form-control', 'placeholder'=>'全部']) !!}
@@ -25,7 +25,10 @@
                     <div class="input-group input-group-sm " style="width: 150px;">
                         <input name="mobile" value="{!! Input::get('mobile') !!}" class="form-control pull-right" placeholder="手机号" type="text">
                         <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            <button id="flow-search" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                        <div class="input-group-btn">
+                            <button id="excel-export" type="submit" class="btn btn-default">导出excel</button>
                         </div>
                     </div>
                 </form>
@@ -86,6 +89,16 @@
 @section('script')
 <script>
     $(function() {
+        $('#excel-export').click(function(){
+            document.search.action = '{!! route('m.customer.users.export') !!}';
+            document.search.submit();
+        });
+
+        $('#flow-search').click(function(){
+            document.search.action = '';
+            document.search.submit();
+        });
+
         var locked = true;
         $('.reset').click(function() {
             var _this = $(this);

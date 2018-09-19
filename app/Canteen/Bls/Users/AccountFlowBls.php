@@ -23,19 +23,21 @@ class AccountFlowBls
 
     /**
      * 创建账户流水
-     * @param $userId
-     * @param $type
-     * @param $amount
-     * @param $describe
+     * @param int $userId 用户ID
+     * @param int $type 状态 1支付 2充值 3对冲 AccountFlowType
+     * @param int $amount 金额
+     * @param string $describe 描述
+     * @param int $useType 消费类型 1早餐 2午餐 3晚餐 4超市 5外卖 MealTypeConst
      * @return bool
      */
-    public static function createAccountFlow($userId, $type, $amount, $describe)
+    public static function createAccountFlow($userId, $type, $amount, $describe, $useType = 0)
     {
         $model = new AccountFlowModel();
         $model->user_id = $userId;
         $model->type = $type;
         $model->amount = $amount;
         $model->describe = $describe;
+        $model->use_type = $useType;
 
         if($model->save()) {
             return $model;
@@ -65,6 +67,11 @@ class AccountFlowBls
             $model->where('user_id', $request->user_id);
         }
 
+        //消费类型
+        if(!empty($request->use_type)) {
+            $model->where('use_type', $request->use_type);
+        }
+
         //类型
         if(!empty($request->type)) {
             $model->where('type', $request->type);
@@ -83,6 +90,11 @@ class AccountFlowBls
         return $model->orderByRaw($order)->paginate($limit);
     }
 
+    /**
+     * 红字对冲
+     * @param AccountFlowModel $model
+     * @return mixed
+     */
     public static function hedging(AccountFlowModel $model)
     {
 

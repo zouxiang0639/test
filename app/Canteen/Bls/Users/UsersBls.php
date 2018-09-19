@@ -124,7 +124,7 @@ class UsersBls
                 $describe = date('Y-m-d') . $typeName . ':'  . $request->num . '份';
             }
 
-            AccountFlowBls::createAccountFlow($model->id, AccountFlowTypeConst::PAYMENT, $request->amount, $describe);
+            AccountFlowBls::createAccountFlow($model->id, AccountFlowTypeConst::PAYMENT, $request->amount, $describe, $request->type);
 
             return $model->save();
         });

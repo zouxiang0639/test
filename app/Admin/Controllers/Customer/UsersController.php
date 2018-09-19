@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Admin;
 use View;
+use Excel;
 
 /**
  * Created by UsersController.
@@ -118,6 +119,59 @@ class UsersController extends Controller
         } else {
             throw new LogicException(1010002, '操作失败');
         }
+    }
+
+    public function export(Request $request)
+    {
+        $model = UsersBls::getUsersList($request, '`id` DESC', 10000);
+        $tagList = TagsBls::getTagsByType(TagsTypeConst::TAG)->pluck('tag_name', 'id')->toArray();
+        $formatData = [];
+        foreach($model as $item) {
+            $formatData[] = [
+                $item->id,
+                $item->name,
+                array_get($tagList, $item->division, '-'),
+                FormatMoney::fen2yuan($item->money)
+            ];
+        }
+
+        $field[] = array_values(config('excelformat.user_balance'));
+        $data = array_merge($field,$formatData);
+        Excel::create('用户余额', function ($excel) use ($data) {
+            $excel->sheet('用户余额', function ($sheet) use ($data) {
+                $sheet->rows($data);
+                $sheet->setWidth('A', 20);
+                $sheet->setWidth('B', 20);
+                $sheet->setWidth('C', 20);
+                $sheet->setWidth('D', 20);
+                $sheet->setWidth('E', 10);
+                $sheet->setWidth('F', 20);
+                $sheet->setWidth('G', 20);
+                $sheet->setWidth('H', 10);
+                $sheet->setWidth('I', 10);
+                $sheet->setWidth('J', 20);
+                $sheet->setWidth('K', 20);
+                $sheet->setWidth('L', 30);
+                $sheet->setWidth('M', 30);
+                $sheet->setWidth('N', 20);
+                $sheet->setWidth('O', 20);
+                $sheet->setWidth('P', 20);
+                $sheet->setWidth('Q', 20);
+                $sheet->setWidth('R', 20);
+                $sheet->setWidth('S', 10);
+                $sheet->setWidth('T', 10);
+                $sheet->setWidth('U', 10);
+                $sheet->setWidth('V', 30);
+                $sheet->setWidth('W', 50);
+                $sheet->setWidth('X', 20);
+                $sheet->setWidth('Y', 20);
+                $sheet->setWidth('Z', 20);
+                $sheet->setWidth('AA', 10);
+                $sheet->setWidth('AB', 10);
+                $sheet->setWidth('AC', 10);
+                $sheet->setColumnFormat(array('V' => '@'));
+            });
+        })->export('xls');
     }
 
     /**

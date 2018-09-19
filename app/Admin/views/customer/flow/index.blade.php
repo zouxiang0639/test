@@ -23,6 +23,10 @@
                         {!! Form::select('type', \App\Consts\Common\AccountFlowTypeConst::desc(),
 Input::get('type'), ['class' => 'form-control', 'placeholder'=>'全部类型']) !!}
                     </div>
+                    <div class="input-group input-group-sm" style="min-width: 100px">
+                        {!! Form::select('use_type', \App\Consts\Common\MealTypeConst::desc(),
+Input::get('use_type'), ['class' => 'form-control', 'placeholder'=>'全部消费类型']) !!}
+                    </div>
                     <div class="input-group input-group-sm" >
                         {!! Form::datetimeRange(['name' =>'start_time', 'value' => ''], ['name' =>'end_time', 'value' => ''] ,['class' => 'form-control', 'placeholder'=>'时间筛选'], 'YYYY-MM-DD')!!}
                         <div class="input-group-btn">
@@ -43,6 +47,7 @@ Input::get('type'), ['class' => 'form-control', 'placeholder'=>'全部类型']) 
                     <th>编号</th>
                     <th>用户</th>
                     <th>类型</th>
+                    <th>消费类型</th>
                     <th>金额</th>
                     <th>描述</th>
                     <th>日期</th>
@@ -52,6 +57,7 @@ Input::get('type'), ['class' => 'form-control', 'placeholder'=>'全部类型']) 
                         <td>{!! $item->id !!}</td>
                         <td>{{ $item->userName }}</td>
                         <td>{{ $item->typeName }}</td>
+                        <td>{{ $item->useTypeName }}</td>
                         <td>{{ $item->formatAmount }}</td>
                         <td>{{ $item->describe }}</td>
                         <td>{{ $item->created_at }}</td>

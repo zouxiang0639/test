@@ -178,6 +178,7 @@ Route::group([
             Route::post('update/{id}', ['uses' => "Customer\\UsersController@update", 'as' => 'm.customer.users.update']);
             Route::put('status/{id}', ['uses' => "Customer\\UsersController@status", 'as' => 'm.customer.users.status']);
             Route::put('reset/{id}', ['uses' => "Customer\\UsersController@reset", 'as' => 'm.customer.users.reset']);
+            Route::get('export', ['uses' => "Customer\\UsersController@export", 'as' => 'm.customer.users.export']);
         });
 
         //流水

@@ -82,7 +82,7 @@ class OrderBls
                 static::createTakeoutOrderByChild($item, $order->id);
             }
 
-            AccountFlowBls::createAccountFlow($user->id, AccountFlowTypeConst::PAYMENT, $deposit, "订单号:{$order->id}外卖定金");
+            AccountFlowBls::createAccountFlow($user->id, AccountFlowTypeConst::PAYMENT, $deposit, "订单号:{$order->id}外卖定金", MealTypeConst::TAKEOUT);
 
             return $user->save();
         });
@@ -139,7 +139,7 @@ class OrderBls
             static::createMealOrderByChild($data, $order->id);
 
             $name = "订单号:{$order->id}订购{$data['date']}" . MealTypeConst::getDesc($data['type']) . '定金';
-            AccountFlowBls::createAccountFlow($user->id, AccountFlowTypeConst::PAYMENT, $deposit, $name);
+            AccountFlowBls::createAccountFlow($user->id, AccountFlowTypeConst::PAYMENT, $deposit, $name, $data['type']);
 
             return $user->save();
         });
@@ -237,7 +237,7 @@ class OrderBls
             $model->save();
 
             $name = "订单号:{$model->id}外卖退单";
-            AccountFlowBls::createAccountFlow($user->id, AccountFlowTypeConst::REFUND, $model->deposit, $name);
+            AccountFlowBls::createAccountFlow($user->id, AccountFlowTypeConst::REFUND, $model->deposit, $name, MealTypeConst::TAKEOUT);
 
             return $user->save();
         });
@@ -302,13 +302,15 @@ class OrderBls
             if($order->type == OrderTypeConst::TAKEOUT) {
                 $typeName = OrderTypeConst::getDesc($order->type);
                 $name = "订单号:{$order->id}{$typeName}支付尾款";
+                $useType = MealTypeConst::TAKEOUT;
             } else {
                 $meal = $order->orderMeal;
                 $typeName = MealTypeConst::getDesc($meal->type);
                 $name = "订单号:{$order->id} ($meal->date{$typeName})支付尾款";
+                $useType = $meal->type;
             }
 
-            AccountFlowBls::createAccountFlow($users->id, AccountFlowTypeConst::PAYMENT, $amount, $name);
+            AccountFlowBls::createAccountFlow($users->id, AccountFlowTypeConst::PAYMENT, $amount, $name, $useType);
 
             return $users->save();
         });
