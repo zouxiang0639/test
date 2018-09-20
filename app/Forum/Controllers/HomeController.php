@@ -13,6 +13,9 @@ class HomeController extends Controller
         $request = new Request();
         $request->type = 'hot';
         $hot = ArticleBls::getArticleLise($request, '', 20);
+        $hot->getCollection()->each(function($item) {
+            $item->replyCount = $item->reply()->count();
+        });
         return view('forum::home.index', [
             'hot' => $hot
         ]);

@@ -31,7 +31,9 @@ class MemberController extends Controller
         $user = Auth::guard('forum')->user();
         $request->issuer = $user->id;
         $article = articleBls::getArticleLise($request);
-
+        $article->getCollection()->each(function($item) {
+            $item->replyCount = $item->reply()->count();
+        });
         return view('forum::member.index', [
             'list' => $article,
             'current' => 1,
@@ -77,6 +79,9 @@ class MemberController extends Controller
     {
         $user = Auth::guard('forum')->user();
         $list = $user->articlesStar()->paginate(10);
+        $list->getCollection()->each(function($item) {
+            $item->replyCount = $item->reply()->count();
+        });
         return view('forum::member.index', [
             'current' => 4,
             'list' => $list,

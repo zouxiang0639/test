@@ -20,6 +20,7 @@
                             <a href="{!! route('f.article.info', ['id' => $item->a_id]) !!}">
                                 <i style="color:{!!  Forum::Tags()->getTagsColor($item->a_tags) !!} " class="{!!  Forum::Tags()->getTagsIcon($item->a_tags) !!}"></i>
                                 {{ $item->a_title }}
+                                <span style="color: #00a7d0">[ {!! \App\Forum\Bls\Article\ReplyBls::countReply($item->a_id) !!}]</span>
                             </a>
                         </td>
                         <td width="95">{{ $item->u_name }}</td>

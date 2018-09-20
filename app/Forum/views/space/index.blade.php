@@ -19,6 +19,7 @@
                                 <a href="{!! route('f.article.info', ['id' => $item->id]) !!}">
                                     <i style="color:{!!  Forum::Tags()->getTagsColor($item->tags) !!} " class="{!!  Forum::Tags()->getTagsIcon($item->tags) !!}"></i>
                                     {{ $item->title }}
+                                    <span style="color: #00a7d0">[{!! $item->replyCount !!}]</span>
                                 </a>
                             </td>
                             <td width="95">{{ $userName }}</td>

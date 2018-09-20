@@ -32,6 +32,9 @@ class SpaceController extends Controller
 
         $request->issuer = $user->id;
         $article = articleBls::getArticleLise($request);
+        $article->getCollection()->each(function($item) {
+            $item->replyCount = $item->reply()->count();
+        });
 
         return view('forum::space.index', [
             'list' => $article,

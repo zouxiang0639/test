@@ -18,6 +18,7 @@
                                            class="{!!  Forum::Tags()->getTagsIcon($value->tags) !!}"></i>
                                     </span>
                                     {!! $value->title !!}
+                                    <span style="color: #00a7d0">[{!! $value->replyCount !!}]</span>
                                 </a>
                             </li>
                         @endforeach

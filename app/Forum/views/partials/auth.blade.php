@@ -28,7 +28,7 @@
                             <div class="spel"><input name="password_confirmation" type="password" placeholder="确认密码" /></div>
                         </div>
                         <div class="agree">
-                            <p class="ck" style="margin: 0 0 -5px;"><input type="checkbox" id="check1" value="123" name="is_read" class="check"><span for="check1">我已阅读并同意</span></p>
+                            <p class="ck" style=""><input type="checkbox" id="check1" value="123" name="is_read" class="check"><span for="check1">我已阅读并同意</span></p>
                             <a class="agree-link" target="_blank" href="{!! route('f.auth.info') !!}">空地社区用户注册协议</a>
                         </div>
                         <div class=" res-con">
