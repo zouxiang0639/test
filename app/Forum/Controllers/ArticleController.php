@@ -175,7 +175,7 @@ class ArticleController extends Controller
      */
     public function all(Request $request)
     {
-        $list = ArticleBls::getArticleLise($request,$order = '`id` DESC', $limit = 1);
+        $list = ArticleBls::getArticleLise($request,$order = '`id` DESC', $limit = 30);
         $list->getCollection()->each(function($item) {
             $item->replyCount = $item->reply()->count();
         });

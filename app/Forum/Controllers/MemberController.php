@@ -48,7 +48,7 @@ class MemberController extends Controller
     public function reply()
     {
         $userId = Auth::guard('forum')->id();
-        $list = ReplyBls::replyJoinArticle($userId);
+        $list = ReplyBls::replyJoinArticle($userId, 30);
         return view('forum::member.reply', [
             'current' => 2,
             'list' => $list
@@ -63,7 +63,7 @@ class MemberController extends Controller
     public function recommend()
     {
         $user = Auth::guard('forum')->user();
-        $list = $user->articlesRecommend()->paginate(10);
+        $list = $user->articlesRecommend()->paginate(30);
         return view('forum::member.index', [
             'current' => 3,
             'list' => $list,
@@ -78,7 +78,7 @@ class MemberController extends Controller
     public function star()
     {
         $user = Auth::guard('forum')->user();
-        $list = $user->articlesStar()->paginate(10);
+        $list = $user->articlesStar()->paginate(30);
         $list->getCollection()->each(function($item) {
             $item->replyCount = $item->reply()->count();
         });
@@ -96,7 +96,7 @@ class MemberController extends Controller
     public function info(Request $request)
     {
         $request->merge(['user_id' => Auth::guard('forum')->id()]);
-        $model = InfoBls::getInfoList($request);
+        $model = InfoBls::getInfoList($request, '`id` DESC', 30);
         $model->getCollection()->each(function($item) {
             $item->typeName = InfoTypeConst::getDesc($item->type);
         });

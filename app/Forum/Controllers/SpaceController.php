@@ -52,7 +52,7 @@ class SpaceController extends Controller
         $request->merge(['user_id' => $userId]);
         $user = UsersBls::find($userId);
         $this->isEmpty($user);
-        $list = ReplyBls::replyJoinArticle($userId);
+        $list = ReplyBls::replyJoinArticle($userId, 30);
         return view('forum::space.reply', [
             'current' => 2,
             'list' => $list

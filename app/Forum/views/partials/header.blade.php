@@ -26,7 +26,7 @@
             </div>
             <div class="search clearfix">
                <form id="search-form" action="{!! route('f.article.search') !!}">
-                   <input class="s-txt" type="text" name="key" placeholder="" />
+                   <input class="s-txt" type="text" name="key" placeholder="{!! Input::get('key') !!}" />
                    <a class="s-btn icon-search" id="search-submit" href="javascript:void(0)"></a>
 
                </form>

@@ -7,7 +7,12 @@
                 </div>
                 <div class="sh-r fr {!! $item->color !!}">
                     <div class="top">
-                        <p class="left"><b>{{ $item->issuerName }}</b>({!! mb_substr($item->created_at, 0, 16) !!}) 211.38.***.118 </p>
+                        <p class="left">
+                            <a href="{!! route('f.space.index', ['user_id' => $item->issuer]) !!}" style="color: #666666;">
+                                <b>{{ $item->issuerName }}</b>
+                            </a>
+                            ({!! mb_substr($item->created_at, 0, 16) !!})
+                        </p>
                         <p class="right">
                             @if($item->isDelete)
                                 <a class="delete-reply" data-href="{!! route('f.reply.destroy',['id' => $item->id]) !!}" href="javascript:void(0)">
@@ -28,8 +33,11 @@
 
                             </a>
                             <a class="review" href="javascript:void(0)"><i class="fa fa-exclamation"></i></a>
-                            <a class="reply-two-edit" data-pid="{{ Input::get('parent_id') }}"  data-id="{{ $item->id }}" data-at="{{ $item->issuer }}" href="javascript:void(0)"> <i class="fa fa-comment-o"></i>
-                            </a>
+                            @if($item->isDelete)
+                                <a class="reply-two-edit" data-pid="{{ Input::get('parent_id') }}"  data-id="{{ $item->id }}" data-at="{{ $item->issuer }}" href="javascript:void(0)"> <i class="fa fa-comment-o"></i>
+                                </a>
+                            @endif
+
                         </p>
                     </div>
                     <div class="con">

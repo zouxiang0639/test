@@ -19,7 +19,7 @@
                         <a style="margin-left: 40px; color: #ffffff;" title="编辑" href="{!! route('f.article.edit', ['id' => $info->id]) !!}">
                             <i class="fa fa-edit"></i>编辑
                         </a>
-                        <a title="删除" style=" color: #ffffff;"  href="javascript:;" data-url="{!! route('f.article.delete', ['id' => $info->id]) !!}">
+                        <a title="删除" class="article—delete" style="color: #ffffff;"  href="javascript:;" data-url="{!! route('f.article.delete', ['id' => $info->id]) !!}">
                             <i class="fa fa-trash"></i>删除
                         </a>
                     @endif
@@ -293,7 +293,7 @@
 
                                 } else {
                                     swal(res.data, '', 'success');
-                                    _this.parents('li').remove();
+                                    window.history.go(-1);
                                 }
                                 locked = true;
                             },

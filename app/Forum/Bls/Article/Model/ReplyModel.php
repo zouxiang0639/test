@@ -57,12 +57,12 @@ class ReplyModel extends Model
 
     public function child()
     {
-        return $this->hasMany(static::class, 'parent_id', 'id');
+        return $this->hasMany(static::class, 'parent_id', 'id')->withTrashed();
     }
 
     public function parent()
     {
-        return $this->hasOne(static::class,  'id', 'parent_id');
+        return $this->hasOne(static::class,  'id', 'parent_id')->withTrashed();
     }
 
 }

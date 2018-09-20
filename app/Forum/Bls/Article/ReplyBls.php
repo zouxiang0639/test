@@ -41,7 +41,7 @@ class ReplyBls
         if(!is_null($request->parent_id)) {
             $model->where('parent_id', $request->parent_id);
         }
-
+        $model->withTrashed();
         return $model->orderByRaw($order)->paginate($limit);
     }
 
