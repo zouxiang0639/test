@@ -67,7 +67,7 @@
 </div>
 
 <div class="modal fade bs-example-modal-lg" id="integral-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close blue" data-dismiss="modal" aria-label="Close">

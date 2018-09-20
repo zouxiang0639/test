@@ -1,5 +1,5 @@
 @if($replyAd)
-<li style="padding: 2px 6px;">
+<li style="padding: 0px;">
     <a  href="{!! $replyAd->links !!}">
     <img src="{!! uploads_path($replyAd->picture) !!}" title="{!! $replyAd->title  !!}">
     </a>

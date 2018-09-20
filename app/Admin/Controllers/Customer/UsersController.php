@@ -7,6 +7,7 @@ use App\Admin\Bls\Auth\Requests\UserRequest;
 use App\Admin\Bls\Auth\AdminUserBls;
 use App\Admin\Bls\Auth\RoleBls;
 use App\Consts\Admin\User\InfoTypeConst;
+use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\InfoBls;
 use App\Forum\Bls\Users\UsersBls;
@@ -97,6 +98,13 @@ class UsersController extends Controller
         }
     }
 
+    /**
+     * 禁言
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
     public function excuse(Request $request, $id)
     {
         $model = UsersBls::find($id);
@@ -114,6 +122,32 @@ class UsersController extends Controller
             return (new JsonResponse())->success('操作成功');
         } else {
             throw new LogicException(1010002, '操作失败');
+        }
+
+    }
+
+    /**
+     * 更新状态
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
+    public function status($id, Request $request)
+    {
+
+        $this->isEmpty(WhetherConst::getDesc($request->status));
+
+        $model = UsersBls::find($id);
+
+        $this->isEmpty($model);
+
+        $model->status = $request->status;
+
+        if($model->save()) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010001, '操作失败');
         }
 
     }

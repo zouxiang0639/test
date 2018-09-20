@@ -16,10 +16,10 @@
             <div class="inner-info">
                 <p>帖子ID : {!! $info->id !!}
                     @if($checkAuth && is_null($info->deleted_at))
-                        <a style="margin-left: 40px;" title="编辑" class="btn btn-primary btn-sm" href="{!! route('f.article.edit', ['id' => $info->id]) !!}">
+                        <a style="margin-left: 40px; color: #ffffff;" title="编辑" href="{!! route('f.article.edit', ['id' => $info->id]) !!}">
                             <i class="fa fa-edit"></i>编辑
                         </a>
-                        <a title="删除" class="btn btn-primary btn-sm article—delete" href="javascript:;" data-url="{!! route('f.article.delete', ['id' => $info->id]) !!}">
+                        <a title="删除" style=" color: #ffffff;"  href="javascript:;" data-url="{!! route('f.article.delete', ['id' => $info->id]) !!}">
                             <i class="fa fa-trash"></i>删除
                         </a>
                     @endif
@@ -71,10 +71,10 @@
                         <div style="float: inherit; margin-top: 4px;">
                             <a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=e2f4016d-a184-49b4-832b-65b5519a06ec&style=2&textcolor=#000000&bgcolor=none&bp=weixin,qzone,sinaminiblog,qqim&text=分享"></script>
                         </div>
+                        <a class="col article-star" style="color: red;" href="javascript:void(0)">举报!</a>
                         <a class="col article-star" style="padding-right: 15px;" href="javascript:void(0)">
                             <i class="fa fa-heart {!! in_array($userId, $info->star) ? "default" : "" !!}"></i>收藏
                         </a>
-
                     </div>
                 </div>
             </div>
@@ -84,7 +84,6 @@
     <div class="fabulous">
         <div class="wm-850">
             <div class="fabulous-con">
-                <a class="are" href="javascript:void(0)">举报!</a>
 
                 <p class="thumbs-up thumbs" data-href="{!! route('f.article.thumbsUp',['id' => $info->id]) !!}" href="javascript:void(0)">
                     <i class="fa fa-thumbs-o-up {!! in_array($userId, $info->thumbs_up) ? "default" : "" !!}"></i>

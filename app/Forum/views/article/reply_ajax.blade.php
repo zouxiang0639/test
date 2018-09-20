@@ -143,9 +143,12 @@
 
                $(this).attr('data-check', '1');
 
-               var html ='<li class="edit-container delete-'+ id +'">';
+//               var html ='<li class="edit-container delete-'+ id +'">';
+//               html += $(".reply").html();
+//               html += '</li>';
+               var html ='<li class="share clearfix delete-'+ id +' "><div class="sh-l fl"><i></i></div><div class="sh-r fr edit-container"> ';
                html += $(".reply").html();
-               html += '</li>';
+               html += '</div></li>';
                $(this).parents('.reply-' + id).after(html);
                $('.abc').click();
            }
@@ -173,7 +176,8 @@
 
        //评论点赞
        comTie.on('click', '.thumbs', function(){
-           var numClass = $(this).children(".num");
+           var numClass = $(this).children().children(".num");
+
            var num = parseInt(numClass.text());
            var _this = $(this);
 

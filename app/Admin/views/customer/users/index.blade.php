@@ -27,6 +27,7 @@
                     <th>邮箱</th>
                     <th>禁言时间</th>
                     <th>更新时间</th>
+                    <th>状态 (yes:禁止登录)</th>
                     <th>操作</th>
                 </tr>
                 @foreach($list as $item)
@@ -37,8 +38,12 @@
 
                         <td>{!! $item->excuse_time !!}</td>
                         <td>{!! $item->updated_at !!}</td>
+                        <td class="switch_submit" data-href="{!! route('m.customer.users.status', ['id' => $item->id]) !!}">
+                            {!! Form::switchOff('switch_submit', $item->status) !!}
+                        </td>
                         <td>
                             <div class="btn-group">
+                                <button type="button" class="btn btn-info">详情</button>
                                 <button type="button" class="btn btn-info excuse" data-toggle="modal" data-target="#modal-excuse"
                                         data-url="{!! route('m.customer.users.excuse', ['id' => $item->id]) !!}"
                                         data-date="{!! $item->excuse_time !!}">禁言</button>

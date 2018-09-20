@@ -170,6 +170,14 @@ $(function(){
         return false;
     });
 
+    $('.feedback-create a').on('click', function(){
+        if($('meta[name="auth—num"]').attr('content')) {
+            return true;
+        }
+        swal('请登录会员', '', 'error');
+        return false;
+    });
+
 });
 
 function deleteAb(obj) {

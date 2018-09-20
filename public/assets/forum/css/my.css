@@ -1,6 +1,11 @@
 
-.thumbs .default, #reply_ajax .default, .article-star .default, .inner-info .default{
-	color: #e15844; !important;
+.thumbs .default, .com-tie li .top .right .default span, #reply_ajax .default, .article-star .default, .inner-info .default{
+	color: #cc6633; !important;
+}
+
+.art-info .wm-850 .con-in p{
+	line-height: 20px;
+	font-size: 13px;
 }
 
 .article-star{
@@ -254,7 +259,7 @@
 
 .com-tie li .top .right a span{
 	font-size: 16px;
-	color: #cc6633;
+
 }
 
 .com-tie li .con p{
@@ -281,7 +286,7 @@
 	border: 1px solid #1a3148;
 	height: 38px;
 	line-height: 38px;
-	width: 787px;
+	width: 814px;
 	padding: 0 15px;
 	font-size: 14px;
 	background: #fff;
@@ -417,7 +422,7 @@
 .new-inner-tit{
 	margin-bottom: -10px;
 	height: 36px;
-	line-height: 36px;
+	line-height: 27px;
 	text-align: center;
 	background: #3b4f62;
 	color: #cccccc;
@@ -514,7 +519,7 @@
 	position: absolute;
 	right: 0;
 	width: 52px;
-	height: 105px;
+	height: 106px;
 	background: #479fed;
 	border-left: 1px solid #1a3148;
 }

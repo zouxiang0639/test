@@ -16,12 +16,16 @@
                             @endif
 
                             <a class="thumbs" data-href="{!! route('f.reply.thumbsUp',['id' => $item->id]) !!}"  href="javascript:void(0)">
-                                <i class="fa fa-thumbs-o-up {!! $item->thumbsUpCheck ? "default" : "" !!}"></i>
-                                <span class="num">{!! $item->thumbsUpCount !!}</span>
+                                <i class="fa fa-thumbs-o-up {!! $item->thumbsUpCheck ? "default" : "" !!}">
+                                    <span class="num">{!! $item->thumbsUpCount !!}</span>
+                                </i>
+
                             </a>
                             <a class="thumbs"  data-href="{!! route('f.reply.thumbsDown',['id' => $item->id]) !!}" href="javascript:void(0)">
-                                <i class="fa fa-thumbs-o-down {!! $item->thumbsDownCheck ? "default" : "" !!}"></i>
-                                <span class="num">{!! $item->thumbsDownCount !!}</span>
+                                <i class="fa fa-thumbs-o-down {!! $item->thumbsDownCheck ? "default" : "" !!}">
+                                    <span class="num">{!! $item->thumbsDownCount !!}</span>
+                                </i>
+
                             </a>
                             <a class="review" href="javascript:void(0)"><i class="fa fa-exclamation"></i></a>
                             <a class="reply-two-edit" data-pid="{{ Input::get('parent_id') }}"  data-id="{{ $item->id }}" data-at="{{ $item->issuer }}" href="javascript:void(0)"> <i class="fa fa-comment-o"></i>
@@ -38,7 +42,7 @@
                         </div>
                         <p>
                             @if($item->atName)
-                                <span style="color: red"> @ {{ $item->atName }}</span>
+                                <b style="color: #666666">  {{ '@'.$item->atName }}</b>
                             @endif
                             {!!  str_replace("\r\n", '<br>', e($item->contents)) !!}
                         </p>

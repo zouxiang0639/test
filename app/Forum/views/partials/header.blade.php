@@ -7,9 +7,11 @@
             <div class="login-state">
                 <!--登陆后的状态-->
                 @if(Auth::guard('forum')->check())
-
+                     <?php
+                    $count = \App\Forum\Bls\Article\InfoBls::countInfo(\Auth::guard('forum')->id(), \App\Consts\Common\WhetherConst::NO);
+                    ?>
                     <span class="news">
-                         <a style="color: #e15844;" href="{!! route('f.member.info') !!}" >
+                         <a style="{!! $count ? 'color: #e15844;': 'color: #999999;' !!}" href="{!! route('f.member.info') !!}" >
                         <i class="icon-alarm"></i>{!! \App\Forum\Bls\Article\InfoBls::countInfo(\Auth::guard('forum')->id(), \App\Consts\Common\WhetherConst::NO) !!}
                          </a>
                     </span>

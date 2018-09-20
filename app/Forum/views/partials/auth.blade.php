@@ -9,8 +9,9 @@
             </div>
             <div class="modal-body">
                 <div class="center">
-                    <form class="register-form" action="">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <form class="register-form"  autocomplete="off">
+
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="PUT">
                         <div class="txt-input">
                             <div class="spel">
@@ -27,7 +28,7 @@
                             <div class="spel"><input name="password_confirmation" type="password" placeholder="确认密码" /></div>
                         </div>
                         <div class="agree">
-                            <p class="ck"><input type="checkbox" id="check1" value="123" name="is_read" class="check"><label for="check1">我已阅读并同意</label></p>
+                            <p class="ck" style="margin: 0 0 -5px;"><input type="checkbox" id="check1" value="123" name="is_read" class="check"><span for="check1">我已阅读并同意</span></p>
                             <a class="agree-link" target="_blank" href="{!! route('f.auth.info') !!}">空地社区用户注册协议</a>
                         </div>
                         <div class=" res-con">
@@ -55,7 +56,7 @@
             </div>
             <div class="modal-body">
                 <div class="center">
-                    <form class="retrieve-form" action="">
+                    <form class="retrieve-form" action="" autocomplete="off">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="PUT">
                         <div class="txt-input">
@@ -96,7 +97,7 @@ right: 0;" onclick="this.src='{{captcha_src()}}'+Math.random()">
             <div class="modal-body">
                 <div class="center">
                     <div class="txt-input">
-                        <form class="login-form">
+                        <form class="login-form" autocomplete="off">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="_method" value="PUT">
                             <div class="spel"><input name="email" type="text" placeholder="邮箱" /></div>
@@ -117,7 +118,7 @@ right: 0;" onclick="this.src='{{captcha_src()}}'+Math.random()">
                             <a class="modal-retrieve" href="javascript:void(0)">忘记密码</a>
                         </p>
                         <p class="rt fr">
-                            <input type="checkbox" id="check1" value="123" name="name" class="check"><label for="check1">自动登录</label>
+                            <input type="checkbox" id="check1" value="123" name="name" class="check"><span for="check1">自动登录</span>
                         </p>
                     </div>
                     <div class="dl-con">

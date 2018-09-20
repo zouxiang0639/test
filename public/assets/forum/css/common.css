@@ -18,6 +18,11 @@ html {
 	background: #1a3148; !important
 }
 
+input:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+
 body,
 html,
 div,
@@ -53,7 +58,7 @@ td {
 	font-family: ""Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif";
 }
 th{
-	font-size: 14px;
+	font-size: 12px;
 }
 
 table {
@@ -166,7 +171,7 @@ acronym {
 }
 .wm-850{
 	width: 850px;
-	margin: 0 auto;
+	margin: -1px auto;
 	position: relative;
 }
 .wm-850:before,
@@ -252,7 +257,7 @@ acronym {
 	line-height: 26px;
 }
 .nav{
-	padding-top: 11px;
+	padding-top: 12px;
 	min-height: 48px;
 	background: #2c56a5;
 	border-bottom-left-radius: 5px;
@@ -294,6 +299,7 @@ acronym {
 	color: #fff;
 	line-height: 28px;
 	text-align: center;
+	margin-top: -2px;
 }
 .nav .post i{
 	display: inline-block;
@@ -304,7 +310,7 @@ acronym {
 	/*background-position: -39px 0;*/
 	margin-right: 6px;
 	font-size: 18px;
-	margin-top: 2px;
+	margin-top: 1px;
 }
 .com-hot{
 	margin-top: 10px;
@@ -458,7 +464,7 @@ acronym {
 .new-table tbody tr td.l{
 	text-align: left;
 	color: #38393e;
-	font-size: 12px;
+	font-size: 13px;
 }
 .new-table tbody tr td.l a{
 	color: #38393e;
@@ -538,7 +544,7 @@ acronym {
 	padding: 20px 0 0 0;
 	color: #fff;
 	text-align: center;
-	font-size: 14px;
+	font-size: 12px;
 }
 .com-footer a{
 	display: inline-block;
