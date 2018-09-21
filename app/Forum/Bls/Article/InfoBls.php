@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Forum\Bls\Article;
+use App\Consts\Admin\User\InfoTypeConst;
 use App\Consts\Common\WhetherConst;
 use App\Forum\Bls\Article\Model\InfoModel;
 
@@ -30,6 +31,27 @@ class InfoBls
         return $model->save();
     }
 
+
+
+    /**
+     * @param InfoModel $model info模型
+     * @param int $userId  用户ID
+     * @param int $operatorId 操作人
+     * @param int $type 类型
+     * @param int $content 描述
+     * @param int $articlesId 文章ID
+     * @return bool
+     */
+    public static function updateInfo(InfoModel $model, $userId, $operatorId, $type, $content, $articlesId = 0)
+    {
+        $model->user_id = $userId;
+        $model->operator_id = $operatorId;
+        $model->type = $type;
+        $model->content = $content;
+        $model->sign = WhetherConst::NO;
+        $model->articles_id = $articlesId;
+        return $model->save();
+    }
 
     /**
      * 文章列表
@@ -92,6 +114,12 @@ class InfoBls
              $item->save();
          }
          return $model->count();
+    }
+
+
+    public static function getArticleReplyInfo($userId, $articlesId)
+    {
+        return InfoModel::where('user_id', $userId)->where('articles_id', $articlesId)->where('sign', WhetherConst::NO)->where('type', InfoTypeConst::ARTICLE_REPLY)->first();
     }
 }
 

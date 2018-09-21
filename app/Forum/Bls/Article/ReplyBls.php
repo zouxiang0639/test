@@ -74,18 +74,24 @@ class ReplyBls
                 $article->count_new_reply ++;
                 $article->save();
 
+                $info = InfoBls::getArticleReplyInfo($article->issuer, $model->article_id);
                 //信息创建
                 $operatorId = Auth::guard('forum')->id();
                 $content = '你的帖子';
-                $content .= '<a href="'. route('f.article.info', ['id' => $model->id], false) .'"> ‘' . e($article->title) . '’ </a>';
+                $content .= '<a href="'. route('f.article.info', ['id' => $model->article_id], false) .'"> ‘' . e($article->title) . '’ </a>';
                 $content .= '有'. $article->count_new_reply .'个新回复';
-                InfoBls::createInfo($article->issuer, $operatorId, InfoTypeConst::ARTICLE_REPLY, $content, $article->id);
+                if($info) {
+                    InfoBls::updateInfo($info, $article->issuer, $operatorId, InfoTypeConst::ARTICLE_REPLY, $content, $article->id);
+                } else {
+                    InfoBls::createInfo($article->issuer, $operatorId, InfoTypeConst::ARTICLE_REPLY, $content, $article->id);
+                }
+
 
             } else if($model->at != 0) { //子回复
                 //信息创建
                 $operatorId = Auth::guard('forum')->id();
                 $content = '你的回复';
-                $content .= '<a href="'. route('f.article.info', ['id' => $model->id], false) .'"> ‘' . e(mb_substr($model->parent->contents,0,20)) . '’ </a>';
+                $content .= '<a href="'. route('f.article.info', ['id' => $model->article_id], false) .'"> ‘' . e(mb_substr($model->parent->contents,0,20)) . '’ </a>';
                 $content .= '有个新回复';
                 InfoBls::createInfo($article->issuer, $operatorId, InfoTypeConst::AT, $content);
 
