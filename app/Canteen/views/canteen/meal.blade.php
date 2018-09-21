@@ -140,6 +140,7 @@
             var price = 0;
             var locked = true;
             var check = false;
+            var info = '{!! $info ? 0 : 1 !!}';
 
             $('.menu a').click(function() {
 
@@ -152,7 +153,8 @@
                 $('.amount').text(fmoney(data.price / 100));
                 $('.buy-deposit').text(fmoney(data.deposit / 100));
                 $('.deadline').text(meal.time[data.type]);
-                check = meal.currentTime > meal.endTime[data.type];
+                check = meal.currentTime > meal.endTime[data.type] || info == 1;
+
                 $('.takeout-buy').attr("style", "");
                 if(check) {
                     $('.takeout-buy').css({ "background-color":"#848484"})
@@ -173,6 +175,11 @@
 
             //我的购物车
             $('.takeout-buy').click(function() {
+
+                if(info) {
+                    $.alert('没有可预订的就餐');
+                    return false;
+                }
 
                 if(check) {
                     $.alert('订购时间已截止');
