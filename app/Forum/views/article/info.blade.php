@@ -71,7 +71,7 @@
                         <div style="float: inherit; margin-top: 4px;">
                             <a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=e2f4016d-a184-49b4-832b-65b5519a06ec&style=2&textcolor=#000000&bgcolor=none&bp=weixin,qzone,sinaminiblog,qqim&text=分享"></script>
                         </div>
-                        <a class="col article-star" style="color: red;" href="javascript:void(0)">举报!</a>
+                        <a class="col article-report" style="color: red;" href="{!! route('f.feedback.report', ['article_id' => $info->id]) !!}">举报!</a>
                         <a class="col article-star" style="padding-right: 15px;" href="javascript:void(0)">
                             <i class="fa fa-heart {!! in_array($userId, $info->star) ? "default" : "" !!}"></i>收藏
                         </a>
@@ -293,7 +293,7 @@
 
                                 } else {
                                     swal(res.data, '', 'success');
-                                    window.history.go(-1);
+                                    setTimeout(" window.history.go(-1); ",2000);
                                 }
                                 locked = true;
                             },

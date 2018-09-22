@@ -5,6 +5,7 @@ namespace App\Forum\Controllers;
 use App\Admin\Bls\Other\FeedbackBls;
 use App\Admin\Bls\Other\FeedbackStrategy\FeedbackStrategy;
 use App\Admin\Bls\Other\Requests\FeedbackRequests;
+use App\Consts\Admin\Other\FeedbackReportTypeConst;
 use App\Consts\Admin\Other\FeedbackTypeConst;
 use App\Exceptions\LogicException;
 use App\Http\Controllers\Controller;
@@ -64,7 +65,18 @@ class FeedbackController extends Controller
         ]);
     }
 
+    public function report()
+    {
+        $info = [
+            'title' => FeedbackTypeConst::REPORT_DESC,
+            'type' => FeedbackTypeConst::REPORT,
+            'report_type' => FeedbackReportTypeConst::desc()
+        ];
 
+        return view('forum::feedback.report', [
+            'info' => $info
+        ]);
+    }
 
     public function store(FeedbackRequests $requests)
     {

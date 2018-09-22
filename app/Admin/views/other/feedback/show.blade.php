@@ -61,13 +61,16 @@
                             <div class="col-sm-7 ">
                                 <div class="input-group" style="width:100%">
                                     <div class="box box-body  box-solid box-default no-margin">
-                                        {{ $value }}
+                                        @if(strpos($key, '地址') === false)
+                                            {{ $value }}
+                                        @else
+                                            {!! $value !!}
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
-
                     <div class="form-group">
                         <label for="username" class="col-sm-2 control-label">
                             内容:

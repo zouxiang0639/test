@@ -2,24 +2,36 @@
 
 @section('style')
     <link rel="stylesheet" href="{!! assets_path("/forum/css/post.css") !!}" />
+    <style>
+        .radio{ margin: 20px 14px 43px 4px;}
+        .radio input{margin: 0px}
+        .radio .col-md-4{margin: 5px}
+    </style>
 @stop
 
 @section('content')
     <div class="post-contianer">
         <div class="wm-850">
             <div class="post-con">
-                <div class="post-tit">{!! $info['title'] !!}</div>
-                <form class="article-form">
+                <div class="post-tit">举报不良内容</div>
+                <form class="feedback-form">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="PUT">
                     <input type="hidden" name="type" value="{!! $info['type'] !!}">
+                    <input type="hidden" name="article_id" value="{!! Input::get('article_id') !!}">
                     <div class="post-txt">
 
+                        <div class="radio" style="height: 83px;">
+                            <div><p>请选择举报内容类型:</p></div>
+
+                            @foreach($info['report_type'] as $key => $value)
+                                <div class="col-md-4">{!! Form::radio('report_type', $key) !!}<span>{!! $value !!}</span></div>
+                            @endforeach
+                        </div>
                         <div class="tep2">
                             <input name="title" type="text" placeholder="请填写标题" />
                         </div>
                         <div class="tep3">
-
                             <p class="area">
                                 <textarea id="contents" style="border: 0px solid #1a3148; width: 787px;" name="contents" ></textarea>
                             </p>
@@ -68,7 +80,8 @@
                 ]
             }
     );
-    //建议提交
+
+    //举报提交
     $('#feedback-submit').click(function() {
 
         //解决ckeditor编辑器 ajax上传问他
@@ -84,7 +97,7 @@
 
         locked = false;
         var _this = $(this);
-        var data  = $(".article-form").serialize();
+        var data  = $(".feedback-form").serialize();
 
         _this.attr('disabled',true);
         $('div.text-danger').text('');
@@ -117,7 +130,7 @@
                     locked = true;
                 } else {
                     swal(res.data, '', 'success');
-                    window.location.href = window.location.href;
+                    setTimeout(" window.history.go(-1); ",3000);
                 }
             },
             error:function () {

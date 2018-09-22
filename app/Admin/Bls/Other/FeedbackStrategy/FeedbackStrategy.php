@@ -4,6 +4,7 @@ namespace App\Admin\Bls\Other\FeedbackStrategy;
 
 use App\Admin\Bls\Other\FeedbackStrategy\Ifc\FeedbackInterface;
 use App\Admin\Bls\Other\FeedbackStrategy\Strategy\Feedback;
+use App\Admin\Bls\Other\FeedbackStrategy\Strategy\Report;
 use App\Admin\Bls\Other\Model\FeedbackModel;
 use App\Admin\Bls\Other\Requests\FeedbackRequests;
 use App\Consts\Admin\Other\FeedbackTypeConst;
@@ -32,8 +33,10 @@ class FeedbackStrategy implements FeedbackInterface
             case FeedbackTypeConst::OPERATE :  //给运营组的建议
             case FeedbackTypeConst::MODERATOR :  //版主申请
             case FeedbackTypeConst::APPEALS :  //申诉区
-            case FeedbackTypeConst::REPORT :  //举报
                 $this->_strategy = new Feedback();
+                break;
+            case FeedbackTypeConst::REPORT :  //举报
+                $this->_strategy = new Report();
                 break;
             default:
                 throwException(new LogicException('没有这个反馈类型！'));
