@@ -12,7 +12,7 @@
 	font-size: 14px;
 	padding-top: 3px;
 }
-.article-report{
+.article-{
 	font-size: 14px;
 	padding-top: 3px;
 }
@@ -229,8 +229,9 @@
 	white-space: nowrap;
 	color: #666666;
 }
-.com-tie li .top .left b{
+.com-tie li .top .left a b{
 	font-weight: bold;
+	color: #666666;
 }
 .com-tie li .top .right{
 	position: absolute;
