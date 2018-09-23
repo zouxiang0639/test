@@ -155,6 +155,11 @@ acronym {
 .clear {
 	clear: both
 }
+.read  a{
+	color: #B8C0C7 !important;
+}.read  a span{
+	color: #B8C0C7 !important;
+}
 
 .clearfix:before,
 .clearfix:after {

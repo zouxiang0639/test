@@ -14,13 +14,13 @@
             <div class="new-container new-container-tie">
                 <table class="new-table new-table-tie">
                     <tbody>
-                    <tr>
+                    <tr class="@if(in_array($item->a_id, session('article', []))) read @endif">
                         <td width="55">{!! $item->r_id !!}</td>
                         <td class="l" width="515">
                             <a href="{!! route('f.article.info', ['id' => $item->a_id]) !!}">
                                 <i style="color:{!!  Forum::Tags()->getTagsColor($item->a_tags) !!} " class="{!!  Forum::Tags()->getTagsIcon($item->a_tags) !!}"></i>
                                 {{ $item->a_title }}
-                                <span style="color: #00a7d0">[ {!! \App\Forum\Bls\Article\ReplyBls::countReply($item->a_id) !!}]</span>
+                                <span style="color: #00a7d0">[{!! \App\Forum\Bls\Article\ReplyBls::countReply($item->a_id) !!}]</span>
                             </a>
                         </td>
                         <td width="95">{{ $item->u_name }}</td>
@@ -39,7 +39,7 @@
                     <ul>
                         <li class="color-1">
                             <div class="top">
-                                <p class="left"><b>江南小雨</b>({!! mb_substr($item->r_created_at, 0,16) !!}) 211.38.***.118 </p>
+                                <p class="left"><b>{!! $userName !!}</b>({!! mb_substr($item->r_created_at, 0,16) !!})</p>
                                 <p class="right">
                                     <span class="delete-reply" data-href="{!! route('f.reply.destroy',['id' => $item->r_id]) !!}"  href="javascript:void(0)" style="margin-right: 10px; cursor:pointer">
                                         <i class="fa fa-trash"></i>

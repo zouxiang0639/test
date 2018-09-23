@@ -13,7 +13,7 @@
 
                     <tbody>
                     @foreach($list as $item)
-                        <tr>
+                        <tr class="@if(in_array($item->id,session('article', []))) read @endif">
                             <td width="55"> {{ $item->id }}</td>
                             <td class="l" width="515">
                                 <a href="{!! route('f.article.info', ['id' => $item->id]) !!}">

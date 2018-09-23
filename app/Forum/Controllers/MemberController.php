@@ -48,10 +48,12 @@ class MemberController extends Controller
     public function reply()
     {
         $userId = Auth::guard('forum')->id();
+        $userName = Auth::guard('forum')->user()->name;
         $list = ReplyBls::replyJoinArticle($userId, 30);
         return view('forum::member.reply', [
             'current' => 2,
-            'list' => $list
+            'list' => $list,
+            'userName' => $userName
         ]);
     }
 

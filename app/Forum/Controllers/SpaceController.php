@@ -55,7 +55,8 @@ class SpaceController extends Controller
         $list = ReplyBls::replyJoinArticle($userId, 30);
         return view('forum::space.reply', [
             'current' => 2,
-            'list' => $list
+            'list' => $list,
+            'user' => $user
         ]);
     }
 }

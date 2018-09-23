@@ -117,6 +117,10 @@ class ArticleController extends Controller
         $model->save();
 
         $userId = Auth::guard('forum')->id();
+        $articleId = session('article') ?: [];
+        if(!in_array($model->id,$articleId)) {
+            \Session::push('article', $model->id);
+        }
 
         return view('forum::article.info', [
             'info' => $model,
