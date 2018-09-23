@@ -109,6 +109,10 @@ class ReplyController extends Controller
 
         $this->isEmpty($model);
 
+        if($model->issuer == Auth::guard('forum')->id()) {
+            throw new LogicException(1010002, '自己的回复不能点');
+        }
+
         if($data = ReplyBls::thumbsUp($model)) {
             return (new JsonResponse())->success($data['data']);
         } else {
@@ -122,6 +126,11 @@ class ReplyController extends Controller
         $model = ReplyBls::find($id);
 
         $this->isEmpty($model);
+
+
+        if($model->issuer == Auth::guard('forum')->id()) {
+            throw new LogicException(1010002, '自己的回复不能点');
+        }
 
         if($data = ReplyBls::thumbsDown($model)) {
             return (new JsonResponse())->success($data['data']);

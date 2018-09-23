@@ -174,6 +174,7 @@ class ArticleBls
     public static function thumbsDown(ArticleModel $model)
     {
         $user = Auth::guard('forum')->user();
+
         if(in_array($user->id, $model->thumbs_down)) {
 //            $model->thumbs_down = static::thumbsMinus($model->thumbs_down, $user->id);
 //            $data = false;

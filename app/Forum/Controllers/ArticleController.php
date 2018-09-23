@@ -143,6 +143,10 @@ class ArticleController extends Controller
 
         $this->isEmpty($model);
 
+        if($model->issuer == Auth::guard('forum')->id()) {
+            throw new LogicException(1010002, '自己的文章不能点');
+        }
+
         if($data = ArticleBls::thumbsUp($model)) {
             return (new JsonResponse())->success($data['data']);
         } else {
@@ -162,6 +166,10 @@ class ArticleController extends Controller
         $model = ArticleBls::find($id);
 
         $this->isEmpty($model);
+
+        if($model->issuer == Auth::guard('forum')->id()) {
+            throw new LogicException(1010002, '自己的文章不能点');
+        }
 
         if($data = ArticleBls::thumbsDown($model)) {
             return (new JsonResponse())->success($data['data']);
