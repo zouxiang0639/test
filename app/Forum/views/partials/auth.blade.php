@@ -141,7 +141,7 @@ right: 0;" onclick="this.src='{{captcha_src()}}'+Math.random()">
     @parent
     <script>
        $(function() {
-           //短信验证
+           //邮箱验证
            $('.post-verify').click(function() {
                var btn     = $(this);
                $.ajax({

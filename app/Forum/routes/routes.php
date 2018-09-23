@@ -52,6 +52,10 @@ Route::group([
         Route::get('info', ['uses' => "MemberController@info", 'as' => 'f.member.info']);
         Route::put('info/sign', ['uses' => "MemberController@infoSign", 'as' => 'f.member.info.sign']);
         Route::put('sign/in', ['uses' => "MemberController@signIn", 'as' => 'f.member.sign.in']);
+
+        Route::get('setup', ['uses' => "MemberController@setup", 'as' => 'f.member.setup']);
+        Route::put('setup/basic', ['uses' => "MemberController@setupBasic", 'as' => 'f.member.setup.basic']);
+        Route::put('setup/password', ['uses' => "MemberController@setupPassword", 'as' => 'f.member.setup.password']);
     });
 
     //空间

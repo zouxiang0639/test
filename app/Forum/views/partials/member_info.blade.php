@@ -2,7 +2,7 @@
     <div class="wm-850">
         <div class="info">
             <div class="step1">
-                <a class="edit" href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i></a>
+                <a class="edit" {!! $current == 6 ? 'style="color: #e15844;"' : '' !!} href="{!! route('f.member.setup') !!}"><i class="fa fa-pencil-square-o"></i></a>
                 <a class="right sign-in" href="javascript:void(0)">
                     <i {!! mb_substr($info->sign_time, 0, 10) ==  date('Y-m-d') ? 'style="color:#F0E672"' : '' !!} class="fa fa-check-square-o"></i>
                 </a>
@@ -17,7 +17,7 @@
                         <span style="padding-left: 16px;">-{!! $info->thumbs_down !!}</span><br />
                         <span>登录次数：{!! $info->login_num !!}</span><br />
                         <span>注册时间：{!! mb_substr($info->created_at, 0, 10) !!}</span><br />
-                        <span><i  data-toggle="modal" data-target="#integral-modal" >？</i>积分 ：
+                        <span><i style="cursor:pointer;" data-toggle="modal" data-target="#integral-modal" >？</i>积分 ：
                             <span id="integral" data-num='{!! $info->integral !!}'>{!! $info->integral ?: 0 !!}</span>
                         </span>
                     </div>

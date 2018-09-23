@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
 use Illuminate\Http\Request;
 use Auth;
+use Validator;
+use Hash;
 
 /**
  * Created by MemberController.
@@ -109,6 +111,11 @@ class MemberController extends Controller
         ]);
     }
 
+    /**
+     * 设置信息已读
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
     public function infoSign()
     {
         if (InfoBls::signByYes(Auth::guard('forum')->id())) {
@@ -136,6 +143,83 @@ class MemberController extends Controller
             return (new JsonResponse())->success('签到成功');
         } else {
             throw new LogicException(1010002, '签到失败');
+        }
+    }
+
+    /**
+     * 推荐
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function setup()
+    {
+        $user = Auth::guard('forum')->user();
+        return view('forum::member.setup', [
+            'current' => 6,
+            'info' => $user
+        ]);
+    }
+
+    /**
+     * 修改基本信息
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
+    public function setupBasic(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:users,name',
+        ],[
+            'name.required' => '昵称不能为空',
+            'name.unique' => '昵称已被使用',
+        ]);
+
+        if ($validator->fails()) {
+            throw new LogicException(1010001, $validator->getMessageBag());
+        }
+        $user = Auth::guard('forum')->user();
+        $user->name = $request->name;
+
+        if ($user->save()) {
+            return (new JsonResponse())->success('修改成功');
+        } else {
+            throw new LogicException(1010002, '修改是吧');
+        }
+    }
+
+
+    /**
+     * 修改密码
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws LogicException
+     */
+    public function setupPassword(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'password' => 'required|confirmed|max:255',
+        ],[
+            'old_password.required' => '原始密码不能为空',
+            'password.required' => '密码不能为空',
+            'password.confirmed' => '两次输入的密码不一样',
+        ]);
+
+        if ($validator->fails()) {
+            throw new LogicException(1010001, $validator->getMessageBag());
+        }
+        $user = Auth::guard('forum')->user();
+        if(!Hash::check($request->old_password, $user->password)){
+            throw new LogicException(1010001, [['原始密码错误']]);
+        }
+        $user->password = bcrypt($request->password);
+
+        if ($user->save()) {
+            return (new JsonResponse())->success('修改成功');
+        } else {
+            throw new LogicException(1010002, '修改是吧');
         }
     }
 

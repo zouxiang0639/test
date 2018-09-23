@@ -35,7 +35,7 @@ $(function(){
                     locked = true;
                 } else {
                     swal(res.data, '', 'success');
-                    window.location.href = window.location.href;
+                    setTimeout("window.location.href =  window.location.href; ",2000);
                 }
             },
             error:function () {
@@ -89,7 +89,7 @@ $(function(){
                 } else {
 
                     swal(res.data, '', 'success');
-                    window.location.href =  window.location.href;
+                    setTimeout("window.location.href =  window.location.href; ",2000);
                 }
             },
             error:function () {
