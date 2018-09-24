@@ -16,6 +16,16 @@ class AdministratorModel extends Model implements AuthenticatableContract
 {
     use Authenticatable;
 
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'tags' => 'array',
+    ];
+
     /**
      * The table associated with the model.
      *

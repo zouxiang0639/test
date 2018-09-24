@@ -61,6 +61,7 @@ class AdminUserBls
 
             $model->username = $request->username;
             $model->name = $request->name;
+            $model->tags = $request->tags;
             if($request->password) {
                 $model->password =  bcrypt($request->password);
             }
@@ -82,6 +83,7 @@ class AdminUserBls
             $model->username = $request->username;
             $model->name = $request->name;
             $model->password = bcrypt($request->password);
+            $model->tags = $request->tags;
             $result = $model->save();
             static::updateRelation($model, $request->only($only));
 

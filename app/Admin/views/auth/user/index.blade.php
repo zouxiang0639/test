@@ -31,6 +31,7 @@
                     <th>用户名</th>
                     <th>名称</th>
                     <th>角色</th>
+                    <th>文章标签</th>
                     <th>创建时间</th>
                     <th>更新时间</th>
                     <th>操作</th>
@@ -42,6 +43,9 @@
                         <td>{!! $item->name !!}</td>
                         <td>
                             {!! Html::getTag($item->roles->pluck('name'),'label label-success') !!}
+                        </td>
+                        <td>
+                            {!! Html::getTag(Forum::tags()->getSpecifyTags($item->tags, ['全部']),'label label-success') !!}
                         </td>
                         <td>{!! $item->created_at !!}</td>
                         <td>{!! $item->updated_at !!}</td>

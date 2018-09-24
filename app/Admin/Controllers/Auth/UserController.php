@@ -8,10 +8,12 @@ use App\Admin\Bls\Auth\AdminUserBls;
 use App\Admin\Bls\Auth\Model\Permission;
 use App\Admin\Bls\Auth\Model\Role;
 use App\Admin\Bls\Auth\RoleBls;
+use App\Consts\Admin\Tags\TagsTypeConst;
 use App\Exceptions\LogicException;
 use App\Http\Controllers\Controller;
 use App\Library\Admin\Form\FormBuilder;
 use App\Library\Admin\Form\HtmlFormTpl;
+use App\Library\Forum\Widgets\Tags;
 use App\Library\Response\JsonResponse;
 use Redirect;
 use Admin;
@@ -131,6 +133,12 @@ class UserController extends Controller
             $item->create('权限', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->multipleSelect('permissions[]', PermissionsBls::PermissionByName(), array_get($info, 'permissions'), $h->options);
                 $h->set('permissions', true);
+            });
+
+            $item->create('文章标签', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $tag = (new Tags(TagsTypeConst::TAG))->getTagsOption();
+                $h->input = $form->multipleSelect('tags[]', $tag, array_get($info, 'tags'), $h->options);
+                $h->set('tags', true);
             });
 
             $item->create('创建时间', function(HtmlFormTpl $h, FormBuilder $form) use ($info){

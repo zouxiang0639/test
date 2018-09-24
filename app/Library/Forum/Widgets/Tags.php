@@ -66,4 +66,17 @@ class Tags
             return $model->contents;
         }
     }
+
+    public function getSpecifyTags($tagsID, $default = null)
+    {
+        $tag = self::getTagsOption();
+        $array = [];
+        foreach($tag as $key => $value) {
+            if(in_array($key, $tagsID)) {
+                $array[$key] = $value;
+            }
+        }
+
+        return $array ?: $default;
+    }
 }
