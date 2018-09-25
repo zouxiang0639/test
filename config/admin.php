@@ -8,22 +8,22 @@ return [
     /*
      * Laravel-admin name.
      */
-    'name' => 'Laravel-admin',
+    'name' => '空地社区',
 
     /*
      * Logo in admin panel header.
      */
-    'logo' => '<b>Laravel</b> admin',
+    'logo' => '<b>空地</b> 社区',
 
     /*
      * Mini-logo in admin panel header.
      */
-    'logo-mini' => '<b>La</b>',
+    'logo-mini' => '<b>空地</b>',
 
     /*
      * Laravel-admin html title.
      */
-    'title' => 'Admin',
+    'title' => '空地社区',
 
     /*
      * Use `https`.

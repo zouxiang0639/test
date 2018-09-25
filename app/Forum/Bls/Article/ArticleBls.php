@@ -34,7 +34,13 @@ class ArticleBls
 
         //标签
         if(!empty($request->tag)) {
-            $model->where('tags', $request->tag);
+
+            if(is_array($request->tag)) {
+                $model->whereIn('tags', $request->tag);
+            } else {
+                $model->where('tags', $request->tag);
+            }
+
         }
 
         //标题
@@ -61,6 +67,12 @@ class ArticleBls
         //发布人
         if(!empty($request->issuer)) {
             $model->where('issuer', $request->issuer);
+        }
+
+
+        //只展示删除数据
+        if(!empty($request->recycle)) {
+            $model->onlyTrashed();
         }
 
         return $model->orderByRaw($order)->paginate($limit);
@@ -112,6 +124,17 @@ class ArticleBls
         return $model->save();
     }
 
+    public static function updateArticle(ArticleCreateRequest $request, ArticleModel $model)
+    {
+        $model->title = $request->title;
+        $model->source = $request->source ?: '';
+        $model->tags = $request->tags;
+        $model->contents = $request->contents;
+        $model->browse = $request->browse;
+        $model->recommend_count = $request->recommend_count;
+        return $model->save();
+    }
+
     /**
      * @param $id
      * @return mixed
@@ -121,6 +144,11 @@ class ArticleBls
         return ArticleModel::find($id);
     }
 
+    /**
+     * 无视文章是否删除
+     * @param $id
+     * @return mixed
+     */
     public static function findByWithTrashed($id)
     {
         return ArticleModel::withTrashed()->find($id);
@@ -174,7 +202,6 @@ class ArticleBls
     public static function thumbsDown(ArticleModel $model)
     {
         $user = Auth::guard('forum')->user();
-
         if(in_array($user->id, $model->thumbs_down)) {
 //            $model->thumbs_down = static::thumbsMinus($model->thumbs_down, $user->id);
 //            $data = false;
@@ -293,6 +320,12 @@ class ArticleBls
         $user->save();
     }
 
+    /**
+     * 根据发表人ID查询文章
+     * @param $issuer
+     * @param $id
+     * @return mixed
+     */
     public static function getArticleByIssuer($issuer, $id)
     {
         return ArticleModel::where('issuer', $issuer)->where('id', $id)->first();
