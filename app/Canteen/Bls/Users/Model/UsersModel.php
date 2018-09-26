@@ -27,7 +27,7 @@ class UsersModel extends Model implements AuthenticatableContract
      */
     public function divisions()
     {
-        return $this->belongsTo(TagsModel::class, 'division');
+        return $this->belongsTo(TagsModel::class, 'division')->withTrashed();
     }
 
 }

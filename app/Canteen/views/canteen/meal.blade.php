@@ -176,7 +176,7 @@
             //我的购物车
             $('.takeout-buy').click(function() {
 
-                if(info) {
+                if(info == 1) {
                     $.alert('没有可预订的就餐');
                     return false;
                 }
