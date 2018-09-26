@@ -41,7 +41,33 @@ class ReplyBls
         if(!is_null($request->parent_id)) {
             $model->where('parent_id', $request->parent_id);
         }
+
+        if(!is_null($request->contents)) {
+            $model->where('parent_id', $request->parent_id);
+        }
         $model->withTrashed();
+        return $model->orderByRaw($order)->paginate($limit);
+    }
+
+
+    public static function getReplyListByAdmin($request, $order = '`id` DESC', $limit = 20)
+    {
+        $model = ReplyModel::query();
+
+        if(!empty($request->article_id)) {
+            $model->where('article_id', $request->article_id);
+        }
+
+        //内容
+        if(!empty($request->contents)) {
+            $model->where('contents', 'like', '%'.$request->contents.'%');
+        }
+
+        //只展示删除数据
+        if(!empty($request->recycle)) {
+            $model->onlyTrashed();
+        }
+
         return $model->orderByRaw($order)->paginate($limit);
     }
 
@@ -153,6 +179,16 @@ class ReplyBls
     {
         return ReplyModel::find($id);
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public static function findByWithTrashed($id)
+    {
+        return ReplyModel::withTrashed()->find($id);
+    }
+
 
     /**
      * 赞

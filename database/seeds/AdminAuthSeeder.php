@@ -271,6 +271,16 @@ class AdminAuthSeeder extends Seeder
 
         $menuRequest->merge([
             'parent_id' => $menu->getKey(),
+            'title' => '公告',
+            'icon' => 'fa-align-justify',
+            'route' => 'm.contents.notice.list',
+            'slug' => 'm_contents_notice',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);
+
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
             'title' => '文章',
             'icon' => 'fa-align-justify',
             'route' => 'm.contents.article.list',
@@ -281,10 +291,10 @@ class AdminAuthSeeder extends Seeder
 
         $menuRequest->merge([
             'parent_id' => $menu->getKey(),
-            'title' => '公告',
+            'title' => '评论',
             'icon' => 'fa-align-justify',
-            'route' => 'm.contents.notice.list',
-            'slug' => 'm_contents_notice',
+            'route' => 'm.contents.reply.list',
+            'slug' => 'm_contents_reply',
             'permissions' => WhetherConst::YES
         ]);
         MenuBls::storeMenu($menuRequest);

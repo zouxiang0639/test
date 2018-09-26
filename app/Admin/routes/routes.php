@@ -172,6 +172,17 @@ Route::group([
 
     //内容管理
     Route::group(['prefix'=>'contents'], function(){
+        //公告
+        Route::group(['prefix'=>'notice', 'middleware' => 'admin.auth:m_contents_notice'], function(){
+            Route::get('', ['uses' => "Contents\\NoticeController@index", 'as' => 'm.contents.notice.list']);
+            Route::get('/create', ['uses' => "Contents\\NoticeController@create", 'as' => 'm.contents.notice.create']);
+            Route::post('store', ['uses' => "Contents\\NoticeController@store", 'as' => 'm.contents.notice.store']);
+            Route::get('edit/{id}', ['uses' => "Contents\\NoticeController@edit", 'as' => 'm.contents.notice.edit']);
+            Route::post('update/{id}', ['uses' => "Contents\\NoticeController@update", 'as' => 'm.contents.notice.update']);
+            Route::put('status/{id}', ['uses' => "Contents\\NoticeController@status", 'as' => 'm.contents.notice.status']);
+            Route::delete('destroy/{id}', ['uses' => "Contents\\NoticeController@destroy", 'as' => 'm.contents.notice.destroy']);
+        });
+
         //文章
         Route::group(['prefix'=>'article', 'middleware' => 'admin.auth:m_contents_article'], function(){
             Route::get('', ['uses' => "Contents\\ArticleController@index", 'as' => 'm.contents.article.list']);
@@ -182,15 +193,11 @@ Route::group([
             Route::put('reduction/{id}', ['uses' => "Contents\\ArticleController@reduction", 'as' => 'm.contents.article.reduction']);
         });
 
-        //公告
-        Route::group(['prefix'=>'notice', 'middleware' => 'admin.auth:m_contents_notice'], function(){
-            Route::get('', ['uses' => "Contents\\NoticeController@index", 'as' => 'm.contents.notice.list']);
-            Route::get('/create', ['uses' => "Contents\\NoticeController@create", 'as' => 'm.contents.notice.create']);
-            Route::post('store', ['uses' => "Contents\\NoticeController@store", 'as' => 'm.contents.notice.store']);
-            Route::get('edit/{id}', ['uses' => "Contents\\NoticeController@edit", 'as' => 'm.contents.notice.edit']);
-            Route::post('update/{id}', ['uses' => "Contents\\NoticeController@update", 'as' => 'm.contents.notice.update']);
-            Route::put('status/{id}', ['uses' => "Contents\\NoticeController@status", 'as' => 'm.contents.notice.status']);
-            Route::delete('destroy/{id}', ['uses' => "Contents\\NoticeController@destroy", 'as' => 'm.contents.notice.destroy']);
+        //评论
+        Route::group(['prefix'=>'reply', 'middleware' => 'admin.auth:m_reply_article'], function(){
+            Route::get('', ['uses' => "Contents\\ReplyController@index", 'as' => 'm.contents.reply.list']);
+            Route::delete('destroy/{id}', ['uses' => "Contents\\ReplyController@destroy", 'as' => 'm.contents.reply.destroy']);
+            Route::put('reduction/{id}', ['uses' => "Contents\\ReplyController@reduction", 'as' => 'm.contents.reply.reduction']);
         });
 
     });

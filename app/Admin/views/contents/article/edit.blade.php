@@ -5,7 +5,7 @@
 @stop
 @section('content-header')
     <h1>
-        公告<small>编辑</small>
+        文章<small>编辑</small>
     </h1>
 @stop
 @section('content')
