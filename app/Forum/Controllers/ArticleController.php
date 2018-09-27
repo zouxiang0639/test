@@ -2,6 +2,7 @@
 
 namespace App\Forum\Controllers;
 
+use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ArticleBls;
 use App\Forum\Bls\Article\ReplyBls;
@@ -114,6 +115,13 @@ class ArticleController extends Controller
         $this->isEmpty($model);
         $this->isEmpty($model->issuers);
         $model->browse ++;
+
+        //超出浏览量 设置热搜
+        if($model->browse == config('config.browse', 0)) {
+            $model->is_hot = WhetherConst::YES;
+            $model->hot_search_time = date('Y-m-d H:i:s');
+        }
+
         $model->save();
 
         $userId = Auth::guard('forum')->id();

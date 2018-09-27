@@ -115,6 +115,8 @@ class TestSeeder extends Seeder
                 'thumbs_up' => '[]',
                 'thumbs_down' => '[]',
                 'star' => '[]',
+                'is_hot' => 1,
+                'hot_search_time' => '2018-09-13 07:01:02',
             ],
             [
                 'title' => '测试数据2',
@@ -128,19 +130,23 @@ class TestSeeder extends Seeder
                 'thumbs_up' => '[]',
                 'thumbs_down' => '[]',
                 'star' => '[]',
+                'is_hot' => 1,
+                'hot_search_time' => '2018-09-13 07:01:02',
             ],
             [
                 'title' => '测试数据3',
                 'tags' => '1',
                 'status' => '1',
                 'contents' => '测试数据2',
-                'issuer' => 2,
+                'issuer' => 1,
                 'ip' => 1,
                 'browse' => 1000,
                 'recommend' => '[]',
                 'thumbs_up' => '[]',
                 'thumbs_down' => '[]',
                 'star' => '[]',
+                'is_hot' => 1,
+                'hot_search_time' => '2018-09-13 07:01:02',
             ],
             [
                 'title' => '测试数据4',
@@ -154,6 +160,8 @@ class TestSeeder extends Seeder
                 'thumbs_up' => '[]',
                 'thumbs_down' => '[]',
                 'star' => '[]',
+                'is_hot' => 1,
+                'hot_search_time' => '2018-09-13 07:01:02',
             ],
             [
                 'title' => '测试数据5',
@@ -167,6 +175,8 @@ class TestSeeder extends Seeder
                 'thumbs_up' => '[]',
                 'thumbs_down' => '[]',
                 'star' => '[]',
+                'is_hot' => 1,
+                'hot_search_time' => '2018-09-13 07:01:02',
             ],
             [
                 'title' => '测试数据6',
@@ -180,6 +190,8 @@ class TestSeeder extends Seeder
                 'thumbs_up' => '[]',
                 'thumbs_down' => '[]',
                 'star' => '[]',
+                'is_hot' => 1,
+                'hot_search_time' => '2018-09-13 07:01:02',
             ],
             [
                 'title' => '测试数据7',
@@ -193,6 +205,8 @@ class TestSeeder extends Seeder
                 'thumbs_up' => '[]',
                 'thumbs_down' => '[]',
                 'star' => '[]',
+                'is_hot' => 1,
+                'hot_search_time' => '2018-09-13 07:01:02',
             ],
             [
                 'title' => '测试数据8',
@@ -206,6 +220,8 @@ class TestSeeder extends Seeder
                 'thumbs_up' => '[]',
                 'thumbs_down' => '[]',
                 'star' => '[]',
+                'is_hot' => 1,
+                'hot_search_time' => '2018-09-13 07:01:02',
             ],
             [
                 'title' => '测试数据9',
@@ -219,6 +235,8 @@ class TestSeeder extends Seeder
                 'thumbs_up' => '[]',
                 'thumbs_down' => '[]',
                 'star' => '[]',
+                'is_hot' => 1,
+                'hot_search_time' => '2018-09-13 07:01:02',
             ],
             [
                 'title' => '测试数据10',
@@ -232,6 +250,8 @@ class TestSeeder extends Seeder
                 'thumbs_up' => '[]',
                 'thumbs_down' => '[]',
                 'star' => '[]',
+                'is_hot' => 1,
+                'hot_search_time' => '2018-09-13 07:01:02',
             ],
         ]);
 

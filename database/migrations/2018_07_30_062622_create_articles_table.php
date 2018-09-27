@@ -30,6 +30,8 @@ class CreateArticlesTable extends Migration
             $table->text('thumbs_down')->comment('弱');
             $table->text('star')->comment('收藏');
             $table->integer('count_new_reply')->default(0)->comment('新文章发表统计');
+            $table->timestamp('hot_search_time')->nullable()->comment('上热搜时间');
+            $table->tinyInteger('is_hot')->default(2)->comment('是否上热搜 1yes 2no 详细WhetherConst');
             $table->index(['id', 'tags', 'issuer']);
             $table->timestamps();
             $table->softDeletes();

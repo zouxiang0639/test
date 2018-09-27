@@ -58,10 +58,8 @@ class ArticleBls
 
         //热门条件
         if(!empty($request->type) && $request->type == 'hot') {
-            $order = '`browse` DESC';
-            $model->where(function($query) {
-                return $query->where('browse','>=', config('config.browse'))->orWhere('recommend_count','>=', config('config.recommend'));
-            });
+            $order = '`hot_search_time` DESC';
+            $model->where('is_hot', WhetherConst::YES);
         }
 
         //发布人
@@ -175,10 +173,16 @@ class ArticleBls
             if(static::checkThumbs($model->thumbs_down, $model->thumbs_up, $user->id)) {
                 throw new LogicException(1010002, '只能选一个赞或者弱');
             }
+
             $model->thumbs_up = static::thumbsPlus($model->thumbs_up, $user->id);
             $user->thumbs_up ++;
             $model->recommend_count ++;
             $data = true;
+
+            if($user->thumbs_up == config('config.recommend', 0)) {
+                $model->is_hot = WhetherConst::YES;
+                $model->hot_search_time = date('Y-m-d H:i:s');
+            }
         }
         $model->save();
 
