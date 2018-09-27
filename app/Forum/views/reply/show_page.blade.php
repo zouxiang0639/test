@@ -28,7 +28,9 @@
                                 <span class="num">{!! $item->thumbsDownCount !!}</span>
                             </i>
                         </a>
-                        <a class="review" href="javascript:void(0)"><i class="fa fa-exclamation"></i></a>
+                        <a class="review" href="{!! route('f.feedback.reply', ['reply_id' => $item->id]) !!}">
+                            <i class="fa fa-exclamation"></i>
+                        </a>
                         @if($item->isDelete)
                         <a class="reply-one-edit"  data-id="{{ $item->id }}" data-at="{{ $item->issuer }}" href="javascript:void(0)">
                             <i class="fa fa-comment-o"></i>

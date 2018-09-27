@@ -78,6 +78,19 @@ class FeedbackController extends Controller
         ]);
     }
 
+    public function reply()
+    {
+        $info = [
+            'title' => FeedbackTypeConst::REPLY_DESC,
+            'type' => FeedbackTypeConst::REPLY,
+            'report_type' => FeedbackReportTypeConst::desc()
+        ];
+
+        return view('forum::feedback.reply', [
+            'info' => $info
+        ]);
+    }
+
     public function store(FeedbackRequests $requests)
     {
         $extend = (new FeedbackStrategy($requests->type))->store($requests);

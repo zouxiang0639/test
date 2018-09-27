@@ -62,6 +62,10 @@ class ReplyBls
         if(!empty($request->contents)) {
             $model->where('contents', 'like', '%'.$request->contents.'%');
         }
+        //id
+        if(!empty($request->id)) {
+            $model->where('id', $request->id);
+        }
 
         //只展示删除数据
         if(!empty($request->recycle)) {
