@@ -191,6 +191,7 @@ Route::group([
             Route::put('status/{id}', ['uses' => "Contents\\ArticleController@status", 'as' => 'm.contents.article.status']);
             Route::delete('destroy/{id}', ['uses' => "Contents\\ArticleController@destroy", 'as' => 'm.contents.article.destroy']);
             Route::put('reduction/{id}', ['uses' => "Contents\\ArticleController@reduction", 'as' => 'm.contents.article.reduction']);
+            Route::put('hot/search/{id}', ['uses' => "Contents\\ArticleController@hotSearch", 'as' => 'm.contents.article.hot.search']);
         });
 
         //评论

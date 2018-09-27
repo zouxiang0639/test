@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers\Contents;
 
 use App\Consts\Admin\Tags\TagsTypeConst;
+use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ArticleBls;
 use App\Forum\Bls\Article\Requests\ArticleCreateRequest;
@@ -105,6 +106,20 @@ class ArticleController  extends Controller
         $this->isEmpty($model);
 
         if($model->restore()) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010001, '操作失败');
+        }
+    }
+
+    public function hotSearch($id)
+    {
+        $model = ArticleBls::find($id);
+        $this->isEmpty($model);
+        $model->is_hot = WhetherConst::YES;
+        $model->hot_search_time = date('Y-m-d H:i:s');
+
+        if($model->save()) {
             return (new JsonResponse())->success('操作成功');
         } else {
             throw new LogicException(1010001, '操作失败');

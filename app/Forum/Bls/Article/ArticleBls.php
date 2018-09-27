@@ -184,6 +184,7 @@ class ArticleBls
                 $model->hot_search_time = date('Y-m-d H:i:s');
             }
         }
+
         $model->save();
 
         //信息创建
