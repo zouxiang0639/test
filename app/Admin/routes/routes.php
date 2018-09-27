@@ -208,6 +208,7 @@ Route::group([
         Route::get('meal/export', ['uses' => "Report\\ReportController@mealExport", 'as' => 'm.report.meal.export']);
         Route::get('takeout', ['uses' => "Report\\ReportController@takeout", 'as' => 'm.report.takeout']);
         Route::get('takeout/export', ['uses' => "Report\\ReportController@takeoutExport", 'as' => 'm.report.takeout.export']);
+        Route::get('takeout/user/export', ['uses' => "Report\\ReportController@takeoutUserExport", 'as' => 'm.report.takeout.user.export']);
     });
 
 });

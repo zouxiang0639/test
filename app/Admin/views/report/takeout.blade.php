@@ -15,7 +15,11 @@
         <div class="box-header">
             <div class="pull-left ">
                 <a href="{!! route('m.report.takeout.export') !!}" class="btn btn-sm btn-success">
-                   导出Excel
+                    导出本周外卖菜单
+                </a>
+
+                <a href="{!! route('m.report.takeout.user.export') !!}" class="btn btn-sm btn-success">
+                    导出本周用户外卖菜单
                 </a>
             </div>
         <span>
