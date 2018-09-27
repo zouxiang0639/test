@@ -62,7 +62,7 @@
                     ['Maximize', 'ShowBlocks','-'],
                     '/',
                     //图片     表格       水平线            表情       特殊字符        分页符
-                    ['Image','Html5video','Chart','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+                    ['Image',/*'Html5video',*/'Chart','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
                     //样式       格式      字体    字体大小
                     ['Styles','Format','Font','FontSize'],
                 ]

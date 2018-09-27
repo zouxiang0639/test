@@ -298,5 +298,15 @@ class AdminAuthSeeder extends Seeder
             'permissions' => WhetherConst::YES
         ]);
         MenuBls::storeMenu($menuRequest);
+
+        $menuRequest->merge([
+            'parent_id' => $menu->getKey(),
+            'title' => '文件',
+            'icon' => 'fa-align-justify',
+            'route' => 'm.contents.file.list',
+            'slug' => 'm_contents_file',
+            'permissions' => WhetherConst::YES
+        ]);
+        MenuBls::storeMenu($menuRequest);
     }
 }

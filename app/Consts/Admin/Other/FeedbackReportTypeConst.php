@@ -11,10 +11,10 @@ class FeedbackReportTypeConst
     const OTHER = 5;
 
 
-    const ADVERT_MEANINGLESS_DESC = '广告或无意义内容无关主题';
-    const INDUCE_DESC = '诱导赞内容人身攻击';
-    const UNFRIENDLY_DESC = '不友善内容政治';
-    const SEXY_DESC = '色等敏感内容';
+    const ADVERT_MEANINGLESS_DESC = '广告或无意义内容';
+    const INDUCE_DESC = '无关主题、诱导赞内容';
+    const UNFRIENDLY_DESC = '人身攻击、不友善内容';
+    const SEXY_DESC = '政治、色情等敏感内容';
     const OTHER_DESC = '其他违规内容';
 
 

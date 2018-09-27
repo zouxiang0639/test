@@ -194,10 +194,16 @@ Route::group([
         });
 
         //评论
-        Route::group(['prefix'=>'reply', 'middleware' => 'admin.auth:m_reply_article'], function(){
+        Route::group(['prefix'=>'reply', 'middleware' => 'admin.auth:m_contents_reply'], function(){
             Route::get('', ['uses' => "Contents\\ReplyController@index", 'as' => 'm.contents.reply.list']);
             Route::delete('destroy/{id}', ['uses' => "Contents\\ReplyController@destroy", 'as' => 'm.contents.reply.destroy']);
             Route::put('reduction/{id}', ['uses' => "Contents\\ReplyController@reduction", 'as' => 'm.contents.reply.reduction']);
+        });
+
+        //文件
+        Route::group(['prefix'=>'file', 'middleware' => 'admin.auth:m_contents_file'], function(){
+            Route::get('', ['uses' => "Contents\\FileController@index", 'as' => 'm.contents.file.list']);
+            Route::delete('destroy/{id}', ['uses' => "Contents\\FileController@destroy", 'as' => 'm.contents.file.destroy']);
         });
 
     });

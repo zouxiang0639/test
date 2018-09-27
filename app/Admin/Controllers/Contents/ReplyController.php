@@ -2,22 +2,12 @@
 
 namespace App\Admin\Controllers\Contents;
 
-use App\Consts\Admin\Tags\TagsTypeConst;
 use App\Exceptions\LogicException;
-use App\Forum\Bls\Article\ArticleBls;
 use App\Forum\Bls\Article\ReplyBls;
-use App\Forum\Bls\Article\Requests\ArticleCreateRequest;
 use App\Http\Controllers\Controller;
-use App\Library\Admin\Form\FormBuilder;
-use App\Library\Admin\Form\HtmlFormTpl;
-use App\Library\Admin\Widgets\Forms;
-use App\Library\Forum\Widgets\Tags;
 use App\Library\Response\JsonResponse;
 use Illuminate\Http\Request;
-use Admin;
 use View;
-use Forum;
-use Auth;
 
 class ReplyController  extends Controller
 {
@@ -60,7 +50,7 @@ class ReplyController  extends Controller
     }
 
     /**
-     * 回复
+     * 恢复
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      * @throws LogicException

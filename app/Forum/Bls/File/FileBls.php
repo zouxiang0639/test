@@ -20,5 +20,24 @@ class FileBls
 
     }
 
+    /**
+     * 文章列表
+     * @param $request
+     * @param string $order
+     * @param int $limit
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public static function getFileLise($request, $order = '`id` DESC', $limit = 30)
+    {
+        $model = FileModel::query();
+
+        return $model->orderByRaw($order)->paginate($limit);
+    }
+
+    public static function find($id)
+    {
+        return FileModel::find($id);
+    }
+
 }
 
