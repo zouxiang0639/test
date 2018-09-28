@@ -365,9 +365,7 @@ acronym {
 	display: block;
 	color: #38393e;
 }
-.hot-list li a:visited{
-	color: #B8C0C7;
-}
+
 .hot-list li i{
 	display: inline-block;
 	vertical-align: middle;

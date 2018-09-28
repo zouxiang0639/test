@@ -11,7 +11,7 @@
                 <div class="hot-list">
                     <ul class="clearfix">
                         @foreach($hot as $value)
-                            <li class=" @if(in_array($value->id,session('article', []))) read @endif ">
+                            <li>
                                 <a href="{!! route('f.article.info', ['id' => $value->id]) !!}">
                                     <span>
                                         <i style="color:{!!  Forum::Tags()->getTagsColor($value->tags) !!} "
