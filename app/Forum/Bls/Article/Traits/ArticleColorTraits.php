@@ -22,9 +22,6 @@ trait ArticleColorTraits
 
     public function getColor($model)
     {
-        if(!is_null($model->deleted_at)) {
-            return $this->color['gray'];
-        }
 
         if($model->issuer == $this->articlesIssuer) {
             return $this->color['yellow'];

@@ -32,10 +32,9 @@
                                 </i>
 
                             </a>
-                            <a class="review" href="{!! route('f.feedback.reply', ['reply_id' => $item->id]) !!}">
-                                <i class="fa fa-exclamation"></i>
-                            </a>
-                            @if($item->isDelete)
+                            <a class="review" href="javascript:void(0)"><i class="fa fa-exclamation"></i></a>
+
+                            @if(is_null($item->deleted_at))
                                 <a class="reply-two-edit" data-pid="{{ Input::get('parent_id') }}"  data-id="{{ $item->id }}" data-at="{{ $item->issuer }}" href="javascript:void(0)"> <i class="fa fa-comment-o"></i>
                                 </a>
                             @endif
@@ -50,7 +49,7 @@
                                 @endforeach
                             @endif
                         </div>
-                        <p>
+                        <p {!! !is_null($item->deleted_at) ? 'style="color: #999999"' : '' !!} >
                             @if($item->atName)
                                 <b style="color: #666666">  {{ '@'.$item->atName }}</b>
                             @endif

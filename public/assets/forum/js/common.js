@@ -186,6 +186,14 @@ $(function(){
         return false;
     });
 
+    $("#article-reply-contents").click(function(){
+        if($('meta[name="auth—num"]').attr('content')) {
+            return true;
+        }
+        swal('请登录会员', '', 'error');
+        return false;
+    });
+
 });
 
 function deleteAb(obj) {

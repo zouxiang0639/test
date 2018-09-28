@@ -12,7 +12,7 @@ class HomeController extends Controller
     {
         $request = new Request();
         $request->type = 'hot';
-        $hot = ArticleBls::getArticleLise($request, '', 20);
+        $hot = ArticleBls::getArticleLise($request, '', 14);
         $hot->getCollection()->each(function($item) {
             $item->replyCount = $item->reply()->count();
         });

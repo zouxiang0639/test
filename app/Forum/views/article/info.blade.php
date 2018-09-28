@@ -116,7 +116,7 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="tea">
-                                <textarea name="contents"></textarea>
+                                <textarea name="contents" id="article-reply-contents"></textarea>
                             </div>
                             <div class="opt">
                                 <a   href="javascript:;"   class=" img img—submit" data-href="{!! route('f.reply.store') !!}"><i class="fa fa-image"></i></a>

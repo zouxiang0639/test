@@ -28,10 +28,8 @@
                                 <span class="num">{!! $item->thumbsDownCount !!}</span>
                             </i>
                         </a>
-                        <a class="review" href="{!! route('f.feedback.reply', ['reply_id' => $item->id]) !!}">
-                            <i class="fa fa-exclamation"></i>
-                        </a>
-                        @if($item->isDelete)
+                        <a class="review" href="javascript:void(0)"><i class="fa fa-exclamation"></i></a>
+                        @if(is_null($item->deleted_at))
                         <a class="reply-one-edit"  data-id="{{ $item->id }}" data-at="{{ $item->issuer }}" href="javascript:void(0)">
                             <i class="fa fa-comment-o"></i>
                         </a>
@@ -46,7 +44,7 @@
                             @endforeach
                         @endif
                     </div>
-                    <p>
+                    <p {!! !is_null($item->deleted_at) ? 'style="color: #999999"' : '' !!} >
                         {!!  str_replace("\r\n", '<br>', e($item->contents)) !!}
                     </p>
                 </div>
