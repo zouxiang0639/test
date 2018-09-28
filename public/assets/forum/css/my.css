@@ -4,8 +4,8 @@
 }
 
 .art-info .wm-850 .con-in p{
-	line-height: 20px;
-	font-size: 13px;
+	line-height: 28px;
+	font-size: 14px;
 }
 
 .article-star{
@@ -482,6 +482,10 @@
 	padding: 6px 20px 12px 30px;
 }
 
+.new-inner .com-tie li .sh-reply{
+	width: 790px;
+}
+
 
 .page{
 	background: #f9f9f9;
@@ -498,20 +502,23 @@
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
+
 .edit-container .con{
 
 	height: 108px;
 	border: 1px solid #1a3148;
 	margin: 0 auto;
 	position: relative;
+
 }
 .edit-container .con .tea{
 	position: absolute;
 	left: 0;
 	top: 0;
 	width: 100%;
-	height: 105px;
+	height: 107px;
 	overflow: hidden;
+	border-left: 4px solid #479FED;
 }
 .edit-container .con .tea textarea{
 	width: 94%;

@@ -146,7 +146,7 @@
 //               var html ='<li class="edit-container delete-'+ id +'">';
 //               html += $(".reply").html();
 //               html += '</li>';
-               var html ='<li class="share clearfix delete-'+ id +' "><div class="sh-l fl"><i></i></div><div class="sh-r fr edit-container"> ';
+               var html ='<li class="share clearfix delete-'+ id +' "><div class="sh-l fl"><i></i></div><div class="sh-reply fr edit-container" style="padding-bottom:0px"> ';
                html += $(".reply").html();
                html += '</div></li>';
                $(this).parents('.reply-' + id).after(html);
@@ -166,7 +166,7 @@
 
                $(this).attr('data-check', '1');
 
-               var html ='<li class="share clearfix delete-'+ id +' "><div class="sh-l fl"><i></i></div><div class="sh-r fr edit-container"> ';
+               var html ='<li class="share clearfix delete-'+ id +' "><div class="sh-l fl"><i></i></div><div class="sh-reply fr edit-container" style="padding-bottom:0px"> ';
                html += $(".reply").html();
                html += '</div></li>';
                $(this).parents('.reply-' + id).after(html);

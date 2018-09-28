@@ -76,9 +76,9 @@ class ArticleController  extends Controller
         $model = ArticleBls::findByWithTrashed($id);
 
         if (ArticleBls::updateArticle($request, $model)) {
-            return (new JsonResponse())->success(route('f.article.info', ['id' => $model->id]));
+            return (new JsonResponse())->success('操作成功');
         } else {
-            throw new LogicException(1010002, '发布失败');
+            throw new LogicException(1010002, '操作失败');
         }
     }
 

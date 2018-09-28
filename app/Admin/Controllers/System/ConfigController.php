@@ -172,15 +172,21 @@ class ConfigController extends Controller
         $forum = Admin::form(function(Forms $item) {
 
             $item->create('浏览量', function(HtmlFormTpl $h, FormBuilder $form) {
-                $h->input = $form->text('browse', config('config.browse'), $h->options);
+                $h->input = $form->number('browse', config('config.browse'), $h->options);
                 $h->set('browse', false);
-                $h->helpBlock = '（设置上热门浏览量）';
+                $h->helpBlock = '（假如设置1000,文章浏览量到达1000会触发 推荐机制）';
             });
 
             $item->create('推荐量', function(HtmlFormTpl $h, FormBuilder $form) {
-                $h->input = $form->text('recommend', config('config.recommend'), $h->options);
+                $h->input = $form->number('recommend', config('config.recommend'), $h->options);
                 $h->set('recommend', false);
-                $h->helpBlock = '（设置上热门推荐量）';
+                $h->helpBlock = '（假如设置100,文章推荐量到达100会触发 推荐机制）';
+            });
+
+            $item->create('当天可发布文章', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->number('day_article', config('config.day_article'), $h->options);
+                $h->set('day_article', false);
+                $h->helpBlock = '（假如设置10,设置后当天用户只能发10篇文章）';
             });
 
         })->getFormHtml();
