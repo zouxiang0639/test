@@ -182,7 +182,7 @@
 	position: absolute;
 }
 .tab-con li span.time{
-	width: 72px;
+	width: 82px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

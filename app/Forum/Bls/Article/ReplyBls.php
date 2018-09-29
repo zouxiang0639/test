@@ -123,7 +123,7 @@ class ReplyBls
                 $content = '你的回复';
                 $content .= '<a href="'. route('f.article.info', ['id' => $model->article_id], false) .'"> ‘' . e(mb_substr($model->parent->contents,0,20)) . '’ </a>';
                 $content .= '有个新回复';
-                InfoBls::createInfo($article->issuer, $operatorId, InfoTypeConst::AT, $content);
+                InfoBls::createInfo($model->at, $operatorId, InfoTypeConst::AT, $content);
 
             }
 

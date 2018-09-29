@@ -103,6 +103,8 @@ class MemberController extends Controller
         $model = InfoBls::getInfoList($request, '`id` DESC', 30);
         $model->getCollection()->each(function($item) {
             $item->typeName = InfoTypeConst::getDesc($item->type);
+            $time = mb_substr($item->created_at, 0, 10);
+            $item->createdAt = $time == date('Y-m-d') ? mb_substr($item->created_at, 11, 5) : $time;
         });
         return view('forum::member.info', [
             'current' => 5,
