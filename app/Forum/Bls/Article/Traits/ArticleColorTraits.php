@@ -25,11 +25,11 @@ trait ArticleColorTraits
 
         if($model->issuer == $this->articlesIssuer) {
             return $this->color['yellow'];
-        } else if($model->thumbsDownCount > 9) {
+        } else if($model->thumbsDownCount >= config('config.reply_light_red')) {
             return $this->color['lightRed'];
-        } else if($model->thumbsUpCount > 99) {
+        } else if($model->thumbsUpCount >= config('config.reply_green')) {
             return $this->color['green'];
-        } else if($model->thumbsUpCount > 9) {
+        } else if($model->thumbsUpCount >= config('config.reply_light_green')) {
             return $this->color['lightGreen'];
         } else {
             return $this->color['white'];

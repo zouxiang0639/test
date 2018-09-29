@@ -189,6 +189,24 @@ class ConfigController extends Controller
                 $h->helpBlock = '（假如设置10,设置后当天用户只能发10篇文章）';
             });
 
+            $item->create('回复点赞深绿色数量', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->number('reply_green', config('config.reply_green'), $h->options);
+                $h->set('reply_green', false);
+                $h->helpBlock = '（假如设置10,回复点赞到了10底色变成深绿色）';
+            });
+
+            $item->create('回复点赞浅绿色数量', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->number('reply_light_green', config('config.reply_light_green'), $h->options);
+                $h->set('reply_light_green', false);
+                $h->helpBlock = '（假如设置10,回复点赞到了10底色变成浅绿色数量）';
+            });
+
+            $item->create('回复点弱浅红色色数量', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->number('reply_light_red', config('config.reply_light_red'), $h->options);
+                $h->set('reply_light_red', false);
+                $h->helpBlock = '（假如设置10,回复点弱到了10底色变成浅红色色数量）';
+            });
+
         })->getFormHtml();
 
         $words = Storage::disk('local')->get('words.txt');

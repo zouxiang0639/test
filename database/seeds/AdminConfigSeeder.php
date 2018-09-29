@@ -69,6 +69,21 @@ class AdminConfigSeeder extends Seeder
                 'description' => '当天可发布文章',
                 'value' => '10',
             ],
+            [
+                'name' => 'reply_green',
+                'description' => '回复点赞深绿色数量',
+                'value' => '100',
+            ],
+            [
+                'name' => 'reply_light_green',
+                'description' => '回复点赞浅绿色数量',
+                'value' => '10',
+            ],
+            [
+                'name' => 'reply_light_red',
+                'description' => '回复点弱浅红色色数量',
+                'value' => '10',
+            ],
 
         ]);
     }
