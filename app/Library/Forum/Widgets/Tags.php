@@ -14,7 +14,7 @@ class Tags
     public function __construct($type = TagsTypeConst::TAG)
     {
         if(empty($this->tags)) {
-            $this->tags = TagsModel::where('type', $type)->where('status', WhetherConst::YES)
+            $this->tags = TagsModel::where('type', $type)->where('status', WhetherConst::YES)->orderBy('hot','desc')
                 ->get()->keyBy('id');
         }
 
