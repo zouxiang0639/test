@@ -20,15 +20,19 @@
                         @endforeach
 
                     </ul>
-                    <a class="read info-sign" href="javascript:void(0)">全部设为已读</a>
+                    {{--<a class="read info-sign" href="javascript:void(0)">全部设为已读</a>--}}
                 </div>
                 <div class="tab-con">
                     <ul>
-                        @foreach($list as $item)
+
+                        @foreach($list as $key => $item)
                             <li  {!! $item->sign == 2 ? 'class="new"' : ''!!}>
                                 <span class="time">{!!  $item->createdAt !!}</span>
                                 <span class="type">{{ $item->typeName }}</span>
                                 <span class="con">{!! $item->content  !!}</span>
+                                @if($count > 0 && $key == $count)
+                                <div style="border-bottom: 2px solid #295665;"></div>
+                                @endif
                             </li>
                         @endforeach
                     </ul>

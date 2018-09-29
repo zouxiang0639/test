@@ -3,6 +3,7 @@
 namespace App\Forum\Controllers;
 
 use App\Consts\Admin\User\InfoTypeConst;
+use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ArticleBls;
 use App\Forum\Bls\Article\InfoBls;
@@ -106,10 +107,18 @@ class MemberController extends Controller
             $time = mb_substr($item->created_at, 0, 10);
             $item->createdAt = $time == date('Y-m-d') ? mb_substr($item->created_at, 11, 5) : $time;
         });
+
+        $count = InfoBls::countInfo(\Auth::guard('forum')->id(), WhetherConst::NO);
+
+        if($count > 0) {
+            InfoBls::signByYes(Auth::guard('forum')->id());
+        }
+
         return view('forum::member.info', [
             'current' => 5,
             'list' => $model,
-            'type' => InfoTypeConst::desc()
+            'type' => InfoTypeConst::desc(),
+            'count' => $count
         ]);
     }
 
