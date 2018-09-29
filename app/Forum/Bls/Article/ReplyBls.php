@@ -67,6 +67,11 @@ class ReplyBls
             $model->where('id', $request->id);
         }
 
+        //发布人
+        if(!empty($request->issuer)) {
+            $model->where('issuer', $request->issuer);
+        }
+
         //只展示删除数据
         if(!empty($request->recycle)) {
             $model->onlyTrashed();

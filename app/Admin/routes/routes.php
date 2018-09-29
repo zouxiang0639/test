@@ -167,6 +167,7 @@ Route::group([
             Route::post('update/{id}', ['uses' => "Customer\\UsersController@update", 'as' => 'm.customer.users.update']);
             Route::put('status/{id}', ['uses' => "Customer\\UsersController@status", 'as' => 'm.customer.users.status']);
             Route::put('excuse/{id}', ['uses' => "Customer\\UsersController@excuse", 'as' => 'm.customer.users.excuse']);
+            Route::post('search', ['uses' => "Customer\\UsersController@search", 'as' => 'm.customer.users.search']);
         });
 
     });

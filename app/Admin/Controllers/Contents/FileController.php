@@ -5,6 +5,7 @@ namespace App\Admin\Controllers\Contents;
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ReplyBls;
 use App\Forum\Bls\File\FileBls;
+use App\Forum\Bls\Users\UsersBls;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
 use Illuminate\Http\Request;
@@ -19,8 +20,18 @@ class FileController  extends Controller
 
         $list = FileBls::getFileLise($request);
 
+        $userList = [];
+
+        if(!empty($request->issuer)) {
+            $userModel = UsersBls::find($request->issuer);
+            if($userModel) {
+                $userList[$userModel->id] = $userModel->name;
+            }
+        }
+
         return View::make('admin::contents.file.index', [
-            'list' => $list
+            'list' => $list,
+            'userList' => $userList
         ]);
     }
 

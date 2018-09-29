@@ -4,6 +4,7 @@ namespace App\Admin\Controllers\Contents;
 
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ReplyBls;
+use App\Forum\Bls\Users\UsersBls;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
 use Illuminate\Http\Request;
@@ -26,8 +27,19 @@ class ReplyController  extends Controller
             }
         });
 
+        $userList = [];
+
+        if(!empty($request->issuer)) {
+            $userModel = UsersBls::find($request->issuer);
+            if($userModel) {
+                $userList[$userModel->id] = $userModel->name;
+            }
+        }
+
+
         return View::make('admin::contents.reply.index', [
-            'list' => $list
+            'list' => $list,
+            'userList' => $userList
         ]);
     }
 

@@ -21,8 +21,8 @@
                             {!! Form::checkbox('recycle', 1, Input::get('recycle')) !!} 回收站
                         </div>
                     </div>
-                    <div class="input-group input-group-sm">
-                        {{--{!! Form::select('tag', $tags, Input::get('tag'), ['class'=>'form-control','placeholder'=>'全部']) !!}--}}
+                    <div class="input-group input-group-sm" style="width: 200px">
+                        {!! Form::select2BySearch(route('m.customer.users.search'), 'issuer', $userList, Input::get('issuer'), ['class'=>'form-control','placeholder'=>'全部']) !!}
                     </div>
                     <div class="input-group input-group-sm ">
                         {!! Form::text('article_id', Input::get('article_id'), ['class'=>'form-control','placeholder'=>'文章编号']) !!}

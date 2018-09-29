@@ -8,6 +8,7 @@ use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ArticleBls;
 use App\Forum\Bls\Article\Requests\ArticleCreateRequest;
+use App\Forum\Bls\Users\UsersBls;
 use App\Http\Controllers\Controller;
 use App\Library\Admin\Form\FormBuilder;
 use App\Library\Admin\Form\HtmlFormTpl;
@@ -47,9 +48,20 @@ class ArticleController  extends Controller
             }
         });
 
+        $userList = [];
+
+        if(!empty($request->issuer)) {
+            $userModel = UsersBls::find($request->issuer);
+            if($userModel) {
+                $userList[$userModel->id] = $userModel->name;
+            }
+        }
+
+
         return View::make('admin::contents.article.index', [
             'list' => $list,
-            'tags' => $userTags ? (new Tags(TagsTypeConst::TAG))->getSpecifyTags($userTags) : $tags
+            'tags' => $userTags ? (new Tags(TagsTypeConst::TAG))->getSpecifyTags($userTags) : $tags,
+            'userList' => $userList
         ]);
     }
 

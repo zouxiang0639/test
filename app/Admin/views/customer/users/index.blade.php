@@ -43,7 +43,7 @@
                         </td>
                         <td>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-info">详情</button>
+                                <a href="{!! route('m.customer.users.edit', ['id' => $item->id]) !!}" type="button" class="btn btn-info">详情</a>
                                 <button type="button" class="btn btn-info excuse" data-toggle="modal" data-target="#modal-excuse"
                                         data-url="{!! route('m.customer.users.excuse', ['id' => $item->id]) !!}"
                                         data-date="{!! $item->excuse_time !!}">禁言</button>

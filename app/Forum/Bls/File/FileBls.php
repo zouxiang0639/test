@@ -31,6 +31,11 @@ class FileBls
     {
         $model = FileModel::query();
 
+        //发布人
+        if(!empty($request->issuer)) {
+            $model->where('user_id', $request->issuer);
+        }
+
         return $model->orderByRaw($order)->paginate($limit);
     }
 

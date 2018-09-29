@@ -128,4 +128,9 @@ class UsersBls
     }
 
 
+    public static function getUserByName($name)
+    {
+        return UsersModel::where('name', 'like', '%'.$name.'%')->get();
+    }
+
 }
