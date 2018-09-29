@@ -32,7 +32,7 @@
                                 </i>
 
                             </a>
-                            <a class="review" href="javascript:void(0)"><i class="fa fa-exclamation"></i></a>
+                            <a class="review" href="{!! route('f.feedback.reply', ['reply_id' => $item->id]) !!}"><i class="fa fa-exclamation"></i></a>
 
                             @if(is_null($item->deleted_at))
                                 <a class="reply-two-edit" data-pid="{{ Input::get('parent_id') }}"  data-id="{{ $item->id }}" data-at="{{ $item->issuer }}" href="javascript:void(0)"> <i class="fa fa-comment-o"></i>

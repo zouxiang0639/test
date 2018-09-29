@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers\Contents;
 
+use App\Consts\Admin\Role\RoleSlugConst;
 use App\Consts\Admin\Tags\TagsTypeConst;
 use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
@@ -157,14 +158,18 @@ class ArticleController  extends Controller
                 $h->set('source', true);
             });
 
-            $item->create('浏览量', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->number('browse', array_get($info, 'browse'), $h->options);
-                $h->set('browse', true);
-            });
+            //超级管理员才有浏览量修改
+            if(Auth::guard('admin')->user()->is(RoleSlugConst::ROLE_SUPER)) {
+                $item->create('浏览量', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                    $h->input = $form->number('browse', array_get($info, 'browse'), $h->options);
+                    $h->set('browse', true);
+                });
+            }
 
             $item->create('推荐量', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->number('recommend_count', array_get($info, 'recommend_count'), $h->options);
-                $h->set('recommend_count', true);
+                $h->input = $form->display(array_get($info, 'recommend_count'));
+//                $h->input = $form->number('recommend_count', array_get($info, 'recommend_count'), $h->options);
+//                $h->set('recommend_count', true);
             });
 
             $item->create('ip', function(HtmlFormTpl $h, FormBuilder $form) use ($info){

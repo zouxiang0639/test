@@ -522,7 +522,7 @@
 }
 .edit-container .con .tea textarea{
 	width: 94%;
-	height: 100%;
+	height: 99%;
 	resize: none;
 	padding: 10px;
 }
@@ -531,7 +531,7 @@
 	position: absolute;
 	right: 0;
 	width: 52px;
-	height: 106px;
+	height: 107px;
 	background: #479fed;
 	border-left: 1px solid #1a3148;
 }

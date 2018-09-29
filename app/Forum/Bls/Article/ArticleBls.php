@@ -2,6 +2,7 @@
 
 namespace App\Forum\Bls\Article;
 
+use App\Consts\Admin\Role\RoleSlugConst;
 use App\Consts\Admin\User\InfoTypeConst;
 use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
@@ -50,10 +51,8 @@ class ArticleBls
 
         //排序
         if(!empty($request->order) && $request->order == 'hot') {
-            $order = '`browse` DESC';
-            $model->where(function($query) {
-                return $query->where('browse','>=', config('config.browse'))->orWhere('recommend_count','>=', config('config.recommend'));
-            });
+            $order = '`hot_search_time` DESC';
+            $model->where('is_hot', WhetherConst::YES);
         }
 
         //热门条件
@@ -128,8 +127,12 @@ class ArticleBls
         $model->source = $request->source ?: '';
         $model->tags = $request->tags;
         $model->contents = $request->contents;
-        $model->browse = $request->browse;
-        $model->recommend_count = $request->recommend_count;
+
+        if(Auth::guard('admin')->user()->is(RoleSlugConst::ROLE_SUPER)) {
+            $model->browse = $request->browse;
+        }
+
+        //$model->recommend_count = $request->recommend_count;
         return $model->save();
     }
 
@@ -179,7 +182,7 @@ class ArticleBls
             $model->recommend_count ++;
             $data = true;
 
-            if($user->thumbs_up == config('config.recommend', 0)) {
+            if($model->recommend_count == config('config.recommend', 0)) {
                 $model->is_hot = WhetherConst::YES;
                 $model->hot_search_time = date('Y-m-d H:i:s');
             }

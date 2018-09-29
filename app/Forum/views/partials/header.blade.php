@@ -1,7 +1,7 @@
 <div class="com-top">
     <div class="wm-850 clearfix">
         <a class="logo" href="{!! route('f.home') !!}">
-            <img src="{!! assets_path("/forum/img/logo.png") !!}" alt="" title="" />
+            <img src="{!! uploads_path(config('config.logo')) !!}" alt="" title="" />
         </a>
         <div class="right">
             <div class="login-state">

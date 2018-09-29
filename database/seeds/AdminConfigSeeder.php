@@ -48,7 +48,7 @@ class AdminConfigSeeder extends Seeder
             [
                 'name' => 'logo',
                 'description' => 'logo',
-                'value' => '',
+                'value' => 'image/201809/29/cdd9407e9244ad89b4ceb853f2bdfad8.png',
             ],
         ]);
 
@@ -68,7 +68,8 @@ class AdminConfigSeeder extends Seeder
                 'name' => 'day_article',
                 'description' => '当天可发布文章',
                 'value' => '10',
-            ]
+            ],
+
         ]);
     }
 }
