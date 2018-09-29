@@ -148,6 +148,81 @@ EOT;
     }
 
     /**
+     * select2 搜索关键字
+     *
+     * @param  string $url
+     * @param  string $name
+     * @param  array  $list
+     * @param  string|bool $selected
+     * @param  array  $selectAttributes
+     * @param  array  $select2Param [
+     *      'tags' true:是包含自己, false:不包含自己
+     * ]
+     *
+     * @return \Illuminate\Support\HtmlString
+     */
+    public function select2BySearch(
+        $url,
+        $name,
+        $list = [],
+        $selected = null,
+        array $selectAttributes = [],
+        array $select2Param = []
+    ) {
+
+        Admin::style()->setCss(StyleTypeConst::FILE, $this->getResource('select2.min.css'));
+        Admin::style()->setJs(StyleTypeConst::FILE, $this->getResource('select2.full.min.js'));
+
+        $tags = array_get($select2Param, 'tags', 'false');
+
+        $code = <<<EOT
+
+            $("select[name='$name']").select2({
+                allowClear: true,
+                placeholder: "$name",
+                separator:true,
+                tags: $tags,
+                allowClear: true,
+                placeholder : '请输入客户名称',
+                language: {
+                    noResults: function () {
+                        return "暂无符合搜索条件的信息";
+                    },
+                    searching : function () {
+                        return "查询中...";
+                    },
+                    inputTooShort : function(a) {
+                        var b = a.minimum - a.input.length,c="请至少输入"+b+"个关键字";
+                        return c
+                    }
+                },
+                ajax: {
+                    url: "$url",
+                    type: 'POST',
+                    dataType: 'json',
+                    data: function (params) {
+                        return {
+                             "_token": $('meta[name="csrf-token"]').attr('content'),
+                            "keyword": params.term
+
+                        };
+                    },
+                    processResults: function (result, params) {
+                        return {
+                            results: result.data.items
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1
+            });\n
+EOT;
+        Admin::style()->setJs(StyleTypeConst::CODE, $code);
+        $selectAttributes = array_merge(['data-placeholder'=>"请输入",'placeholder'=>'请输入'], $selectAttributes);
+        return self::select($name ,$list, $selected, $selectAttributes);
+    }
+
+    /**
      * Create a dualListBox field.
      *
      * @param  string $name

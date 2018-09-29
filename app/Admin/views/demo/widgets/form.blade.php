@@ -17,8 +17,7 @@
                     <h3 class="box-title">编辑</h3>
                 </div>
                 {!! $form !!}
-                <textarea id="a"></textarea>
-        </div>
+            </div>
 
         </div>
     </div>
@@ -36,7 +35,6 @@
                 }
             }
         }
-        CKEDITOR.replace('a');
         var initialAjAx = {
             "url":"{!! route('m.role.store') !!}",
             "backUrl":"{!! route('m.role.list') !!}"
