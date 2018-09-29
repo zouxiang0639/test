@@ -17,8 +17,7 @@
                     <h3 class="box-title">编辑</h3>
                 </div>
                 {!! $form !!}
-                <textarea id="a"></textarea>
-        </div>
+            </div>
 
         </div>
     </div>

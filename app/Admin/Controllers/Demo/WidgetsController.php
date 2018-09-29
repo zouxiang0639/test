@@ -2,12 +2,14 @@
 
 namespace App\Admin\Controllers\Demo;
 
+use App\Admin\Bls\Auth\Model\MenuModel;
 use App\Http\Controllers\Controller;
 use Admin;
 use App\Library\Admin\Form\FormBuilder;
 use App\Library\Admin\Form\HtmlFormTpl;
 use App\Library\Admin\Widgets\Forms;
 use App\Library\Response\JsonResponse;
+use Illuminate\Http\Request;
 
 class WidgetsController extends Controller
 {
@@ -62,6 +64,11 @@ class WidgetsController extends Controller
                 $h->input = $form->select2('select2', [1,2,3,4], '', $h->options);
                 $h->set('select2', true);
             });
+            $item->create('select2BySearch', function(HtmlFormTpl $h, FormBuilder $form) {
+                $url = route('m.demo.widgets.select.search');
+                $h->input = $form->select2BySearch($url, 'select2BySearch', [], '', $h->options, ['tags' => 'true']);
+                $h->set('select2BySearch', true);
+            });
 
             $item->create('multipleSelect', function(HtmlFormTpl $h, FormBuilder $form) {
                 $h->input = $form->multipleSelect('multipleSelect', [1,2,3,4], '', $h->options);
@@ -98,5 +105,20 @@ class WidgetsController extends Controller
     public function formPost(\Request $request)
     {
         return (new JsonResponse())->success('http://laravel-admin.org//uploads/images/下載 (4).jpg');
+    }
+
+    public function selectSearch(Request $request)
+    {
+        $model =  MenuModel::where('title','like','%'.$request->keyword.'%')->get();
+
+        $array = [];
+        foreach($model as $item) {
+            $array[] = [
+                'id' => $item->id,
+                'text' => $item->title
+            ];
+        }
+
+        return (new JsonResponse())->success(['items'=>$array]);
     }
 }

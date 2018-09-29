@@ -68,7 +68,7 @@
             $(".import").click(function(){
                 var self = this, code = ".";
                 swal({
-                    title: "确认删除?",
+                    title: "你确定要还原数据吗?",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",

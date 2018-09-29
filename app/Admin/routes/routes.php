@@ -154,6 +154,7 @@ Route::group([
     Route::group(['prefix'=>'demo'], function(){
         Route::get('form', ['uses' => "Demo\\WidgetsController@form", 'as' => 'm.demo.form']);
         Route::post('formPost', ['uses' => "Demo\\WidgetsController@formPost", 'as' => 'm.demo.widgets.formPost']);
+        Route::post('select/search', ['uses' => "Demo\\WidgetsController@selectSearch", 'as' => 'm.demo.widgets.select.search']);
     });
 
     //用户管理
