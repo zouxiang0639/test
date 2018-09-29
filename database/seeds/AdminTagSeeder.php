@@ -18,6 +18,11 @@ class AdminTagSeeder extends Seeder
         TagsModel::truncate();
         TagsModel::insert([
             [
+                'tag_name' => '测试组',
+                'type' => TagsTypeConst::TAG,
+                'status' => WhetherConst::NO,
+            ],
+            [
                 'tag_name' => '公司领导',
                 'type' => TagsTypeConst::TAG,
                 'status' => WhetherConst::YES,
@@ -117,7 +122,6 @@ class AdminTagSeeder extends Seeder
                 'type' => TagsTypeConst::TAG,
                 'status' => WhetherConst::YES,
             ]
-
         ]);
     }
 }

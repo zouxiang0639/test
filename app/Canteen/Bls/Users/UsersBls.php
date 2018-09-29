@@ -93,6 +93,11 @@ class UsersBls
         return UsersModel::all();
     }
 
+    public static function usersByStatus()
+    {
+        return UsersModel::where('status', WhetherConst::YES)->get();
+    }
+
     /**
      * 根据手机号获取一条用户信息
      * @param $mobile
@@ -160,7 +165,7 @@ class UsersBls
 
     public static function groupUserDivision()
     {
-        return UsersModel::groupBy('division')->get(array(
+        return UsersModel::where('status', WhetherConst::YES)->groupBy('division')->get(array(
            'division',
             \DB::raw('COUNT(*) as "count"')
         ))->pluck('count', 'division');

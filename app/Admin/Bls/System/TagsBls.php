@@ -83,4 +83,14 @@ class TagsBls
         return TagsModel::where('type', $type)->where('status', WhetherConst::YES)
             ->orderBy('hot', 'DESC')->orderBy('id', 'DESC')->get();
     }
+
+    /**
+     * 根据类型获取所有标签
+     * @param $type
+     * @return mixed
+     */
+    public static function getTags($type)
+    {
+        return TagsModel::where('type', $type)->get();
+    }
 }

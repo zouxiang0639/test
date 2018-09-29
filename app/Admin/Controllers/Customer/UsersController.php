@@ -35,8 +35,9 @@ class UsersController extends Controller
         $tagList = TagsBls::getTagsByType(TagsTypeConst::TAG)->pluck('tag_name', 'id')->toArray();
         $model = UsersBls::getUsersList($request);
 
-        $model->getCollection()->each(function($item) use ($tagList) {
-            $item->divisionNmae = array_get($tagList, $item->division, '-');
+        $tag = TagsBls::getTags(TagsTypeConst::TAG)->pluck('tag_name', 'id')->toArray();
+        $model->getCollection()->each(function($item) use ($tag) {
+            $item->divisionNmae = array_get($tag, $item->division, '-');
             $item->formatMoney = FormatMoney::fen2yuan($item->money);
         });
 

@@ -148,7 +148,7 @@ class RechargeController extends Controller
             });
 
             $item->create('用户', function(HtmlFormTpl $h, FormBuilder $form) {
-                $list = UsersBls::usersAll()->pluck('name', 'id')->toArray();
+                $list = UsersBls::usersByStatus()->pluck('name', 'id')->toArray();
                 $h->input = $form->select2('user', $list , '', $h->options);
                 $h->id = 'user';
                 $h->set('user', true);
