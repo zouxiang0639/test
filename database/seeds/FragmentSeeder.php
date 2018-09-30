@@ -50,6 +50,13 @@ class FragmentSeeder extends Seeder
                 'picture' => '',
                 'created_at' => '2018-07-24',
             ],
+            [
+                'title' => '底部广告咨询',
+                'contents' => '广告咨询：info@kongdi.com 2018 kongdi All Rights Reserved',
+                'links' => '',
+                'picture' => '',
+                'created_at' => '2018-07-24',
+            ],
         ]);
     }
 }

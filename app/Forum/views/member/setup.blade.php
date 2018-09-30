@@ -30,6 +30,9 @@
                                     <div class="input-group" style="width:100%">
                                         <input class="form-control" name="name" value="{!! $info->name !!}" type="text">
                                     </div>
+                                    <span class="help-block">
+                <i class="fa fa-info-circle"></i>&nbsp;（修改昵称需要扣50个积分）
+            </span>
                                 </div>
                             </div>
                             <div class="box-footer">

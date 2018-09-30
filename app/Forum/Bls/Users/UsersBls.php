@@ -86,6 +86,19 @@ class UsersBls
 
     }
 
+    /**
+     * 减积分
+     * @param $integral
+     * @return mixed
+     */
+    public static function minusIntegral($integral)
+    {
+        $user = \Auth::guard('forum')->user();
+        $user->integral -= $integral;
+        return $user->save();
+
+    }
+
 
     /**
      * 签到
@@ -119,6 +132,7 @@ class UsersBls
     public static function getUsersList(Request $request, $order = '`id` DESC', $limit = 20)
     {
         $model = UsersModel::query();
+
 
         if(!empty($request->id)) {
             $model->where('id', $request->id);

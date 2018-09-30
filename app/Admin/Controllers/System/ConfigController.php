@@ -204,7 +204,7 @@ class ConfigController extends Controller
             $item->create('回复点弱浅红色色数量', function(HtmlFormTpl $h, FormBuilder $form) {
                 $h->input = $form->number('reply_light_red', config('config.reply_light_red'), $h->options);
                 $h->set('reply_light_red', false);
-                $h->helpBlock = '（假如设置10,回复点弱到了10底色变成浅红色色数量）';
+                $h->helpBlock = '（假如设置10,回复点弱数大于赞数10以上变成红色）';
             });
 
         })->getFormHtml();

@@ -9,8 +9,25 @@
 
     <div class="box">
         <div class="box-header">
+            <div class="pull-left ">
+                <form class="form-inline" name="search" action="">
+
+                    <div class="input-group input-group-sm" style="width: 200px">
+                        {!! Form::select2BySearch(route('m.customer.users.search'), 'id', $userList, Input::get('id'), ['class'=>'form-control','placeholder'=>'全部']) !!}
+                    </div>
+
+                    <div class="input-group input-group-sm" >
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
 
             <div class="pull-right">
+
             </div>
 
         <span>

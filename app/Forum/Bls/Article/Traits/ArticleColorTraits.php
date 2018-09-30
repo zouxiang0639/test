@@ -22,10 +22,9 @@ trait ArticleColorTraits
 
     public function getColor($model)
     {
-
         if($model->issuer == $this->articlesIssuer) {
             return $this->color['yellow'];
-        } else if($model->thumbsDownCount >= config('config.reply_light_red')) {
+        } else if($model->thumbsDownCount - $model->thumbsUpCount > config('config.reply_light_red')) {
             return $this->color['lightRed'];
         } else if($model->thumbsUpCount >= config('config.reply_green')) {
             return $this->color['green'];

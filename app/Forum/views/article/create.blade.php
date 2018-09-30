@@ -27,6 +27,7 @@
                         <div class="tep2">
                             <input name="title" type="text" placeholder="请填写标题" />
                         </div>
+
                         <div class="tep3">
 
                             <p class="area">
@@ -36,6 +37,9 @@
                                 <input name="source" value="" type="text" placeholder="转载内容请填写原作者与来源，原创内容无需填写" />
                             </p>
                         </div>
+            <span class="help-block">
+                <i class="fa fa-info-circle"></i>&nbsp;（每天发表文章章超出{!! config('config.day_article') !!}后,每发表一篇文章将减10个积分）
+            </span>
                         <div class="tep4">
                             <a class="post-btn" id="article-submit" data-action="{!! route('f.article.create.put') !!}" href="javascript:void(0)">发表</a>
                             <a class="cancel-btn" href="JavaScript:history.go(-1)">返回</a>

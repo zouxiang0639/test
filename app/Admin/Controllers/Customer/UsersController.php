@@ -33,9 +33,18 @@ class UsersController extends Controller
 
         $model = UsersBls::getUsersList($request);
 
+        $userList = [];
+
+        if(!empty($request->id)) {
+            $userModel = UsersBls::find($request->id);
+            if($userModel) {
+                $userList[$userModel->id] = $userModel->name;
+            }
+        }
 
         return View::make('admin::customer.users.index', [
-            'list' => $model
+            'list' => $model,
+            'userList' => $userList
         ]);
     }
 

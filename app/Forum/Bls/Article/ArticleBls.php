@@ -184,6 +184,9 @@ class ArticleBls
             $model->recommend_count ++;
             $data = true;
 
+            //添加积分
+            UsersBls::addIntegral(2);
+
             if($model->recommend_count == config('config.recommend', 0)) {
                 $model->is_hot = WhetherConst::YES;
                 $model->hot_search_time = date('Y-m-d H:i:s');
@@ -318,7 +321,14 @@ class ArticleBls
 
         if($lastLoginTime == $day && $user->day_article == $dayArticle) {
             //如果当天已发布限制时间抛出错误
-            throw new LogicException(1010002, [["每天限制发表{$dayArticle}篇文章"]]);
+
+            if($user->integral - 10 < 0) {
+                throw new LogicException(1010002, [["你的积分不够了"]]);
+            }
+
+            //超出当天限制减10个积分
+            UsersBls::minusIntegral(10);
+
         } else if($lastLoginTime != $day){
             //如果不是当日发布
             $user->last_login_time = date('Y-m-d H:i:s');

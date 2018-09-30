@@ -7,6 +7,7 @@ use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ArticleBls;
 use App\Forum\Bls\Article\ReplyBls;
 use App\Forum\Bls\Article\Requests\ArticleCreateRequest;
+use App\Forum\Bls\Users\UsersBls;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
 use Auth;
@@ -267,6 +268,7 @@ class ArticleController extends Controller
     public function search(Request $request)
     {
         $request->merge(['title' => $request->key]);
+
         $list = ArticleBls::getArticleLise($request);
         $this->formatData($list->getCollection());
 

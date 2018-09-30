@@ -190,12 +190,16 @@ class MemberController extends Controller
             throw new LogicException(1010001, $validator->getMessageBag());
         }
         $user = Auth::guard('forum')->user();
+
+        if($user->integral - 50 < 0) {
+            throw new LogicException(1010002, '你的积分不够');
+        }
         $user->name = $request->name;
 
         if ($user->save()) {
             return (new JsonResponse())->success('修改成功');
         } else {
-            throw new LogicException(1010002, '修改是吧');
+            throw new LogicException(1010002, '修改失败');
         }
     }
 
