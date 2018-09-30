@@ -167,7 +167,7 @@
 	padding: 25px;
 }
 .tab-con li{
-	width: 730px;
+	width: 799px;
 	height: 30px;
 	line-height: 30px;
 	padding: 2px 0;
@@ -516,7 +516,7 @@
 	left: 0;
 	top: 0;
 	width: 100%;
-	height: 107px;
+	height: 106px;
 	overflow: hidden;
 	border-left: 4px solid #479FED;
 }
@@ -531,7 +531,7 @@
 	position: absolute;
 	right: 0;
 	width: 52px;
-	height: 107px;
+	height: 106px;
 	background: #479fed;
 	border-left: 1px solid #1a3148;
 }

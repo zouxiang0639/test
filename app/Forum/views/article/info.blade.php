@@ -101,7 +101,7 @@
     <div class="com-new">
         <div class="wm-850">
             <div class="new-container new-inner">
-                <div class="new-inner-tit">*超过10赞底色变为浅绿色，超过100赞底色变为绿色，弱数超过赞数10个底色变为浅红色，楼主回复底色为黄色</div>
+                <div class="new-inner-tit">*超过{!! config('config.reply_light_green') !!}赞底色变为浅绿色，超过{!! config('config.reply_green') !!}赞底色变为绿色，弱数超过赞数{!! config('config.reply_light_red') !!}个底色变为浅红色，楼主回复底色为黄色</div>
                 @include('forum::article.reply_ajax')
                 <div class="edit-container">
                     <div class="img" >
