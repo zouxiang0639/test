@@ -4,6 +4,7 @@ namespace App\Canteen\Bls\Users;
 use App\Api\Bls\Users\Requests\SitePaymentRequests;
 use App\Api\Bls\Users\Requests\UsersRegisterRequests;
 use App\Canteen\Bls\Users\Model\UsersModel;
+use App\Consts\Admin\Role\RoleSlugConst;
 use App\Consts\Common\AccountFlowTypeConst;
 use App\Consts\Common\MealTypeConst;
 use App\Consts\Common\WhetherConst;
@@ -11,6 +12,7 @@ use App\Exceptions\LogicException;
 use App\Library\Format\FormatMoney;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Auth;
 
 /**
  * Created by UsersBls.
@@ -76,6 +78,9 @@ class UsersBls
     {
         $model->division = $request->division;
         $model->status = $request->status;
+        if(Auth::guard('admin')->user()->is(RoleSlugConst::ROLE_SUPER)) {
+            $model->name = $request->name;
+        }
         return $model->save();
     }
 

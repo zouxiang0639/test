@@ -4,6 +4,7 @@ namespace App\Admin\Controllers\Customer;
 
 use App\Admin\Bls\System\TagsBls;
 use App\Canteen\Bls\Users\UsersBls;
+use App\Consts\Admin\Role\RoleSlugConst;
 use App\Consts\Admin\Tags\TagsTypeConst;
 use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
@@ -17,6 +18,7 @@ use App\Http\Controllers\Controller;
 use Admin;
 use View;
 use Excel;
+use Auth;
 
 /**
  * Created by UsersController.
@@ -190,9 +192,18 @@ class UsersController extends Controller
                 $h->input = $form->display(array_get($info, 'id'));
             });
 
-            $item->create('姓名', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->display(array_get($info, 'name'));
-            });
+
+            if(Auth::guard('admin')->user()->is(RoleSlugConst::ROLE_SUPER)) {
+                $item->create('名称', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                    $h->input = $form->text('name', array_get($info, 'name'), $h->options);
+                    $h->set('name', true);
+                });
+            } else {
+                $item->create('姓名', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                    $h->input = $form->display(array_get($info, 'name'));
+                });
+            }
+
 
             $item->create('手机号', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->display(array_get($info, 'mobile'));

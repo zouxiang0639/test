@@ -68,7 +68,9 @@
     <script>
         $(function () {
             $('#rqcard').click(function(e) {
-                $.alert('<img style="min-height: 192px" width="100%" src="{!! route('c.qrcode') !!}">', '二维码');
+                $.alert('<img style="min-height: 192px" width="100%" src="{!! route('c.qrcode') !!}">', '二维码', function () {
+                    window.location.href = document.location;
+                });
             });
         });
     </script>
