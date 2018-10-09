@@ -267,7 +267,6 @@ class ArticleController extends Controller
 
     public function search(Request $request)
     {
-        $request->merge(['title' => $request->key]);
 
         $list = ArticleBls::getArticleLise($request);
         $this->formatData($list->getCollection());

@@ -4,6 +4,7 @@ namespace App\Forum\Bls\Article;
 
 use App\Consts\Admin\Role\RoleSlugConst;
 use App\Consts\Admin\User\InfoTypeConst;
+use App\Consts\Common\SearchType;
 use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\Model\ArticleModel;
@@ -43,6 +44,16 @@ class ArticleBls
             }
 
         }
+
+        if($request->type_key == SearchType::NAME && !empty($request->key)) {
+            $user = UsersBls::getUserByName($request->key)->pluck('id');
+            $model->whereIn('issuer', $user);
+        }
+
+        if($request->type_key == SearchType::TITLE && !empty($request->key)) {
+            $model->where('title', 'like', '%'.$request->key.'%');
+        }
+
 
         //标题
         if(!empty($request->title)) {

@@ -1,3 +1,8 @@
+<?php
+use App\Consts\Common\SearchType;
+?>
+
+
 <div class="com-top">
     <div class="wm-850 clearfix">
         <a class="logo" href="{!! route('f.home') !!}">
@@ -24,9 +29,12 @@
                 @endif
 
             </div>
+
             <div class="search clearfix">
                <form id="search-form" action="{!! route('f.article.search') !!}">
-                   <input class="s-txt" type="text" name="key" placeholder="{!! Input::get('key') !!}" />
+
+                   {!! Form::select('type_key', SearchType::desc(), Input::get('type_key'), ['style'=>'margin: 5px 0 0px 10px;color: #479fed;padding-right: 2px;border: 0;float: left;background: #31465b;']) !!}
+                   <input style="width: 177px" class="s-txt" type="text" name="key" placeholder="{!! Input::get('key') !!}" />
                    <a class="s-btn icon-search" id="search-submit" href="javascript:void(0)"></a>
 
                </form>
