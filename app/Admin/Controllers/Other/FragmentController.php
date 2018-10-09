@@ -49,7 +49,7 @@ class FragmentController extends Controller
      */
     public function create()
     {
-        return View::make('admin::other.Fragment.create',[
+        return View::make('admin::other.fragment.create',[
             'form' =>  $this->form([]),
         ]);
     }
@@ -81,7 +81,7 @@ class FragmentController extends Controller
 
         $this->isEmpty($model);
 
-        return View::make('admin::other.Fragment.edit',[
+        return View::make('admin::other.fragment.edit',[
             'form' =>  $this->form($model),
             'info' =>  $model
         ]);
