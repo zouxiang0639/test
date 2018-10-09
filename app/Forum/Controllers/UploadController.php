@@ -31,6 +31,7 @@ class UploadController extends Controller
             'fileName' =>$data['url'],
             'url' => $data['url']
         ];
+        FileBls::createFile($data['filePath'], FileTypeConst::IMG);
         return json_encode($data);
     }
 }
