@@ -15,7 +15,7 @@
         <div class="wm-850">
             <div class="list">
                 <div class="list-txt">
-                    {!! Forum::fragment()->get(3, 'contents') !!}
+                        {!! $contents !!}
                 </div>
             </div>
         </div>

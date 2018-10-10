@@ -10,7 +10,7 @@ use App\Consts\Common\SearchType;
         </a>
         <div class="right">
             <div class="login-state">
-                <!--登陆后的状态-->
+                <!--登录后的状态-->
                 @if(Auth::guard('forum')->check())
                      <?php
                     $count = \App\Forum\Bls\Article\InfoBls::countInfo(\Auth::guard('forum')->id(), \App\Consts\Common\WhetherConst::NO);
@@ -25,7 +25,7 @@ use App\Consts\Common\SearchType;
                     <a  href="{!! route('f.auth.logout') !!}">退出</a>
                 @else
                     <a  class="register" data-toggle="modal" data-target="#registerModal" href="javascript:void(0)">注册</a>
-                    <a  class="login" data-toggle="modal" data-target="#loginModal" href="javascript:void(0)">登陆</a>
+                    <a  class="login" data-toggle="modal" data-target="#loginModal" href="javascript:void(0)">登录</a>
                 @endif
 
             </div>
