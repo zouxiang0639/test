@@ -47,7 +47,7 @@ class CanteenTakeout extends Command
         $this->line('开始查询过期的外卖...');
         $date = new \DateTime();
         $today = $date->format('Y-m-d');
-        $date->modify('this week +6 days');
+        $date->modify('this week +4 days');
         $endDayWeek = $date->format('Y-m-d');
 
         if($endDayWeek == $today) {

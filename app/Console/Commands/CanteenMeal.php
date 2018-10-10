@@ -25,7 +25,7 @@ class CanteenMeal extends Command
      *
      * @var string
      */
-    protected $description = '外卖过期';
+    protected $description = '就餐过期';
 
 
     /**
