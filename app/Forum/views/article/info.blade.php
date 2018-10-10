@@ -4,7 +4,8 @@
     <link rel="stylesheet" href="{!! assets_path("/forum/css/my.css") !!}" />
     <style>
         .img img{
-            max-width: 24%;
+            /*max-width: 24%;*/
+            max-width: 100%;
             padding: 5px;
         }
     </style>
@@ -68,8 +69,9 @@
                         <a> {!! config('app.url').Request::getRequestUri() !!}</a>
                     </div>
                     <div class="share fr">
-                        <div style="float: inherit; margin-top: 4px;">
-                            <a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=e2f4016d-a184-49b4-832b-65b5519a06ec&style=2&textcolor=#000000&bgcolor=none&bp=weixin,qzone,sinaminiblog,qqim&text=分享"></script>
+                        <div style="float: inherit; margin-top: 0px;">
+                            <div class="bdsharebuttonbox"><a href=" " class="bds_more" data-cmd="more"></a ><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a ><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a ><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a ><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a ><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a ><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a ></div>
+                            <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin","sqq"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin","sqq"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
                         </div>
                         <a class="col article-report" style="padding-top: 3px;" href="{!! route('f.feedback.report', ['article_id' => $info->id]) !!}">举报!</a>
                         <a class="col article-star" style="padding-right: 15px;" href="javascript:void(0)">
@@ -101,7 +103,7 @@
     <div class="com-new">
         <div class="wm-850">
             <div class="new-container new-inner">
-                <div class="new-inner-tit">*超过{!! config('config.reply_light_green') !!}赞底色变为浅绿色，超过{!! config('config.reply_green') !!}赞底色变为绿色，弱数超过赞数{!! config('config.reply_light_red') !!}个底色变为浅红色，楼主回复底色为黄色</div>
+                <div class="new-inner-tit">*超过{!! config('config.reply_light_green') !!}赞底色变为浅绿色，超过{!! config('config.reply_green') !!}赞底色变为绿色，弱数超过赞数{!! config('config.reply_light_red') !!}个底色变为浅红色，楼主回复底色为蓝色</div>
                 @include('forum::article.reply_ajax')
                 <div class="edit-container">
                     <div class="img" >
