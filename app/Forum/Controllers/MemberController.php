@@ -180,10 +180,12 @@ class MemberController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:users,name',
+            'name' => 'required|max:10|sensitive|unique:users,name',
         ],[
             'name.required' => '昵称不能为空',
             'name.unique' => '昵称已被使用',
+            'name.max' => '昵称字数超出',
+            'name.sensitive' => '昵称不能有敏感词汇',
         ]);
 
         if ($validator->fails()) {

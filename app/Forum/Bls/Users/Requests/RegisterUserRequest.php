@@ -27,7 +27,7 @@ class RegisterUserRequest extends JsonResponseForumValidator
         return [
             'email' => 'required|email|unique:users,email|checkEmail',
             'email_verify' => 'required|emailAuth',
-            'name' => 'required|unique:users,name',
+            'name' => 'required|max:20|sensitive|unique:users,name',
             'password' => 'required|confirmed|max:255',
             'is_read' => 'required',
         ];
@@ -49,6 +49,8 @@ class RegisterUserRequest extends JsonResponseForumValidator
             'email_verify.email_auth' => '邮箱验证码不正确或者失效',
             'name.required' => ' 昵称不能为空',
             'name.unique' => '用户名已经被使用',
+            'name.max' => '昵称字数超出',
+            'name.sensitive' => '昵称不能有敏感词汇',
             'password.required' => '密码不能为空',
             'password.confirmed' => '两次密码输入不一致',
             'is_read.required' => '请勾选并阅读空地社区用户注册协议',
