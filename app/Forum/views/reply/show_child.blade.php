@@ -1,4 +1,4 @@
-<li class="share clearfixs child-{!! Input::get('parent_id') !!}">
+<li class="share clearfixs child-{!! $parentId !!}">
     <ul>
         @foreach($list as $item)
             <li class="share clearfix reply-{!! $item->id !!}">
@@ -35,7 +35,7 @@
                             <a class="review" href="{!! route('f.feedback.reply', ['reply_id' => $item->id]) !!}"><i class="fa fa-exclamation"></i></a>
 
                             @if(is_null($item->deleted_at))
-                                <a class="reply-two-edit" data-pid="{{ Input::get('parent_id') }}"  data-id="{{ $item->id }}" data-at="{{ $item->issuer }}" href="javascript:void(0)"> <i class="fa fa-comment-o"></i>
+                                <a class="reply-two-edit" data-pid="{{ $parentId }}"  data-id="{{ $item->id }}" data-at="{{ $item->issuer }}" href="javascript:void(0)"> <i class="fa fa-comment-o"></i>
                                 </a>
                             @endif
 

@@ -5,6 +5,7 @@ namespace App\Forum\Controllers;
 use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ArticleBls;
+use App\Forum\Bls\Article\Model\ReplyModel;
 use App\Forum\Bls\Article\ReplyBls;
 use App\Forum\Bls\Article\Requests\ArticleCreateRequest;
 use App\Forum\Bls\Users\UsersBls;
@@ -111,6 +112,9 @@ class ArticleController extends Controller
      */
     public function info($id)
     {
+        $model = ReplyModel::all();
+        (new ReplyController())->formatDate(Collection::make($model));
+        //dd($model);
         $model = ArticleBls::findByWithTrashed($id);
 
         $this->isEmpty($model);

@@ -81,6 +81,7 @@ class ReplyController extends Controller
 
         $html =  view('forum::reply.show_child', [
             'list' => $model,
+            'parentId' => $request->parent_id,
         ])->render();
         if($html){
             return (new JsonResponse())->success($html);
@@ -143,6 +144,7 @@ class ReplyController extends Controller
     {
         $userId = \Auth::guard('forum')->id();
         $items->each(function($item) use ($userId) {
+
             $item->issuerName = '-';  //发布人
             $item->thumbsUpCount = count($item->thumbs_up); //赞数量
             $item->thumbsUpCheck = in_array($userId, $item->thumbs_up); //是否赞过
@@ -152,8 +154,11 @@ class ReplyController extends Controller
             $item->formatPicture = explode(',', $item->picture); //图片
             $item->atName = ''; //@的用户名称
             $item->color = $this->getColor($item); //更近需求判断颜色
-            $item->childrenCount = $item->child()->count(); //更近需求判断颜色
+            $item->childrenCount = $item->child()->count(); //是否有子数据
 
+            if($item->parent_id == 0 && $item->childrenCount > 0) {
+                $this->formatDate($item->child);
+            }
 
             //信息删除
             if(!is_null($item->deleted_at)) {

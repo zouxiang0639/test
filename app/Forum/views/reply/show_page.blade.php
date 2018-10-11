@@ -49,9 +49,12 @@
                     </p>
                 </div>
                 @if($item->childrenCount > 0)
-                    <a class="other reply-show-child" data-check="0" data-id="{!! $item->id !!}" href="javascript:void(0)">回复 {!! $item->childrenCount !!}<i></i></a>
+                    <a class="other reply-show-child" data-check="1" data-id="{!! $item->id !!}" href="javascript:void(0)">回复 {!! $item->childrenCount !!}<i></i></a>
                 @endif
             </li>
+                @if($item->childrenCount > 0)
+                    @include('forum::reply.show_child', ['list' => $item->child, 'parentId'=>$item->id])
+                @endif
         @endforeach
 
     </ul>
