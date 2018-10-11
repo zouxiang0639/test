@@ -98,7 +98,7 @@
                         <td colspan="7">
                             <table class="table ">
                                 <tr>
-                                    <td>赞:{!! count($item->picture) !!}</td>
+                                    <td>赞:{!! count($item->thumbs_up) !!}</td>
                                     <td>弱:{!! count($item->thumbs_down) !!}</td>
                                 </tr>
                                 <tr>
