@@ -185,6 +185,8 @@ Route::group([
         Route::group(['prefix'=>'flow', 'middleware' => 'admin.auth:m_customer_flow'], function(){
             Route::get('', ['uses' => "Customer\\FlowController@index", 'as' => 'm.customer.flow.list']);
             Route::get('export', ['uses' => "Customer\\FlowController@export", 'as' => 'm.customer.flow.export']);
+            Route::get('deduct', ['uses' => "Customer\\FlowController@deduct", 'as' => 'm.customer.flow.deduct']);
+            Route::post('deduct/money', ['uses' => "Customer\\FlowController@deductMoney", 'as' => 'm.customer.flow.deduct.money']);
         });
 
         //订单

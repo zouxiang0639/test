@@ -2,15 +2,26 @@
 
 namespace App\Admin\Controllers\Customer;
 
+use App\Admin\Bls\Customer\Requests\FlowDeductMoneyRequests;
+use App\Admin\Bls\System\TagsBls;
 use App\Canteen\Bls\Users\AccountFlowBls;
 use App\Canteen\Bls\Users\UsersBls;
+use App\Consts\Admin\Customer\RechargeTypeConst;
+use App\Consts\Admin\Tags\TagsTypeConst;
 use App\Consts\Common\AccountFlowTypeConst;
 use App\Consts\Common\MealTypeConst;
+use App\Exceptions\LogicException;
+use App\Library\Admin\Form\FormBuilder;
+use App\Library\Admin\Form\HtmlFormTpl;
+use App\Library\Admin\Widgets\Forms;
 use App\Library\Format\FormatMoney;
+use App\Library\Response\JsonResponse;
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use View;
 use Excel;
+use Admin;
 
 /**
  * Created by FlowController.
@@ -100,6 +111,84 @@ class FlowController extends Controller
                 $sheet->setColumnFormat(array('V' => '@'));
             });
         })->export('xls');
+    }
 
+    /**
+     * 后台扣款
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function deduct()
+    {
+        $division = UsersBls::groupUserDivision();
+
+        return View::make('admin::customer.flow.deduct',[
+            'form' => $this->form([]),
+            'division' => json_encode($division),
+        ]);
+    }
+
+    public function deductMoney(FlowDeductMoneyRequests $request)
+    {
+
+        if($request->type == RechargeTypeConst::ONE) {
+            $user = UsersBls::find($request->user);
+            $item = Collection::make([$user]);
+        } else {
+            $item = UsersBls::getUserByDivision($request->division);
+        }
+        $money = FormatMoney::fen($request->money);
+
+        if(UsersBls::deduct($item, $money, $request->describe)) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010002, '操作失败');
+        }
+    }
+
+    /**
+     *
+     * Make a form builder.
+     * @param $info
+     * @return mixed
+     */
+    protected function form($info)
+    {
+        return Admin::form(function(Forms $item) use ($info)  {
+
+            $item->create('扣款金额', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->currency('money', 0,  $h->options);
+                $h->set('money', true);
+            });
+
+            $item->create('扣款类型', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->options['placeholder'] = '请输入';
+                $h->input = $form->select('type',RechargeTypeConst::desc() , '', $h->options);
+                $h->set('type', true);
+            });
+            $item->create('扣款总金额', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->display('用户0 充值总金额0.00');
+                $h->id = 'count-money';
+                $h->set('divisions', false);
+            });
+            $item->create('分组', function(HtmlFormTpl $h, FormBuilder $form) {
+                $list = TagsBls::getTagsByType(TagsTypeConst::TAG)->pluck('tag_name', 'id')->toArray();
+                $h->input = $form->dualListBox('division[]',$list , '', $h->options);
+                $h->id = 'division';
+                $h->set('division', true);
+            });
+
+            $item->create('用户', function(HtmlFormTpl $h, FormBuilder $form) {
+                $list = UsersBls::usersByStatus()->pluck('name', 'id')->toArray();
+                $h->input = $form->select2('user', $list , '', $h->options);
+                $h->id = 'user';
+                $h->set('user', true);
+            });
+
+            $item->create('描述', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->textarea('describe', '' , $h->options);
+                $h->set('describe', true);
+            });
+
+        })->getFormHtml();
     }
 }

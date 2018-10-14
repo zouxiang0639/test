@@ -168,6 +168,32 @@ class UsersBls
         });
     }
 
+    /**
+     * 扣款
+     * @param $items
+     * @param $money
+     * @param $describe
+     * @return mixed
+     */
+    public static function deduct($items, $money, $describe)
+    {
+
+        return UsersModel::query()->getQuery()->getConnection()->transaction(function () use($items, $money, $describe) {
+
+            foreach($items as $value) {
+                $value->money -= $money;
+                if(!$value->save()){
+                    throw new LogicException(1010002, '扣款错误');
+                }
+                $price = FormatMoney::fen2yuan($value->money);
+                $describes = $describe . "(余额:{$price})";
+                AccountFlowBls::createAccountFlow($value->id, AccountFlowTypeConst::PAYMENT, $money, $describes, MealTypeConst::ADMIN_OPERATION);
+            }
+
+            return true;
+        });
+    }
+
     public static function groupUserDivision()
     {
         return UsersModel::where('status', WhetherConst::YES)->groupBy('division')->get(array(

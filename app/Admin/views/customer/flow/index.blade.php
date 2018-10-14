@@ -38,6 +38,11 @@ Input::get('use_type'), ['class' => 'form-control', 'placeholder'=>'全部消费
                     </div>
                 </form>
             </div>
+            <div class="pull-right">
+                <a href="{!! route('m.customer.flow.deduct') !!}" class="btn btn-sm btn-success">
+                    后台扣款
+                </a>
+            </div>
         </div>
 
         <!-- /.box-header -->
