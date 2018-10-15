@@ -162,14 +162,10 @@ class ReportController extends Controller
      */
     public function takeoutUserExport()
     {
-        $date = new \DateTime();
-        $date->modify('this week');
-        $firstDayWeek = $date->format('Y-m-d 00:00:00');
 
         $order = OrderModel::with(['orderTakeout'])
             ->where('type', OrderTypeConst::TAKEOUT)
             ->where('status', OrderStatusConst::DEPOSIT)
-            ->where('created_at', '>', $firstDayWeek)
             ->get();
 
         $data = [];
@@ -258,14 +254,10 @@ class ReportController extends Controller
     protected function getTakeout()
     {
         $item = [];
-        $date = new \DateTime();
-        $date->modify('this week');
-        $firstDayWeek = $date->format('Y-m-d 00:00:00');
-
+        
         $order = OrderModel::with(['orderTakeout'])
             ->where('type', OrderTypeConst::TAKEOUT)
             ->where('status', OrderStatusConst::DEPOSIT)
-            ->where('created_at', '>', $firstDayWeek)
             ->get();
 
         foreach($order as $orderModel) {
