@@ -9,6 +9,7 @@ class MealTypeConst
     const STORE = 4;
     const TAKEOUT = 5;
     const ADMIN_OPERATION = 6;
+    const FRESH_TAKEOUT = 7;
 
     const MORNING_DESC = '早餐';
     const LUNCH_DESC = '午餐';
@@ -16,6 +17,7 @@ class MealTypeConst
     const STORE_DESC = '超市';
     const TAKEOUT_DESC = '外卖';
     const ADMIN_OPERATION_DESC = '后台扣款';
+    const FRESH_TAKEOUT_DESC = '生鲜外卖';
 
 
     public static function desc()
@@ -27,6 +29,7 @@ class MealTypeConst
             self::STORE => self::STORE_DESC,
             self::TAKEOUT => self::TAKEOUT_DESC,
             self::ADMIN_OPERATION => self::ADMIN_OPERATION_DESC,
+            self::FRESH_TAKEOUT => self::FRESH_TAKEOUT_DESC,
         ];
     }
 
