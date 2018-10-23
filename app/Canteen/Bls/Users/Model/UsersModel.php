@@ -22,6 +22,15 @@ class UsersModel extends Model implements AuthenticatableContract
     protected $table = 'users';
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+    ];
+
+    /**
      * 分组
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

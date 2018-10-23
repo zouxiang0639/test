@@ -6,6 +6,7 @@ Route::group(['middleware' => 'api.aes:contents'], function(){
     Route::group(['prefix'=>'user'], function(){
         Route::post('register', ['uses' => "UsersController@register"]);
         Route::post('show', ['uses' => "UsersController@show"]);
+        Route::post('login', ['uses' => "UsersController@login"]);
     });
 
     //订单
