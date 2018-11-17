@@ -50,6 +50,10 @@ class ForumServiceProvider extends ServiceProvider
         $this->registerRouteMiddleware();
         $this->loadViewsFrom(app_path('Forum/views'), 'forum');
         $this->loadRoutesFrom(app_path('Forum/routes/routes.php'));
+
+        //h5
+        $this->loadViewsFrom(app_path('H5/views'), 'h5');
+        $this->loadRoutesFrom(app_path('H5/routes/routes.php'));
     }
 
     /**
