@@ -109,7 +109,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('forum::article.create');
+        return view('h5::article.create');
     }
 
     /**
@@ -126,7 +126,7 @@ class ArticleController extends Controller
         $request->title = Forum::sensitive($request->title);
 
         if ($model = ArticleBls::createArticle($request)) {
-            return (new JsonResponse())->success(route('f.article.info', ['id' => $model->id]));
+            return (new JsonResponse())->success(route('h.article.info', ['id' => $model->id]));
         } else {
             throw new LogicException(1010002, '发布失败');
         }
@@ -136,7 +136,7 @@ class ArticleController extends Controller
     {
         $model = ArticleBls::getArticleByIssuer(Auth::guard('forum')->id(), $id);
         $this->isEmpty($model);
-        return view('forum::article.edit', [
+        return view('h5::article.edit', [
             'info' => $model
         ]);
     }
@@ -146,7 +146,7 @@ class ArticleController extends Controller
 
         $this->isEmpty($model);
         if (ArticleBls::editArticle($request, $model)) {
-            return (new JsonResponse())->success(route('f.article.info', ['id' => $model->id]));
+            return (new JsonResponse())->success(route('h.article.info', ['id' => $model->id]));
         } else {
             throw new LogicException(1010002, '操作失败');
         }

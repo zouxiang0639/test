@@ -15,8 +15,12 @@
     <link rel="stylesheet" href="{{  assets_path("/h5/css/base.css") }}" />
     <link rel="stylesheet" href="{{  assets_path("/h5/css/swiper.min.css") }}" />
     <script type="text/javascript" src="{{  assets_path("/h5/js/lib-flexible.js") }}" ></script>
+    <link rel="stylesheet" href="{{  assets_path("/lib/font-awesome/css/font-awesome.min.css") }}">
     <link rel="stylesheet" href="{{  assets_path("/lib/icomoon/style.css") }}">
     <link rel="stylesheet" href="{{  assets_path("/lib/sweetalert/dist/sweetalert.css") }}">
+    <link rel="stylesheet" href="{!! assets_path("/lib/bootstrap3/bootstrap.min.css") !!}" />
+
+
     @yield('style')
 </head>
 <body>
@@ -25,6 +29,7 @@
 @yield('content')
 
 @include('h5::partials.footer')
+
 <script type="text/javascript" src="{{  assets_path("/h5/js/jquery.min.js") }}" ></script>
 <script type="text/javascript" src="{{  assets_path("/h5/js/swiper.min.js") }}" ></script>
 <script src="{{  assets_path("/lib/sweetalert/dist/sweetalert.min.js") }}"></script>

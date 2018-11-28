@@ -1,5 +1,5 @@
-<div class="list-box">
-    <ul>
+<div class="list-box" >
+    <ul style="margin-bottom: 0px;">
         @foreach($list as $item)
             <li>
                 <div class="tit clearfix">
@@ -7,10 +7,9 @@
                         <i style="color:{!!  Forum::Tags()->getTagsColor($item->tags) !!} " class="{!!  Forum::Tags()->getTagsIcon($item->tags) !!} icon"></i>
                         <p>{{ $item->title }}<span class="num">[{!! $item->replyCount !!}]</span></p>
                     </a>
-
                 </div>
                 <div class="des clearfix">
-                    <i class="no">97</i>
+                    <i class="no">{!! $item->id !!}</i>
                     <p>
                         <i class="name">{!! $item->issuers ? $item->issuers->name : '-' !!}</i>
                         <i class="date">{!! $item->created_at !!}</i>
@@ -24,5 +23,4 @@
 </div>
 <div class="page-box clearfix">
     {!! $list->appends(Input::get())->render() !!}
-
 </div>

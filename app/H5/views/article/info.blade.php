@@ -1,16 +1,24 @@
 @extends('h5::layouts.master')
 
+@section('style')
+    <style>
+        .reply-show img{
+            max-width: 100%;
+            padding: 10px 0;
+        }
+    </style>
+@stop
 @section('content')
     <div class="des-info">
         <div class="article">
-            <div class="title"><h1>儿子，饭好啦，快出来吃饭~~~</h1></div>
+            <div class="title"><h1>{!! $info->title !!}</h1></div>
             <div class="con">
                 <p>
                     @if($checkAuth && is_null($info->deleted_at))
-                        <a style="margin-left: 40px; color: #337ab7;" title="编辑" href="{!! route('f.article.edit', ['id' => $info->id]) !!}">
+                        <a style="color: #337ab7;" title="编辑" href="{!! route('h.article.edit', ['id' => $info->id]) !!}">
                             <i class="fa fa-edit"></i>编辑
                         </a>
-                        <a title="删除" class="article—delete" style="color: #337ab7;"  href="javascript:;" data-url="{!! route('f.article.delete', ['id' => $info->id]) !!}">
+                        <a title="删除" class="article—delete" style="color: #337ab7;"  href="javascript:;" data-url="{!! route('h.article.delete', ['id' => $info->id]) !!}">
                             <i class="fa fa-trash"></i>删除
                         </a>
                     @endif
@@ -44,88 +52,385 @@
                         </span>
                 <p>
                     <a href="javascript:void(0)">举报！</a>
-                    <a href="javascript:void(0)"><i class="coll-ico"></i>收藏</a>
+                    <a class="col article-star" style="padding-right: 15px;" href="javascript:void(0)">
+                        <i class="coll-ico fa fa-heart {!! in_array($userId, $info->star) ? "default" : "" !!}"></i>收藏
+                    </a>
                     <a href="javascript:void(0)">分享</a>
                 </p>
             </div>
         </div>
         <div class="zan-show">
             <div class="con">
-                <a class="gd" href="javascript:void(0)"><i></i>10</a>
-                <a class="bad" href="javascript:void(0)"><i></i>0</a>
+                <a class="thumbs-up thumbs gd" data-href="{!! route('f.article.thumbsUp',['id' => $info->id]) !!}">
+                    <i class="fa fa-thumbs-o-up {!! in_array($userId, $info->thumbs_up) ? "default" : "" !!}"></i>
+                    <span class="num">{!! $info->recommend_count !!}</span>
+                </a>
+
+                <a class=" thumbs-down thumbs bad" data-href="{!! route('f.article.thumbsDown',['id' => $info->id]) !!}" >
+                    <i class="fa fa-thumbs-o-down {!! in_array($userId, $info->thumbs_down) ? "default" : "" !!}"></i>
+                    <span class="num">{!! count($info->thumbs_down) !!}</span>
+                </a>
             </div>
-            <p>*10赞以上变浅绿色，20赞以上变绿色，弱数超过赞数10个变浅红色，楼主回复为蓝色</p>
+            <div style="height: 0.8rem;">
+                <p style="margin: 0px; ">*{!! config('config.reply_light_green') !!}赞以上变浅绿色，{!! config('config.reply_green') !!}赞以上变绿色，弱数超过赞数{!! config('config.reply_light_red') !!}个变浅红色，楼主回复为蓝色</p>
+            </div>
         </div>
-        <div class="reply-show">
-            <ul>
-                <li>
-                    <div class="box">
-                        <div class="con-1 clearfix">
-                            <p class="fl"><b>Gardener</b>(2018-10-02&nbsp;00:58)</p>
-                            <p class="fr">
-                                <a class="ico-1" href="javascript:void(0)"><i></i>0</a>
-                                <a class="ico-2" href="javascript:void(0)"><i></i>0</a>
-                                <a class="ico-3" href="javascript:void(0)"></a>
-                                <a class="ico-4" href="javascript:void(0)"></a>
-                            </p>
-                        </div>
-                        <div class="con-2">饭呢。。？</div>
-                    </div>
-                </li>
-                <li class="hover">
-                    <div class="box">
-                        <div class="con-1 clearfix">
-                            <p class="fl"><b>Gardener</b>(2018-10-02&nbsp;00:58)</p>
-                            <p class="fr">
-                                <a class="ico-1" href="javascript:void(0)"><i></i>0</a>
-                                <a class="ico-2" href="javascript:void(0)"><i></i>0</a>
-                                <a class="ico-3" href="javascript:void(0)"></a>
-                                <a class="ico-4" href="javascript:void(0)"></a>
-                            </p>
-                        </div>
-                        <div class="con-2">这不是我妈。。。</div>
-                        <div class="con-3 clearfix">
-                            <span>回复1<i></i></span>
-                        </div>
-                    </div>
-                </li>
-                <li class="clearfix">
-                    <div class="relpy-bz fl"><i></i></div>
-                    <div class="box box-d fl">
-                        <div class="con-1 clearfix">
-                            <p class="fl"><b>Gardener</b>(2018-10-02&nbsp;00:58)</p>
-                            <p class="fr">
-                                <a class="ico-1" href="javascript:void(0)"><i></i>0</a>
-                                <a class="ico-2" href="javascript:void(0)"><i></i>0</a>
-                                <a class="ico-3" href="javascript:void(0)"></a>
-                                <a class="ico-4" href="javascript:void(0)"></a>
-                            </p>
-                        </div>
-                        <div class="con-2">都一样的通常等10分钟</div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        @include('h5::article.reply_ajax')
 
         <div class="reply-push">
-
-            <textarea></textarea>
-
-            <div class="btn clearfix">
-                <a href="javascript:void(0)">发表回复</a>
-                <a class="xinfo" href="javascript:void(0)"><i></i></a>
+            <div class="img" >
             </div>
+            <form class="reply-form">
+                <input type="hidden" name="article_id" value="{!! $info->id !!}">
+                <input type="hidden" name="at" value="0">
+                <input type="hidden" name="parent_id" value="0">
+                <input type="hidden" class="picture" name="picture" value="">
+                <input type="hidden" name="_method" value="PUT">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <textarea name="contents"></textarea>
+
+                <div class="btn clearfix" style="display: block;border: 0px solid transparent;padding: 0px;">
+                    <a class="txt reply—submit" data-href="{!! route('h.reply.store') !!}">回复发表回复</a>
+                    <input style="display: none" class="layui-upload-file" accept="undefined" name="file" type="file">
+                    <a   class="xinfo img img—submit" data-href="{!! route('f.reply.store') !!}"><i class="fa fa-image"></i></a>
+                </div>
+            </form>
         </div>
 
     </div>
 @stop
-@section('script')
-    <script>
 
+
+@section('script')
+    @parent
+    <script>
         $(function(){
-           $('.content img').removeAttr("height").removeAttr("style").removeAttr('width');
+            var locked = true;
+            var data = {
+                'ext': ['jpg', 'png', 'gif', 'jpeg'],
+                'size': 1,
+                'limit': 4
+            };
+
+            $('.content img').removeAttr("height").removeAttr("style").removeAttr('width');
+
+            //上传文件
+            $("body").on('click', '.abc', function(){
+                $('.reply-form .img').click(function(){
+                    $(this).siblings('.layui-upload-file').click();
+                }).siblings('.layui-upload-file').change(function(){
+
+                    if($(this).val()) {
+
+                        var _this = $(this);
+                        var file =  this.files[0];
+                        var imgPath = $(this).parents('.clearfix').siblings('.picture').val();
+
+                        if(imgPath == '') {
+
+                            imgPath = new Array();
+                        } else {
+                            imgPath = imgPath.split(",");
+                        }
+
+                        if(imgPath.length >= data.limit) {
+                            swal("图片只能上传" + data.limit +'张', '', 'error');
+                            return false;
+                        }
+
+                        var type = file.name.match(/^(.*)(\.)(.{1,8})$/)[3];
+                        if (data.ext.indexOf(type) < 0) {
+                            swal("请上传图片", '', 'error');
+                            return false;
+                        }
+
+                        if(file.size > data.size * 1024 * 1024)
+                        {
+                            swal("上传的图片大小不能超过"+data.size+"M！", '', 'error');
+                            return false;
+                        }
+
+                        var formData = new FormData();
+                        formData.append('file', file);
+                        formData.append('_method', 'PUT');
+                        formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+                        $.ajax({
+                            url: '{!! route('f.upload.img') !!}',
+                            type: 'POST',
+                            cache: false, //上传文件不需要缓存
+                            data: formData,
+                            processData: false, // 告诉jQuery不要去处理发送的数据
+                            contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+                            dataType: 'json',
+                            success: function (res) {
+
+                                if(res.code == 1020001){
+                                    swal({
+                                        title: "",
+                                        text: "<p class='text-danger'>" + res.msg + "</p>",
+                                        html: true
+                                    });
+                                }else if(res.code != 0) {
+
+                                } else {
+                                    _this.parents('.reply-form').siblings('.img').append('<img src="'+res.data.url+'">');
+                                    imgPath.push(res.data.filePath);
+                                    _this.parents('.clearfix').siblings('.picture').val(imgPath.join());
+                                }
+                            },
+                            error: function (data) {
+
+                            }
+                        });
+                        $(this).val('');
+                    }
+                });
+            });
+            $('.abc').click();
+
+            $('.article—delete').click(function() {
+                var _this = $(this);
+                swal({
+                            title: "确认删除?",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "确定",
+                            closeOnConfirm: false,
+                            cancelButtonText: "取消"
+                        },
+                        function(){
+
+                            if (! locked) {
+                                return false;
+                            }
+
+                            locked = false;
+                            $.ajax({
+                                url: _this.attr('data-url'),
+                                type: 'POST',
+                                data: {
+                                    "_method":"DELETE",
+                                    "_token":$('meta[name="csrf-token"]').attr('content')
+                                },
+                                cache: false,
+                                dataType: 'json',
+                                success:function(res) {
+                                    if(res.code != 0) {
+                                        swal(res.data, '', 'error');
+
+                                    } else {
+                                        swal(res.data, '', 'success');
+                                        setTimeout(" window.history.go(-1); ",2000);
+                                    }
+                                    locked = true;
+                                },
+                                error:function () {
+                                    locked = true;
+                                }
+
+                            });
+
+                        }
+                );
+            });
+
+            //收藏
+            $('.article-star').click(function() {
+                var _this = $(this);
+                if (! locked) {
+                    return false;
+                }
+
+                locked = false;
+
+                $.ajax({
+                    url: '{!! route('f.article.star', ['id' => $info->id]) !!}',
+                    type: 'POST',
+                    data: {
+                        "_method": "PUT",
+                        "_token": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    success:function(res) {
+                        if(res.code == 1020001){
+                            swal({
+                                title: "",
+                                text: "<p class='text-danger'>" + res.msg + "</p>",
+                                html: true
+                            });
+                        }else if(res.code != 0) {
+                            swal({
+                                title: "",
+                                text: "<p class='text-danger'>" + res.data + "</p>",
+                                html: true
+                            });
+
+                        } else {
+                            if(res.data == true) {
+                                _this.children("i").addClass('default');
+                            } else {
+                                _this.children("i").removeClass('default');
+                            }
+                        }
+
+                        locked = true;
+                    },
+                    error:function () {
+                        locked = true;
+                    }
+
+                });
+            });
+
+            //推荐
+            $('.article-recommend').click(function() {
+                var numClass = $(this).children(".num");
+                var num = parseInt(numClass.text());
+                var _this = $(this);
+
+                if (! locked) {
+                    return false;
+                }
+
+                locked = false;
+
+                $.ajax({
+                    url: '{!! route('f.article.recommend', ['id' => $info->id]) !!}',
+                    type: 'POST',
+                    data: {
+                        "_method": "PUT",
+                        "_token": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    success:function(res) {
+                        if(res.code == 1020001){
+                            swal({
+                                title: "",
+                                text: "<p class='text-danger'>" + res.msg + "</p>",
+                                html: true
+                            });
+                        }else if(res.code != 0) {
+                            swal({
+                                title: "",
+                                text: "<p class='text-danger'>" + res.data + "</p>",
+                                html: true
+                            });
+
+                        } else {
+                            if(res.data == true) {
+                                _this.addClass('default');
+                                numClass.text(num + 1);
+                            } else {
+                                _this.removeClass('default');
+                                numClass.text(num - 1);
+                            }
+                        }
+
+                        locked = true;
+                    },
+                    error:function () {
+                        locked = true;
+                    }
+
+                });
+            });
+
+            /**
+             *  回复
+             */
+            $("body").on('click', '.reply—submit', function(){
+
+                if (! locked) {
+                    return false;
+                }
+                console.log($(this).parents('.reply-form').serialize());
+                locked = false;
+
+                $.ajax({
+                    url: $(this).attr('data-href'),
+                    type: 'POST',
+                    data: $(this).parents('.reply-form').serialize(),
+                    cache: false,
+                    dataType: 'json',
+                    success:function(res) {
+                        if(res.code == 1020001){
+                            swal({
+                                title: "",
+                                text: "<p class='text-danger'>" + res.msg + "</p>",
+                                html: true
+                            });
+
+                        }else if(res.code != 0) {
+                            var errorHtml = '';
+                            var error = res.data;
+                            for ( var i in error ) {
+                                errorHtml += "<p class='text-danger'>" + error[i][0] + "</p>"
+                            }
+                            swal({
+                                title: "",
+                                text: errorHtml,
+                                html: true
+                            });
+
+                        } else {
+                            swal(res.data, '', 'success');
+                            window.location.href =  window.location.href;
+                        }
+                        locked = true;
+                    },
+                    error:function () {
+                        locked = true;
+                    }
+
+                });
+
+                return false;
+
+            });
+
+            //异步加载数据
+            var  lockedPage = true;
+            var page = 0;
+            $('#reply-page').click(function() {
+                if (! lockedPage) {
+                    return false;
+                }
+
+                lockedPage = false;
+
+                $.ajax({
+                    url: '{!! route('f.reply.show', ['article_id' => $info->id]) !!}',
+                    type: 'POST',
+                    data: {
+                        'page' : page,
+                        "_method": "PUT",
+                        "_token": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    success:function(res) {
+                        if(res.code != 0) {
+                            $('.page-reply').html(res.data);
+                        } else {
+                            $('#reply-content').append(res.data);
+                            page ++;
+                            lockedPage = true;
+                        }
+                    },
+                    error:function () {
+                        lockedPage = true;
+                    }
+
+                });
+
+            }).trigger("click");
 
         });
+
 
         function copyVideoUrl(event){
 
@@ -133,7 +438,7 @@
             var success;
             var $temp = $("<input>");
             $("body").append($temp);
-                $temp.val(value).select();
+            $temp.val(value).select();
             try{
                 success = document.execCommand("copy");
             }catch (e){

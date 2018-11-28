@@ -155,7 +155,7 @@ body{
     width: 10rem !important;
     margin: 0 auto !important;
     position: relative;
-    background: #1f3046;
+    background: #1f3046 !important;
 }
 /*公用头部*/
 .header{
@@ -272,7 +272,6 @@ body{
 	font-size: 0.318rem;
 }
 .list-box li{
-	height: 1.849rem;
 	overflow: hidden;
 	background: #fff;
 	padding: 0 0.247rem;
@@ -292,7 +291,7 @@ body{
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	font-size: 21px;
+	font-size: 0.4rem;
 }
 .list-box li .tit .icon img{
 	max-width: 100%;
@@ -352,45 +351,24 @@ body{
 	width: 10rem;
 	text-align: center;
 }
-.page-box a{
+.page-box li{
 	display: inline-block;
 	vertical-align: middle;
 	width: 0.911rem;
 	height: 0.858rem;
 	line-height: 0.858rem;
-	border: 1px solid #eeeeee;
 	font-size: 0.318rem;
 	color: #4779b2;
 }
-.page-box a.on{
+.page-box li a{
+	display: block;
+}
+.page-box li a.on{
 	color: #fff;
 	background: #4678b2;
 	border: 1px solid #4678b2;
 }
-.page-box a.prev .ico{
-	display: inline-block;
-	vertical-align: middle;
-	width: 0.221rem;
-	height: 0.221rem;
-	background: url(../img/prev-ico.png) no-repeat center center;
-	background-size: contain;
-}
-.page-box a.prev.hover .ico{
-	background: url(../img/prev-ico-on.png) no-repeat center center;
-	background-size: contain;
-}
-.page-box a.next .ico{
-	display: inline-block;
-	vertical-align: middle;
-	width: 0.221rem;
-	height: 0.221rem;
-	background: url(../img/next-ico.png) no-repeat center center;
-	background-size: contain;
-}
-.page-box a.next.hover .ico{
-	background: url(../img/next-ico-on.png) no-repeat center center;
-	background-size: contain;
-}
+
 /*列表新增*/
 .list-menu{
 	background: #364559;
@@ -433,10 +411,10 @@ body{
 	background-size: contain;
 }
 .my-info .option a.right{
-	width: 0.743rem;
-	height: 0.628rem;
-	background: url(../img/my-right-ico.png) no-repeat center center;
+	font-size: 0.8rem;
 	background-size: contain;
+	margin-top: -0.25rem;
+	color: #B9C0C7;
 }
 .my-tit{
 	padding: 0.53rem 0.353rem;
@@ -465,8 +443,11 @@ body{
 	width: 25%;
 	text-align: center;
 	font-size: 0.318rem;
-	color: #fff;
 	line-height: 0.53rem;
+}
+
+.my-state li a{
+	color: #fff;
 }
 .my-state li span{
 	display: block;
@@ -566,9 +547,10 @@ body{
 	vertical-align: middle;
 	width: 0.336rem;
 	height: 0.398rem;
-	background: url(../img/copyright-ico.png) no-repeat center center;
 	background-size: contain;
 	margin: -0.017rem 0 0 0.088rem;
+	color: #999999;
+	font-size: 0.365rem;
 }
 .show-op  p{
 	float: right;
@@ -582,9 +564,12 @@ body{
 	vertical-align: middle;
 	width: 0.309rem;
 	height: 0.265rem;
-	background: url(../img/love-ico.png) no-repeat center center;
 	background-size: contain;
 	margin: -0.017rem 0.044rem 0 0;
+	color: #999999;;
+}
+.show-op p a .default {
+	color: red !important;
 }
 .zan-show{
 	background: #1f3046;
@@ -606,7 +591,7 @@ body{
 	width: 0.946rem;
 	height: 1.035rem;
 	margin-bottom: 0.07rem;
-	background: url(../img/zan-ico.png) no-repeat center center;
+	font-size: 1.1rem;
 	background-size: contain;
 }
 .zan-show .con a.bad i{
@@ -614,8 +599,8 @@ body{
 	width: 0.946rem;
 	height: 1.026rem;
 	margin-bottom: 0.07rem;
-	background: url(../img/zan-no-ico.png) no-repeat center center;
 	background-size: contain;
+	font-size: 1.1rem;
 }
 .zan-show  p{
 	background: #364559;
@@ -625,9 +610,7 @@ body{
 	font-size: 0.247rem;
 }
 .reply-show li{
-	height: 2.212rem;
 	border-bottom: 0.008rem solid #1f3046;
-	background: #acc9e6;
 }
 .reply-show li.hover{
 	background: #fff;
@@ -650,13 +633,12 @@ body{
 	margin-left: 0.221rem;
 	line-height: 0.353rem;
 }
-.reply-show li .con-1 p a.ico-1 i{
+.reply-show li .con-1 p a i{
 	display: inline-block;
 	vertical-align: middle;
 	margin: -0.03rem 0.044rem 0 0;
-	width: 0.345rem;
-	height: 0.371rem;
-	background: url(../img/des-ico-1.png) no-repeat center center;
+	font-size: 0.4rem;
+	color: #999999;
 	background-size: contain;
 }
 .reply-show li .con-1 p a.ico-2 i{
@@ -685,21 +667,23 @@ body{
 	background-size: contain;
 }
 .reply-show li .con-2{
-	height: 0.53rem;
 	line-height: 0.53rem;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	font-size: 0.318rem;
 }
-.reply-show li .con-3 span{
+.reply-show li .con-3{
+	text-align: right;
+}
+.reply-show li .con-3 a{
 	float: right;
 	line-height: 0.53rem;
 	margin: 0.044rem 0 0 0;
 	font-size: 0.265rem;
 	color: #666666;
 }
-.reply-show li .con-3 span i{
+.reply-show li .con-3 a i{
 	display: inline-block;
 	vertical-align: middle;
 	width: 0.256rem;
@@ -711,7 +695,6 @@ body{
 .reply-show li .relpy-bz{
 	width: 0.707rem;
 	background: #1f3046;
-	height: 2.212rem;
 }
 .reply-show li .relpy-bz i{
 	display: block;
@@ -755,9 +738,9 @@ body{
 	vertical-align: middle;
 	width: 0.584rem;
 	height: 0.575rem;
-	background: url(../img/des-ico-7.png) no-repeat center center;
 	background-size: contain;
 	margin-top: -0.017rem;
+	font-size: 0.5rem;
 }
 /*登录新增*/
 .login-box{
@@ -878,4 +861,25 @@ body{
 	line-height: 1.283rem;
 	text-align: center;
 	color: #fff;
+}
+.reply-show .color-green{
+	background: #59bab6;
+}
+
+.reply-show .color-light-green{
+	background: #cef0eb;
+}
+
+.reply-show .color-white{
+	background: #FFFFFF;
+}
+
+.reply-show .color-light-red{
+	background: #fbe4e0;
+}
+.reply-show .color-yellow{
+	background: #a5cae9;
+}
+.reply-show .color-gray{
+	background: #d4dde6;
 }

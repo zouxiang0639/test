@@ -5,8 +5,8 @@
             <i class="icon"></i>
             <span>2</span>
         </a>
-        <a class="my-link" href="javascript:void(0)"></a>
-        <a class="edit-link" href="javascript:void(0)"></a>
+        <a class="my-link" href="{!! route('h.auth.login') !!}"></a>
+        <a class="edit-link" href="{!! route('h.article.create') !!}"></a>
         <a class="search-link" href="javascript:void(0)"></a>
     </div>
 </div>
