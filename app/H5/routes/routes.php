@@ -40,6 +40,11 @@ Route::group([
         });
     });
 
+    //空间
+    Route::group(['prefix'=>'space'], function(){
+        Route::get('index/{user_id}', ['uses' => "SpaceController@index", 'as' => 'h.space.index']);
+        Route::get('reply/{user_id}', ['uses' => "SpaceController@reply", 'as' => 'h.space.reply']);
+    });
 
     //会员
     Route::group(['prefix'=>'member', 'middleware' => 'forum.auth:f_member'], function(){

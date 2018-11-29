@@ -321,7 +321,6 @@ body{
 }
 .list-box li .des p i,.list-box li .des p span{
 	display: inline-block;
-	margin-right: 0.176rem;
 }
 .list-box li .des p span.read .ico{
 	display: inline-block;
