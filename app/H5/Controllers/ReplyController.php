@@ -54,7 +54,7 @@ class ReplyController extends Controller
         $this->isEmpty($model);
         $this->articlesIssuer = $model->issuer;
 
-        $html = ReplyBls::getReplyList($request, '`id` ASC', 50);
+        $html = ReplyBls::getReplyList($request, '`id` ASC', 50, 'simplePaginate');
         $this->formatDate($html->getCollection());
 
         $html =  view('h5::reply.show_page', [
@@ -76,7 +76,7 @@ class ReplyController extends Controller
         $this->articlesIssuer = $model->issuer;
 
         //$html = ReplyBls::showChildReply($request->parent_id, $request->article_id);
-        $model = ReplyBls::getReplyList($request, '`id` ASC', 1000);
+        $model = ReplyBls::getReplyList($request, '`id` ASC', 1000, 'simplePaginate');
         $this->formatDate($model->getCollection());
 
         $html =  view('forum::reply.show_child', [

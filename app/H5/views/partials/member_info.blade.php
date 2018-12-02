@@ -25,7 +25,11 @@
                 登陆次数：{!! $info->login_num !!}
             </li>
             <li>
-                <span style="color: #fefd95;">?</span>&nbsp;积分：<span id="integral" data-num='{!! $info->integral !!}'>{!! $info->integral ?: 0 !!}</span>
+             <i style="cursor:pointer;color: #fefd95;" class="integral-click">？</i>&nbsp;积分：<span id="integral" data-num='{!! $info->integral !!}'>{!! $info->integral ?: 0 !!}</span>
+                <div class="integral-contents" style="display: none">
+                    {!!  Forum::fragment()->get(5, 'contents') !!}
+                </div>
+
             </li>
         </ul>
     </div>
@@ -119,6 +123,13 @@
                         locked = true;
                     }
 
+                });
+            });
+            $('.integral-click').click(function(){
+                swal({
+                    title: "<h4>积分描述</h4>",
+                    text: $('.integral-contents').html(),
+                    html: true
                 });
             })
         })

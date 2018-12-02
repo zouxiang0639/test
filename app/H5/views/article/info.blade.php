@@ -51,7 +51,7 @@
                         <i class="icon-copy"></i>
                         </span>
                 <p>
-                    <a href="javascript:void(0)">举报！</a>
+                    <a href="{!! route('h.feedback.report', ['article_id' => $info->id]) !!}">举报！</a>
                     <a class="col article-star" style="padding-right: 15px;" href="javascript:void(0)">
                         <i class="coll-ico fa fa-heart {!! in_array($userId, $info->star) ? "default" : "" !!}"></i>收藏
                     </a>

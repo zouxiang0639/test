@@ -5,11 +5,8 @@ namespace App\H5\Controllers;
 use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ArticleBls;
-use App\Forum\Bls\Article\Model\ReplyModel;
 use App\Forum\Bls\Article\ReplyBls;
 use App\Forum\Bls\Article\Requests\ArticleCreateRequest;
-use App\Forum\Bls\Users\UsersBls;
-use App\Forum\Controllers\ReplyController;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
 use Auth;
@@ -29,7 +26,7 @@ class ArticleController extends Controller
         $tags = Forum::Tags()->getTags($request->tag);
 
         $this->isEmpty($tags);
-        $list = ArticleBls::getArticleLise($request);
+        $list = ArticleBls::getArticleLise($request, '`id` DESC', 30, 'simplePaginate');
 
         $this->formatData($list->getCollection());
 
@@ -88,7 +85,7 @@ class ArticleController extends Controller
     public function gather(Request $request)
     {
 
-        $list = ArticleBls::getArticleLise($request);
+        $list = ArticleBls::getArticleLise($request, '`id` DESC', 30, 'simplePaginate');
         $this->formatData($list->getCollection());
 
         if($request->type == 'hot') {
@@ -211,7 +208,7 @@ class ArticleController extends Controller
      */
     public function all(Request $request)
     {
-        $list = ArticleBls::getArticleLise($request,$order = '`id` DESC', $limit = 30);
+        $list = ArticleBls::getArticleLise($request, '`id` DESC', 30, 'simplePaginate');
         $list->getCollection()->each(function($item) {
             $item->replyCount = $item->reply()->count();
         });
@@ -283,10 +280,10 @@ class ArticleController extends Controller
     public function search(Request $request)
     {
 
-        $list = ArticleBls::getArticleLise($request);
+        $list = ArticleBls::getArticleLise($request, '`id` DESC', 30, 'simplePaginate');
         $this->formatData($list->getCollection());
 
-        return view('forum::article.search', [
+        return view('h5::article.search', [
             'list' => $list,
         ]);
     }

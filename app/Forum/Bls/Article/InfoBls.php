@@ -58,9 +58,10 @@ class InfoBls
      * @param $request
      * @param string $order
      * @param int $limit
+     * @param string $page
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public static function getInfoList($request, $order = '`id` DESC', $limit = 20)
+    public static function getInfoList($request, $order = '`id` DESC', $limit = 20, $page = 'paginate')
     {
         $model = InfoModel::query();
 
@@ -74,7 +75,13 @@ class InfoBls
             $model->where('type', $request->type);
         }
 
-        return $model->orderByRaw($order)->paginate($limit);
+        $model->orderByRaw($order);
+
+        if($page == 'paginate') {
+            return $model->paginate($limit);
+        } else {
+            return $model->simplePaginate($limit);
+        }
     }
 
 

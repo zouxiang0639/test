@@ -12,6 +12,10 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        if(empty($request->type)) {
+            $request->merge(['type' => 'hot']);
+        }
+
         $list = ArticleBls::getArticleLise($request);
         $this->formatData($list->getCollection());
 

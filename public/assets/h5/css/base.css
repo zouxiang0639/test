@@ -211,10 +211,9 @@ body{
 .hd-link a.info-link .icon{
 	display: inline-block;
 	margin-top: 0.221rem;
-	width: 0.362rem;
-	height: 0.424rem;
-	background: url(../img/info-ico.png) no-repeat center center;
 	background-size: contain;
+	font-size: 0.4rem;
+	color: #ffffff;
 }
 .hd-link a.info-link span{
 	display: block;
@@ -286,9 +285,6 @@ body{
 .list-box li .tit .icon{
 	float:left;
 	margin: 0.071rem 0.265rem 0 0;
-	width: 0.398rem;
-	height: 0.398rem;
-	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	font-size: 0.4rem;
@@ -881,4 +877,131 @@ body{
 }
 .reply-show .color-gray{
 	background: #d4dde6;
+}
+
+/*单页*/
+.pages .post-con {
+	background: #f6f6f6;
+	border-radius: 0.1rem;
+	padding-bottom: 0.5rem;
+}
+.pages .post-tit {
+	height: 0.65rem;
+	background: #46586b;
+	border-top-left-radius: 0.1rem;
+	border-top-right-radius: 0.1rem;
+	padding: 0 0.5rem;
+	color: #cccccc;
+	font-size: 0.35rem;
+	line-height: 0.65rem;
+}
+.pages .post-txt {
+	padding: 0 0.5rem;
+}
+.pages .tep3 {
+	margin: 0.3rem 0.01rem 0rem 0rem;
+	font-size: 0.3rem;
+}
+
+
+.feedback .post-tit {
+	height: 0.65rem;
+	background: #46586b;
+	border-top-left-radius: 0.1rem;
+	border-top-right-radius: 0.1rem;
+	padding: 0 0.5rem;
+	color: #ffffff;
+	font-size: 0.35rem;
+	line-height: 0.65rem;
+}
+
+
+/*文章创建*/
+.article-create {
+	background: #fff;
+	padding: 10px;
+}
+
+.article-create .tep1 {
+	margin: 20px 0 0 0;
+}
+.article-create .tep1 > p {
+	float: left;
+	margin-right: 30px;
+	font-size: 14px;
+	color: #4b4b4b;
+	line-height: 28px;
+}
+.article-create .tep1 > p select {
+	cursor: pointer;
+	width: 110px;
+	height: 26px;
+	border: 1px solid #1a3148;
+}
+.article-create .tep2 {
+	margin: 20px 0 0 0;
+}
+.article-create .tep2 input {
+	width: 100%;
+	padding: 0 15px;
+	height: 38px;
+	font-size: 14px;
+	border: 1px solid #1a3148;
+}
+.article-create .tep3 {
+	margin: 20px 3px 0px 0px;
+}
+.article-create .tep3 .text {
+	margin: 7px 0 0 0;
+}
+
+.article-create .tep3 .text input {
+	width: 100%;
+	padding: 0 15px;
+	height: 38px;
+	font-size: 14px;
+	border: 1px solid #1a3148;
+}
+.article-create .help-block {
+	display: block;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	color: #737373;
+}
+
+.article-create .tep3 .area {
+	border: 1px solid #1a3148;
+	min-height: 275px;
+}
+.article-create .tep4 {
+	padding: 15px 0;
+	text-align: center;
+}
+.article-create .tep4 > a {
+	display: inline-block;
+	margin: 0 8px;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 14px;
+}
+.article-create .tep4 > a.post-btn {
+	background: #479fed;
+}
+.article-create .tep4 > a {
+	display: inline-block;
+	margin: 0 8px;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 14px;
+}
+.article-create .tep4 > a.cancel-btn {
+	background: #999999;
 }

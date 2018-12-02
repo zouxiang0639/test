@@ -7,17 +7,18 @@ Route::group([
 ], function(){
 
     Route::get('/', ['uses' => "HomeController@index", 'as' => 'h.home']);
+
     //文章
     Route::group(['prefix'=>'article'], function(){
         Route::get('/', ['uses' => "ArticleController@index", 'as' => 'h.article.list']);
         Route::get('category', ['uses' => "ArticleController@category", 'as' => 'h.article.category']);
         Route::get('info/{id}', ['uses' => "ArticleController@info", 'as' => 'h.article.info']);
-
+        Route::get('create', ['uses' => "ArticleController@create", 'as' => 'h.article.create']);
+        Route::get('search', ['uses' => "ArticleController@search", 'as' => 'h.article.search']);
 
         Route::group(['middleware' => 'forum.auth:f_member'], function(){
             Route::put('thumbsup/{id}', ['uses' => "ArticleController@thumbsUp", 'as' => 'h.article.thumbsUp']);
             Route::put('thumbsdown/{id}', ['uses' => "ArticleController@thumbsDown", 'as' => 'h.article.thumbsDown']);
-            Route::get('create', ['uses' => "ArticleController@create", 'as' => 'h.article.create']);
             Route::put('create/put', ['uses' => "ArticleController@createPut", 'as' => 'h.article.create.put']);
             Route::get('edit/{id}', ['uses' => "ArticleController@edit", 'as' => 'h.article.edit']);
             Route::put('edit/put/{id}', ['uses' => "ArticleController@editPut", 'as' => 'h.article.edit.put']);
@@ -38,6 +39,13 @@ Route::group([
             Route::put('thumbsup/{id}', ['uses' => "ReplyController@thumbsUp", 'as' => 'h.reply.thumbsUp']);
             Route::put('thumbsdown/{id}', ['uses' => "ReplyController@thumbsDown", 'as' => 'h.reply.thumbsDown']);
         });
+    });
+
+    //公告
+    Route::group(['prefix'=>'notice'], function(){
+
+        Route::get('', ['uses' => "NoticeController@index", 'as' => 'h.notice.list']);
+        Route::get('show/{id}', ['uses' => "NoticeController@show", 'as' => 'h.notice.show']);
     });
 
     //空间
@@ -68,6 +76,18 @@ Route::group([
         Route::get('logout', ['uses' => "AuthController@logout", 'as' => 'h.auth.logout']);
         Route::get('register', ['uses' => "AuthController@register", 'as' => 'h.auth.register']);
         Route::get('retrieve', ['uses' => "AuthController@retrieve", 'as' => 'h.auth.retrieve']);
+    });
+
+    //反馈
+    Route::group(['prefix'=>'feedback'], function(){
+
+        Route::get('', ['uses' => "FeedbackController@feedback", 'as' => 'h.feedback.feedback']);
+        Route::get('operate', ['uses' => "FeedbackController@operate", 'as' => 'h.feedback.operate']);
+        Route::get('moderator', ['uses' => "FeedbackController@moderator", 'as' => 'h.feedback.moderator']);
+        Route::get('appeals', ['uses' => "FeedbackController@appeals", 'as' => 'h.feedback.appeals']);
+        Route::get('report', ['uses' => "FeedbackController@report", 'as' => 'h.feedback.report']);
+        Route::get('reply', ['uses' => "FeedbackController@reply", 'as' => 'h.feedback.reply']);
+        Route::put('store', ['uses' => "FeedbackController@store", 'middleware' => 'forum.auth:f_member', 'as' => 'h.feedback.store']);
     });
 });
 

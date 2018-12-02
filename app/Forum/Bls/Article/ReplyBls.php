@@ -30,7 +30,7 @@ class ReplyBls
         10 => '反对浅红' //反对浅红
     ];
 
-    public static function getReplyList($request, $order = '`id` DESC', $limit = 20)
+    public static function getReplyList($request, $order = '`id` DESC', $limit = 20, $page = 'paginate')
     {
         $model = ReplyModel::query();
 
@@ -46,7 +46,13 @@ class ReplyBls
             $model->where('parent_id', $request->parent_id);
         }
         $model->withTrashed();
-        return $model->orderByRaw($order)->paginate($limit);
+        $model->orderByRaw($order);
+
+        if($page == 'paginate') {
+            return $model->paginate($limit);
+        } else {
+            return $model->simplePaginate($limit);
+        }
     }
 
 
@@ -312,7 +318,7 @@ class ReplyBls
         return ReplyModel::where('issuer', $issuer)->withTrashed()->count();
     }
 
-    public static function replyJoinArticle($userId, $limit = 10)
+    public static function replyJoinArticle($userId, $limit = 10, $page = 'paginate')
     {
         $model = ReplyModel::query();
         $model->leftJoin('articles as a','reply.article_id','=','a.id');
@@ -324,7 +330,12 @@ class ReplyBls
             'a.title as a_title', 'a.tags as a_tags','a.recommend as a_recommend', 'a.created_at as a_created_at',
             'a.id as a_id'
         );
-        return $model->paginate($limit);
+
+        if($page == 'paginate') {
+            return $model->paginate($limit);
+        } else {
+            return $model->simplePaginate($limit);
+        }
     }
 }
 

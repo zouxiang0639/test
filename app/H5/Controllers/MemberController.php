@@ -33,7 +33,7 @@ class MemberController extends Controller
     {
         $user = Auth::guard('forum')->user();
         $request->issuer = $user->id;
-        $article = articleBls::getArticleLise($request);
+        $article = articleBls::getArticleLise($request, '`id` DESC', 30, 'paginate');
         $article->getCollection()->each(function($item) {
             $item->replyCount = $item->reply()->count();
         });
@@ -52,7 +52,7 @@ class MemberController extends Controller
     {
         $userId = Auth::guard('forum')->id();
         $userName = Auth::guard('forum')->user()->name;
-        $list = ReplyBls::replyJoinArticle($userId, 30);
+        $list = ReplyBls::replyJoinArticle($userId, 30, 'simplePaginate');
         return view('h5::member.reply', [
             'current' => 2,
             'list' => $list,

@@ -31,7 +31,7 @@ class SpaceController extends Controller
         $this->isEmpty($user);
 
         $request->issuer = $user->id;
-        $article = articleBls::getArticleLise($request);
+        $article = articleBls::getArticleLise($request, '`id` DESC', 30, 'paginate');
         $article->getCollection()->each(function($item) {
             $item->replyCount = $item->reply()->count();
         });
@@ -52,7 +52,7 @@ class SpaceController extends Controller
         $request->merge(['user_id' => $userId]);
         $user = UsersBls::find($userId);
         $this->isEmpty($user);
-        $list = ReplyBls::replyJoinArticle($userId, 30);
+        $list = ReplyBls::replyJoinArticle($userId, 30, 'simplePaginate');
         return view('h5::space.reply', [
             'current' => 2,
             'list' => $list,
