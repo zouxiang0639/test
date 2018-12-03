@@ -160,7 +160,7 @@ body{
 /*公用头部*/
 .header{
 	height: 1.185rem;
-	background: #3655a0;
+	background: #2B4DA8;
 }
 .logo a{
 	display: block;
@@ -222,7 +222,7 @@ body{
 }
 /*公用菜单*/
 .menu-box{
-	padding: 0.15rem 0;
+	padding: 0.1rem 0;
 	text-align: center;
 }
 .menu-box a{
@@ -293,8 +293,9 @@ body{
 	max-width: 100%;
 }
 .list-box li .tit p{
+	color: #000000;
 	float: left;
-	font-size: 0.336rem;
+	font-size: 0.436rem;
 }
 .list-box li .tit p .num{
 	color: #3f9fc9;
@@ -302,13 +303,12 @@ body{
 }
 .list-box li .des{
 	color: #9b9b9b;
-	font-size: 0.265rem;
+	font-size: 0.365rem;
 	line-height: 0.53rem;
 }
 .list-box li .des .no{
 	float: left;
 	margin:0 0.265rem 0 0;
-	width: 0.398rem;
 	text-align: center;
 	overflow: hidden;
 }
@@ -327,16 +327,13 @@ body{
 	background: url(../img/read-ico.png) no-repeat center center;
 	background-size: contain;
 }
-.list-box li .des p span.good{
+.list-box li .des p span.good span{
 	color: #c04742;
 }
-.list-box li .des p span.good .ico{
+.list-box li .des p span.good i{
 	display: inline-block;
 	vertical-align: middle;
-	margin: -0.02rem 0.053rem 0 0;
-	width: 0.265rem;
-	height: 0.247rem;
-	background: url(../img/good-ico.png) no-repeat center center;
+	margin: -0.05rem -0.04rem 0 0.1rem;
 	background-size: contain;
 }
 /*公用翻页*/

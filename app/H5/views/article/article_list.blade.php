@@ -9,12 +9,14 @@
                     </a>
                 </div>
                 <div class="des clearfix">
-                    <i class="no">{!! $item->id !!}</i>
                     <p>
+                        <i class="no">{!! $item->id !!}</i>
                         <i class="name">{!! $item->issuers ? $item->issuers->name : '-' !!}</i>
                         <i class="date">{!! $item->created_at !!}</i>
                         <span class="read"><i class="ico"></i>{!! $item->browse !!}</span>
-                        <span class="good"><i class="ico"></i>{{ $item->recommend_count }}</span>
+                        <span class="good"><i  class="fa fa-thumbs-o-up"></i>
+                            <span >{{ $item->recommend_count }}</span>
+                        </span>
                     </p>
                 </div>
             </li>
