@@ -12,6 +12,10 @@ html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
 }
+
+p {
+	margin: 0 !important;
+}
 article,
 aside,
 details,
@@ -160,7 +164,8 @@ body{
 /*公用头部*/
 .header{
 	height: 1.185rem;
-	background: #2B4DA8;
+	background: #2b56a5;
+	/*box-shadow: 0 -1px 0.1rem #6a7ea8 inset;*/
 }
 .logo a{
 	display: block;
@@ -222,20 +227,23 @@ body{
 }
 /*公用菜单*/
 .menu-box{
-	padding: 0.1rem 0;
+	padding: 0.1rem 0.1rem 0.12rem 0.1rem;
 	text-align: center;
 }
 .menu-box a{
 	display: inline-block;
 	vertical-align: middle;
-	padding: 0.07rem 0.115rem;
+	padding: 0.03rem 0.115rem;
 	color: #fff;
 	font-size: 0.318rem;
 	margin: 0 0.1rem;
 	border-radius: 0.088rem;
 }
+.menu-box a:hover{
+	color: #fff;
+}
 .menu-box a.on{
-	background: #5f9de7;
+	background: #489fee;
 }
 /*公用底部*/
 .footer{
@@ -295,7 +303,7 @@ body{
 .list-box li .tit p{
 	color: #000000;
 	float: left;
-	font-size: 0.436rem;
+	font-size: 0.386rem;
 }
 .list-box li .tit p .num{
 	color: #3f9fc9;
@@ -303,7 +311,7 @@ body{
 }
 .list-box li .des{
 	color: #9b9b9b;
-	font-size: 0.365rem;
+	font-size: 0.315rem;
 	line-height: 0.53rem;
 }
 .list-box li .des .no{
