@@ -165,7 +165,9 @@ body{
 .header{
 	height: 1.185rem;
 	background: #2b56a5;
-	/*box-shadow: 0 -1px 0.1rem #6a7ea8 inset;*/
+	/*border-bottom: 0.1rem solid #3c5ba5;*/
+	box-shadow: -0.004rem -0.04rem 0.04rem #5076BC inset;
+
 }
 .logo a{
 	display: block;
@@ -200,6 +202,16 @@ body{
 	background: url(../img/edit-ico.png) no-repeat center center #5f9de7;
 	background-size: contain;
 }
+/*.hd-link a.my-link{*/
+	/*font-size: 0.9rem;*/
+	/*color: #9b9b9b;*/
+	/*padding-left: 0.26rem;*/
+	/*background-size: contain;*/
+/*}*/
+/*.hd-link a.my-link.on{*/
+	/*color: white;*/
+	/*background-size: contain;*/
+/*}*/
 .hd-link a.my-link{
 	background: url(../img/my-ico.png) no-repeat center center;
 	background-size: contain;
@@ -227,7 +239,7 @@ body{
 }
 /*公用菜单*/
 .menu-box{
-	padding: 0.1rem 0.1rem 0.12rem 0.1rem;
+	padding: 0.15rem;
 	text-align: center;
 }
 .menu-box a{
@@ -282,17 +294,16 @@ body{
 	overflow: hidden;
 	background: #fff;
 	padding: 0 0.247rem;
-	border-bottom: 0.008rem solid #1f3046;
+	border-bottom: 0.02rem solid #ddd !important;
 }
 .list-box li .tit{
 	margin: 0.442rem 0 0.3rem 0;
-	height: 0.53rem;
 	line-height: 0.53rem;
 	overflow: hidden;
 }
 .list-box li .tit .icon{
 	float:left;
-	margin: 0.071rem 0.265rem 0 0;
+	margin: 0.15rem 0.265rem 0 0;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	font-size: 0.4rem;
@@ -304,6 +315,7 @@ body{
 	color: #000000;
 	float: left;
 	font-size: 0.386rem;
+	line-height: 0.7rem;
 }
 .list-box li .tit p .num{
 	color: #3f9fc9;
@@ -313,6 +325,9 @@ body{
 	color: #9b9b9b;
 	font-size: 0.315rem;
 	line-height: 0.53rem;
+}
+.list-box li .des p span{
+	padding-right: 0.2rem;
 }
 .list-box li .des .no{
 	float: left;
@@ -354,13 +369,18 @@ body{
 .page-box li{
 	display: inline-block;
 	vertical-align: middle;
-	width: 0.911rem;
-	height: 0.858rem;
+
 	line-height: 0.858rem;
-	font-size: 0.318rem;
+	font-size: 0.418rem;
 	color: #4779b2;
 }
+
 .page-box li a{
+	padding: 0.1rem 0.3rem  !important;
+	display: block;
+}
+.page-box li span{
+	padding: 0.1rem 0.3rem  !important;
 	display: block;
 }
 .page-box li a.on{
