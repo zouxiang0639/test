@@ -1,4 +1,4 @@
-<div id="reply_ajax" style="margin-bottom: -18px;clear: both;">
+<div id="reply_ajax" style="margin-bottom: -0.3rem;">
 
     <div class="page-reply">
         <ul class="pagination" style="display: none">
@@ -6,7 +6,7 @@
         </ul>
     </div>
 </div>
-<p class="abc" style="clear:both; margin: 0 0 0px;"></p>
+<div class="abc" style="clear:both; margin: 0.31rem;"></div>
 
 <div style="display: none">
 

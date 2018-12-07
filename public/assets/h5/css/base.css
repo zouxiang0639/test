@@ -622,9 +622,10 @@ body{
 	background-size: contain;
 	font-size: 1.1rem;
 }
-.zan-show  p{
+.zan-show  .zan-show-title{
 	background: #364559;
-	line-height: 0.637rem;
+	line-height: 0.647rem;
+	height: 0.637rem;
 	padding: 0 0.176rem;
 	color: #cccccc;
 	font-size: 0.247rem;

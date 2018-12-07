@@ -44,22 +44,30 @@
                 @endif
             </div>
 
-            <div class="show-op clearfix">
+            <div class="show-op clearfix" style="padding-top: 0.2rem">
 
-                <span value="{!! route('h.article.info', ['id'=> $info->id])  !!}" class="copyVideo reprint" onclick="copyVideoUrl(event)">
-                            复制本帖地址
+                <div style=" float: left" value="{!! route('h.article.info', ['id'=> $info->id])  !!}" class="copyVideo reprint" onclick="copyVideoUrl(event)">
+                    <p style="padding-top: 0.15rem;">
+                        复制本帖地址
                         <i class="icon-copy"></i>
-                        </span>
-                <p>
+                    </p>
+                </div>
+
+               <div style="float: right;">
+                   <div class="bdsharebuttonbox" style="float: right"><a href=" " class="bds_more" data-cmd="more"></a ><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a ><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a ><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a ><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a ><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a ><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a ></div>
+                   <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}, "selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin","sqq"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+               </div>
+                <div style="float: right;padding-top: 0.1rem;">
                     <a href="{!! route('h.feedback.report', ['article_id' => $info->id]) !!}">举报！</a>
                     <a class="col article-star" style="padding-right: 15px;" href="javascript:void(0)">
                         <i class="coll-ico fa fa-heart {!! in_array($userId, $info->star) ? "default" : "" !!}"></i>收藏
                     </a>
-                    <a href="javascript:void(0)">分享</a>
-                </p>
+                </div>
+
+
             </div>
         </div>
-        <div class="zan-show">
+        <div class="zan-show" >
             <div class="con">
                 <a class="thumbs-up thumbs gd" data-href="{!! route('f.article.thumbsUp',['id' => $info->id]) !!}">
                     <i class="fa fa-thumbs-o-up {!! in_array($userId, $info->thumbs_up) ? "default" : "" !!}"></i>
@@ -71,13 +79,11 @@
                     <span class="num">{!! count($info->thumbs_down) !!}</span>
                 </a>
             </div>
-            <div style="height: 0.8rem;">
-                <p style="margin: 0px; ">*{!! config('config.reply_light_green') !!}赞以上变浅绿色，{!! config('config.reply_green') !!}赞以上变绿色，弱数超过赞数{!! config('config.reply_light_red') !!}个变浅红色，楼主回复为蓝色</p>
-            </div>
+            <div class="zan-show-title">*{!! config('config.reply_light_green') !!}赞以上变浅绿色，{!! config('config.reply_green') !!}赞以上变绿色，弱数超过赞数{!! config('config.reply_light_red') !!}个变浅红色，楼主回复为蓝色</div>
         </div>
         @include('h5::article.reply_ajax')
 
-        <div class="reply-push">
+        <div class="reply-push" style="clear: both;">
             <div class="img" >
             </div>
             <form class="reply-form">
