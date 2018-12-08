@@ -164,7 +164,7 @@ class MemberController extends Controller
     public function setup()
     {
         $user = Auth::guard('forum')->user();
-        return view('forum::member.setup', [
+        return view('h5::member.setup', [
             'current' => 6,
             'info' => $user
         ]);

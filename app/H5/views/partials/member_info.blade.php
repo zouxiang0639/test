@@ -1,11 +1,13 @@
 <div class="my-info">
     <div class="option clearfix">
-        <a class="edit" href="javascript:void(0)"></a>
+        <a class="edit" href="{!! route('h.member.setup') !!}">
+            <i class="fa fa-pencil-square-o"></i>
+        </a>
         <a class="right sign-in" href="javascript:void(0)">
             <i {!! mb_substr($info->sign_time, 0, 10) ==  date('Y-m-d') ? 'style="color:#F0E672"' : '' !!} class="fa fa-check-square-o">
             </i>
         </a>
-        <a class="right" href="{!! route('h.auth.logout') !!}">
+        <a class="right" style="float: right;" href="{!! route('h.auth.logout') !!}">
             <i class="fa fa-sign-out">
             </i>
         </a>

@@ -425,10 +425,11 @@ body{
 	margin-right: 0.398rem;
 }
 .my-info .option a.edit{
-	width: 0.805rem;
-	height: 0.628rem;
-	background: url(../img/my-edit-ico.png) no-repeat center center;
+
+	font-size: 0.8rem;
+	color: #B9C0C7;
 	background-size: contain;
+	margin-top: -0.25rem;
 }
 .my-info .option a.right{
 	font-size: 0.8rem;
