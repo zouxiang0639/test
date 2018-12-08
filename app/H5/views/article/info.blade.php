@@ -25,7 +25,7 @@
                 </p>
                 <p>
                     <span>帖子ID : {!! $info->id !!}</span>
-                    <span>发帖人 :<a href="{!! route('f.space.index', ['user_id' => $info->issuer]) !!}"><i>{{ $info->issuers->name  }}</i></a>(注册时间:{{ mb_substr($info->issuers->created_at, 0, 10) }} 登陆次数:{{ $info->issuers->login_num }})</span>
+                    <span>发帖人 :<a href="{!! route('h.space.index', ['user_id' => $info->issuer]) !!}"><i>{{ $info->issuers->name  }}</i></a>(注册时间:{{ mb_substr($info->issuers->created_at, 0, 10) }} 登陆次数:{{ $info->issuers->login_num }})</span>
                 </p>
                 <p>
                     <span>推荐 : {{ $info->recommend_count }}</span>
@@ -46,17 +46,13 @@
 
             <div class="show-op clearfix" style="padding-top: 0.2rem">
 
-                <div style=" float: left" value="{!! route('h.article.info', ['id'=> $info->id])  !!}" class="copyVideo reprint" onclick="copyVideoUrl(event)">
-                    <p style="padding-top: 0.15rem;">
-                        复制本帖地址
-                        <i class="icon-copy"></i>
-                    </p>
+                <div style=" float: left" class="copyVideo reprint" >
+                    @if($info->source)
+                        来源:{!! $info->source !!}
+                    @endif
                 </div>
 
-               <div style="float: right;">
-                   <div class="bdsharebuttonbox" style="float: right"><a href=" " class="bds_more" data-cmd="more"></a ><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a ><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a ><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a ><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a ><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a ><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a ></div>
-                   <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}, "selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin","sqq"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-               </div>
+
                 <div style="float: right;padding-top: 0.1rem;">
                     <a href="{!! route('h.feedback.report', ['article_id' => $info->id]) !!}">举报！</a>
                     <a class="col article-star" style="padding-right: 15px;" href="javascript:void(0)">
@@ -96,7 +92,7 @@
                 <textarea name="contents"></textarea>
 
                 <div class="btn clearfix" style="display: block;border: 0px solid transparent;padding: 0px;">
-                    <a class="txt reply—submit" data-href="{!! route('h.reply.store') !!}">回复发表回复</a>
+                    <a class="txt reply—submit" data-href="{!! route('h.reply.store') !!}">回复发表</a>
                     <input style="display: none" class="layui-upload-file" accept="undefined" name="file" type="file">
                     <a   class="xinfo img img—submit" data-href="{!! route('f.reply.store') !!}"><i class="fa fa-image"></i></a>
                 </div>

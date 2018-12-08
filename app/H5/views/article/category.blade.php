@@ -6,7 +6,7 @@
             @foreach($list as $key => $item)
             <li>
                 <a href="{!! route('h.article.list', ['tag' => $item['id']]) !!}">
-                    <i @if($key == 1)  style="background-color: #e9711a; color: white;" @else style="color:{{ $item->color }}" @endif class="{{ $item->icon }} ico "></i>
+                    <i @if($key == 1)  style="background-color: #e9711a; color: white;" @else style="color:#0064b4" @endif class="{{ $item->icon }} ico "></i>
                     <p>{!! $item->tag_name !!}</p>
                 </a>
             </li>

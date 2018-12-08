@@ -24,7 +24,7 @@
                 <textarea name="contents"></textarea>
 
                 <div class="btn clearfix" style="display: block;border: 0px solid transparent;padding: 0px;">
-                    <a class="txt reply—submit" data-href="{!! route('h.reply.store') !!}">回复发表回复</a>
+                    <a class="txt reply—submit" data-href="{!! route('h.reply.store') !!}">回复发表</a>
                     <input style="display: none" class="layui-upload-file" accept="undefined" name="file" type="file">
                     <a   class="xinfo img img—submit" data-href="{!! route('f.reply.store') !!}"><i class="fa fa-image"></i></a>
                 </div>

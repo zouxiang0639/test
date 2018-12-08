@@ -16,6 +16,11 @@ html {
 p {
 	margin: 0 !important;
 }
+
+.h1, .h2, .h3, h1, h2, h3 {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
 article,
 aside,
 details,
@@ -75,7 +80,7 @@ caption,th{
     text-align:left;}
 h1,h2,h3,h4,h5,h6{
     font-size:100%;
-    font-weight:normal}
+    font-weight:normal !important;}
 abbr,acronym{
     border:0}
 button,
@@ -528,12 +533,17 @@ body{
 .des-info .article{
 	background: #f1f1f1;
 }
-.des-info .article > div{
-	padding: 0.309rem 0.247rem;
-	border-bottom: 0.008rem solid #1f3046;
+.des-info .article .title{
+	padding: 0.319rem 0.247rem;
+	border-bottom: 1px solid  #e2e2e2;
+}
+.des-info .article .con{
+	padding: 0.109rem 0.247rem;
+
+	border-bottom: 1px solid  #e2e2e2;
 }
 .des-info .article > div h1{
-	font-size: 0.424rem;
+	font-size: 0.524rem;
 	color: #000000;
 }
 .des-info .article > div p{
@@ -551,7 +561,13 @@ body{
 	padding: 0.141rem;
 	background: #fff;
 }
-.article-show .content {}
+.article-show .content {
+	padding:0.2rem 0 0.3rem 0;
+	font-size: 14px;
+	line-height: 2;
+	color: #000;
+	word-wrap: break-word;
+}
 .article-show .content img{
 
 	overflow: hidden;
@@ -560,7 +576,7 @@ body{
 
 .show-op .reprint{
 	float: left;
-	font-size: 0.265rem;
+	font-size:  0.335rem;
 	color: #599ae6;
 }
 .show-op .reprint i{
@@ -632,7 +648,7 @@ body{
 	font-size: 0.247rem;
 }
 .reply-show li{
-	border-bottom: 0.008rem solid #1f3046;
+	border-bottom: 1px solid #1f3046;
 }
 .reply-show li.hover{
 	background: #fff;
@@ -689,21 +705,24 @@ body{
 	background-size: contain;
 }
 .reply-show li .con-2{
-	line-height: 0.53rem;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	font-size: 0.318rem;
+	line-height: 2;
+	font-size: 14px;
+	padding-bottom: 0.5rem;
+}
+.reply-show li .con-2 p{
+	line-height: 2;
+	font-size: 14px;
 }
 .reply-show li .con-3{
 	text-align: right;
 }
 .reply-show li .con-3 a{
-	float: right;
-	line-height: 0.53rem;
-	margin: 0.044rem 0 0 0;
 	font-size: 0.265rem;
 	color: #666666;
+	position: absolute;
+	width: 100px;
+	right: 6px;
+	margin-top: -20px;
 }
 .reply-show li .con-3 a i{
 	display: inline-block;
@@ -746,7 +765,7 @@ body{
 	width: 2.371rem;
 	height: 0.778rem;
 	line-height: 0.778rem;
-	border: 0.008rem solid #1f3046;
+	border: 0.008rem solid #818a96;
 	background: #5f9de7;
 	color: #fff;
 	font-size: 0.318rem;
@@ -779,7 +798,7 @@ body{
 	font-size: 0.53rem;
 }
 .login-box .tab a.on{
-	color: #3655a0;
+	color: #5f9de7;
 }
 .login-box .tab a.login:after{
 	content: "|";
