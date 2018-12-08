@@ -8,8 +8,6 @@ use App\Consts\Common\SearchType;
 <style>
     .search {
 
-        width: 258px;
-        height: 30px;
         border: 1px solid #2c56a5;
         background: #31465b;
         margin: 0 auto;
@@ -20,7 +18,7 @@ use App\Consts\Common\SearchType;
         width: 220px;
         padding-left: 10px;
         height: 28px;
-        background: #31465b;
+        background: #364559;;
         color: #fff;
 
     }
@@ -32,6 +30,14 @@ use App\Consts\Common\SearchType;
         color: #F0F182;
 
     }
+    .select{
+        cursor: pointer;
+        border: 1px solid #1a3148;
+        margin: 5px 0 0px 10px;
+        padding-right: 2px;
+        float: left;
+        background: #31465b;
+    }
 </style>
 @stop
 @section('content')
@@ -40,7 +46,10 @@ use App\Consts\Common\SearchType;
         <div class="search clearfix">
             <form id="search-form" action="{!! route('h.article.search') !!}">
 
-                {!! Form::select('type_key', SearchType::desc(), Input::get('type_key'), ['style'=>'margin: 5px 0 0px 10px;color: #479fed;padding-right: 2px;border: 0;float: left;background: #31465b;']) !!}
+                {!! Form::select('type_key', SearchType::desc(), Input::get('type_key'), ['class'=>'select']) !!}
+
+
+
                 <input style="width: 159px" class="s-txt" type="text" name="key" placeholder="{!! Input::get('key') !!}" />
                 <a class="s-btn icon-search" id="search-submit" href="javascript:void(0)"></a>
 

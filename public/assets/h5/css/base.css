@@ -218,11 +218,10 @@ body{
 	/*background-size: contain;*/
 /*}*/
 .hd-link a.my-link{
-	background: url(../img/my-ico.png) no-repeat center center;
 	background-size: contain;
 }
-.hd-link a.my-link.on{
-	background: url(../img/my-ico.png) no-repeat center center #5f9de7;
+.hd-link .on{
+	background: #5f9de7;
 	background-size: contain;
 }
 .hd-link a.info-link{
@@ -973,6 +972,9 @@ body{
 .article-create .tep1 {
 	margin: 20px 0 0 0;
 }
+.article-create .ck {
+	padding-left: 14px;
+}
 .article-create .tep1 > p {
 	float: left;
 	margin-right: 30px;
@@ -987,7 +989,7 @@ body{
 	border: 1px solid #1a3148;
 }
 .article-create .tep2 {
-	margin: 20px 0 0 0;
+	margin: 20px 0 7px 0;
 }
 .article-create .tep2 input {
 	width: 100%;
@@ -1052,4 +1054,22 @@ body{
 }
 .article-create .tep4 > a.cancel-btn {
 	background: #999999;
+}
+
+.article-create .post-tit {
+	height: 35px;
+	background: #46586b;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	padding: 0 15px;
+	color: #cccccc;
+	font-size: 14px;
+	line-height: 35px;
+}
+
+.icons-tops {
+	font-size: 0.8rem;
+	margin: 0.23rem 0.27rem;
+	display: block;
+	color: #ffffff;
 }

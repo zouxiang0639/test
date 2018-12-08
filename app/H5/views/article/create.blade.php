@@ -21,18 +21,18 @@
                         </p>
                     </div>
 
-                    <div class="tep2">
-                        <input name="title" type="text" placeholder="请填写标题" />
-                    </div>
 
                     <div class="tep3">
 
-                        <p class="area">
-                            <textarea name="contents" ></textarea>
-                        </p>
-                        <p class="text">
+                        <div class="tep2">
+                            <input name="title" type="text" placeholder="请填写标题" />
+                        </div>
+                        <div class="area">
+                            <textarea name="contents"  ></textarea>
+                        </div>
+                        <div class="text">
                             <input name="source" value="" type="text" placeholder="转载内容请填写原作者与来源，原创内容无需填写" />
-                        </p>
+                        </div>
                     </div>
             <span class="help-block">
                 <i class="fa fa-info-circle"></i>&nbsp;（每天发表文章章超出{!! config('config.day_article') !!}后,每发表一篇文章将减10个积分）
@@ -73,7 +73,9 @@
                             //图片     表格       水平线            表情       特殊字符        分页符
                             ['Image',/*'Html5video',*/'Chart','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
 
-                        ]
+                        ],
+                        height: 400
+
                     }
             );
         });

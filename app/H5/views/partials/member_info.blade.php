@@ -4,7 +4,7 @@
             <i class="fa fa-pencil-square-o"></i>
         </a>
         <a class="right sign-in" href="javascript:void(0)">
-            <i {!! mb_substr($info->sign_time, 0, 10) ==  date('Y-m-d') ? 'style="color:#F0E672"' : '' !!} class="fa fa-check-square-o">
+            <i {!! mb_substr($info->sign_time, 0, 10) ==  date('Y-m-d') ? 'style="color:#f0f191"' : '' !!} class="fa fa-check-square-o">
             </i>
         </a>
         <a class="right" style="float: right;" href="{!! route('h.auth.logout') !!}">
@@ -116,7 +116,7 @@
                             locked = true;
                         } else {
                             swal(res.data, '', 'success');
-                            $('.sign-in i').css({color:"#F0E672"});
+                            $('.sign-in i').css({color:"#f0f191"});
                             $('#integral').text(parseInt($('#integral').attr('data-num')) + 5);
                             locked = true;
                         }

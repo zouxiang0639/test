@@ -10,17 +10,18 @@
                     <i style="{!! $count ? 'color: #e15844;': 'color: #ffffff;' !!}" class="icon-alarm icon"></i>
                     <span style="{!! $count ? 'color: #e15844;': 'color: #ffffff;' !!}">{!! \App\Forum\Bls\Article\InfoBls::countInfo(\Auth::guard('forum')->id(), \App\Consts\Common\WhetherConst::NO) !!}</span>
                 </a>
-                <a class="my-link on" href="{!! route('h.member.index') !!}">
-                    {{--<i class="fa fa-user"></i>--}}
+                <a class="my-link @if(\Request::route()->getAction('as') == 'h.member.index') on @endif"  href="{!! route('h.member.index') !!}">
+                    <i class="icons-tops icon-user"></i>
                 </a>
             @else
-                <a class="my-link" href="{!! route('h.auth.login') !!}">
-                    {{--<i class="fa fa-user"></i>--}}
+
+                <a class="my-link @if(\Request::route()->getAction('as') == 'h.auth.login') on @endif" href="{!! route('h.auth.login') !!}">
+                    <i class="icons-tops icon-user"></i>
                 </a>
             @endif
 
-            <a class="edit-link" href="{!! route('h.article.create') !!}"></a>
-            <a class="search-link" href="{!! route('h.article.search') !!}"></a>
+            <a class="edit-link  @if(\Request::route()->getAction('as') == 'h.article.create') on @endif" href="{!! route('h.article.create') !!}"></a>
+            <a class="search-link  @if(\Request::route()->getAction('as') == 'h.article.search') on @endif" href="{!! route('h.article.search') !!}"></a>
         </div>
     </div>
 </div>
