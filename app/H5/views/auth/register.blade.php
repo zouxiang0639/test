@@ -1,5 +1,10 @@
 @extends('h5::layouts.master')
 
+@section('style')
+<style>
+    .post-verify
+</style>
+@stop
 @section('content')
 
     <div class="login-box">

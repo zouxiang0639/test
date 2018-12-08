@@ -14,11 +14,6 @@
                             {{--211.38.***.118--}}
                         </p>
                         <p class="fr">
-                            @if($item->isDelete)
-                                <a class="delete-reply" data-href="{!! route('f.reply.destroy',['id' => $item->id]) !!}" href="javascript:void(0)">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                            @endif
                             <a class="thumbs" data-href="{!! route('f.reply.thumbsUp',['id' => $item->id]) !!}"  href="javascript:void(0)">
                                 <i class="fa fa-thumbs-o-up {!! $item->thumbsUpCheck ? "default" : "" !!}">
                                     <span class="num">{!! $item->thumbsUpCount !!}</span>

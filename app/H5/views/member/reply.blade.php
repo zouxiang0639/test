@@ -55,9 +55,7 @@
                             <div class="top">
                                 <p class="left"><b>{!! $userName !!}</b>({!! mb_substr($item->r_created_at, 0,16) !!})</p>
                                 <p class="right">
-                                    <span class="delete-reply" data-href="{!! route('f.reply.destroy',['id' => $item->r_id]) !!}" href="javascript:void(0)" style="margin-right: 10px; cursor:pointer">
-                                        <i class="fa fa-trash"></i>
-                                    </span>
+
                                     <span class="praise" href="javascript:void(0)">
                                         <i class="fa fa-thumbs-o-up"></i>
                                         {!! count(\GuzzleHttp\json_decode($item->r_thumbs_up)) !!}

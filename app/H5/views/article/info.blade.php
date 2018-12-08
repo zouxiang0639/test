@@ -14,16 +14,6 @@
             <div class="title"><h1>{!! $info->title !!}</h1></div>
             <div class="con">
                 <p>
-                    @if($checkAuth && is_null($info->deleted_at))
-                        <a style="color: #337ab7;" title="编辑" href="{!! route('h.article.edit', ['id' => $info->id]) !!}">
-                            <i class="fa fa-edit"></i>编辑
-                        </a>
-                        <a title="删除" class="article—delete" style="color: #337ab7;"  href="javascript:;" data-url="{!! route('h.article.delete', ['id' => $info->id]) !!}">
-                            <i class="fa fa-trash"></i>删除
-                        </a>
-                    @endif
-                </p>
-                <p>
                     <span>帖子ID : {!! $info->id !!}</span>
                     <span>发帖人 :<a href="{!! route('h.space.index', ['user_id' => $info->issuer]) !!}"><i>{{ $info->issuers->name  }}</i></a>(注册时间:{{ mb_substr($info->issuers->created_at, 0, 10) }} 登陆次数:{{ $info->issuers->login_num }})</span>
                 </p>

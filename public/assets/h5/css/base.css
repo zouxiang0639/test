@@ -535,12 +535,12 @@ body{
 }
 .des-info .article .title{
 	padding: 0.319rem 0.247rem;
-	border-bottom: 1px solid  #e2e2e2;
+	border-bottom: 1px solid  #818a96;
 }
 .des-info .article .con{
 	padding: 0.109rem 0.247rem;
 
-	border-bottom: 1px solid  #e2e2e2;
+	border-bottom: 1px solid  #818a96;
 }
 .des-info .article > div h1{
 	font-size: 0.524rem;
@@ -563,7 +563,7 @@ body{
 }
 .article-show .content {
 	padding:0.2rem 0 0.3rem 0;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 2;
 	color: #000;
 	word-wrap: break-word;
@@ -823,9 +823,11 @@ body{
 	color: #fff;
 	font-size: 0.318rem;
 	line-height: 0.495rem;
-	margin: 0.15rem 0.15rem 0 0;
 	border-radius: 0.088rem;
 	padding: 0 0.132rem;
+}
+.login-box .check-name{
+	margin-top: 0.318rem;
 }
 .login-box .forget{
 	float: left;

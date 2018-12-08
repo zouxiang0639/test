@@ -22,7 +22,9 @@ width: 32%;margin-top: 0.1rem; margin-left: 10px;height: 1rem;" onclick="this.sr
             </div>
             <div class="opt">
                 <a class="forget" href="{!! route('h.auth.retrieve') !!}">忘记密码</a>
-                <a class="zd-login" href="javascript:void(0)"><i></i>自动登录</a>
+
+                <a style="float: right"  class="zd-login" href="javascript:void(0)">自动登录</a>
+                <input name="" type="checkbox" placeholder="密码" style="float: right;    margin-top: 2px;" />
             </div>
             <div class="btn-login"><a data-action="{!! route('f.auth.login.put') !!}" id="login-submit"  href="javascript:void(0)">登录</a></div>
         </form>
