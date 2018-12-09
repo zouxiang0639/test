@@ -192,7 +192,6 @@ body{
 	border-left: 0.008rem solid #7388bc;
 }
 .hd-link a.search-link{
-	background: url(../img/search-ico.png) no-repeat center center;
 	background-size: contain;
 }
 .hd-link a.search-link.on{
@@ -200,7 +199,6 @@ body{
 	background-size: contain;
 }
 .hd-link a.edit-link{
-	background: url(../img/edit-ico.png) no-repeat center center;
 	background-size: contain;
 }
 .hd-link a.edit-link.on{
@@ -1065,9 +1063,9 @@ body{
 }
 
 .icons-tops {
-	font-size: 0.8rem;
+	font-size: 0.7rem !important;
 	margin: 0.23rem 0.27rem;
-	display: block;
+	display: block !important;
 	color: #ffffff;
 }
 

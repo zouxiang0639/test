@@ -45,7 +45,7 @@
             @foreach($list as $item)
                 <li>
                     <div class="tit clearfix">
-                        <a href="{!! route('h.article.info', ['id'=> $item->id]) !!}">
+                        <a href="{!! route('h.article.info', ['id'=> $item->a_id]) !!}">
                             <i style="color:{!!  Forum::Tags()->getTagsColor($item->a_tags) !!} " class="{!!  Forum::Tags()->getTagsIcon($item->a_tags) !!} icon"></i>
                             <p>{{ $item->a_title }}<span class="num">[{!! \App\Forum\Bls\Article\ReplyBls::countReply($item->a_id) !!}]</span></p>
                         </a>

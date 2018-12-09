@@ -20,8 +20,12 @@
                 </a>
             @endif
 
-            <a class="edit-link  @if(\Request::route()->getAction('as') == 'h.article.create') on @endif" href="{!! route('h.article.create') !!}"></a>
-            <a class="search-link  @if(\Request::route()->getAction('as') == 'h.article.search') on @endif" href="{!! route('h.article.search') !!}"></a>
+            <a class="edit-link  @if(\Request::route()->getAction('as') == 'h.article.create') on @endif" href="{!! route('h.article.create') !!}">
+                <i class="icon-pencil icons-tops"></i>
+            </a>
+            <a class="search-link  @if(\Request::route()->getAction('as') == 'h.article.search') on @endif" href="{!! route('h.article.search') !!}">
+                <i class="icons-tops fa fa-search"></i>
+            </a>
         </div>
     </div>
 </div>
