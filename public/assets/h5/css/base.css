@@ -442,19 +442,19 @@ body{
 	color: #B9C0C7;
 }
 .my-tit{
-	padding: 0.53rem 0.353rem;
+	padding: 0.2rem 0.353rem 0.53rem 0.353rem;
 	text-align: center;
 }
 .my-tit p{
 	color: #ffffff;
-	font-size: 0.654rem;
+	font-size: 0.754rem;
 }
 
 .my-des li{
 	float: left;
-	width: 3.805rem;
+	width: 4rem;
 	margin-left: 0.619rem;
-	font-size: 0.318rem;
+	font-size: 0.378rem;
 	color: #fff;
 	line-height: 0.566rem;
 }
@@ -467,7 +467,7 @@ body{
 	float: left;
 	width: 25%;
 	text-align: center;
-	font-size: 0.318rem;
+	font-size: 0.418rem;
 	line-height: 0.53rem;
 }
 
