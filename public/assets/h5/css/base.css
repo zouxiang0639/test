@@ -263,7 +263,7 @@ body{
 }
 /*公用底部*/
 .footer{
-	padding-bottom: 1.769rem;
+	padding-bottom: 0.4rem;
 }
 .go-top{
 	padding: 0.486rem 0;
@@ -318,7 +318,7 @@ body{
 .list-box li .tit p{
 	color: #000000;
 	float: left;
-	font-size: 0.386rem;
+	font-size: 16px;
 	line-height: 0.7rem;
 }
 .list-box li .tit p .num{
@@ -482,10 +482,11 @@ body{
 .my-state li .ico{
 	display: block;
 	margin: 0 auto;
-	width: 0.752rem;
 	height: 0.486rem;
-	background: url(../img/arrow-bt-ico.png) no-repeat center center;
 	background-size: contain;
+	color: #d4624c;
+	font-size: 0.7rem;
+	margin-top: -0.1rem;
 }
 /*板块新增*/
 .plate-box{
@@ -935,8 +936,6 @@ body{
 .pages .post-tit {
 	height: 0.65rem;
 	background: #46586b;
-	border-top-left-radius: 0.1rem;
-	border-top-right-radius: 0.1rem;
 	padding: 0 0.5rem;
 	color: #cccccc;
 	font-size: 0.35rem;
@@ -1059,8 +1058,6 @@ body{
 .article-create .post-tit {
 	height: 35px;
 	background: #46586b;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
 	padding: 0 15px;
 	color: #cccccc;
 	font-size: 14px;
@@ -1072,4 +1069,13 @@ body{
 	margin: 0.23rem 0.27rem;
 	display: block;
 	color: #ffffff;
+}
+
+.post-tit {
+	height: 35px;
+	background: #46586b;
+	padding: 0 15px;
+	color: #cccccc;
+	font-size: 14px;
+	line-height: 35px;
 }

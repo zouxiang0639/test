@@ -6,7 +6,6 @@
                     <a href="{!! route('h.article.info', ['id'=> $item->id]) !!}">
                         <i style="color:{!!  Forum::Tags()->getTagsColor($item->tags) !!}; float: left " class="{!!  Forum::Tags()->getTagsIcon($item->tags) !!} icon"></i>
                        <p style="float: left ;width: 90%">
-
                             {{ $item->title }}
                            <span class="num">[{!! $item->replyCount !!}]</span>
                        </p>

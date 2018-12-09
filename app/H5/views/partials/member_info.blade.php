@@ -43,28 +43,28 @@
             <a href="{!! route('h.member.index') !!}">
                 发帖
                 <span class="num">{!! $articleCount !!}</span>
-                {!! $current == 1 ? '<i class="ico"></i>' : '' !!}
+                {!! $current == 1 ? '<i class="ico icon-arrow"></i>' : '' !!}
             </a>
         </li>
         <li>
             <a href="{!! route('h.member.reply') !!}">
                 回复
                 <span class="num">{!! $replyCount !!}</span>
-                {!! $current == 2 ? '<i class="ico"></i>' : '' !!}
+                {!! $current == 2 ? '<i class="ico icon-arrow"></i>' : '' !!}
             </a>
         </li>
         <li>
             <a href="{!! route('h.member.star') !!}">
                 收藏
                 <span class="num">{!! $articlesStarCount !!}</span>
-                {!! $current == 4 ? '<i class="ico"></i>' : '' !!}
+                {!! $current == 4 ? '<i class="ico icon-arrow"></i>' : '' !!}
             </a>
         </li>
         <li>
             <a href="{!! route('h.member.info') !!}">
                 消息
                 <span class="num">{!! $infoCount !!}</span>
-                {!! $current == 5 ? '<i class="ico"></i>' : '' !!}
+                {!! $current == 5 ? '<i class="ico icon-arrow"></i>' : '' !!}
             </a>
         </li>
     </ul>

@@ -6,9 +6,9 @@
         color: #999999;
     }
     .tab-tit {
-        margin-top: 0.1rem;
+        margin-top: 0.02rem;
         height:0.48rem;
-        background: #31465b;
+        background: #354559;
         position: relative;
     }
     .tab-tit li.on {
@@ -19,7 +19,6 @@
         float: left;
         height: 0.48rem;
         width: 25%;
-        border-right: 1px solid #607080;
         text-align: center;
         color: #fff;
         line-height: 0.48rem;

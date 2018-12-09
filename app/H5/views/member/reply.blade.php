@@ -33,8 +33,8 @@
         font-size: 16px;
     }
     .com-tie .con p {
-        line-height: 0.4rem;
-        font-size: 0.3rem;
+        line-height: 24px;
+        font-size: 14px;
     }
 </style>
 @stop
