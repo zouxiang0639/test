@@ -7,7 +7,7 @@
                         <i style="color:red; float: left " class="icon-bullhorn icon"></i>
                         <p style="float: left ;width: 90%;color: #9b9b9b">
                             {{ $item->title }}
-                            （{!! mb_substr($item->created_at,0,9) !!}）
+                            （{!! mb_substr($item->created_at,0,10) !!}）
                         </p>
                     </a>
                 </div>

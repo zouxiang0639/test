@@ -31,6 +31,7 @@
     <div class="com-new">
         <div class="wm-850">
             <div class="new-container">
+                @include('forum::partials.notice_is_home')
                 <div class="new-tit"><i class="icon-new"></i></div>
                 @include('forum::partials.all_article')
             </div>
