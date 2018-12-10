@@ -67,4 +67,15 @@ class NoticeBls
         return $model->save();
     }
 
+    /**
+     * 根据推荐首页获取公告
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getNoticeByIsHome($isHome)
+    {
+        $model = NoticeModel::query();
+        $model->where('is_home', $isHome);
+        return $model->get();
+    }
+
 }

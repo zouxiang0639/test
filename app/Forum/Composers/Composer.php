@@ -17,6 +17,10 @@ class Composer
         View::composer('forum::partials.space_info', 'App\Forum\Composers\SpaceInfoComposer');
         View::composer('h5::partials.space_info', 'App\Forum\Composers\SpaceInfoComposer');
 
+        View::composer('forum::partials.notice_is_home', 'App\Forum\Composers\NoticeComposer');
+        View::composer('h5::partials.notice_is_home', 'App\Forum\Composers\NoticeComposer');
+
+
         View::composer('forum::partials.ad', 'App\Forum\Composers\AdComposer');
         View::composer('forum::partials.reply_ad', 'App\Forum\Composers\ReplyAdComposer');
         View::composer('forum::partials.advert', 'App\Forum\Composers\AdvertComposer');

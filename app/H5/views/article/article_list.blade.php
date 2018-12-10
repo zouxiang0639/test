@@ -21,6 +21,7 @@
                                 @else
                                     {!! $item->issuers ? $item->issuers->name : '-' !!}
                                 @endif
+
                             </i>
                         </span>
                         <span><i class="date">{!! $item->created_at !!}</i></span>

@@ -21,7 +21,7 @@ class ForumV11Update extends Migration
     {
         //公告
         Schema::table('notice', function (Blueprint $table) {
-            $table->tinyInteger('is_home')->default(0)->comment('推荐首页');
+            $table->tinyInteger('is_home')->default(0)->comment('推荐首页 状态 1是 2否 :WhetherConst');
         });
 
         //回复
