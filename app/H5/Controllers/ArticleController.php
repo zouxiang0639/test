@@ -26,7 +26,7 @@ class ArticleController extends Controller
         $tags = Forum::Tags()->getTags($request->tag);
 
         $this->isEmpty($tags);
-        $list = ArticleBls::getArticleLise($request, '`id` DESC', 30, 'simplePaginate');
+        $list = ArticleBls::getArticleLise($request);
 
         $this->formatData($list->getCollection());
 
@@ -280,7 +280,7 @@ class ArticleController extends Controller
     public function search(Request $request)
     {
 
-        $list = ArticleBls::getArticleLise($request, '`id` DESC', 30, 'simplePaginate');
+        $list = ArticleBls::getArticleLise($request);
         $this->formatData($list->getCollection());
 
         return view('h5::article.search', [

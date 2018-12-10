@@ -33,7 +33,7 @@ class MemberController extends Controller
     {
         $user = Auth::guard('forum')->user();
         $request->issuer = $user->id;
-        $article = articleBls::getArticleLise($request, '`id` DESC', 30, 'paginate');
+        $article = articleBls::getArticleLise($request);
         $article->getCollection()->each(function($item) {
             $item->replyCount = $item->reply()->count();
         });
@@ -52,7 +52,7 @@ class MemberController extends Controller
     {
         $userId = Auth::guard('forum')->id();
         $userName = Auth::guard('forum')->user()->name;
-        $list = ReplyBls::replyJoinArticle($userId, 30, 'simplePaginate');
+        $list = ReplyBls::replyJoinArticle($userId);
         return view('h5::member.reply', [
             'current' => 2,
             'list' => $list,
@@ -68,7 +68,7 @@ class MemberController extends Controller
     public function recommend()
     {
         $user = Auth::guard('forum')->user();
-        $list = $user->articlesRecommend()->simplePaginate(30);
+        $list = $user->articlesRecommend()->paginate(1);
         return view('forum::member.index', [
             'current' => 3,
             'list' => $list,
@@ -83,7 +83,7 @@ class MemberController extends Controller
     public function star()
     {
         $user = Auth::guard('forum')->user();
-        $list = $user->articlesStar()->simplePaginate(30);
+        $list = $user->articlesStar()->paginate(1);
         $list->getCollection()->each(function($item) {
             $item->replyCount = $item->reply()->count();
         });
@@ -101,7 +101,7 @@ class MemberController extends Controller
     public function info(Request $request)
     {
         $request->merge(['user_id' => Auth::guard('forum')->id()]);
-        $model = InfoBls::getInfoList($request, '`id` DESC', 30);
+        $model = InfoBls::getInfoList($request);
         $model->getCollection()->each(function($item) {
             $item->typeName = InfoTypeConst::getDesc($item->type);
             $time = mb_substr($item->created_at, 0, 10);

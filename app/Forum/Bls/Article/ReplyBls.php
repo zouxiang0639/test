@@ -318,24 +318,19 @@ class ReplyBls
         return ReplyModel::where('issuer', $issuer)->withTrashed()->count();
     }
 
-    public static function replyJoinArticle($userId, $limit = 10, $page = 'paginate')
+    public static function replyJoinArticle($userId, $limit = 10)
     {
         $model = ReplyModel::query();
         $model->leftJoin('articles as a','reply.article_id','=','a.id');
         $model->leftJoin('users as u','a.issuer','=','u.id');
         $model->where('reply.issuer', $userId);
         $model->orderBy('r_id', 'desc');
-        $model->select('reply.created_at as r_created_at', 'reply.contents as r_contents', 'reply.thumbs_up as r_thumbs_up',
+        return $model->select('reply.created_at as r_created_at', 'reply.contents as r_contents', 'reply.thumbs_up as r_thumbs_up',
             'reply.thumbs_down as r_thumbs_down', 'reply.id as r_id', 'u.name as u_name', 'a.browse as a_browse',
             'a.title as a_title', 'a.tags as a_tags','a.recommend as a_recommend', 'a.created_at as a_created_at',
             'a.id as a_id'
-        );
+        )->paginate($limit);
 
-        if($page == 'paginate') {
-            return $model->paginate($limit);
-        } else {
-            return $model->simplePaginate($limit);
-        }
     }
 }
 
