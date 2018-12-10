@@ -28,10 +28,9 @@ class ArticleBls
      * @param $request
      * @param string $order
      * @param int $limit
-     * @param string $page
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public static function getArticleLise($request, $order = '`id` DESC', $limit = 30, $page = 'paginate')
+    public static function getArticleLise($request, $order = '`id` DESC', $limit = 30)
     {
         $model = ArticleModel::query();
 
@@ -86,13 +85,8 @@ class ArticleBls
             $model->onlyTrashed();
         }
 
-        $model->orderByRaw($order);
+        return $model->orderByRaw($order)->paginate($limit);
 
-        if($page == 'paginate') {
-            return $model->paginate($limit);
-        } else {
-            return $model->simplePaginate($limit);
-        }
 
     }
 

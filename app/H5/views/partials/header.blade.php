@@ -24,7 +24,7 @@
                 <i class="icon-pencil icons-tops"></i>
             </a>
             <a class="search-link  @if(\Request::route()->getAction('as') == 'h.article.search') on @endif" href="{!! route('h.article.search') !!}">
-                <i class="icons-tops fa fa-search"></i>
+                <i class="icons-tops  icon-search"></i>
             </a>
         </div>
     </div>

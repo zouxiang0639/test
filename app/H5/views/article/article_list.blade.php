@@ -27,5 +27,5 @@
     </ul>
 </div>
 <div class="page-box clearfix">
-    {!! $list->appends(Input::get())->render() !!}
+    {!! $list->appends(Input::get())->links('h5::partials.pagination') !!}
 </div>
