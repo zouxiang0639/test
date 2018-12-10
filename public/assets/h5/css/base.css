@@ -195,14 +195,12 @@ body{
 	background-size: contain;
 }
 .hd-link a.search-link.on{
-	background: url(../img/search-ico.png) no-repeat center center #5f9de7;
 	background-size: contain;
 }
 .hd-link a.edit-link{
 	background-size: contain;
 }
 .hd-link a.edit-link.on{
-	background: url(../img/edit-ico.png) no-repeat center center #5f9de7;
 	background-size: contain;
 }
 /*.hd-link a.my-link{*/
@@ -1052,7 +1050,7 @@ body{
 	font-size: 0.7rem !important;
 	margin: 0.23rem 0.27rem;
 	display: block !important;
-	color: #ffffff;
+	color: #ffffff !important;
 }
 
 .post-tit {
