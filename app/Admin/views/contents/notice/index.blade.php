@@ -35,6 +35,7 @@
                 <tr>
                     <th>编号</th>
                     <th>标题</th>
+                    <th>推荐首页</th>
                     <th>创建时间</th>
                     <th width="100">操作</th>
                 </tr>
@@ -42,6 +43,9 @@
                     <tr>
                         <td>{!! $item->id !!}</td>
                         <td>{{ $item->title }}</td>
+                        <td class="switch_submit" data-href="{!! route('m.contents.notice.ishome', ['id' => $item->id]) !!}">
+                            {!! Form::switchOff('switch_submit', $item->is_home) !!}
+                        </td>
                         <td>{{ $item->created_at }}</td>
                         <td>
                             <a href="{!! route('m.contents.notice.edit', ['id' => $item->id]) !!}">

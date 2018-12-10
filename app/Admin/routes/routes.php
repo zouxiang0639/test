@@ -182,6 +182,7 @@ Route::group([
             Route::get('edit/{id}', ['uses' => "Contents\\NoticeController@edit", 'as' => 'm.contents.notice.edit']);
             Route::post('update/{id}', ['uses' => "Contents\\NoticeController@update", 'as' => 'm.contents.notice.update']);
             Route::put('status/{id}', ['uses' => "Contents\\NoticeController@status", 'as' => 'm.contents.notice.status']);
+            Route::put('ishome/{id}', ['uses' => "Contents\\NoticeController@isHome", 'as' => 'm.contents.notice.ishome']);
             Route::delete('destroy/{id}', ['uses' => "Contents\\NoticeController@destroy", 'as' => 'm.contents.notice.destroy']);
         });
 

@@ -20,7 +20,15 @@
             <div class="con">
                 <p>
                     <span>帖子ID : {!! $info->id !!}</span>
-                    <span>发帖人 :<a href="{!! route('h.space.index', ['user_id' => $info->issuer]) !!}"><i>{{ $info->issuers->name  }}</i></a>(注册时间:{{ mb_substr($info->issuers->created_at, 0, 10) }} 登陆次数:{{ $info->issuers->login_num }})</span>
+                    <span>发帖人 :
+                        @if($info->tags == 4 && $info->is_hide == \App\Consts\Common\WhetherConst::YES)
+                            匿名
+                        @else
+                            <a href="{!! route('h.space.index', ['user_id' => $info->issuer]) !!}"><i>{{ $info->issuers->name  }}</i></a>
+                        @endif
+
+
+                        (注册时间:{{ mb_substr($info->issuers->created_at, 0, 10) }} 登陆次数:{{ $info->issuers->login_num }})</span>
                 </p>
                 <p>
                     <span>推荐 : {{ $info->recommend_count }}</span>

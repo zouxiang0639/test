@@ -4,6 +4,7 @@ namespace App\Admin\Controllers\Contents;
 
 use App\Admin\Bls\Contents\NoticeBls;
 use App\Admin\Bls\Contents\Requests\NoticeRequest;
+use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Http\Controllers\Controller;
 use App\Library\Admin\Form\FormBuilder;
@@ -112,6 +113,25 @@ class NoticeController  extends Controller
         $this->isEmpty($model);
 
         if($model->delete()) {
+            return (new JsonResponse())->success('操作成功');
+        } else {
+            throw new LogicException(1010001, '操作失败');
+        }
+    }
+
+
+
+    public function isHome($id, Request $request)
+    {
+        $this->isEmpty(WhetherConst::getDesc($request->status));
+
+        $model = NoticeBls::find($id);
+
+        $this->isEmpty($model);
+
+        $model->is_home = $request->status;
+
+        if($model->save()) {
             return (new JsonResponse())->success('操作成功');
         } else {
             throw new LogicException(1010001, '操作失败');

@@ -14,7 +14,15 @@
                 <div class="des clearfix">
                     <p>
                         <span><i>{!! $item->id !!}</i></span>
-                        <span><i class="name">{!! $item->issuers ? $item->issuers->name : '-' !!}</i></span>
+                        <span>
+                            <i class="name">
+                                @if($item->tags == 4 && $item->is_hide == \App\Consts\Common\WhetherConst::YES)
+                                    匿名
+                                @else
+                                    {!! $item->issuers ? $item->issuers->name : '-' !!}
+                                @endif
+                            </i>
+                        </span>
                         <span><i class="date">{!! $item->created_at !!}</i></span>
                         <span class="read"><i class="ico"></i>{!! $item->browse !!}</span>
                         <span class="good"><i  class="fa fa-thumbs-o-up"></i>
