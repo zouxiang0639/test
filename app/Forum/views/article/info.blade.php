@@ -26,7 +26,14 @@
                     @endif
                 </p>
                 <p>
-                    发帖人 :<a href="{!! route('f.space.index', ['user_id' => $info->issuer]) !!}">{{ $info->issuers->name  }}</a>
+                    发帖人 :
+                    @if($info->tags == 4 && $info->is_hide == \App\Consts\Common\WhetherConst::YES)
+                        匿名
+                    @else
+                        <a href="{!! route('f.space.index', ['user_id' => $info->issuer]) !!}">{{ $info->issuers->name  }}</a>
+                    @endif
+
+
                     (注册时间:{{ mb_substr($info->issuers->created_at, 0, 10) }} 登陆次数:{{ $info->issuers->login_num }})
                 </p>
                 <p>

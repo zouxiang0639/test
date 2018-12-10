@@ -18,7 +18,13 @@
                     {{ $item->title }} <span style="color: #00a7d0">[{!! $item->replyCount !!}]</span>
                 </a>
             </td>
-            <td width="95">{!! $item->issuers ? $item->issuers->name : '-' !!}</td>
+            <td width="95">
+                @if($item->tags == 4 && $item->is_hide == \App\Consts\Common\WhetherConst::YES)
+                    匿名
+                @else
+                    {!! $item->issuers ? $item->issuers->name : '-' !!}
+                @endif
+            </td>
             <td width="95">
                 {{ $item->browse }}
                 <span class="red"> {{ $item->recommend_count }}</span>
