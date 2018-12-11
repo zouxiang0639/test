@@ -26,12 +26,13 @@ class UploadController extends Controller
         $file = $request->file('upload');
 
         $data = Admin::upload()->uploadOneImage($file);
+        FileBls::createFile($data['filePath'], FileTypeConst::IMG);
         $data = [
             'uploaded' => 1,
             'fileName' =>$data['url'],
             'url' => $data['url']
         ];
-        FileBls::createFile($data['url'], FileTypeConst::IMG);
+
         return json_encode($data);
     }
 }
