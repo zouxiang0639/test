@@ -197,6 +197,7 @@ class MemberController extends Controller
             throw new LogicException(1010002, '你的积分不够');
         }
         $user->name = $request->name;
+        $user->integral -= 50;
 
         if ($user->save()) {
             return (new JsonResponse())->success('修改成功');

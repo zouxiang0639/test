@@ -196,6 +196,7 @@ class MemberController extends Controller
         if($user->integral - 50 < 0) {
             throw new LogicException(1010002, '你的积分不够');
         }
+        $user->integral -= 50;
         $user->name = $request->name;
 
         if ($user->save()) {

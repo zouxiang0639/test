@@ -35,7 +35,7 @@ class InfoModel extends Model
     }
     public function articles()
     {
-        return $this->belongsTo(ArticleModel::class, 'articles_id');
+        return $this->belongsTo(ArticleModel::class, 'articles_id')->withTrashed();
     }
 
 
