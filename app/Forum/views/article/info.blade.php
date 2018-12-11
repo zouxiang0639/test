@@ -11,6 +11,9 @@
     </style>
 @stop
 
+@section('title')-{!! $info->title !!}@stop
+
+
 @section('content')
     <div class="tie-inner">
         <div class="wm-850">

@@ -16,7 +16,7 @@ class HomeController extends Controller
             $request->merge(['type' => 'hot']);
         }
 
-        $list = ArticleBls::getArticleLise($request, '`id` DESC', 1);
+        $list = ArticleBls::getArticleLise($request);
         $this->formatData($list->getCollection());
 
         return view('h5::home.index', [
