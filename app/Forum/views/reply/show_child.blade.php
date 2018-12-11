@@ -8,9 +8,13 @@
                 <div class="sh-r fr {!! $item->color !!}">
                     <div class="top">
                         <p class="left">
-                            <a href="{!! route('f.space.index', ['user_id' => $item->issuer]) !!}" style="color: #666666;">
-                                <b>{{ $item->issuerName }}</b>
-                            </a>
+                            @if(!empty($item->issuerName))
+                                <a href="{!! route('f.space.index', ['user_id' => $item->issuer]) !!}" style="color: #666666;">
+                                    <b>{{ $item->issuerName }}</b>
+                                </a>
+                            @else
+                                匿名
+                            @endif
                             ({!! mb_substr($item->created_at, 0, 16) !!})
                         </p>
                         <p class="right">

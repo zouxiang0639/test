@@ -112,9 +112,6 @@ class ArticleController extends Controller
      */
     public function info($id)
     {
-        $model = ReplyModel::all();
-        (new ReplyController())->formatDate(Collection::make($model));
-        //dd($model);
         $model = ArticleBls::findByWithTrashed($id);
 
         $this->isEmpty($model);

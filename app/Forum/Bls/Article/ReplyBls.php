@@ -30,7 +30,7 @@ class ReplyBls
         10 => '反对浅红' //反对浅红
     ];
 
-    public static function getReplyList($request, $order = '`id` DESC', $limit = 20, $page = 'paginate')
+    public static function getReplyList($request, $order = '`id` DESC', $limit = 20)
     {
         $model = ReplyModel::query();
 
@@ -48,11 +48,9 @@ class ReplyBls
         $model->withTrashed();
         $model->orderByRaw($order);
 
-        if($page == 'paginate') {
-            return $model->paginate($limit);
-        } else {
-            return $model->simplePaginate($limit);
-        }
+
+        return $model->paginate($limit);
+
     }
 
 

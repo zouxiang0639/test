@@ -10,7 +10,12 @@
                 <div class="box">
                     <div class="con-1 clearfix">
                         <p class="fl">
-                            <a href="{!! route('h.space.index', ['user_id' => $item->issuer]) !!}"><b>{{ $item->issuerName }}</b></a>({!! mb_substr($item->created_at, 0, 16) !!})
+                            @if(!empty($item->issuerName))
+                                <a href="{!! route('h.space.index', ['user_id' => $item->issuer]) !!}"><b>{{ $item->issuerName }}</b></a>
+                            @else
+                                匿名
+                            @endif
+                           ({!! mb_substr($item->created_at, 0, 16) !!})
                             {{--211.38.***.118--}}
                         </p>
                         <p class="fr">
@@ -62,5 +67,5 @@
     </ul>
 </div>
 <div class="page-reply">
-    {!! $list->appends(Input::get())->render() !!}
+    {!! $list->appends(Input::get())->links('h5::partials.pagination')  !!}
 </div>

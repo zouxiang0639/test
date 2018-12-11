@@ -2,6 +2,7 @@
 
 namespace App\H5\Controllers;
 
+use App\Consts\Common\WhetherConst;
 use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ArticleBls;
 use App\Forum\Bls\Article\ReplyBls;
@@ -54,8 +55,8 @@ class ReplyController extends Controller
         $this->isEmpty($model);
         $this->articlesIssuer = $model->issuer;
 
-        $html = ReplyBls::getReplyList($request, '`id` ASC', 50, 'simplePaginate');
-        $this->formatDate($html->getCollection());
+        $html = ReplyBls::getReplyList($request);
+        $this->formatDate($html->getCollection(), $model);
 
         $html =  view('h5::reply.show_page', [
             'list' => $html,
@@ -77,7 +78,7 @@ class ReplyController extends Controller
 
         //$html = ReplyBls::showChildReply($request->parent_id, $request->article_id);
         $model = ReplyBls::getReplyList($request, '`id` ASC', 1000, 'simplePaginate');
-        $this->formatDate($model->getCollection());
+        $this->formatDate($model->getCollection(), $model);
 
         $html =  view('forum::reply.show_child', [
             'list' => $model,
@@ -140,10 +141,10 @@ class ReplyController extends Controller
         }
     }
 
-    public function formatDate(Collection $items)
+    public function formatDate(Collection $items, $model)
     {
         $userId = \Auth::guard('forum')->id();
-        $items->each(function($item) use ($userId) {
+        $items->each(function($item) use ($userId, $model) {
 
             $item->issuerName = '-';  //发布人
             $item->thumbsUpCount = count($item->thumbs_up); //赞数量
@@ -157,7 +158,7 @@ class ReplyController extends Controller
             $item->childrenCount = $item->child()->count(); //是否有子数据
 
             if($item->parent_id == 0 && $item->childrenCount > 0) {
-                $this->formatDate($item->child);
+                $this->formatDate($item->child, $model);
             }
 
             //信息删除
@@ -167,7 +168,9 @@ class ReplyController extends Controller
                 $item->isDelete = false;
             }
 
-            if($issuer = $item->issuers) {
+            if($model->tags = 4 && $model->issuer == $item->issuer && $model->is_hide == WhetherConst::YES) {
+                $item->issuerName = '';
+            } else if($issuer = $item->issuers) {
                 $item->issuerName = $issuer->name;
             }
 
