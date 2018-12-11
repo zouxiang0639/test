@@ -3,7 +3,7 @@
 Route::group([
     'prefix'        => '/',
     'namespace'     => 'App\\Forum\\Controllers',
-    'middleware'    => ['web', 'forum'],
+    'middleware'    => ['web', 'forum', 'isMobile'],
 ], function(){
 
 
