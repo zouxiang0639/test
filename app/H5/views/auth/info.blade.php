@@ -7,7 +7,7 @@
           <div class="post-txt">
 
               <div class="tep3">
-                  空地社区用户注册协议
+                  {!!  Forum::fragment()->get(4, 'contents') !!}
               </div>
 
           </div>

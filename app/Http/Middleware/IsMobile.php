@@ -26,9 +26,10 @@ class IsMobile
     public function handle($request, Closure $next, $guard = null)
     {
 
+
         $isMobile = isMobile();
 
-        if ($isMobile) {
+        if ($isMobile && $request->_method != 'PUT') {
             return redirect()->route('h.home');
         }
         return $next($request);
