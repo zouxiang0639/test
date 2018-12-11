@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     @if(config('config.ico'))
-        <link href="{!! config('config.ico') !!}" type="image/x-icon" rel="shortcut icon">
+        <link href="{!! uploads_path(config('config.ico')) !!}" type="image/x-icon" rel="shortcut icon">
     @endif
     <link rel="stylesheet" href="{{  assets_path("/h5/css/base.css") }}" />
     <link rel="stylesheet" href="{{  assets_path("/h5/css/swiper.min.css") }}" />

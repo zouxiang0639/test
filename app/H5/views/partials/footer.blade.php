@@ -9,5 +9,8 @@
         <a href="{!! route('h.feedback.appeals') !!}">申诉区</a>
     </div>
     <p class="copyright">网站试运营，欢迎提出意见&nbsp;&nbsp;2018&nbsp;longdi&nbsp;All&nbsp;Rights&nbsp;Reserved
-        <a target="_blank" href="http://www.miitbeian.gov.cn/"> {!! config('config.icp') !!}</a></p>
+        </p>
+    <p class="copyright">
+        <a target="_blank" href="http://www.miitbeian.gov.cn/"> {!! config('config.icp') !!}</a>
+    </p>
 </div>

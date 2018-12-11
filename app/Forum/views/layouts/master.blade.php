@@ -9,7 +9,7 @@
     <meta name='description' content="{!! config('config.description', '空地社区') !!}" />
     <script src="{{  assets_path("/forum/js/jQuery-2.1.4.min.js") }}"></script>
     @if(config('config.ico'))
-    <link href="{!! config('config.ico') !!}" type="image/x-icon" rel="shortcut icon">
+        <link href="{!! uploads_path(config('config.ico')) !!}" type="image/x-icon" rel="shortcut icon">
     @endif
     <link rel="stylesheet" href="{!! assets_path("/forum/css/common.css") !!}" />
     <link rel="stylesheet" href="{!! assets_path("/lib/bootstrap3/bootstrap.min.css") !!}" />
