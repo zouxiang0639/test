@@ -16,7 +16,7 @@
 @section('content')
     <div class="des-info">
         <div class="article">
-            <div class="title"><h1>{!! $info->title !!}</h1></div>
+            <div class="title"><h1>{{ dd($info->title)  }}</h1></div>
             <div class="con">
                 <p>
                     <span>帖子ID : {!! $info->id !!}</span>

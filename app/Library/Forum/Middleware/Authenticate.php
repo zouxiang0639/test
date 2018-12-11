@@ -38,6 +38,22 @@ class Authenticate
     public function handle($request, Closure $next, $permissionCode = '')
     {
 
+        $isMobile = $this->isMobile();
+
+
+
+
+        if ($isMobile) {
+           return view('home');//手机端
+
+
+        } else {
+            dd(1);
+            return view('pc');//pc端
+
+
+        }
+
 
 //        if (!$this->shouldPassThrough($request)){
 //
