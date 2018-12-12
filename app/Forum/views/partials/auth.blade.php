@@ -96,8 +96,9 @@ right: 0;" onclick="this.src='{{captcha_src()}}'+Math.random()">
             </div>
             <div class="modal-body">
                 <div class="center">
+                    <form class="login-form" autocomplete="off">
                     <div class="txt-input">
-                        <form class="login-form" autocomplete="off">
+
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="_method" value="PUT">
                             <div class="spel"><input name="email" type="text" placeholder="邮箱" /></div>
@@ -110,7 +111,7 @@ right: 0;" onclick="this.src='{{captcha_src()}}'+Math.random()">
 right: 0;" onclick="this.src='{{captcha_src()}}'+Math.random()">
                                 </div>
                             </div>
-                        </form>
+
                     </div>
                     <div class="txt-opt clearfix">
                         <p class="lt fl">
@@ -118,9 +119,10 @@ right: 0;" onclick="this.src='{{captcha_src()}}'+Math.random()">
                             <a class="modal-retrieve" href="javascript:void(0)">忘记密码</a>
                         </p>
                         <p class="rt fr">
-                            <input type="checkbox" id="check1" value="123" name="name" class="check"><span for="check1">自动登录</span>
+                            <input type="checkbox" id="check1" value="1" name="is_automatic_login" class="check"><span for="check1">自动登录</span>
                         </p>
                     </div>
+                    </form>
                     <div class="dl-con">
                         <button data-action="{!! route('f.auth.login.put') !!}" id="login-submit" type="button" style="background: #219d98; color: beige;width: 122px;" class="btn">登录</button>
 

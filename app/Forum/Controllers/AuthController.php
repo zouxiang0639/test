@@ -36,8 +36,8 @@ class AuthController extends Controller
     public function loginPut(LoginUserRequest $request)
     {
         $credentials = $request->only(['email', 'password']);
-
-        if (Auth::guard('forum')->attempt($credentials)) {
+        $isAutomaticLogin = $request->is_automatic_login == 1 ? true : false;
+        if (Auth::guard('forum')->attempt($credentials, $isAutomaticLogin)) {
 
             $user = Auth::guard('forum')->user();
             UsersBls::loginPolicy($user);
