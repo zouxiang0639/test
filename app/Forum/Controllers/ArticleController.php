@@ -201,7 +201,7 @@ class ArticleController extends Controller
         $list->getCollection()->each(function($item) {
             $item->replyCount = $item->reply()->count();
         });
-        $html = view('forum::article.all', ['list' => $list])->render();
+        $html = view('forum::article.all', ['list' => $list, 'page' => $request->page])->render();
 
         if($html) {
             return (new JsonResponse())->success($html);

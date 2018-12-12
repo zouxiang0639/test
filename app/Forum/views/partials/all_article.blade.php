@@ -1,6 +1,6 @@
 <div id="all_article">
     <ul class="pagination" style="display: none">
-        <li><a href="{!! route('f.article.all') !!}">2</a></li>
+        <li><a href="{!! route('f.article.all',[ 'page' => Input::get('page')]) !!}">2</a></li>
     </ul>
 </div>
 

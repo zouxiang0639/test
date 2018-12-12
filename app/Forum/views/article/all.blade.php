@@ -13,7 +13,10 @@
         <tr class="@if(in_array($item->id,session('article', []))) read @endif">
             <td width="55"> {{ $item->id }}</td>
             <td class="l" width="515">
-                <a href="{!! route('f.article.info', ['id' => $item->id]) !!}">
+                <?php
+                $pageArray =  isset($page) ? ['page' =>  $page] : [];
+                ?>
+                <a href="{!! route('f.article.info', array_merge(['id' => $item->id], $pageArray)) !!}">
                     <i style="color:{!!  Forum::Tags()->getTagsColor($item->tags) !!} " class="{!!  Forum::Tags()->getTagsIcon($item->tags) !!}"></i>
                     {{ $item->title }} <span style="color: #00a7d0">[{!! $item->replyCount !!}]</span>
                 </a>
