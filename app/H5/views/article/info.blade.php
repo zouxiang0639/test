@@ -57,7 +57,7 @@
 
 
                 <div style="float: right;padding-top: 0.1rem;">
-                    <a href="{!! route('h.feedback.report', ['article_id' => $info->id]) !!}">举报！</a>
+                    <a class="check-auth" href="{!! route('h.feedback.report', ['article_id' => $info->id]) !!}">举报！</a>
                     <a class="col article-star" style="padding-right: 15px;" href="javascript:void(0)">
                         <i class="coll-ico fa fa-heart {!! in_array($userId, $info->star) ? "default" : "" !!}"></i>收藏
                     </a>

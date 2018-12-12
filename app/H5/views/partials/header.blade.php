@@ -20,7 +20,7 @@
                 </a>
             @endif
 
-            <a class="edit-link  @if(\Request::route()->getAction('as') == 'h.article.create') on @endif" href="{!! route('h.article.create') !!}">
+            <a class="edit-link check-auth  @if(\Request::route()->getAction('as') == 'h.article.create') on @endif" href="{!! route('h.article.create') !!}">
                 <i class="icon-pencil icons-tops"></i>
             </a>
             <a class="search-link  @if(\Request::route()->getAction('as') == 'h.article.search') on @endif" href="{!! route('h.article.search') !!}">

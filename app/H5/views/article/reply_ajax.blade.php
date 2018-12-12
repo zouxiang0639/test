@@ -129,6 +129,10 @@
        });
 
        comTie.on('click', '.reply-one-edit', function(){
+           if(!$('meta[name="auth—num"]').attr('content')) {
+               swal('请登录会员', '', 'error');
+               return false;
+           }
            var id = $(this).attr('data-id');
            if($(this).attr('data-check') == '1') {
 
@@ -152,6 +156,10 @@
        });
 
        comTie.on('click', '.reply-two-edit', function(){
+           if(!$('meta[name="auth—num"]').attr('content')) {
+               swal('请登录会员', '', 'error');
+               return false;
+           }
            var id = $(this).attr('data-id');
 
            if($(this).attr('data-check') == '1') {

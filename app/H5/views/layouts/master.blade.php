@@ -33,6 +33,7 @@
 <script type="text/javascript" src="{{  assets_path("/h5/js/jquery.min.js") }}" ></script>
 <script type="text/javascript" src="{{  assets_path("/h5/js/swiper.min.js") }}" ></script>
 <script src="{{  assets_path("/lib/sweetalert/dist/sweetalert.min.js") }}"></script>
+<script type="text/javascript" src="{{  assets_path("/h5/js/common.js") }}" ></script>
 @yield('script')
 <script type="text/javascript">
     $(function() {
