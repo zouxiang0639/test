@@ -92,7 +92,7 @@
                 <input type="hidden" class="picture" name="picture" value="">
                 <input type="hidden" name="_method" value="PUT">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <textarea name="contents"></textarea>
+                <textarea name="contents"  class="check-auth"></textarea>
 
                 <div class="btn clearfix" style="display: block;border: 0px solid transparent;padding: 0px;">
                     <a class="txt reply—submit" data-href="{!! route('h.reply.store') !!}">回复发表</a>
