@@ -103,6 +103,7 @@ class ReplyBls
         $model->thumbs_down = [];
         $model->thumbs_up = [];
         $article =  $model->article;
+        $model->ip =  $request->getClientIp();
         if(empty($article) || !is_null($article->deleted_at)) {
             throw new LogicException(1010002, [['文章已被删除,不能评论']]);
         }

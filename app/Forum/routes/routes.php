@@ -95,8 +95,14 @@ Route::group([
         Route::get('info', ['uses' => "AuthController@info", 'as' => 'f.auth.info']);
         Route::get('qq', ['uses' => "AuthController@qq", 'as' => 'f.auth.qq']);
         Route::get('qq/login', ['uses' => "AuthController@qqLogin", 'as' => 'f.auth.qq.login']);
+        Route::get('qq/login/callback', ['uses' => "AuthController@qqCallback", 'as' => 'f.auth.qq.login.callback']);
         Route::get('weibo', ['uses' => "AuthController@weibo", 'as' => 'f.auth.weibo']);
-        Route::get('weibo/login', ['uses' => "AuthController@qqLogin", 'as' => 'f.auth.weibo.login']);
+        Route::get('weibo/login', ['uses' => "AuthController@weiboLogin", 'as' => 'f.auth.weibo.login']);
+        Route::get('weibo/login/callback', ['uses' => "AuthController@weiboCallback", 'as' => 'f.auth.weibo.login.callback']);
+        Route::get('wechat', ['uses' => "AuthController@wechat", 'as' => 'f.auth.wechat']);
+        Route::get('wechat/login', ['uses' => "AuthController@wechatLogin", 'as' => 'f.auth.wechat.login']);
+        Route::get('wechat/login/callback', ['uses' => "AuthController@wechatCallback", 'as' => 'f.auth.wechat.login.callback']);
+
         Route::get('login', ['uses' => "AuthController@login", 'as' => 'f.auth.login']);
         Route::put('login/put', ['uses' => "AuthController@loginPut", 'as' => 'f.auth.login.put']);
         Route::get('logout', ['uses' => "AuthController@logout", 'as' => 'f.auth.logout']);

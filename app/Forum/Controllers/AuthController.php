@@ -98,6 +98,11 @@ class AuthController extends Controller
         return Socialite::with('qq')->redirect();
     }
 
+    public function qqCallback()
+    {
+
+    }
+
     public function weibo()
     {
         return Socialite::with('weibo')->redirect();
