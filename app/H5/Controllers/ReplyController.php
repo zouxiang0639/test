@@ -55,7 +55,7 @@ class ReplyController extends Controller
         $this->isEmpty($model);
         $this->articlesIssuer = $model->issuer;
 
-        $html = ReplyBls::getReplyList($request);
+        $html = ReplyBls::getReplyList($request, '`id` ASC', 50);
         $this->formatDate($html->getCollection(), $model);
 
         $html =  view('h5::reply.show_page', [
