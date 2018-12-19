@@ -1061,3 +1061,7 @@ body{
 	font-size: 14px;
 	line-height: 35px;
 }
+.cke_dialog .ImagePreviewBox img{
+	width: 100%!important;
+	height: 100%!important;
+}
