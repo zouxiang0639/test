@@ -1,4 +1,4 @@
-@extends('forum::layouts.master')
+@extends('h5::layouts.master')
 @section('style')
     <link rel="stylesheet" href="{!! assets_path("/forum/css/post.css") !!}" />
     <style>

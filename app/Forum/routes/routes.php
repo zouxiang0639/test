@@ -142,6 +142,7 @@ Route::group([
 
         Route::get('bind', ['uses' => "AuthController@bind", 'as' => 'f.auth.bind']);
         Route::put('bind', ['uses' => "AuthController@bindPut", 'as' => 'f.auth.bind.put']);
+        Route::get('unbound', ['uses' => "AuthController@unbound", 'as' => 'f.auth.unbound']);
         Route::get('login/redirect', ['uses' => "AuthController@loginRedirect", 'as' => 'f.auth.login.redirect']);
 
     });

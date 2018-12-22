@@ -117,6 +117,7 @@ class AuthController extends Controller
 //            "user_id" => "",
 //        ];
         if ($oauthUser instanceof \Laravel\Socialite\Contracts\User) {
+        //if ($oauthUser) {
             return $socialiteLib->socialiteCallback($oauthUser, $type, $request);
         }
 
@@ -131,7 +132,27 @@ class AuthController extends Controller
 
     public function bind()
     {
-        return view('forum::auth.bind');
+        if(isMobile()) {
+            return view('h5::auth.bind');
+        } else {
+            return view('forum::auth.bind');
+        }
+    }
+
+    public function unbound()
+    {
+        $userSocialiteId = session(UserSocialiteConst::SOCIALITE_SESSION_KEY);
+        $socialiteLib = new SocialiteLib();
+        if(empty($userSocialiteId)) {
+            return redirect($socialiteLib->getHome());
+        }
+
+        $usersSocialiteModel = $socialiteLib->usersSocialiteFind($userSocialiteId);
+        if($socialiteLib->createUser($usersSocialiteModel)) {
+            Auth::guard('forum')->login($usersSocialiteModel->user);
+        }
+        session([UserSocialiteConst::SOCIALITE_SESSION_KEY => '']);
+        return redirect($socialiteLib->getMember());
     }
 
     public function bindPut(bindPutRequest $request)
@@ -151,7 +172,9 @@ class AuthController extends Controller
     public function loginRedirect()
     {
         $userSocialiteId = session(UserSocialiteConst::SOCIALITE_SESSION_KEY);
-        return (new SocialiteLib())->login($userSocialiteId);
+        $result = (new SocialiteLib())->login($userSocialiteId);
+        session([UserSocialiteConst::SOCIALITE_SESSION_KEY => '']);
+        return $result;
     }
 
     /**

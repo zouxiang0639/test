@@ -125,13 +125,18 @@ class SocialiteLib
 
     public function getErrorView($type, $a)
     {
-        return true;
+
+        if(isMobile()) {
+            return redirect(route('f.member.index'));
+        } else {
+            return redirect(route('h.member.index'));
+        }
     }
 
     public function bindUser($email, $userSocialiteId)
     {
         $usersModel = User::where('email', $email)->first();
-        $usersSocialiteModel = UsersSocialiteModel::find($userSocialiteId);
+        $usersSocialiteModel = $this->usersSocialiteFind($userSocialiteId);
 
         if(!$usersSocialiteModel) {
             return false;
@@ -150,13 +155,27 @@ class SocialiteLib
             $model->save();
 
             $usersSocialiteModel->user_id = $model->id;
-            return $usersSocialiteModel->save();
+            return $this->createUser($usersSocialiteModel, $email);
         }
+    }
+
+    public function createUser($usersSocialiteModel, $email = '')
+    {
+        $model = new User();
+        $model->email = $email;
+        $model->password = bcrypt(Str::random(60));
+        $model->status = WhetherConst::YES;
+        $model->remember_token = Str::random(60);
+        $model->name = $usersSocialiteModel->nickname;
+        $model->save();
+
+        $usersSocialiteModel->user_id = $model->id;
+        return $usersSocialiteModel->save();
     }
 
     public function login($userSocialiteId)
     {
-        $usersSocialiteModel = UsersSocialiteModel::find($userSocialiteId);
+        $usersSocialiteModel = $this->usersSocialiteFind($userSocialiteId);
         if (! empty($usersSocialiteModel->user->id)) {
             if (empty($user)) {
                 // 未登陆用户，直接登陆
@@ -183,5 +202,18 @@ class SocialiteLib
         }
     }
 
+    public function getMember()
+    {
+        if(isMobile()) {
+            return route('f.member.index');
+        } else {
+            return route('h.member.index');
+        }
+    }
+
+    public function usersSocialiteFind($userSocialiteId)
+    {
+        return UsersSocialiteModel::find($userSocialiteId);
+    }
 
 }
