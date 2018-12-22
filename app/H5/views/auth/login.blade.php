@@ -1,5 +1,23 @@
 @extends('h5::layouts.master')
 
+@section('style')
+<style>
+    .other-dl {
+        margin: 30px 0 0;
+        color: #ccc;
+        font-size: 0.318rem;
+    }
+    .other-dl a {
+        margin-left: 0.2rem;
+        border-radius: 9px;
+        width: 1rem;
+        background-color: #fff;
+        font-size: 24px;
+        padding: 3px;
+    }
+</style>
+@stop
+
 @section('content')
     <div class="login-box">
         <div class="tab">
@@ -27,6 +45,11 @@ width: 32%;margin-top: 0.1rem; margin-left: 10px;height: 1rem;" onclick="this.sr
                 <input name="is_automatic_login" value="1" type="checkbox" placeholder="密码" style="float: right;    margin-top: 2px;" />
             </div>
             <div class="btn-login"><a data-action="{!! route('f.auth.login.put') !!}" id="login-submit"  href="javascript:void(0)">登录</a></div>
+            <div class="other-dl">
+                其他登录
+                <a class="qq" href="{!! route('f.auth.qq') !!}"><i class="fa fa-qq"></i></a>
+                {{--<a class="wb" href="{!! route('f.auth.weibo') !!}"></a>--}}
+            </div>
         </form>
     </div>
 @stop

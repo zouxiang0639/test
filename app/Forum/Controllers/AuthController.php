@@ -3,11 +3,13 @@
 namespace App\Forum\Controllers;
 
 use App\Exceptions\LogicException;
+use App\Forum\Bls\Users\Requests\bindPutRequest;
 use App\Forum\Bls\Users\Requests\LoginUserRequest;
 use App\Forum\Bls\Users\Requests\RegisterUserRequest;
 use App\Forum\Bls\Users\UsersBls;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
+use App\Library\Socialite\SocialiteLib;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -15,6 +17,7 @@ use Laravel\Socialite\Facades\Socialite;
 use Mail;
 use Illuminate\Support\Facades\Validator;
 use Session;
+use App\Library\Socialite\Consts\UserSocialiteConst;
 
 class AuthController extends Controller
 {
@@ -98,9 +101,27 @@ class AuthController extends Controller
         return Socialite::with('qq')->redirect();
     }
 
-    public function qqCallback()
+    public function qqCallback(Request $request)
     {
+        $socialiteLib = new SocialiteLib();
+        $type = UserSocialiteConst::SOCIALITE_TYPE_QQ;
+        $oauthUser = $socialiteLib->getSocialiteUser('qq', $type);
 
+//        $oauthUser = [
+//            "socialite_uid" => "D251CF6F58308F5E1BE44E44BC7768CB",
+//            "nickname" => "附宅",
+//            "name" => null,
+//            "email" => null,
+//            "avatar" => "http://thirdqq.qlogo.cn/qqapp/101497272/D251CF6F58308F5E1BE44E44BC7768CB/100",
+//            "type" => 2,
+//            "user_id" => "",
+//        ];
+        if ($oauthUser instanceof \Laravel\Socialite\Contracts\User) {
+            return $socialiteLib->socialiteCallback($oauthUser, $type, $request);
+        }
+
+
+         return redirect($socialiteLib->getHome());
     }
 
     public function weibo()
@@ -108,6 +129,30 @@ class AuthController extends Controller
         return Socialite::with('weibo')->redirect();
     }
 
+    public function bind()
+    {
+        return view('forum::auth.bind');
+    }
+
+    public function bindPut(bindPutRequest $request)
+    {
+        if(is_null(session(UserSocialiteConst::SOCIALITE_SESSION_KEY))) {
+            throw new LogicException(1010002, '第三方登录已过期,请重新绑定');
+        };
+        $userSocialiteId = session(UserSocialiteConst::SOCIALITE_SESSION_KEY);
+        $result = (new SocialiteLib())->bindUser($request->email, $userSocialiteId);
+        if($result) {
+            return (new JsonResponse())->success('绑定成功');
+        } else {
+            throw new LogicException(1010002, '绑定失败,请重新登录');
+        }
+    }
+
+    public function loginRedirect()
+    {
+        $userSocialiteId = session(UserSocialiteConst::SOCIALITE_SESSION_KEY);
+        return (new SocialiteLib())->login($userSocialiteId);
+    }
 
     /**
      * @param Request $request
@@ -290,7 +335,5 @@ EOT;
         } else {
             throw new LogicException(1010001, [['操作失败']]);
         }
-
-
     }
 }

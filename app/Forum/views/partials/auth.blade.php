@@ -127,11 +127,11 @@ right: 0;" onclick="this.src='{{captcha_src()}}'+Math.random()">
                         <button data-action="{!! route('f.auth.login.put') !!}" id="login-submit" type="button" style="background: #219d98; color: beige;width: 122px;" class="btn">登录</button>
 
                     </div>
-                    {{--<div class="other-dl">--}}
-                        {{--其他登录--}}
-                        {{--<a class="qq" href="{!! route('f.auth.qq') !!}"></a>--}}
+                    <div class="other-dl">
+                        其他登录
+                        <a class="qq" href="{!! route('f.auth.qq') !!}"></a>
                         {{--<a class="wb" href="{!! route('f.auth.weibo') !!}"></a>--}}
-                    {{--</div>--}}
+                    </div>
                 </div>
             </div>
 

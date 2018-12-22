@@ -93,15 +93,19 @@ Route::group([
     //登录等功能
     Route::group(['prefix'=>'auth'], function(){
         Route::get('info', ['uses' => "AuthController@info", 'as' => 'f.auth.info']);
-        Route::get('qq', ['uses' => "AuthController@qq", 'as' => 'f.auth.qq']);
-        Route::get('qq/login', ['uses' => "AuthController@qqLogin", 'as' => 'f.auth.qq.login']);
-        Route::get('qq/login/callback', ['uses' => "AuthController@qqCallback", 'as' => 'f.auth.qq.login.callback']);
-        Route::get('weibo', ['uses' => "AuthController@weibo", 'as' => 'f.auth.weibo']);
-        Route::get('weibo/login', ['uses' => "AuthController@weiboLogin", 'as' => 'f.auth.weibo.login']);
-        Route::get('weibo/login/callback', ['uses' => "AuthController@weiboCallback", 'as' => 'f.auth.weibo.login.callback']);
-        Route::get('wechat', ['uses' => "AuthController@wechat", 'as' => 'f.auth.wechat']);
-        Route::get('wechat/login', ['uses' => "AuthController@wechatLogin", 'as' => 'f.auth.wechat.login']);
-        Route::get('wechat/login/callback', ['uses' => "AuthController@wechatCallback", 'as' => 'f.auth.wechat.login.callback']);
+//        Route::get('qq', ['uses' => "AuthController@qq", 'as' => 'f.auth.qq']);
+//        Route::get('qq/login', ['uses' => "AuthController@qqLogin", 'as' => 'f.auth.qq.login']);
+//        Route::get('qq/login/callback', ['uses' => "AuthController@qqCallback", 'as' => 'f.auth.qq.login.callback']);
+//        Route::get('weibo', ['uses' => "AuthController@weibo", 'as' => 'f.auth.weibo']);
+//        Route::get('weibo/login', ['uses' => "AuthController@weiboLogin", 'as' => 'f.auth.weibo.login']);
+//        Route::get('weibo/login/callback', ['uses' => "AuthController@weiboCallback", 'as' => 'f.auth.weibo.login.callback']);
+//        Route::get('wechat', ['uses' => "AuthController@wechat", 'as' => 'f.auth.wechat']);
+//        Route::get('wechat/login', ['uses' => "AuthController@wechatLogin", 'as' => 'f.auth.wechat.login']);
+//        Route::get('wechat/login/callback', ['uses' => "AuthController@wechatCallback", 'as' => 'f.auth.wechat.login.callback']);
+//
+//        Route::get('bind', ['uses' => "AuthController@bind", 'as' => 'f.auth.bind']);
+//        Route::put('bind', ['uses' => "AuthController@bindPut", 'as' => 'f.auth.bind.put']);
+//        Route::get('login/redirect', ['uses' => "AuthController@loginRedirect", 'as' => 'f.auth.login.redirect']);
 
         Route::get('login', ['uses' => "AuthController@login", 'as' => 'f.auth.login']);
         Route::put('login/put', ['uses' => "AuthController@loginPut", 'as' => 'f.auth.login.put']);
@@ -113,6 +117,33 @@ Route::group([
         Route::get('retrieve/{token}', ['uses' => "AuthController@retrieve", 'as' => 'f.auth.retrieve']);
         Route::put('retrieve/put', ['uses' => "AuthController@retrievePut", 'as' => 'f.auth.retrieve.put']);
         Route::put('retrieve/update', ['uses' => "AuthController@retrieveUpdate", 'as' => 'f.auth.retrieve.update']);
+    });
+
+});
+
+Route::group([
+    'prefix'        => '/',
+    'namespace'     => 'App\\Forum\\Controllers',
+    'middleware'    => ['web', 'forum'],
+], function(){
+
+
+    //登录等功能
+    Route::group(['prefix'=>'auth'], function(){
+        Route::get('qq', ['uses' => "AuthController@qq", 'as' => 'f.auth.qq']);
+        Route::get('qq/login', ['uses' => "AuthController@qqLogin", 'as' => 'f.auth.qq.login']);
+        Route::get('qq/login/callback', ['uses' => "AuthController@qqCallback", 'as' => 'f.auth.qq.login.callback']);
+        Route::get('weibo', ['uses' => "AuthController@weibo", 'as' => 'f.auth.weibo']);
+        Route::get('weibo/login', ['uses' => "AuthController@weiboLogin", 'as' => 'f.auth.weibo.login']);
+        Route::get('weibo/login/callback', ['uses' => "AuthController@weiboCallback", 'as' => 'f.auth.weibo.login.callback']);
+        Route::get('wechat', ['uses' => "AuthController@wechat", 'as' => 'f.auth.wechat']);
+        Route::get('wechat/login', ['uses' => "AuthController@wechatLogin", 'as' => 'f.auth.wechat.login']);
+        Route::get('wechat/login/callback', ['uses' => "AuthController@wechatCallback", 'as' => 'f.auth.wechat.login.callback']);
+
+        Route::get('bind', ['uses' => "AuthController@bind", 'as' => 'f.auth.bind']);
+        Route::put('bind', ['uses' => "AuthController@bindPut", 'as' => 'f.auth.bind.put']);
+        Route::get('login/redirect', ['uses' => "AuthController@loginRedirect", 'as' => 'f.auth.login.redirect']);
+
     });
 
 });
