@@ -3,7 +3,7 @@
     <ul class="clearfix">
         @foreach($noticeList as $value)
             <li>
-                <a href="{!! route('h.notice.show', ['id'=> $value->id]) !!}">
+                <a href="{!! route('f.notice.show', ['id'=> $value->id]) !!}">
                     <span>
                         <i style="color:red;"
                            class="icon-bullhorn"></i>
