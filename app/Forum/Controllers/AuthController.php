@@ -184,9 +184,15 @@ class AuthController extends Controller
      */
     public function emailAuth(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:users,email',
-        ],[
+        if($request->type = 2) {
+            $rules = ['email' => 'required|email'];
+        }else {
+            $rules = [
+                'email' => 'required|email|unique:users,email',
+            ];
+        }
+
+        $validator = Validator::make($request->all(),$rules ,[
             'email.required' => '邮箱不能为空',
             'email.email' => '邮箱格式不正确',
             'email.unique' => '邮箱已被注册',

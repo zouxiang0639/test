@@ -152,7 +152,8 @@ right: 0;" onclick="this.src='{{captcha_src()}}'+Math.random()">
                    data :{
                        "_method": "PUT",
                        "_token": $('meta[name="csrf-token"]').attr('content'),
-                       'email': $(this).siblings('input[name=email]').val()
+                       'email': $(this).siblings('input[name=email]').val(),
+                       'type': 1
                    } ,
                    dataType:  'json',
                    success: function(json) {

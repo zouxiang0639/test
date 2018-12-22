@@ -103,7 +103,8 @@
                     data :{
                         "_method": "PUT",
                         "_token": $('meta[name="csrf-token"]').attr('content'),
-                        'email': $('.register-form input[name=email]').val()
+                        'email': $('.register-form input[name=email]').val(),
+                        'type': 1
                     } ,
                     dataType:  'json',
                     success: function(json) {

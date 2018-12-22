@@ -2,6 +2,7 @@
 
 namespace App\Forum\Bls\Users;
 
+use App\Consts\Common\WhetherConst;
 use App\Forum\Bls\Users\Model\UsersModel;
 use App\Forum\Bls\Users\Requests\RegisterUserRequest;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ class UsersBls
         $model->name = $request->name;
         $model->email = $request->email;
         $model->password = bcrypt($request->password);
+        $model->status = WhetherConst::YES;
 
         if($model->save()) {
             return $model;
