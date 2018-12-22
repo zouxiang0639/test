@@ -58,7 +58,7 @@ class AuthController extends Controller
             if($loginNum >= 5) {
                 throw new LogicException(1020002, '邮箱或密码错误');
             }
-            throw new LogicException(1010002, [['邮箱或密码错误'],[$loginNum]]);
+            throw new LogicException(1010002, [['邮箱或密码错误']]);
         }
     }
 
@@ -184,7 +184,7 @@ class AuthController extends Controller
      */
     public function emailAuth(Request $request)
     {
-        if($request->type = 2) {
+        if($request->type == 2) {
             $rules = ['email' => 'required|email'];
         }else {
             $rules = [

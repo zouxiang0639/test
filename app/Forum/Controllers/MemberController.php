@@ -8,6 +8,7 @@ use App\Exceptions\LogicException;
 use App\Forum\Bls\Article\ArticleBls;
 use App\Forum\Bls\Article\InfoBls;
 use App\Forum\Bls\Article\ReplyBls;
+use App\Forum\Bls\Users\Requests\bindPutRequest;
 use App\Forum\Bls\Users\UsersBls;
 use App\Http\Controllers\Controller;
 use App\Library\Response\JsonResponse;
@@ -237,7 +238,18 @@ class MemberController extends Controller
         if ($user->save()) {
             return (new JsonResponse())->success('修改成功');
         } else {
-            throw new LogicException(1010002, '修改是吧');
+            throw new LogicException(1010002, '修改失败');
+        }
+    }
+
+    public function bindEmail(bindPutRequest $request)
+    {
+        $user = Auth::guard('forum')->user();
+        $user->email = $request->email;
+        if ($user->save()) {
+            return (new JsonResponse())->success('修改成功');
+        } else {
+            throw new LogicException(1010002, '修改失败');
         }
     }
 

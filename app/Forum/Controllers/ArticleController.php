@@ -35,6 +35,7 @@ class ArticleController extends Controller
             'list' => $list,
             'tags' => $tags
         ]);
+
     }
 
     public function gather(Request $request)
