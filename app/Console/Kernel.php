@@ -31,11 +31,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+
         $schedule->command('inspire')->hourly();
 
 
         //过期外卖
-        $schedule->command('canteen:takeout')->weekly()->fridays()->at('23:00'); //每周星期五 23点运行任务
+        //$schedule->command('canteen:takeout')->weekly()->fridays()->at('23:00'); //每周星期五 23点运行任务
+
+        $schedule->command('canteen:takeout')->cron(env('TAKEOUT_EXPIRE_TIME'))->withoutOverlapping(); //在.env配置
         $schedule->command('canteen:meal')->dailyAt('1:00')->withoutOverlapping(); //每天凌晨1点运行任务
         //开启每天凌晨一点备份
         if(config('admin.data_backup_mysql_dump')) {
