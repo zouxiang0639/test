@@ -151,6 +151,7 @@ class SocialiteLib
             $model->password = bcrypt(Str::random(60));
             $model->status = WhetherConst::YES;
             $model->remember_token = Str::random(60);
+            $model->integral = 50;
             $model->name = $usersSocialiteModel->nickname;
             $model->save();
 
@@ -167,6 +168,7 @@ class SocialiteLib
         $model->status = WhetherConst::YES;
         $model->remember_token = Str::random(60);
         $model->name = $usersSocialiteModel->nickname;
+        $model->integral = 50;
         $model->save();
 
         $usersSocialiteModel->user_id = $model->id;
