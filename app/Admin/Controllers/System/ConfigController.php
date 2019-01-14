@@ -236,6 +236,11 @@ class ConfigController extends Controller
                 $h->set('takeout_deadline', false);
                 $h->helpBlock = '（外卖截止时间到期后将不能购买外卖）';
             });
+            $item->create('外卖过期日', function(HtmlFormTpl $h, FormBuilder $form) {
+                $h->input = $form->select('takeout_expire_week',array_combine(range(1,7),range(1,7)) , config('config.takeout_expire_week'), $h->options);
+                $h->set('takeout_deadline', false);
+                $h->helpBlock = '（每周外卖过期时间周1-7,请不要设置也结束时间否则无效）';
+            });
 
         })->getFormHtml();
 

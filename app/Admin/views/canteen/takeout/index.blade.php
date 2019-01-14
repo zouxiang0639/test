@@ -87,6 +87,14 @@
                                 <label for="recipient-name" class="control-label">外卖截止时间:</label>
                                 {!! Form::datetime('takeout_deadline', config('config.takeout_deadline'), ['class' => 'form-control '], 'YYYY-MM-DD') !!}
                             </div>
+                        <div class="form-group" style="margin: 0px 8px;">
+                            <label for="recipient-name" class="control-label">外卖过期日:</label>
+                            {!! Form::select('takeout_expire_week',array_combine(range(1,7),range(1,7)) , config('config.takeout_expire_week'), ['class' => 'form-control '])!!}
+                            <span class="help-block">
+                <i class="fa fa-info-circle"></i>&nbsp;（ 每周外卖过期时间周1-7,请不要设置也结束时间否则无效）
+            </span>
+
+                        </div>
 
                     </div>
                     <div class="modal-footer">
