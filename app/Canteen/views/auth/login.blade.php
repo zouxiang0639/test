@@ -9,7 +9,7 @@
 
         <div class="content" id=''>
             <div class="banner bg-login"></div>
-            <form action="{:Url('member/login',['url'=>input('url')])}" class="form-horizontal" method="post">
+            <form action="" class="form-horizontal" method="post">
                 <input type="hidden" name="_method" value="PUT">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="content-block">
@@ -18,7 +18,7 @@
                             <div class="row">
                                 <dt class="col-25">用户名</dt>
                                 <dd class="col-75">
-                                    <input type="tel" maxlength="11" name="mobile" placeholder="请输入您的手机号"></dd>
+                                    <input type="tel" maxlength="11" name="mobile" placeholder="请输入你的编号"></dd>
                             </div>
                         </dl>
                         <dl>

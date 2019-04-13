@@ -80,7 +80,9 @@ class UsersBls
         $model->status = $request->status;
         if(Auth::guard('admin')->user()->is(RoleSlugConst::ROLE_SUPER)) {
             $model->name = $request->name;
+            $model->mobile = $request->mobile;
         }
+
         return $model->save();
     }
 

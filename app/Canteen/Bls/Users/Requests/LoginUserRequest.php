@@ -20,7 +20,7 @@ class LoginUserRequest extends JsonResponseCanteenValidator
         });
 
         return [
-            'mobile' => 'required|mobile',
+            'mobile' => 'required',
             'password' => 'required|max:255',
         ];
     }

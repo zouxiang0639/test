@@ -33,7 +33,7 @@ class AuthController extends Controller
             }
             return (new JsonResponse())->success('登录成功');
         } else {
-            throw new LogicException(1010002, '手机号或密码错误');
+            throw new LogicException(1010002, '帐号或密码错误');
         }
     }
 

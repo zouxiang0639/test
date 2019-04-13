@@ -198,16 +198,21 @@ class UsersController extends Controller
                     $h->input = $form->text('name', array_get($info, 'name'), $h->options);
                     $h->set('name', true);
                 });
+                $item->create('手机号', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                    $h->input = $form->text('mobile', array_get($info, 'mobile'), $h->options);
+                    $h->set('mobile', true);
+                });
             } else {
                 $item->create('姓名', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                     $h->input = $form->display(array_get($info, 'name'));
                 });
+
+                $item->create('手机号', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                    $h->input = $form->display(array_get($info, 'mobile'));
+                });
             }
 
 
-            $item->create('手机号', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
-                $h->input = $form->display(array_get($info, 'mobile'));
-            });
 
             $item->create('余额', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                 $h->input = $form->display(FormatMoney::fen2yuan(array_get($info, 'money')));
