@@ -11,7 +11,7 @@ class OrderTakeoutRequests extends JsonResponseApiRequests
     public function rules()
     {
         return [
-            'mobile' => 'required|mobile',
+            'mobile' => 'required',
         ];
     }
 

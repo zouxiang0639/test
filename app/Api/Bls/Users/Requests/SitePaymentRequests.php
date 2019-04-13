@@ -11,7 +11,7 @@ class SitePaymentRequests extends JsonResponseApiRequests
     public function rules()
     {
         return [
-            'mobile' => 'required|mobile',
+            'mobile' => 'required',
             'amount' => 'required|numeric',
             'num' => 'required|numeric',
             'type' => 'required|numeric',

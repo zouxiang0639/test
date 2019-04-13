@@ -12,7 +12,7 @@ class UsersRegisterRequests extends JsonResponseApiRequests
     {
         return [
             'tag' => 'required|numeric',
-            'mobile' => 'required|unique:users,mobile',
+            'mobile' => 'required|unique:users',
             'name' => 'required',
         ];
     }

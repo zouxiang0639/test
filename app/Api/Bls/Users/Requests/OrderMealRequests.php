@@ -12,7 +12,7 @@ class OrderMealRequests extends JsonResponseApiRequests
     {
         return [
             'time' => 'required|date_format:Y-m-d H:i:s',
-            'mobile' => 'required|mobile',
+            'mobile' => 'required',
             'type' => 'required|numeric',
         ];
     }
