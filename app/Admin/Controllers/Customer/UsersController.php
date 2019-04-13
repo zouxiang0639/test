@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers\Customer;
 
+use App\Admin\Bls\Customer\Requests\CustomerUsersUpdateRequests;
 use App\Admin\Bls\System\TagsBls;
 use App\Canteen\Bls\Users\UsersBls;
 use App\Consts\Admin\Role\RoleSlugConst;
@@ -92,12 +93,12 @@ class UsersController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param CustomerUsersUpdateRequests $request
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      * @throws LogicException
      */
-    public function update(Request $request, $id)
+    public function update(CustomerUsersUpdateRequests $request, $id)
     {
         $model = UsersBls::find($id);
 
@@ -198,7 +199,7 @@ class UsersController extends Controller
                     $h->input = $form->text('name', array_get($info, 'name'), $h->options);
                     $h->set('name', true);
                 });
-                $item->create('手机号', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $item->create('帐号', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                     $h->input = $form->text('mobile', array_get($info, 'mobile'), $h->options);
                     $h->set('mobile', true);
                 });
@@ -207,7 +208,7 @@ class UsersController extends Controller
                     $h->input = $form->display(array_get($info, 'name'));
                 });
 
-                $item->create('手机号', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
+                $item->create('帐号', function(HtmlFormTpl $h, FormBuilder $form) use ($info){
                     $h->input = $form->display(array_get($info, 'mobile'));
                 });
             }

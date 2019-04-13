@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Api\Bls\Users\Requests;
+namespace App\Admin\Bls\Customer\Requests;
 
-use App\Library\Admin\Widgets\Security;
-use App\Library\Validators\JsonResponseApiRequests;
+use App\Consts\Admin\Customer\RechargeTypeConst;
+use App\Library\Validators\JsonResponseValidator;
 
-class UsersRegisterRequests extends JsonResponseApiRequests
+
+class CustomerUsersUpdateRequests extends JsonResponseValidator
 {
 
     public function rules()
     {
         return [
-            'tag' => 'required|numeric',
+            'division' => 'required|numeric',
             'mobile' => 'required|unique:users,mobile',
             'name' => 'required',
         ];
@@ -20,8 +21,8 @@ class UsersRegisterRequests extends JsonResponseApiRequests
     public function messages()
     {
         return [
-            'tag.required' => '分组不能为空',
-            'tag.numeric' => '分组只能为数字',
+            'division.required' => '分组不能为空',
+            'division.numeric' => '分组只能为数字',
             'mobile.required' => '手机号不能为空',
             'mobile.unique' => '手机号已被注册',
             'name.required' => '名字不能为空',

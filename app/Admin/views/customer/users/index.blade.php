@@ -22,8 +22,8 @@
                     <div class="input-group input-group-sm">
                         <input name="name" value="{!! Input::get('name') !!}" type="text" class="form-control" placeholder="姓名">
                     </div>
-                    <div class="input-group input-group-sm " style="width: 150px;">
-                        <input name="mobile" value="{!! Input::get('mobile') !!}" class="form-control pull-right" placeholder="手机号" type="text">
+                    <div class="input-group input-group-sm ">
+                        <input name="mobile" value="{!! Input::get('mobile') !!}" class="form-control pull-right" placeholder="帐号" type="text">
                         <div class="input-group-btn">
                             <button id="flow-search" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                         </div>
@@ -47,7 +47,7 @@
                 <tr>
                     <th>编号</th>
                     <th>姓名</th>
-                    <th>手机号</th>
+                    <th>帐号</th>
                     <th>分组</th>
                     <th>余额</th>
                     <th>状态</th>
