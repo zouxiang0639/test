@@ -135,12 +135,14 @@ class UsersController extends Controller
                 $item->id,
                 $item->name,
                 array_get($tagList, $item->division, '-'),
-                FormatMoney::fen2yuan($item->money)
+                FormatMoney::fen2yuan($item->money),
+                $item->mobile,
             ];
         }
 
         $field[] = array_values(config('excelformat.user_balance'));
         $data = array_merge($field,$formatData);
+
         Excel::create('用户余额', function ($excel) use ($data) {
             $excel->sheet('用户余额', function ($sheet) use ($data) {
                 $sheet->rows($data);

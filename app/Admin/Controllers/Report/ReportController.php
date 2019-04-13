@@ -175,17 +175,18 @@ class ReportController extends Controller
             foreach($orderTakeout as $value) {
                 $takeout[] = $value->name . '-' . $value->num . '份';
             }
-
             $data[] = [
                 $item->users->name,  //用户名称
                 $item->amount,  //总金额(分)
                 $item->deposit,  //定金(分)
-                implode(chr(10), $takeout)  //外卖
+                implode(chr(10), $takeout),  //外卖
+                $item->users ? $item->users->mobile : '-'//帐号
             ];
         }
 
 
         $field[] = array_values(config('excelformat.report_user_takeout'));
+
         $data = array_merge($field, $data);
         Excel::create('本周用户外卖统计', function ($excel) use ($data) {
             $excel->sheet('本周用户外卖统计', function ($sheet) use ($data) {

@@ -70,12 +70,14 @@ class FlowController extends Controller
                 MealTypeConst::getDesc($item->use_type) ?: '-',
                 AccountFlowTypeConst::getIconDesc($item->type).FormatMoney::fen2yuan($item->amount),
                 $item->describe,
-                $item->created_at
+                $item->created_at,
+                $item->users ? $item->users->mobile : '-', //帐号
             ];
         }
 
         $field[] = array_values(config('excelformat.flow'));
         $data = array_merge($field,$formatData);
+
         Excel::create('账号流水', function ($excel) use ($data) {
             $excel->sheet('账号流水', function ($sheet) use ($data) {
                 $sheet->rows($data);
