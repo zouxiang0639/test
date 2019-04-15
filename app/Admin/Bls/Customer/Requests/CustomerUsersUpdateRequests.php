@@ -11,9 +11,10 @@ class CustomerUsersUpdateRequests extends JsonResponseValidator
 
     public function rules()
     {
+
         return [
             'division' => 'required|numeric',
-            'mobile' => 'required|unique:users,mobile',
+            'mobile' => 'required|unique:users,mobile,'.$this->id,
             'name' => 'required',
         ];
     }
