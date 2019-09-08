@@ -1,5 +1,5 @@
 {
-    "name": "zoux/text",
+    "name": "zouxiang0639/test",
     "description": "The ThinkPHP5 thinkcms-auth Package.",
     "license": "Apache-2.0",
     "authors": [
@@ -11,10 +11,10 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "thinkcms\\auth\\": ""
+          
         },
         "files": [
-            "helper.php"
+           
         ]
     }
 }
